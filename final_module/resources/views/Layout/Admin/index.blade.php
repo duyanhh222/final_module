@@ -8,12 +8,12 @@
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <!-- Font Awesome -->
-  <link rel="stylesheet" href="{{asset('public/Admin')}}/plugins/fontawesome-free/css/all.min.css">
+  <link rel="stylesheet" href="{{asset('public/Admin/plugins/fontawesome-free/css/all.min.css')}}">
   <!-- overlayScrollbars -->
-  <link rel="stylesheet" href="{{asset('public/Admin')}}/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+  <link rel="stylesheet" href="{{asset('public/Admin/plugins/overlayScrollbars/css/OverlayScrollbars.min.css')}}">
   <!-- Theme style -->
-  <link rel="stylesheet" href="{{asset('public/Admin')}}/dist/css/adminlte.min.css">
-  <link rel="stylesheet" href="{{asset('public/Admin')}}/plugins/flag-icon-css/css/flag-icon.min.css">
+  <link rel="stylesheet" href="{{asset('public/Admin/dist/css/adminlte.min.css')}}">
+  <link rel="stylesheet" href="{{asset('public/Admin/plugins/flag-icon-css/css/flag-icon.min.css')}}">
   @yield('css')
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -273,15 +273,15 @@
 <!-- ./wrapper -->
 
 <!-- jQuery -->
-<script src="{{asset('public/Admin')}}/plugins/jquery/jquery.min.js"></script>
+<script src="{{asset('public/Admin/plugins/jquery/jquery.min.js')}}"></script>
 <!-- Bootstrap 4 -->
-<script src="{{asset('public/Admin')}}/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="{{asset('public/Admin/plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
 <!-- overlayScrollbars -->
-<script src="{{asset('public/Admin')}}/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+<script src="{{asset('public/Admin/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js')}}"></script>
 <!-- AdminLTE App -->
-<script src="{{asset('public/Admin')}}/dist/js/adminlte.min.js"></script>
+<script src="{{asset('public/Admin/dist/js/adminlte.min.js')}}"></script>
 <!-- AdminLTE for demo purposes -->
-<script src="{{asset('public/Admin')}}/dist/js/demo.js"></script>
+<script src="{{asset('public/Admin/dist/js/demo.js')}}"></script>
 @yield('js')
 </body>
 </html>
