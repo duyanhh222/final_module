@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('Client.index');
+    return view('Client.home');
 });
 Route::group(['prefix' => 'admin'],function(){
     Route::get('/login','Admin\AdminController@index')->name('admin.login');
