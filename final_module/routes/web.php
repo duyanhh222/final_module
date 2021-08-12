@@ -22,3 +22,7 @@ Route::group(['prefix' => 'admin'],function(){
     Route::post('/login','Admin\AdminController@check')->name('admin.check.login');
     Route::get('/dashboard','Admin\AdminController@dashboard')->name('admin.dashboard');
 });
+
+Route::get('/register', function () {
+    return view('Client.register');
+});
