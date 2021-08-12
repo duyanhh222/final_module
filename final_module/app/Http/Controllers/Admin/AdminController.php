@@ -15,7 +15,7 @@ class AdminController extends Controller
      */
     public function index()
     {
-        //
+        return view('Admin.login');
     }
 
     /**
@@ -23,6 +23,26 @@ class AdminController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function check(Request $request)
+    {
+        $request->validate([
+            'email' => 'required|email',
+            'password' => 'required'
+        ],
+        [
+
+        ]);
+        $email = $request->email;
+        $password = $request->password;
+        $admin = Admin::where('admin_email',$email)->where('admin_password',$password)->first();
+        if(isset($admin)){
+            return redirect()->route('admin.dashboard');
+        }
+    }
+    public function dashboard()
+    {
+        return view('Admin.dashboard');
+    }
     public function create()
     {
         //

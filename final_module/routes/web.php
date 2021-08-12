@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -15,4 +16,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
+});
+Route::group(['prefix' => 'admin'],function(){
+    Route::get('/login','Admin\AdminController@index')->name('admin.login');
+    Route::post('/login','Admin\AdminController@check')->name('admin.check.login');
+    Route::get('/dashboard','Admin\AdminController@dashboard')->name('admin.dashboard');
 });
