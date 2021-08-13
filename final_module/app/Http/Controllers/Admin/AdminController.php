@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Admin;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class AdminController extends Controller
 {
@@ -36,6 +37,7 @@ class AdminController extends Controller
         $password = $request->password;
         $admin = Admin::where('admin_email',$email)->where('admin_password',$password)->first();
         if(isset($admin)){
+            Session::put('admin_name',$admin->admin_name);
             return redirect()->route('admin.dashboard');
         }
     }

@@ -21,7 +21,14 @@ Route::group(['prefix' => 'admin'],function(){
     Route::get('/login','Admin\AdminController@index')->name('admin.login');
     Route::post('/login','Admin\AdminController@check')->name('admin.check.login');
     Route::get('/dashboard','Admin\AdminController@dashboard')->name('admin.dashboard');
+    Route::get('category','Admin\CategoryController@index')->name('category.index');
+    Route::get('category/{category}/edit','Admin\CategoryController@edit')->name('category.edit');
+    Route::get('category/{category}','Admin\CategoryController@destroy')->name('category.destroy');
+    Route::get('/create','Admin\CategoryController@create')->name('category.create');
+    Route::post('category/store','Admin\CategoryController@store')->name('category.store');
+    Route::post('category/{category}','Admin\CategoryController@update')->name('category.update');
 });
+
 
 
 Route::get('/user_login', 'Client\UserController@index')->name('client.login');
@@ -32,3 +39,8 @@ Route::post('/user_register', 'Client\UserController@register')->name('client.re
 Route::get('/register', function () {
     return view('Client.register');
 });
+
+Route::get('/a', function () {
+    return view('Client.register');
+});
+
