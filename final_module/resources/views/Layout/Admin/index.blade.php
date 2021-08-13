@@ -179,6 +179,9 @@
         </div>
         <div class="info">
           <a href="#" class="d-block">
+            @if(Session::has('admin_name'))
+              {{Session::get('admin_name')}}
+            @endif
           </a>
         </div>
       </div>
@@ -194,23 +197,44 @@
           </div>
         </div>
       </div>
-
       <!-- Sidebar Menu -->
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
-               with font-awesome or any other icon font library -->
-                 
+               with font-awesome or any other icon font library -->     
           <li class="nav-item">
             <a href="" class="nav-link">
-              <i class="nav-icon fas fa-shopping-cart"></i>
+              <i class="nav-icon fas fa-home"></i>
               <p>
-              {{ __('Bill')}}  
-                     
+              {{ __('Dashboard')}}                      
                 <i class="right fas fa-angle-left"></i>
-                
               </p>
             </a>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-shopping-cart"></i>
+              <p>
+              {{ __('Category')}}  
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">     
+              <li class="nav-item">
+                <a href="{{route('category.index')}}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>{{ __('All Category')}}  </p>
+                </a>
+              </li>
+            </ul>
+            <ul class="nav nav-treeview">     
+              <li class="nav-item">
+                <a href="{{route('category.create')}}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>{{ __('Add Category')}}  </p>
+                </a>
+              </li>
+            </ul>
           </li>
         </ul>
       </nav>
@@ -234,6 +258,18 @@
             <!-- Default box -->
             <div class="card">
               <div class="card-body">
+              @if(Session::has('error'))
+                <div class="alert alert-danger">
+                  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                    {{Session::get('error')}}
+                </div>
+              @endif
+              @if(Session::has('success'))
+                  <div class="alert alert-success">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                      {{Session::get('success')}}
+                  </div>
+                @endif
                    @yield('main')
               </div>
               <!-- /.card-body -->
