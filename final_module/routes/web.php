@@ -34,7 +34,8 @@ Route::group(['prefix' => 'admin'],function(){
 
 
 
-Route::get('/user_login', 'Client\UserController@index')->name('client.login');
+Route::get('/user_login', 'Client\UserController@index')->name('client.loadLogin');
+Route::post('/user_login', 'Client\UserController@check')->name('client.login');
 
 Route::get('/user_register', 'Client\UserController@loadRegister')->name('client.loadRegister');
 Route::post('/user_register', 'Client\UserController@register')->name('client.register');
@@ -43,7 +44,6 @@ Route::get('/register', function () {
     return view('Client.register');
 });
 
-Route::get('/a', function () {
+Route::get('/ann', function () {
     return view('Client.register');
 });
-
