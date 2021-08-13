@@ -31,6 +31,10 @@ Route::group(['prefix' => 'admin'],function(){
     });
 });
 
+
+Route::get('/user_login', 'Client\LoginController@index')->name('client.login');
+
 Route::get('/register', function () {
     return view('Client.register');
 });
+
