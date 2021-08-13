@@ -34,7 +34,7 @@ class UserController extends Controller
         $email = $request->email;
         $password = $request->password;
         $repassword = $request->re_password;
-        $user = User::where('user_email',$email)->where('user_password',$password)->first();
+        $user = User::where('user_email',$email)->first();
         if(!isset($user) && ($password == $repassword)){
             $newUser = new User();
             $newUser->user_name = $name;
@@ -65,10 +65,10 @@ class UserController extends Controller
         ]);
         $email = $request->email;
         $password = $request->password;
-        $admin = Admin::where('admin_email',$email)->where('admin_password',$password)->first();
-        if(isset($admin)){
-            Session::put('admin_name',$admin->admin_name);
-            return redirect()->route('admin.dashboard');
+        $user = User::where('user_email',$email)->where('user_password',$password)->first();
+        if(isset($user)){
+            Session::put('user_name',$user->user_name);
+            return redirect()->route('client.loadRegister');
         }
     }
 
