@@ -30,12 +30,27 @@ Route::group(['prefix' => 'admin'],function(){
         Route::post('/{category}','Admin\CategoryController@update')->name('category.update');
 
     Route::get('category/create','Admin\CategoryController@create')->name('category.create');
+
+    Route::get('category','Admin\CategoryController@index')->name('category.index');
+    Route::get('category/{category}/edit','Admin\CategoryController@edit')->name('category.edit');
+    Route::get('category/{category}','Admin\CategoryController@destroy')->name('category.destroy');
+    Route::get('category/create','Admin\CategoryController@create')->name('category.create');
+    Route::post('category/store','Admin\CategoryController@store')->name('category.store');
+    Route::post('category/{category}','Admin\CategoryController@update')->name('category.update');
 });
 
 
-Route::get('/user_login', 'Client\LoginController@index')->name('client.login');
+
+Route::get('/user_login', 'Client\UserController@index')->name('client.login');
+
+Route::get('/user_register', 'Client\UserController@loadRegister')->name('client.loadRegister');
+Route::post('/user_register', 'Client\UserController@register')->name('client.register');
 
 Route::get('/register', function () {
+    return view('Client.register');
+});
+
+Route::get('/a', function () {
     return view('Client.register');
 });
 
