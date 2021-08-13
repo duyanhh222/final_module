@@ -61,7 +61,7 @@ class UserController extends Controller
             'password' => 'required'
         ],
         [
-
+            
         ]);
         $email = $request->email;
         $password = $request->password;
