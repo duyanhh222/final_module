@@ -24,5 +24,5 @@ Route::group(['prefix' => 'admin'],function(){
 });
 
 Route::get('/register', function () {
-    return view('Client.login');
+    return view('Client.register');
 });
