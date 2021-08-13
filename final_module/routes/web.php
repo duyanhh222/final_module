@@ -23,6 +23,4 @@ Route::group(['prefix' => 'admin'],function(){
     Route::get('/dashboard','Admin\AdminController@dashboard')->name('admin.dashboard');
 });
 
-Route::get('/register', function () {
-    return view('Client.register');
-});
+Route::get('/user_login', 'Client\LoginController@index')->name('client.login');
