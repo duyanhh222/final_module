@@ -13,6 +13,31 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function loadRegister()
+    {
+        return view('Client.register');
+    }
+
+    public function register(Request $request)
+    {
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required|email',
+            'password' => 'required',
+            're_password' => 'required',
+        ],
+        [
+
+        ]);
+        $name = $request->name;
+        $email = $request->email;
+        $password = $request->password;
+        $repassword = $request->re_password;
+        $user = Users::where('user_email',$email)->where('user_password',$password)->first();
+
+
+    }
+
     public function index()
     {
         

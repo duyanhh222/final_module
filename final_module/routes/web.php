@@ -23,10 +23,12 @@ Route::group(['prefix' => 'admin'],function(){
     Route::get('/dashboard','Admin\AdminController@dashboard')->name('admin.dashboard');
 });
 
-<<<<<<< HEAD
-Route::get('/user_login', 'Client\LoginController@index')->name('client.login');
-=======
+
+Route::get('/user_login', 'Client\UserController@index')->name('client.login');
+
+Route::get('/user_register', 'Client\UserController@loadRegister')->name('client.loadRegister');
+Route::post('/user_register', 'Client\UserController@register')->name('client.register');
+
 Route::get('/register', function () {
     return view('Client.register');
 });
->>>>>>> 35a35426a509fd1dff2746d48a463764a8f2242c
