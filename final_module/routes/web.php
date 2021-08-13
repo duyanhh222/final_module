@@ -43,7 +43,6 @@ Route::get('/register', function () {
     return view('Client.register');
 });
 
-Route::get('/a', function () {
+Route::get('/ann', function () {
     return view('Client.register');
 });
-
