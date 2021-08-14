@@ -3,8 +3,6 @@
 <table class="table table-hover">
     <thead>
         <tr>
-        'name','category_name','restaurant_id','price','price_discount','image','description','status','on_sale',
-        'user_id','coupon','count_coupon','time_preparation'
             <th>#</th>
             <th>name</th>
             <th>category_name</th>
