@@ -69,7 +69,7 @@
                     <div class="tabbed_container">
                         <div class="tabs">
                             <ul class="clearfix">
-                                <li class="active">Đặc biệt</li>
+                                <li class="active">Ưu đãi</li>
                                 <li>Đang sale</li>
                                 <li>Giao nhanh</li>
                             </ul>
@@ -96,10 +96,12 @@
                                                         @endif
                                                         </a></div></div>
                                             <div class="char_subtitle">
-                                                @if(strlen($mostView->get($food)->restaurant->address) >20)
-                                                    {{ substr($mostView->get($food)->restaurant->address, 0, 20) }}...
-                                                @else
-                                                    {{ $mostView->get($food)->restaurant->address }}
+                                                @if(isset($mostView->get($food)->restaurant->address))
+                                                    @if(strlen($mostView->get($food)->restaurant->address) >20)
+                                                        {{ substr($mostView->get($food)->restaurant->address, 0, 20) }}...
+                                                    @else
+                                                        {{ $mostView->get($food)->restaurant->address }}
+                                                    @endif
                                                 @endif
                                             </div>
                                             <div class="product_extras">
@@ -140,10 +142,12 @@
                                                         @endif
                                                         </a></div></div>
                                             <div class="char_subtitle">
+                                                @if(isset($mostView->get($food)->restaurant->address))
                                                 @if(strlen($onSale->get($food)->restaurant->address) >20)
                                                     {{ substr($onSale->get($food)->restaurant->address, 0, 20) }}...
                                                 @else
                                                     {{ $onSale->get($food)->restaurant->address }}
+                                                @endif
                                                 @endif
                                             </div>
                                             <div class="product_extras">
@@ -183,10 +187,12 @@
                                                         @endif
                                                        </a></div></div>
                                             <div class="char_subtitle">
+                                                @if(isset($mostView->get($food)->restaurant->address))
                                                 @if(strlen($fastDelivery->get($food)->restaurant->address) >20)
                                                     {{ substr($fastDelivery->get($food)->restaurant->address, 0, 20) }}...
                                                 @else
                                                     {{ $fastDelivery->get($food)->restaurant->address }}
+                                                @endif
                                                 @endif
                                             </div>
                                             <div class="product_extras">
@@ -222,12 +228,12 @@
         <div class="row">
             <div class="col-lg-3">
                 <div class="popular_categories_content">
-                    <div class="popular_categories_title">Popular Categories</div>
+                    <div class="popular_categories_title">Danh mục</div>
                     <div class="popular_categories_slider_nav">
                         <div class="popular_categories_prev popular_categories_nav"><i class="fas fa-angle-left ml-auto"></i></div>
                         <div class="popular_categories_next popular_categories_nav"><i class="fas fa-angle-right ml-auto"></i></div>
                     </div>
-                    <div class="popular_categories_link"><a href="#">full catalog</a></div>
+                    <div class="popular_categories_link"><a href="#">tất cả danh mục</a></div>
                 </div>
             </div>
 
