@@ -32,10 +32,10 @@ Route::group(['prefix' => 'admin'],function(){
 
     Route::get('food/food','Admin\FoodController@index')->name('food.index');
     Route::get('/{food}/edit','Admin\FoodController@edit')->name('food.edit');
-    Route::get('/{food}','Admin\FoodController@destroy')->name('food.destroy');
-    Route::post('/store','Admin\FoodController@store')->name('food.store');
+    Route::get('food/{food}','Admin\FoodController@destroy')->name('food.destroy');
+    Route::post('food/store','Admin\FoodController@store')->name('food.store');
     Route::post('/{food}','Admin\FoodController@update')->name('food.update');
-    Route::get('food/create','Admin\FoodController@create')->name('food.create');
+    Route::get('food/food/create','Admin\FoodController@create')->name('food.create');
 
 });
 
