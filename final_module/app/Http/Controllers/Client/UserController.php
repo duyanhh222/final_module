@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Client;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
+use App\Http\Requests\RegisterRequest;
 use Illuminate\Support\Facades\Session;
 
 class UserController extends Controller
@@ -19,17 +20,8 @@ class UserController extends Controller
         return view('Client.register');
     }
 
-    public function register(Request $request)
+    public function register(RegisterRequest $request)
     {
-        $request->validate([
-            'name' => 'required',
-            'email' => 'required|email',
-            'password' => 'required',
-            're_password' => 'required',
-        ],
-        [
-
-        ]);
         $name = $request->name;
         $email = $request->email;
         $password = $request->password;
