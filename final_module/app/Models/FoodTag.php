@@ -12,4 +12,5 @@ class FoodTag extends Model
     protected $fillable=[
         'food_id','tag_id'
     ];
+
 }

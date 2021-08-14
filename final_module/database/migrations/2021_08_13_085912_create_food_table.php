@@ -28,7 +28,9 @@ class CreateFoodTable extends Migration
             $table->unsignedInteger('user_id')->nullable();
             $table->string('coupon')->nullable();
             $table->integer('count_coupon')->default(0);
-            $table->string('time_preparation')->nullable();
+
+            $table->integer('time_preparation')->nullable();
+
             $table->integer('view_count')->default(0);
             $table->timestamps();
         });
@@ -41,6 +43,6 @@ class CreateFoodTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('food');
+        Schema::dropIfExists('foods');
     }
 }

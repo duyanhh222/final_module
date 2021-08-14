@@ -15,10 +15,12 @@ class CategorySeeder extends Seeder
     public function run()
     {
         DB::table('categories')->insert([
-            'name' => 'bún'
+            'name' => 'bún',
+            'image' => 'aa.jpg'
         ]);
         DB::table('categories')->insert([
-            'name' => 'trà sữa'
+            'name' => 'trà sữa',
+            'image' => 'bb.jpg'
         ]);
     }
 }
