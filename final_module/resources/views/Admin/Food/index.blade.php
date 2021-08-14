@@ -23,7 +23,7 @@
             <td>{{$food->category_id}}</td>
             <td>{{$food->price}}</td>
             <td>{{$food->price_discount}}</td>
-            <td>{{$food->image}}</td>
+            <td><img src="{{asset('storage/'.$food->image)}}" width="100px" alt=""></td>
             <td>{{$food->status}}</td>
             <td>{{$food->on_sale}}</td>
             <td>{{$food->user_id}}</td>
