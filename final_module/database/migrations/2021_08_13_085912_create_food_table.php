@@ -18,7 +18,6 @@ class CreateFoodTable extends Migration
             $table->string('name');
             $table->unsignedInteger('category_id');
             $table->unsignedInteger('restaurant_id')->nullable();
-
             $table->integer('price')->default(0);
             $table->integer('price_discount')->default(0);
             $table->integer('sell_quantity')->default(0);
@@ -26,14 +25,10 @@ class CreateFoodTable extends Migration
             $table->string('description')->nullable();
             $table->integer('status')->nullable();
             $table->integer('on_sale')->nullable();
-
-            $table->unsignedInteger('user_id');
-            $table->integer('time_preparation')->nullable();
-
             $table->unsignedInteger('user_id')->nullable();
             $table->string('coupon')->nullable();
             $table->integer('count_coupon')->default(0);
-
+            $table->integer('time_preparation')->nullable();
             $table->integer('view_count')->default(0);
             $table->timestamps();
         });
