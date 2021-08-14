@@ -8,6 +8,7 @@ use App\Models\Food;
 use App\Models\FoodTag;
 use App\Models\Restaurant;
 use App\Models\Tag;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 
 class FoodController extends Controller
@@ -69,8 +70,10 @@ class FoodController extends Controller
         }
         if($request->has('file')){
             $file = $request->file;
-            $path = $file->store('images','public');
-            $request->merge(['image' => $path]);
+            $fileName = $file->getClientOriginalName();
+            $newFileName = date('d-m-Y-H-i') . "_$fileName";
+            $request->file('file')->storeAs('public/images', $newFileName);
+            $request->merge(['image' => $newFileName]);
         }
         $foodId = Food::insertGetId($request->only( 'name','category_id','restaurant_id','price','price_discount','image','description','status','on_sale',
             'coupon','count_coupon','time_preparation'));
@@ -153,6 +156,16 @@ class FoodController extends Controller
      */
     public function destroy(Food $food)
     {
+        $tags = FoodTag::where('food_id',$food->id)->get();
+        if(isset($tags)){
+            foreach($tags as $value){
+                FoodTag::where('food_id',$food->id)->delete();
+            }
+        }
+      $file = $food->image;
+      Storage::delete('/public/images/'. $file);
+      $food->delete();
+      return redirect()->route('food.index')->with('success','Xoas thành công');
       
     }
 }

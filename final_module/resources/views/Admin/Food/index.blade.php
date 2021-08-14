@@ -23,11 +23,18 @@
             <td>{{$food->category_id}}</td>
             <td>{{$food->price}}</td>
             <td>{{$food->price_discount}}</td>
-            <td><img src="{{asset('storage/'.$food->image)}}" width="100px" alt=""></td>
+            <td><img src="{{asset('storage/images/'.$food->image)}}" width="100px" alt=""></td>
             <td>{{$food->status}}</td>
             <td>{{$food->on_sale}}</td>
             <td>{{$food->user_id}}</td>
-            <td></td>
+            <td>
+                <a href="{{route('food.edit',$food->id)}}" class="btn btn-sm btn-success">
+                    <i class="fas fa-edit"></i>
+                </a>
+                <a href="{{route('food.destroy',$food->id)}}" class="btn btn-sm btn-danger btndelete" onclick="return confirm('Bạn chắc chắn muốn xóa?')">
+                    <i class="fas fa-trash"></i>
+                </a>
+            </td>
         </tr>
         @endforeach
     </tbody>
