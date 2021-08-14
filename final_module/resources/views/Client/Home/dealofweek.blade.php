@@ -88,8 +88,20 @@
                                         <div class="product_image d-flex flex-column align-items-center justify-content-center"><img src="{{asset('storage/images/'. $mostView->get($food)->image)}}" alt=""  width="175px"></div>
                                         <div class="product_content">
                                             <div class="product_price discount">{{ number_format($mostView->get($food)->price_discount) }}đ<span>{{ number_format($mostView->get($food)->price) }}đ</span></div>
-                                            <div class="product_name"><div><a href="product.html">{{ $mostView->get($food)->name }}</a></div></div>
-                                            <div class="char_subtitle">{{ $mostView->get($food)->restaurant->address }}</div>
+                                            <div class="product_name"><div><a href="product.html">
+                                                        @if(strlen($mostView->get($food)->name) >20)
+                                                            {{ substr($mostView->get($food)->name, 0, 20) }}...
+                                                        @else
+                                                            {{ $mostView->get($food)->name }}
+                                                        @endif
+                                                        </a></div></div>
+                                            <div class="char_subtitle">
+                                                @if(strlen($mostView->get($food)->restaurant->address) >20)
+                                                    {{ substr($mostView->get($food)->restaurant->address, 0, 20) }}...
+                                                @else
+                                                    {{ $mostView->get($food)->restaurant->address }}
+                                                @endif
+                                            </div>
                                             <div class="product_extras">
                                                 <button class="product_cart_button">Thêm vào giỏ hàng</button>
                                             </div>
@@ -120,7 +132,20 @@
                                         <div class="product_image d-flex flex-column align-items-center justify-content-center"><img src="{{asset('storage/images/'. $onSale->get($food)->image)}}"  width="175px" alt=""></div>
                                         <div class="product_content">
                                             <div class="product_price discount">{{ number_format($onSale->get($food)->price_discount) }}đ<span>{{ number_format($onSale->get($food)->price) }}đ</span></div>
-                                            <div class="product_name"><div><a href="product.html">{{ $onSale->get($food)->name }}</a></div></div>
+                                            <div class="product_name"><div><a href="product.html">
+                                                        @if(strlen($onSale->get($food)->name) >20)
+                                                            {{ substr($onSale->get($food)->name, 0, 20) }}...
+                                                        @else
+                                                            {{ $onSale->get($food)->name }}
+                                                        @endif
+                                                        </a></div></div>
+                                            <div class="char_subtitle">
+                                                @if(strlen($onSale->get($food)->restaurant->address) >20)
+                                                    {{ substr($onSale->get($food)->restaurant->address, 0, 20) }}...
+                                                @else
+                                                    {{ $onSale->get($food)->restaurant->address }}
+                                                @endif
+                                            </div>
                                             <div class="product_extras">
                                                 <button class="product_cart_button">Thêm vào giỏ hàng</button>
                                             </div>
@@ -150,7 +175,20 @@
                                         <div class="product_image d-flex flex-column align-items-center justify-content-center"><img src="{{asset('storage/images/'. $fastDelivery->get($food)->image)}}" width="175px" alt=""></div>
                                         <div class="product_content">
                                             <div class="product_price discount">{{ number_format($fastDelivery->get($food)->price_discount) }}đ<span>{{ number_format($fastDelivery->get($food)->price) }}đ</span></div>
-                                            <div class="product_name"><div><a href="product.html">{{ $fastDelivery->get($food)->name }}</a></div></div>
+                                            <div class="product_name"><div><a href="product.html">
+                                                        @if(strlen($fastDelivery->get($food)->name) >20)
+                                                            {{ substr($fastDelivery->get($food)->name, 0, 20) }}...
+                                                        @else
+                                                            {{ $fastDelivery->get($food)->name }}
+                                                        @endif
+                                                       </a></div></div>
+                                            <div class="char_subtitle">
+                                                @if(strlen($fastDelivery->get($food)->restaurant->address) >20)
+                                                    {{ substr($fastDelivery->get($food)->restaurant->address, 0, 20) }}...
+                                                @else
+                                                    {{ $fastDelivery->get($food)->restaurant->address }}
+                                                @endif
+                                            </div>
                                             <div class="product_extras">
 
                                                 <button class="product_cart_button">Thêm vào giỏ hàng</button>
