@@ -13,4 +13,9 @@ class Restaurant extends Model
     protected $fillable=[
         'name','address','time_open','time_close','service','phone','explain'
     ];
+
+    public function food()
+    {
+        return $this->hasMany(Food::class, 'id');
+    }
 }
