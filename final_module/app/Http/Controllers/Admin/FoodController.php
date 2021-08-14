@@ -133,7 +133,18 @@ class FoodController extends Controller
      */
     public function edit(Food $food)
     {
-        //
+        $tags = '';
+        $foodtag = FoodTag::where('food_id',$food->id)->get();
+        
+        foreach($foodtag as $value){
+            $tagss = Tag::where('id',$value->tag_id)->first();
+            $tags .= $tagss->name.',';
+        }
+        $tags_name =trim($tags,',');
+        $restaurantId = $food->restaurant_id;
+        $restaurant = Restaurant::where('id',$restaurantId)->first();
+        $data = Category::all();
+        return view('Admin.Food.edit',compact('food','data','restaurant','tags_name'));
     }
 
     /**
@@ -145,7 +156,68 @@ class FoodController extends Controller
      */
     public function update(Request $request, Food $food)
     {
-        //
+        if($request->restaurant_name != null){
+            $data = array();
+            $data['name'] = $request->restaurant_name;
+            $data['address'] = $request->restaurant_address;
+            $data['time_open'] = $request->time_open;
+            $data['time_close'] = $request->time_close;
+            $data['service'] = $request->service;
+            $data['phone'] = $request->phone;
+            $data['explain'] = $request->explain;
+            $restaurantId = Restaurant::insertGetId($data);
+            $request->merge(['restaurant_id' => $restaurantId]);
+        }
+        $file = $food->image;
+        Storage::delete('/public/images/'. $file);
+        if($request->has('file')){
+            $file = $request->file;
+            $fileName = $file->getClientOriginalName();
+            $newFileName = date('d-m-Y-H-i') . "_$fileName";
+            $request->file('file')->storeAs('public/images', $newFileName);
+            $request->merge(['image' => $newFileName]);
+        }
+        $food->update($request->only( 'name','category_id','restaurant_id','price','price_discount','image','description','status','on_sale',
+            'coupon','count_coupon','time_preparation'));
+        if($request->tag != null){
+            $tags = $request->tag;
+            $hashtag = explode(',',$tags);
+            $count = 0;
+            $hash = array();
+            $tag2 = Tag::all();
+            for($i= 0;$i<count($hashtag);$i++){
+                $flag = 0;
+                foreach($tag2 as $value){
+                    if($this->slugify($hashtag[$i]) == $value->slug){
+                        $tagId = Tag::where('slug',$this->slugify($hashtag[$i]))->first();
+                        $hash[$count] = $tagId->id;
+                        $count++;
+                        $flag = 1;
+                    }
+                }
+                if($flag == 0){
+                    $dt = array();
+                    $dt['name'] = $hashtag[$i];
+                    $dt['slug'] = $this->slugify($hashtag[$i]);
+                    $tag3 = Tag::insertGetId($dt);
+                    $hash[$count] = $tag3;
+                    $count++;
+                }
+            }
+        }
+        if(count($hash) > 0){
+            FoodTag::where('food_id',$food->id)->delete();
+            foreach($hash as $value){
+                $arr = array();
+                $arr['food_id'] = $food->id;
+                $arr['tag_id'] = $value;
+                FoodTag::insertGetId($arr);
+            }
+        }
+        if(count($hash) ==0){
+            FoodTag::where('food_id',$food->id)->delete();
+        }
+        return redirect()->route('food.index');
     }
 
     /**
