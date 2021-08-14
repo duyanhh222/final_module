@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Client;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class UserController extends Controller
 {
@@ -33,14 +34,42 @@ class UserController extends Controller
         $email = $request->email;
         $password = $request->password;
         $repassword = $request->re_password;
-        $user = Users::where('user_email',$email)->where('user_password',$password)->first();
-
-
+        $user = User::where('user_email',$email)->first();
+        if(!isset($user) && ($password == $repassword)){
+            $newUser = new User();
+            $newUser->user_name = $name;
+            $newUser->user_email = $email;
+            $newUser->user_password = $password;
+            $newUser->user_phone = 0;
+            $newUser->user_address = 0;
+            $newUser->user_restaurent = 0;
+            $newUser->save();
+            Session::put('register_success', "Đăng ký tài khoản thành công");
+            return redirect()->route('client.login');
+        }
     }
 
     public function index()
     {
+        return view('Client.login');
+    }
 
+    public function check(Request $request)
+    {
+        $request->validate([
+            'email' => 'required|email',
+            'password' => 'required'
+        ],
+        [
+            
+        ]);
+        $email = $request->email;
+        $password = $request->password;
+        $user = User::where('user_email',$email)->where('user_password',$password)->first();
+        if(isset($user)){
+            Session::put('user_name',$user->user_name);
+            return redirect()->route('client.loadRegister');
+        }
     }
 
     /**
