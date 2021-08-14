@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Requests\RegisterRequest;
+use App\Http\Requests\LoginRequest;
 use Illuminate\Support\Facades\Session;
 
 class UserController extends Controller
@@ -46,15 +47,8 @@ class UserController extends Controller
         return view('Client.login');
     }
 
-    public function check(Request $request)
+    public function check(LoginRequest $request)
     {
-        $request->validate([
-            'email' => 'required|email',
-            'password' => 'required'
-        ],
-        [
-            
-        ]);
         $email = $request->email;
         $password = $request->password;
         $user = User::where('user_email',$email)->where('user_password',$password)->first();
@@ -62,6 +56,8 @@ class UserController extends Controller
             Session::put('user_name',$user->user_name);
             return redirect()->route('client.loadRegister');
         }
+            Session::put('login_fail', 'Kiểm tra lại email hoặc mật khẩu');
+            return view('Client.login');
     }
 
     /**

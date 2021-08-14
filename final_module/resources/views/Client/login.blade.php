@@ -32,6 +32,7 @@
 	<div class="limiter">
 		<div class="container-login100">
 			<div class="wrap-login100">
+				
 				<form class="login100-form validate-form" method="post" action="{{ route('client.login') }}">
                     @csrf
 					<span class="login100-form-title p-b-43">
@@ -66,7 +67,21 @@
 							</a>
 						</div>
 					</div>
-			
+
+					<div class="error-message">
+                        @if ($errors->any())
+                            @foreach($errors->all() as $nameError)
+                                <p style="color:red">{{ $nameError }}</p>
+                            @endforeach
+                        @endif
+                    </div>
+					
+					@if (Session::has('login_fail'))
+						<div class="login-fail">
+							<p class="text-danger">{{ Session::get('login_fail') }}</p>
+						</div>
+					@endif
+					
 
 					<div class="container-login100-form-btn">
 						<button class="login100-form-btn">
