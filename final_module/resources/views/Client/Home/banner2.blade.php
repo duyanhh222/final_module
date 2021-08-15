@@ -9,7 +9,7 @@
         <div class="owl-carousel owl-theme banner_2_slider">
 
             <!-- Banner 2 Slider Item -->
-            @for($food = 0; $food < count($sell_quantity); $food ++)
+            @for($food = 0; $food < 3; $food ++)
             <div class="owl-item">
                 <div class="banner_2_item">
                     <div class="container fill_height">
