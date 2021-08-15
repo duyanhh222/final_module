@@ -45,9 +45,9 @@
                                                             @endif
                                                         @endif
                                                     </div>
-                                                <div class="product_extras">
-                                                    <button class="product_cart_button">Thêm vào giỏ hàng</button>
-                                                </div>
+{{--                                                <div class="product_extras">--}}
+{{--                                                    <button class="product_cart_button">Thêm vào giỏ hàng</button>--}}
+{{--                                                </div>--}}
                                             </div>
                                             <div class="product_fav"><i class="fas fa-heart"></i></div>
                                             <ul class="product_marks">
@@ -82,7 +82,7 @@
                                                                     {{ $sell_quantity->get($food)->name }}
                                                                 @endif</a></div></div>
                                                     <div class="char_subtitle">
-                                                        @if(isset($mostView->get($food)->restaurant->address))
+                                                        @if(isset($sell_quantity->get($food)->restaurant->address))
                                                             @if(strlen($sell_quantity->get($food)->restaurant->address) >20)
                                                                 {{ substr($sell_quantity->get($food)->restaurant->address, 0, 20) }}...
                                                             @else
@@ -90,9 +90,9 @@
                                                             @endif
                                                         @endif
                                                     </div>
-                                                    <div class="product_extras">
-                                                        <button class="product_cart_button">Thêm vào giỏ hàng</button>
-                                                    </div>
+{{--                                                    <div class="product_extras">--}}
+{{--                                                        <button class="product_cart_button">Thêm vào giỏ hàng</button>--}}
+{{--                                                    </div>--}}
                                                 </div>
                                                 <div class="product_fav"><i class="fas fa-heart"></i></div>
                                                 <ul class="product_marks">
@@ -111,19 +111,34 @@
                         <div class="col-lg-3">
                             <div class="arrivals_single clearfix">
                                 <div class="d-flex flex-column align-items-center justify-content-center">
-                                    <div class="arrivals_single_image"><img src="{{asset('Client/images/new_single.png')}}" alt=""></div>
-                                    <div class="arrivals_single_content">
-                                        <div class="arrivals_single_category"><a href="#">Smartphones</a></div>
+                                    @if(asset($bestPrice->image))
+                                    <div class="arrivals_single_image"><img src="{{asset('storage/images/'. $bestPrice->image)}}" width="175px" alt=""></div>
+                                    @endif
+                                        <div class="arrivals_single_content">
+                                        <div class="arrivals_single_category"><a href="#">{{ $bestPrice->category->name }}</a></div>
                                         <div class="arrivals_single_name_container clearfix">
-                                            <div class="arrivals_single_name"><a href="#">LUNA Smartphone</a></div>
-                                            <div class="arrivals_single_price text-right">$379</div>
+                                            <div class="arrivals_single_name"><a href="#">
+                                                    @if(strlen($bestPrice->name) >20)
+                                                        {{ substr($bestPrice->name, 0, 20) }}...
+                                                    @else
+                                                        {{ $bestPrice->name }}
+                                                    @endif</a></div>
+
+                                            <div class="product_price discount">{{ number_format($bestPrice->price_discount) }}đ<span>{{ number_format($bestPrice->price) }}đ</span></div>
                                         </div>
-                                        <div class="rating_r rating_r_4 arrivals_single_rating"><i></i><i></i><i></i><i></i><i></i></div>
-                                        <form action="#"><button class="arrivals_single_button">Add to Cart</button></form>
+                                            <div class="char_subtitle">
+                                                @if(isset($bestPrice->restaurant->address))
+                                                    @if(strlen($bestPrice->restaurant->address) >20)
+                                                        {{ substr($bestPrice->restaurant->address, 0, 20) }}...
+                                                    @else
+                                                        {{ $bestPrice->restaurant->address }}
+                                                    @endif
+                                                @endif
+                                            </div>
+{{--                                        <form action="#"><button class="arrivals_single_button">Thêm vào giỏ hàng</button></form>--}}
                                     </div>
                                     <div class="arrivals_single_fav product_fav active"><i class="fas fa-heart"></i></div>
                                     <ul class="arrivals_single_marks product_marks">
-                                        <li class="arrivals_single_mark product_mark product_new">new</li>
                                     </ul>
                                 </div>
                             </div>

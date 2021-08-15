@@ -27,7 +27,16 @@
                                         <div class="deals_item_name">{{ $mostView->get($food)->name }}</div>
                                         <div class="deals_item_price ml-auto">{{ number_format($mostView->get($food)->price_discount) }}đ</div>
                                     </div>
-                                    <div class="button banner_button"><a href="">Mua ngay</a></div>
+                                        <div class="char_subtitle">
+                                            @if(isset($mostView->get($food)->restaurant->address))
+                                                @if(strlen($mostView->get($food)->restaurant->address) >25)
+                                                    {{ substr($mostView->get($food)->restaurant->address, 0, 25) }}...
+                                                @else
+                                                    {{ $mostView->get($food)->restaurant->address }}
+                                                @endif
+                                            @endif
+                                        </div>
+{{--                                    <div class="button banner_button"><a href="">Mua ngay</a></div>--}}
                                     <div class="deals_timer d-flex flex-row align-items-center justify-content-start">
                                         <div class="deals_timer_title_container">
                                             <div class="deals_timer_title">Nhanh tay</div>
@@ -107,9 +116,9 @@
                                                     @endif
                                                 @endif
                                             </div>
-                                            <div class="product_extras">
-                                                <button class="product_cart_button">Thêm vào giỏ hàng</button>
-                                            </div>
+{{--                                            <div class="product_extras">--}}
+{{--                                                <button class="product_cart_button">Thêm vào giỏ hàng</button>--}}
+{{--                                            </div>--}}
                                         </div>
                                         <div class="product_fav"><i class="fas fa-heart"></i></div>
                                         <ul class="product_marks">
@@ -155,9 +164,9 @@
                                                 @endif
                                                 @endif
                                             </div>
-                                            <div class="product_extras">
-                                                <button class="product_cart_button">Thêm vào giỏ hàng</button>
-                                            </div>
+{{--                                            <div class="product_extras">--}}
+{{--                                                <button class="product_cart_button">Thêm vào giỏ hàng</button>--}}
+{{--                                            </div>--}}
                                         </div>
                                         <div class="product_fav"><i class="fas fa-heart"></i></div>
                                         <ul class="product_marks">

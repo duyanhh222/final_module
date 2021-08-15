@@ -24,7 +24,8 @@ class HomeClientController extends Controller
         $fastDelivery = Food::orderByDesc('time_preparation')->limit('20')->get();
         $sell_quantity = Food::orderByDesc('sell_quantity')->limit('23')->get();
         $mostNew = Food::orderByDesc('created_at')->limit('12')->get();
-        return view('Client.home', compact('categories', 'mostNew' ,'mostView', 'onSale', 'fastDelivery',  'sell_quantity'));
+        $bestPrice = Food::orderByDesc('price_discount')->first();
+        return view('Client.home', compact('categories', 'bestPrice', 'mostNew' ,'mostView', 'onSale', 'fastDelivery',  'sell_quantity'));
     }
 
 }
