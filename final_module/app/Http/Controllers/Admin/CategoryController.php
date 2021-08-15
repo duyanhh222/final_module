@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Storage;
 class CategoryController extends Controller
 {
     /**
@@ -51,9 +51,17 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required|unique:categories'
+            'name' => 'required|unique:categories',
+            'file' => 'required|image|mimes:jpeg,jpg,png|mimetypes:image/jpeg,image/png,image/jpg|max:5120'
         ]);
-        Category::create($request->only('name'));
+        if($request->has('file')){
+            $file = $request->file;
+            $fileName = $file->getClientOriginalName();
+            $newFileName = date('d-m-Y-H-i') . "_$fileName";
+            $request->file('file')->storeAs('public/images', $newFileName);
+            $request->merge(['image' => $newFileName]);
+        }
+        Category::create($request->only('name','image'));
         return redirect()->route('category.index')->with('success','Thêm thành công');
     }
 
@@ -89,9 +97,24 @@ class CategoryController extends Controller
     public function update(Request $request, Category $category)
     {
         $request->validate([
-            'name' => 'required|unique:categories'
+            'name' => 'required|unique:categories,name,'.$category->id,
+            'amount' => 'required|numeric',
+            'file' => 'image|mimes:jpeg,jpg,png|mimetypes:image/jpeg,image/png,image/jpg|max:5120'
         ]);
-        $category->update($request->only('name'));
+        if(!$request->has('file')){
+            $file_file = $request->file_file;
+            $request->merge(['image' => $file_file]);
+        }
+        if($request->has('file')){
+            $old_file = $category->image;
+            Storage::delete('/public/images/'. $old_file);
+            $file = $request->file;
+            $fileName = $file->getClientOriginalName();
+            $newFileName = date('d-m-Y-H-i') . "_$fileName";
+            $request->file('file')->storeAs('public/images', $newFileName);
+            $request->merge(['image' => $newFileName]);
+        }
+        $category->update($request->only('name','image','amount'));
         return redirect()->route('category.index')->with('success','Sửa thành công');
     }
 
@@ -103,6 +126,8 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
+        $old_file = $category->image;
+        Storage::delete('/public/images/'. $old_file);
         $category->delete();
         return redirect()->route('category.index')->with('success','Xóa thành công');
     }

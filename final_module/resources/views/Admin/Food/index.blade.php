@@ -1,4 +1,5 @@
 @extends('Layout.Admin.index')
+@section('title','Food')
 @section('main')
 <table class="table table-hover">
     <thead>
