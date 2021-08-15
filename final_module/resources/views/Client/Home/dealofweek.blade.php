@@ -15,8 +15,10 @@
                             <!-- Deals Item -->
                             @for($food = 0; $food < 3; $food ++)
                             <div class="owl-item deals_item">
+                                @if(asset($mostView->get($food)->image))
                                 <div class="deals_image"><img src="{{asset('storage/images/'. $mostView->get($food)->image)}}" alt=""></div>
-                                <div class="deals_content">
+                                @endif
+                                    <div class="deals_content">
                                     <div class="deals_info_line d-flex flex-row justify-content-start">
                                         <div class="deals_item_category"><a href="#">{{ $mostView->get($food)->category->name }}</a></div>
                                         <div class="deals_item_price_a ml-auto">{{ number_format($mostView->get($food)->price) }}đ</div>
@@ -69,7 +71,7 @@
                     <div class="tabbed_container">
                         <div class="tabs">
                             <ul class="clearfix">
-                                <li class="active">Đặc biệt</li>
+                                <li class="active">Ưu đãi</li>
                                 <li>Đang sale</li>
                                 <li>Giao nhanh</li>
                             </ul>
@@ -85,8 +87,10 @@
                                 <div class="featured_slider_item">
                                     <div class="border_active"></div>
                                     <div class="product_item discount d-flex flex-column align-items-center justify-content-center text-center">
+                                        @if(asset($mostView->get($food)->image))
                                         <div class="product_image d-flex flex-column align-items-center justify-content-center"><img src="{{asset('storage/images/'. $mostView->get($food)->image)}}" alt=""  width="175px"></div>
-                                        <div class="product_content">
+                                        @endif
+                                            <div class="product_content">
                                             <div class="product_price discount">{{ number_format($mostView->get($food)->price_discount) }}đ<span>{{ number_format($mostView->get($food)->price) }}đ</span></div>
                                             <div class="product_name"><div><a href="product.html">
                                                         @if(strlen($mostView->get($food)->name) >20)
@@ -96,10 +100,12 @@
                                                         @endif
                                                         </a></div></div>
                                             <div class="char_subtitle">
-                                                @if(strlen($mostView->get($food)->restaurant->address) >20)
-                                                    {{ substr($mostView->get($food)->restaurant->address, 0, 20) }}...
-                                                @else
-                                                    {{ $mostView->get($food)->restaurant->address }}
+                                                @if(isset($mostView->get($food)->restaurant->address))
+                                                    @if(strlen($mostView->get($food)->restaurant->address) >20)
+                                                        {{ substr($mostView->get($food)->restaurant->address, 0, 20) }}...
+                                                    @else
+                                                        {{ $mostView->get($food)->restaurant->address }}
+                                                    @endif
                                                 @endif
                                             </div>
                                             <div class="product_extras">
@@ -129,8 +135,10 @@
                                 <div class="featured_slider_item">
                                     <div class="border_active"></div>
                                     <div class="product_item discount d-flex flex-column align-items-center justify-content-center text-center">
+                                        @if(asset($onSale->get($food)->image))
                                         <div class="product_image d-flex flex-column align-items-center justify-content-center"><img src="{{asset('storage/images/'. $onSale->get($food)->image)}}"  width="175px" alt=""></div>
-                                        <div class="product_content">
+                                            @endif
+                                            <div class="product_content">
                                             <div class="product_price discount">{{ number_format($onSale->get($food)->price_discount) }}đ<span>{{ number_format($onSale->get($food)->price) }}đ</span></div>
                                             <div class="product_name"><div><a href="product.html">
                                                         @if(strlen($onSale->get($food)->name) >20)
@@ -140,10 +148,12 @@
                                                         @endif
                                                         </a></div></div>
                                             <div class="char_subtitle">
+                                                @if(isset($mostView->get($food)->restaurant->address))
                                                 @if(strlen($onSale->get($food)->restaurant->address) >20)
                                                     {{ substr($onSale->get($food)->restaurant->address, 0, 20) }}...
                                                 @else
                                                     {{ $onSale->get($food)->restaurant->address }}
+                                                @endif
                                                 @endif
                                             </div>
                                             <div class="product_extras">
@@ -172,8 +182,10 @@
                                 <div class="featured_slider_item">
                                     <div class="border_active"></div>
                                     <div class="product_item discount d-flex flex-column align-items-center justify-content-center text-center">
+                                        @if(asset($fastDelivery->get($food)->image))
                                         <div class="product_image d-flex flex-column align-items-center justify-content-center"><img src="{{asset('storage/images/'. $fastDelivery->get($food)->image)}}" width="175px" alt=""></div>
-                                        <div class="product_content">
+                                        @endif
+                                            <div class="product_content">
                                             <div class="product_price discount">{{ number_format($fastDelivery->get($food)->price_discount) }}đ<span>{{ number_format($fastDelivery->get($food)->price) }}đ</span></div>
                                             <div class="product_name"><div><a href="product.html">
                                                         @if(strlen($fastDelivery->get($food)->name) >20)
@@ -183,10 +195,12 @@
                                                         @endif
                                                        </a></div></div>
                                             <div class="char_subtitle">
+                                                @if(isset($mostView->get($food)->restaurant->address))
                                                 @if(strlen($fastDelivery->get($food)->restaurant->address) >20)
                                                     {{ substr($fastDelivery->get($food)->restaurant->address, 0, 20) }}...
                                                 @else
                                                     {{ $fastDelivery->get($food)->restaurant->address }}
+                                                @endif
                                                 @endif
                                             </div>
                                             <div class="product_extras">
@@ -222,12 +236,12 @@
         <div class="row">
             <div class="col-lg-3">
                 <div class="popular_categories_content">
-                    <div class="popular_categories_title">Popular Categories</div>
+                    <div class="popular_categories_title">Danh mục</div>
                     <div class="popular_categories_slider_nav">
                         <div class="popular_categories_prev popular_categories_nav"><i class="fas fa-angle-left ml-auto"></i></div>
                         <div class="popular_categories_next popular_categories_nav"><i class="fas fa-angle-right ml-auto"></i></div>
                     </div>
-                    <div class="popular_categories_link"><a href="#">full catalog</a></div>
+                    <div class="popular_categories_link"><a href="#">tất cả danh mục</a></div>
                 </div>
             </div>
 
