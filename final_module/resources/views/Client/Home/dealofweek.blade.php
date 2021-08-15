@@ -15,8 +15,10 @@
                             <!-- Deals Item -->
                             @for($food = 0; $food < 3; $food ++)
                             <div class="owl-item deals_item">
+                                @if(asset($mostView->get($food)->image))
                                 <div class="deals_image"><img src="{{asset('storage/images/'. $mostView->get($food)->image)}}" alt=""></div>
-                                <div class="deals_content">
+                                @endif
+                                    <div class="deals_content">
                                     <div class="deals_info_line d-flex flex-row justify-content-start">
                                         <div class="deals_item_category"><a href="#">{{ $mostView->get($food)->category->name }}</a></div>
                                         <div class="deals_item_price_a ml-auto">{{ number_format($mostView->get($food)->price) }}đ</div>
@@ -85,8 +87,10 @@
                                 <div class="featured_slider_item">
                                     <div class="border_active"></div>
                                     <div class="product_item discount d-flex flex-column align-items-center justify-content-center text-center">
+                                        @if(asset($mostView->get($food)->image))
                                         <div class="product_image d-flex flex-column align-items-center justify-content-center"><img src="{{asset('storage/images/'. $mostView->get($food)->image)}}" alt=""  width="175px"></div>
-                                        <div class="product_content">
+                                        @endif
+                                            <div class="product_content">
                                             <div class="product_price discount">{{ number_format($mostView->get($food)->price_discount) }}đ<span>{{ number_format($mostView->get($food)->price) }}đ</span></div>
                                             <div class="product_name"><div><a href="product.html">
                                                         @if(strlen($mostView->get($food)->name) >20)
@@ -131,8 +135,10 @@
                                 <div class="featured_slider_item">
                                     <div class="border_active"></div>
                                     <div class="product_item discount d-flex flex-column align-items-center justify-content-center text-center">
+                                        @if(asset($onSale->get($food)->image))
                                         <div class="product_image d-flex flex-column align-items-center justify-content-center"><img src="{{asset('storage/images/'. $onSale->get($food)->image)}}"  width="175px" alt=""></div>
-                                        <div class="product_content">
+                                            @endif
+                                            <div class="product_content">
                                             <div class="product_price discount">{{ number_format($onSale->get($food)->price_discount) }}đ<span>{{ number_format($onSale->get($food)->price) }}đ</span></div>
                                             <div class="product_name"><div><a href="product.html">
                                                         @if(strlen($onSale->get($food)->name) >20)
@@ -176,8 +182,10 @@
                                 <div class="featured_slider_item">
                                     <div class="border_active"></div>
                                     <div class="product_item discount d-flex flex-column align-items-center justify-content-center text-center">
+                                        @if(asset($fastDelivery->get($food)->image))
                                         <div class="product_image d-flex flex-column align-items-center justify-content-center"><img src="{{asset('storage/images/'. $fastDelivery->get($food)->image)}}" width="175px" alt=""></div>
-                                        <div class="product_content">
+                                        @endif
+                                            <div class="product_content">
                                             <div class="product_price discount">{{ number_format($fastDelivery->get($food)->price_discount) }}đ<span>{{ number_format($fastDelivery->get($food)->price) }}đ</span></div>
                                             <div class="product_name"><div><a href="product.html">
                                                         @if(strlen($fastDelivery->get($food)->name) >20)
