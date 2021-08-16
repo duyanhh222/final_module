@@ -15,7 +15,14 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('Client/styles/main_styles.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('Client/styles/responsive.css') }}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
-
+    <link href='https://fonts.googleapis.com/css?family=Roboto:400,100,300,700' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="{{ asset('Table/css/style.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('Form/css/roboto-font.css') }}">
+	<link rel="stylesheet" type="text/css" href="{{ asset('Form/fonts/font-awesome-5/css/fontawesome-all.min.css') }}">
+	<!-- Main Style Css -->
+    <link rel="stylesheet" href="{{ asset('Form/css/style.css') }}"/>
+    @yield('css')
 </head>
 
 <body>
@@ -315,7 +322,7 @@
     <script src="{{ asset('Client/plugins/easing/easing.js') }}"></script>
     <script src="{{ asset('Client/js/custom.js') }}"></script>
 
-
+@yield('js')
 </body>
 
 </html>

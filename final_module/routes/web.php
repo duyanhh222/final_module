@@ -34,6 +34,7 @@ Route::group(['prefix' => 'admin'],function(){
     Route::post('food/store','Admin\FoodController@store')->name('food.store');
     Route::post('food/{food}','Admin\FoodController@update')->name('food.update');
     Route::get('food/food/create','Admin\FoodController@create')->name('food.create');
+    Route::get('food/detail/{food}','Admin\FoodController@show')->name('food.show');
 
 });
 
@@ -45,9 +46,9 @@ Route::post('/user_login', 'Client\UserController@check')->name('client.login');
 Route::get('/user_register', 'Client\UserController@loadRegister')->name('client.loadRegister');
 Route::post('/user_register', 'Client\UserController@register')->name('client.register');
 
-Route::get('/register', function () {
-    return view('Client.register');
-});
+Route::get('/user/food', 'Client\UserController@showList')->name('client.listFood');
+Route::get('/user/create', 'Client\UserController@create')->name('client.createFood');
+Route::post('/user/create', 'Client\UserController@store')->name('client.store');
 
 Route::get('/ann', function () {
     return view('Client.register');
