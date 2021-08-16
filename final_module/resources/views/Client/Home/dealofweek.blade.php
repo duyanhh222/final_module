@@ -6,62 +6,65 @@
                 <!-- Deals -->
 
                 <div class="deals">
-                    <div class="deals_title">Hot nhất trong tuần</div>
+                    <div class="deals_title">Tags</div>
                     <div class="deals_slider_container">
+                        @foreach($tags as $tag)
+                            <button type="button" class="btn btn-outline-info" style="margin: 5px"><i class="bi bi-tag-fill" style="color: red"> </i><a style="color: #187caa" href="#">{{ $tag->name }}</a></button>
 
+                    @endforeach
                         <!-- Deals Slider -->
                         <div class="owl-carousel owl-theme deals_slider">
 
                             <!-- Deals Item -->
-                            @for($food = 0; $food < 3; $food ++)
-                            <div class="owl-item deals_item">
-                                @if(asset($mostView->get($food)->image))
-                                <div class="deals_image"><img src="{{asset('storage/images/'. $mostView->get($food)->image)}}" alt=""></div>
-                                @endif
-                                    <div class="deals_content">
-                                    <div class="deals_info_line d-flex flex-row justify-content-start">
-                                        <div class="deals_item_category"><a href="#">{{ $mostView->get($food)->category->name }}</a></div>
-                                        <div class="deals_item_price_a ml-auto">{{ number_format($mostView->get($food)->price) }}đ</div>
-                                    </div>
-                                    <div class="deals_info_line d-flex flex-row justify-content-start">
-                                        <div class="deals_item_name">{{ $mostView->get($food)->name }}</div>
-                                        <div class="deals_item_price ml-auto">{{ number_format($mostView->get($food)->price_discount) }}đ</div>
-                                    </div>
-                                        <div class="char_subtitle">
-                                            @if(isset($mostView->get($food)->restaurant->address))
-                                                @if(strlen($mostView->get($food)->restaurant->address) >25)
-                                                    {{ substr($mostView->get($food)->restaurant->address, 0, 25) }}...
-                                                @else
-                                                    {{ $mostView->get($food)->restaurant->address }}
-                                                @endif
-                                            @endif
-                                        </div>
+{{--                            @for($food = 0; $food < 3; $food ++)--}}
+{{--                            <div class="owl-item deals_item">--}}
+{{--                                @if(asset($mostView->get($food)->image))--}}
+{{--                                <div class="deals_image"><img src="{{asset('storage/images/'. $mostView->get($food)->image)}}" alt=""></div>--}}
+{{--                                @endif--}}
+{{--                                    <div class="deals_content">--}}
+{{--                                    <div class="deals_info_line d-flex flex-row justify-content-start">--}}
+{{--                                        <div class="deals_item_category"><a href="#">{{ $mostView->get($food)->category->name }}</a></div>--}}
+{{--                                        <div class="deals_item_price_a ml-auto">{{ number_format($mostView->get($food)->price) }}đ</div>--}}
+{{--                                    </div>--}}
+{{--                                    <div class="deals_info_line d-flex flex-row justify-content-start">--}}
+{{--                                        <div class="deals_item_name">{{ $mostView->get($food)->name }}</div>--}}
+{{--                                        <div class="deals_item_price ml-auto">{{ number_format($mostView->get($food)->price_discount) }}đ</div>--}}
+{{--                                    </div>--}}
+{{--                                        <div class="char_subtitle">--}}
+{{--                                            @if(isset($mostView->get($food)->restaurant->address))--}}
+{{--                                                @if(strlen($mostView->get($food)->restaurant->address) >25)--}}
+{{--                                                    {{ substr($mostView->get($food)->restaurant->address, 0, 25) }}...--}}
+{{--                                                @else--}}
+{{--                                                    {{ $mostView->get($food)->restaurant->address }}--}}
+{{--                                                @endif--}}
+{{--                                            @endif--}}
+{{--                                        </div>--}}
 {{--                                    <div class="button banner_button"><a href="">Mua ngay</a></div>--}}
-                                    <div class="deals_timer d-flex flex-row align-items-center justify-content-start">
-                                        <div class="deals_timer_title_container">
-                                            <div class="deals_timer_title">Nhanh tay</div>
-                                            <div class="deals_timer_subtitle">Thời gian còn lại:</div>
-                                        </div>
-                                        <div class="deals_timer_content ml-auto">
-                                            <div class="deals_timer_box clearfix" data-target-time="">
-                                                <div class="deals_timer_unit">
-                                                    <div id="deals_timer1_hr" class="deals_timer_hr"></div>
-                                                    <span>giờ</span>
-                                                </div>
-                                                <div class="deals_timer_unit">
-                                                    <div id="deals_timer1_min" class="deals_timer_min"></div>
-                                                    <span>phút</span>
-                                                </div>
-                                                <div class="deals_timer_unit">
-                                                    <div id="deals_timer1_sec" class="deals_timer_sec"></div>
-                                                    <span>giây</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            @endfor
+{{--                                    <div class="deals_timer d-flex flex-row align-items-center justify-content-start">--}}
+{{--                                        <div class="deals_timer_title_container">--}}
+{{--                                            <div class="deals_timer_title">Nhanh tay</div>--}}
+{{--                                            <div class="deals_timer_subtitle">Thời gian còn lại:</div>--}}
+{{--                                        </div>--}}
+{{--                                        <div class="deals_timer_content ml-auto">--}}
+{{--                                            <div class="deals_timer_box clearfix" data-target-time="">--}}
+{{--                                                <div class="deals_timer_unit">--}}
+{{--                                                    <div id="deals_timer1_hr" class="deals_timer_hr"></div>--}}
+{{--                                                    <span>giờ</span>--}}
+{{--                                                </div>--}}
+{{--                                                <div class="deals_timer_unit">--}}
+{{--                                                    <div id="deals_timer1_min" class="deals_timer_min"></div>--}}
+{{--                                                    <span>phút</span>--}}
+{{--                                                </div>--}}
+{{--                                                <div class="deals_timer_unit">--}}
+{{--                                                    <div id="deals_timer1_sec" class="deals_timer_sec"></div>--}}
+{{--                                                    <span>giây</span>--}}
+{{--                                                </div>--}}
+{{--                                            </div>--}}
+{{--                                        </div>--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+{{--                            @endfor--}}
 
 
 
@@ -91,7 +94,7 @@
                             <div class="featured_slider slider">
 
                                 <!-- Slider Item -->
-                                @for($food = 3; $food < count($mostView); $food++)
+                                @for($food = 0; $food < count($mostView); $food++)
                                 <div class="featured_slider_item">
                                     <div class="border_active"></div>
                                     <div class="product_item discount d-flex flex-column align-items-center justify-content-center text-center">

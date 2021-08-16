@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="description" content="OneTech shop project">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
     <link rel="stylesheet" type="text/css" href="{{ asset('Client/styles/bootstrap4/bootstrap.min.css') }}">
     <link href="{{ asset('Client/plugins/fontawesome-free-5.0.1/css/fontawesome-all.css') }}" rel="stylesheet" type="text/css">
     <link rel="stylesheet" type="text/css" href="{{ asset('Client/plugins/OwlCarousel2-2.2.1/owl.carousel.css') }}">
@@ -78,7 +79,7 @@
                             <div class="header_search">
                                 <div class="header_search_content">
                                     <div     class="header_search_form_container">
-                                        <form method="post" action="" class="header_search_form clearfix">
+                                        <form method="get" action="{{ route('client.search') }}" class="header_search_form clearfix">
                                             @csrf
                                             <input type="search" name="keyword" required="required" class="header_search_input" placeholder="Tìm kiếm sản phẩm...">
                                             <div class="custom_dropdown">
@@ -87,11 +88,9 @@
                                                     <i class="fas fa-chevron-down"></i>
                                                     <ul class="custom_list clc">
                                                         <li><a class="clc" href="#">All Categories</a></li>
-                                                        <li><a class="clc" href="#">Computers</a></li>
-                                                        <li><a class="clc" href="#">Laptops</a></li>
-                                                        <li><a class="clc" href="#">Cameras</a></li>
-                                                        <li><a class="clc" href="#">Hardware</a></li>
-                                                        <li><a class="clc" href="#">Smartphones</a></li>
+                                                        @foreach($categories as $category)
+                                                        <li><a class="clc" href="#">{{ $category->name }}</a></li>
+                                                        @endforeach
                                                     </ul>
                                                 </div>
                                             </div>

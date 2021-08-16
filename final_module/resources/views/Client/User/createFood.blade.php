@@ -11,10 +11,10 @@
     </div>
     <div class="form-group">
         <label for="">category</label>
-        <select name="category_id" id="input" class="form-control" required="required">
-            <option value="">---Lựa chọn danh mục---</option>
+        <select name="category_id" id="input" class="form-control" required="required" >
+            <option disabled selected value="">---Lựa chọn danh mục---</option>
             @foreach($categories as $category)
-            <option value="{{$category->id}}">{{$category->name}} </option>  
+            <option value="{{$category->id}}">{{$category->name}} </option>
             @endforeach
         </select>
     </div>
@@ -35,7 +35,7 @@
         <textarea name="description" id="summernote" cols="30" rows="10">{{old('description')}}</textarea>
     </div>
     <div class="form-group">
-        <label for="">món ăn ưu đãi</label>  
+        <label for="">món ăn ưu đãi</label>
         <div class="radio">
             <label>
                 <input type="radio" name="status"  value="1" checked="checked">
@@ -48,7 +48,7 @@
         </div>
     </div>
     <div class="form-group">
-        <label for="">món ăn đề cử</label>  
+        <label for="">món ăn đề cử</label>
         <div class="radio">
             <label>
                 <input type="radio" name="on_sale"  value="1" checked="checked">
