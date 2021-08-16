@@ -216,7 +216,7 @@
                         <div class="owl-item">
                             <div class="popular_category d-flex flex-column align-items-center justify-content-center">
                                 <div class="popular_category_image"><img src="{{asset('storage/images/'. $category->image)}}" alt=""></div>
-                                <div class="popular_category_text">{{ $category->name }}</div>
+                                <div class="popular_category_text"> <a href="{{ route('client.category', $category->id) }}">{{ $category->name }}</a></div>
                             </div>
                         </div>
                         @endforeach
