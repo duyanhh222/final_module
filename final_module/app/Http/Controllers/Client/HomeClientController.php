@@ -32,7 +32,7 @@ class HomeClientController extends Controller
     {
         $categories = Category::all();
         $category = Category::findOrFail($id);
-        $foods = Food::where('category_id', $id)->paginate(1);
+        $foods = Food::where('category_id', $id)->paginate(2);
         return view('Client.Category.showcategory', compact('category',  'categories', 'foods'));
     }
 }
