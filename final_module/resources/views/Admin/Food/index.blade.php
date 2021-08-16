@@ -39,5 +39,5 @@
         @endforeach
     </tbody>
 </table>
-
+{{ $foods->appends(request()->all())->links() }}
 @stop()
