@@ -35,8 +35,11 @@ class FoodController extends Controller
     public function index()
     {
         $foods = Food::paginate(5);
-        
-        return view('Admin.Food.index',compact('foods'));
+        $key = request()->key;
+        if(isset($key)){
+            $foods = Food::where('name','like','%'.$key.'%')->paginate(5);
+        }
+        return view('Admin.Food.index',compact('foods','key'));
     }
 
     /**

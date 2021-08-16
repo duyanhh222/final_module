@@ -1,6 +1,12 @@
 @extends('Layout.Admin.index')
 @section('title','Food')
 @section('main')
+<form action="" method="GET" class="form-inline" >
+    <div class="form-group">     
+        <input class="form-control" name="key" id="" value="{{$key}}" placeholder="Search...">
+    </div>
+    <button type="submit" class="btn btn-primary"> <i class="fas fa-search"></i> </button>
+</form>
 <table class="table table-hover">
     <thead>
         <tr>
