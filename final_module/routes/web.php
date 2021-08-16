@@ -45,9 +45,9 @@ Route::post('/user_login', 'Client\UserController@check')->name('client.login');
 Route::get('/user_register', 'Client\UserController@loadRegister')->name('client.loadRegister');
 Route::post('/user_register', 'Client\UserController@register')->name('client.register');
 
-Route::get('/register', function () {
-    return view('Client.register');
-});
+Route::get('/user/food', 'Client\UserController@showList')->name('client.listFood');
+Route::get('/user/create', 'Client\UserController@create')->name('client.createFood');
+Route::post('/user/create', 'Client\UserController@store')->name('client.store');
 
 Route::get('/ann', function () {
     return view('Client.register');
