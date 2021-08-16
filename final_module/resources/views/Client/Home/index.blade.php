@@ -140,7 +140,7 @@
 
                                     <ul class="cat_menu">
                                         @foreach($categories as $category)
-                                        <li><a href="#">{{ $category->name }} <i class="fas fa-chevron-right"></i></a></li>
+                                        <li><a href="{{ route('client.category', $category->id) }}">{{ $category->name }} <i class="fas fa-chevron-right"></i></a></li>
                                         @endforeach
                                     </ul>
                                 </div>

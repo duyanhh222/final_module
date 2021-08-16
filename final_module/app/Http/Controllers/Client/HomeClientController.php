@@ -28,4 +28,11 @@ class HomeClientController extends Controller
         return view('Client.home', compact('categories', 'bestPrice', 'mostNew' ,'mostView', 'onSale', 'fastDelivery',  'sell_quantity'));
     }
 
+    public function category($id)
+    {
+        $categories = Category::all();
+        $category = Category::findOrFail($id);
+        $foods = Food::where('category_id', $id)->paginate(1);
+        return view('Client.Category.showcategory', compact('category',  'categories', 'foods'));
+    }
 }

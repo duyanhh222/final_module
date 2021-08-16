@@ -212,44 +212,14 @@
                     <div class="owl-carousel owl-theme popular_categories_slider">
 
                         <!-- Popular Categories Item -->
+                        @foreach($categories as $category)
                         <div class="owl-item">
                             <div class="popular_category d-flex flex-column align-items-center justify-content-center">
-                                <div class="popular_category_image"><img src="{{asset('Client/images/popular_1.png')}}" alt=""></div>
-                                <div class="popular_category_text">Smartphones & Tablets</div>
+                                <div class="popular_category_image"><img src="{{asset('storage/images/'. $category->image)}}" alt=""></div>
+                                <div class="popular_category_text">{{ $category->name }}</div>
                             </div>
                         </div>
-
-                        <!-- Popular Categories Item -->
-                        <div class="owl-item">
-                            <div class="popular_category d-flex flex-column align-items-center justify-content-center">
-                                <div class="popular_category_image"><img src="{{asset('Client/images/popular_2.png')}}" alt=""></div>
-                                <div class="popular_category_text">Computers & Laptops</div>
-                            </div>
-                        </div>
-
-                        <!-- Popular Categories Item -->
-                        <div class="owl-item">
-                            <div class="popular_category d-flex flex-column align-items-center justify-content-center">
-                                <div class="popular_category_image"><img src="{{asset('Client/images/popular_3.png')}}" alt=""></div>
-                                <div class="popular_category_text">Gadgets</div>
-                            </div>
-                        </div>
-
-                        <!-- Popular Categories Item -->
-                        <div class="owl-item">
-                            <div class="popular_category d-flex flex-column align-items-center justify-content-center">
-                                <div class="popular_category_image"><img src="{{asset('Client/images/popular_4.png')}}" alt=""></div>
-                                <div class="popular_category_text">Video Games & Consoles</div>
-                            </div>
-                        </div>
-
-                        <!-- Popular Categories Item -->
-                        <div class="owl-item">
-                            <div class="popular_category d-flex flex-column align-items-center justify-content-center">
-                                <div class="popular_category_image"><img src="{{asset('Client/images/popular_5.png')}}" alt=""></div>
-                                <div class="popular_category_text">Accessories</div>
-                            </div>
-                        </div>
+                        @endforeach
 
                     </div>
                 </div>
