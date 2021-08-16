@@ -34,6 +34,7 @@ Route::group(['prefix' => 'admin'],function(){
     Route::post('food/store','Admin\FoodController@store')->name('food.store');
     Route::post('food/{food}','Admin\FoodController@update')->name('food.update');
     Route::get('food/food/create','Admin\FoodController@create')->name('food.create');
+    Route::get('food/detail/{food}','Admin\FoodController@show')->name('food.show');
 
 });
 
