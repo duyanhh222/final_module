@@ -19,22 +19,28 @@ Route::group(['prefix' => 'admin'],function(){
 
     Route::get('/login','Admin\AdminController@index')->name('admin.login');
     Route::post('/login','Admin\AdminController@check')->name('admin.check.login');
-    Route::get('/dashboard','Admin\AdminController@dashboard')->name('admin.dashboard');
+    
+    Route::get('/logout/logout','Admin\AdminController@out')->name('admin.logout');
 
-    Route::get('category','Admin\CategoryController@index')->name('category.index');
-    Route::get('/{category}/edit','Admin\CategoryController@edit')->name('category.edit');
-    Route::get('/{category}','Admin\CategoryController@destroy')->name('category.destroy');
-    Route::post('category/store','Admin\CategoryController@store')->name('category.store');
-    Route::post('/{category}','Admin\CategoryController@update')->name('category.update');
-    Route::get('category/create','Admin\CategoryController@create')->name('category.create');
+    Route::group(['middleware' => 'check_login'],function(){
+        Route::get('/dashboard','Admin\AdminController@dashboard')->name('admin.dashboard');
 
-    Route::get('food/food','Admin\FoodController@index')->name('food.index');
-    Route::get('food/{food}/edit','Admin\FoodController@edit')->name('food.edit');
-    Route::get('food/{food}','Admin\FoodController@destroy')->name('food.destroy');
-    Route::post('food/store','Admin\FoodController@store')->name('food.store');
-    Route::post('food/{food}','Admin\FoodController@update')->name('food.update');
-    Route::get('food/food/create','Admin\FoodController@create')->name('food.create');
-    Route::get('food/detail/{food}','Admin\FoodController@show')->name('food.show');
+        Route::get('category','Admin\CategoryController@index')->name('category.index');
+        Route::get('/{category}/edit','Admin\CategoryController@edit')->name('category.edit');
+        Route::get('/{category}','Admin\CategoryController@destroy')->name('category.destroy');
+        Route::post('category/store','Admin\CategoryController@store')->name('category.store');
+        Route::post('/{category}','Admin\CategoryController@update')->name('category.update');
+        Route::get('category/create','Admin\CategoryController@create')->name('category.create');
+
+        Route::get('food/food','Admin\FoodController@index')->name('food.index');
+        Route::get('food/{food}/edit','Admin\FoodController@edit')->name('food.edit');
+        Route::get('food/{food}','Admin\FoodController@destroy')->name('food.destroy');
+        Route::post('food/store','Admin\FoodController@store')->name('food.store');
+        Route::post('food/{food}','Admin\FoodController@update')->name('food.update');
+        Route::get('food/food/create','Admin\FoodController@create')->name('food.create');
+        Route::get('food/detail/{food}','Admin\FoodController@show')->name('food.show');
+    });
+    
 
 });
 

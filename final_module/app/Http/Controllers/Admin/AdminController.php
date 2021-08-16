@@ -53,10 +53,20 @@ class AdminController extends Controller
             Session::put('admin_name',$admin->admin_name);
             return redirect()->route('admin.dashboard');
         }
+        else{
+            return redirect()->route('admin.login')->with('message','Thông tin tài khoản hoặc mật khẩu không chính xác');
+        }
     }
     public function dashboard()
     {
         return view('Admin.dashboard');
+    }
+    public function out()
+    {
+        Session::forget('admin_name');
+        Session::forget('message');
+        return redirect()->route('admin.login');
+
     }
     public function create()
     {
