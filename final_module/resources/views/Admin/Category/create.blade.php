@@ -13,7 +13,10 @@
     @enderror
     <div class="form-group">
         <label for="">image</label>
-        <input type="file" name="file"  class="form-control" id="" placeholder="Input field">
+        <input type="file" name="file"  class="form-control" id="upload"  placeholder="Input field">
+    </div>
+    <div>
+        <img id="blah" src="" width="200px" />
     </div>
     @error('file')
         <div class="alert alert-danger">{{ $message }}</div>
@@ -21,4 +24,21 @@
     <button type="submit" class="btn btn-primary">Submit</button>
 </form>
 
+@stop()
+@section('js')
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script type="text/javascript">
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                $('#blah').attr('src', e.target.result);
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+    $("#upload").change(function() {
+    readURL(this);
+});
+</script>
 @stop()
