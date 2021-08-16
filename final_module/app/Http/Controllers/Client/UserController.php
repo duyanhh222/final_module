@@ -73,8 +73,13 @@ class UserController extends Controller
         $password = $request->password;
         $user = User::where('user_email',$email)->where('user_password',$password)->first();
         if(isset($user)){
+            Session::put('level','user');
+            Session::put('user_id',$user->id);
             Session::put('user_name',$user->user_name);
-            return redirect()->route('client.loadRegister');
+            Session::put('user_level',$user->user_level);
+            Session::put('user_restaurant',$user->user_restaurent);
+
+            return redirect()->route('client.createFood');
         }
             Session::put('login_fail', 'Kiểm tra lại email hoặc mật khẩu');
             return view('Client.login');
@@ -124,8 +129,10 @@ class UserController extends Controller
             $request->file('file')->storeAs('public/images', $newFileName);
             $request->merge(['image' => $newFileName]);
         }
+        $id = Session::get('user_id');
+        $request->merge(['user_id' => $id]);
         $foodId = Food::insertGetId($request->only( 'name','category_id','restaurant_id','price','price_discount','image','description','status','on_sale',
-            'coupon','count_coupon','time_preparation'));
+            'coupon','count_coupon','time_preparation', 'user_id'));
         if($request->tag != null){
             $tags = $request->tag;
             $hashtag = explode(',',$tags);
