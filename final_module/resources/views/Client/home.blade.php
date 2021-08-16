@@ -19,7 +19,7 @@
 
     <!-- Adverts -->
     <!-- Trends -->
-    @include('Client.Home.trend')
+{{--    @include('Client.Home.trend')--}}
 
 
     <!-- Reviews -->

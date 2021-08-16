@@ -10,6 +10,7 @@ use App\Models\Restaurant;
 use App\Models\Tag;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class FoodController extends Controller
 {
@@ -56,6 +57,27 @@ class FoodController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'name' => 'required|max:255',
+            'category_id' => 'required|integer',
+            'price' => 'required|numeric|min:0|gt:price_discount',
+            'price_discount' => 'required|numeric|min:0',
+            'coupon' => 'max:255',
+            'count_coupon' => 'max:255',
+            'time_preparation' => 'max:255',
+            'restaurant_name' =>'max:255',
+            'restaurant_address' =>'max:255',
+            'time_open' =>'max:255',
+            'time_close' =>'max:255',
+            'explain' => 'max:255',
+            'service' => 'max:255',
+            'phone' => 'max:255',
+            'tag' => 'max:255',
+            'file' => 'required|image|mimes:jpeg,jpg,png|mimetypes:image/jpeg,image/png,image/jpg|max:5120'
+        ]);
+        $categ1 = Category::where('id',$request->category_id)->first();
+        $a = $categ1->amount + 1;
+        Category::where('id',$request->category_id)->update(['amount' => $a]);
         if($request->restaurant_name != null){
             $data = array();
             $data['name'] = $request->restaurant_name;
@@ -103,7 +125,7 @@ class FoodController extends Controller
                 }
             }
         }
-        if(count($hash) > 0){
+        if(isset($hash)){
             foreach($hash as $value){
                 $arr = array();
                 $arr['food_id'] = $foodId;
@@ -111,7 +133,7 @@ class FoodController extends Controller
                 FoodTag::insertGetId($arr);
             }
         }
-        return redirect()->route('food.index');
+        return redirect()->route('food.index')->with('success','Thêm thành công');
     }
 
     /**
@@ -133,6 +155,8 @@ class FoodController extends Controller
      */
     public function edit(Food $food)
     {
+        $categ1 = Category::where('id',$food->category_id)->first();
+        Session::put('categ1',$categ1->id);
         $tags = '';
         $foodtag = FoodTag::where('food_id',$food->id)->get();
         
@@ -156,6 +180,31 @@ class FoodController extends Controller
      */
     public function update(Request $request, Food $food)
     {
+        $request->validate([
+            'name' => 'required|max:255',
+            'category_id' => 'required|integer',
+            'price' => 'required|numeric|min:0|gt:price_discount',
+            'price_discount' => 'required|numeric|min:0',
+            'coupon' => 'max:255',
+            'count_coupon' => 'max:255',
+            'time_preparation' => 'max:255',
+            'restaurant_name' =>'max:255',
+            'restaurant_address' =>'max:255',
+            'time_open' =>'max:255',
+            'time_close' =>'max:255',
+            'explain' => 'max:255',
+            'service' => 'max:255',
+            'phone' => 'max:255',
+            'tag' => 'max:255',
+            'file' => 'image|mimes:jpeg,jpg,png|mimetypes:image/jpeg,image/png,image/jpg|max:5120'
+        ]);
+        $categ1 = Category::where('id',Session::get('categ1'))->first();
+        $a = $categ1->amount - 1;
+        Category::where('id',$food->category_id)->update(['amount' => $a]);
+        Session::forget('categ1');
+        $categ2 = Category::where('id',$request->category_id)->first();
+        $b = $categ2->amount + 1;
+        Category::where('id',$request->category_id)->update(['amount' => $b]);
         if($request->restaurant_name != null){
             $data = array();
             $data['name'] = $request->restaurant_name;
@@ -168,9 +217,13 @@ class FoodController extends Controller
             $restaurantId = Restaurant::insertGetId($data);
             $request->merge(['restaurant_id' => $restaurantId]);
         }
-        $file = $food->image;
-        Storage::delete('/public/images/'. $file);
+        if(!$request->has('file')){
+            $file_file = $request->file_file;
+            $request->merge(['image' => $file_file]);
+        }
         if($request->has('file')){
+             $file = $food->image;
+            Storage::delete('/public/images/'. $file);
             $file = $request->file;
             $fileName = $file->getClientOriginalName();
             $newFileName = date('d-m-Y-H-i') . "_$fileName";
@@ -205,7 +258,7 @@ class FoodController extends Controller
                 }
             }
         }
-        if(count($hash) > 0){
+        if(isset($hash)){
             FoodTag::where('food_id',$food->id)->delete();
             foreach($hash as $value){
                 $arr = array();
@@ -214,10 +267,10 @@ class FoodController extends Controller
                 FoodTag::insertGetId($arr);
             }
         }
-        if(count($hash) ==0){
+        if(!isset($hash)){
             FoodTag::where('food_id',$food->id)->delete();
         }
-        return redirect()->route('food.index');
+        return redirect()->route('food.index')->with('success','Sửa thành công');
     }
 
     /**
@@ -228,6 +281,9 @@ class FoodController extends Controller
      */
     public function destroy(Food $food)
     {
+        $categ1 = Category::where('id',$food->category_id)->first();
+        $a = $categ1->amount - 1;
+        Category::where('id',$food->category_id)->update(['amount' => $a]);
         $tags = FoodTag::where('food_id',$food->id)->get();
         if(isset($tags)){
             foreach($tags as $value){

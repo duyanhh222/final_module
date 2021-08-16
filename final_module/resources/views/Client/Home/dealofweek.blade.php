@@ -27,7 +27,16 @@
                                         <div class="deals_item_name">{{ $mostView->get($food)->name }}</div>
                                         <div class="deals_item_price ml-auto">{{ number_format($mostView->get($food)->price_discount) }}đ</div>
                                     </div>
-                                    <div class="button banner_button"><a href="">Mua ngay</a></div>
+                                        <div class="char_subtitle">
+                                            @if(isset($mostView->get($food)->restaurant->address))
+                                                @if(strlen($mostView->get($food)->restaurant->address) >25)
+                                                    {{ substr($mostView->get($food)->restaurant->address, 0, 25) }}...
+                                                @else
+                                                    {{ $mostView->get($food)->restaurant->address }}
+                                                @endif
+                                            @endif
+                                        </div>
+{{--                                    <div class="button banner_button"><a href="">Mua ngay</a></div>--}}
                                     <div class="deals_timer d-flex flex-row align-items-center justify-content-start">
                                         <div class="deals_timer_title_container">
                                             <div class="deals_timer_title">Nhanh tay</div>
@@ -73,7 +82,6 @@
                             <ul class="clearfix">
                                 <li class="active">Ưu đãi</li>
                                 <li>Đang sale</li>
-                                <li>Giao nhanh</li>
                             </ul>
                             <div class="tabs_line"><span></span></div>
                         </div>
@@ -108,9 +116,9 @@
                                                     @endif
                                                 @endif
                                             </div>
-                                            <div class="product_extras">
-                                                <button class="product_cart_button">Thêm vào giỏ hàng</button>
-                                            </div>
+{{--                                            <div class="product_extras">--}}
+{{--                                                <button class="product_cart_button">Thêm vào giỏ hàng</button>--}}
+{{--                                            </div>--}}
                                         </div>
                                         <div class="product_fav"><i class="fas fa-heart"></i></div>
                                         <ul class="product_marks">
@@ -156,9 +164,9 @@
                                                 @endif
                                                 @endif
                                             </div>
-                                            <div class="product_extras">
-                                                <button class="product_cart_button">Thêm vào giỏ hàng</button>
-                                            </div>
+{{--                                            <div class="product_extras">--}}
+{{--                                                <button class="product_cart_button">Thêm vào giỏ hàng</button>--}}
+{{--                                            </div>--}}
                                         </div>
                                         <div class="product_fav"><i class="fas fa-heart"></i></div>
                                         <ul class="product_marks">
@@ -172,54 +180,6 @@
                             <div class="featured_slider_dots_cover"></div>
                         </div>
 
-                        <!-- Product Panel -->
-
-                        <div class="product_panel panel">
-                            <div class="featured_slider slider">
-
-                                <!-- Slider Item -->
-                                @for($food = 0; $food < count($fastDelivery); $food ++)
-                                <div class="featured_slider_item">
-                                    <div class="border_active"></div>
-                                    <div class="product_item discount d-flex flex-column align-items-center justify-content-center text-center">
-                                        @if(asset($fastDelivery->get($food)->image))
-                                        <div class="product_image d-flex flex-column align-items-center justify-content-center"><img src="{{asset('storage/images/'. $fastDelivery->get($food)->image)}}" width="175px" alt=""></div>
-                                        @endif
-                                            <div class="product_content">
-                                            <div class="product_price discount">{{ number_format($fastDelivery->get($food)->price_discount) }}đ<span>{{ number_format($fastDelivery->get($food)->price) }}đ</span></div>
-                                            <div class="product_name"><div><a href="product.html">
-                                                        @if(strlen($fastDelivery->get($food)->name) >20)
-                                                            {{ substr($fastDelivery->get($food)->name, 0, 20) }}...
-                                                        @else
-                                                            {{ $fastDelivery->get($food)->name }}
-                                                        @endif
-                                                       </a></div></div>
-                                            <div class="char_subtitle">
-                                                @if(isset($mostView->get($food)->restaurant->address))
-                                                @if(strlen($fastDelivery->get($food)->restaurant->address) >20)
-                                                    {{ substr($fastDelivery->get($food)->restaurant->address, 0, 20) }}...
-                                                @else
-                                                    {{ $fastDelivery->get($food)->restaurant->address }}
-                                                @endif
-                                                @endif
-                                            </div>
-                                            <div class="product_extras">
-
-                                                <button class="product_cart_button">Thêm vào giỏ hàng</button>
-                                            </div>
-                                        </div>
-                                        <div class="product_fav"><i class="fas fa-heart"></i></div>
-                                        <ul class="product_marks">
-                                            <li class="product_mark product_discount">-{{ intval((($fastDelivery->get($food)->price - $fastDelivery->get($food)->price_discount)) /
-                                                                                                            $fastDelivery->get($food)->price * 100) }}%</li>
-
-                                        </ul>
-                                    </div>
-                                </div>
-                                @endfor
-                            </div>
-                            <div class="featured_slider_dots_cover"></div>
-                        </div>
 
                     </div>
                 </div>

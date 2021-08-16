@@ -1,4 +1,5 @@
 @extends('Layout.Admin.index')
+@section('title','Category')
 @section('main')
 <div class="table-responsive">
     <table class="table table-hover">
@@ -6,6 +7,8 @@
             <tr>
                 <th>#</th>
                 <th>Category_name</th>
+                <th>Image</th>
+                <th>amount</th>
                 <th>Action</th>
             </tr>
         </thead>
@@ -14,6 +17,8 @@
             <tr>
                 <td>{{$category->id}}</td>
                 <td>{{$category->name}}</td>
+                <td><img src="{{asset('storage/images/'.$category->image)}}" width="100px" alt=""></td>
+                <td>{{$category->amount}}</td>
                 <td>
                     <a href="{{route('category.edit',$category->id)}}" class="btn btn-sm btn-success">
                     <i class="fas fa-edit"></i>

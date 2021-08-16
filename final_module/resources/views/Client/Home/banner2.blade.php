@@ -9,7 +9,7 @@
         <div class="owl-carousel owl-theme banner_2_slider">
 
             <!-- Banner 2 Slider Item -->
-            @for($food = 0; $food < count($sell_quantity); $food ++)
+            @for($food = 0; $food < 3; $food ++)
             <div class="owl-item">
                 <div class="banner_2_item">
                     <div class="container fill_height">
@@ -20,7 +20,7 @@
                                     <div class="banner_2_title">{{ $sell_quantity->get($food)->name }}</div>
                                     <div class="banner_2_text">{!! $sell_quantity->get($food)->description !!}</div>
                                     <div class="rating_r rating_r_4 banner_2_rating"><i></i><i></i><i></i><i></i><i></i></div>
-                                    <div class="button banner_2_button"><a href="#">Thêm vào giỏ hàng</a></div>
+{{--                                    <div class="button banner_2_button"><a href="#">Thêm vào giỏ hàng</a></div>--}}
                                 </div>
 
                             </div>
