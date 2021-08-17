@@ -1,26 +1,21 @@
 @extends('Layout.Client.index')
 @section('title','Food')
 @section('main')
-<form action="{{route('client.storeFood')}}" method="POST" enctype="multipart/form-data">
+<form action="{{route('client.storeFood')}}" method="POST" enctype="multipart/form-data" class="formcrud">
 @csrf
-    <legend>Form title</legend>
-    <div class="col-6">
-        <div class="card card-warning">
-            <div class="card-header">
-                <h3 class="card-title">Thông tin món ăn</h3>
-            </div>
-        </div>
+<div>
+    <div class="form_title">
+        Thông tin món ăn
     </div>
-    <br>
     <div class="row g-3">
-    <div class="col-5">
+    <div class="col-6 input_group">
         <label for="">name</label>
         <input type="text" name="name" value="{{old('name')}}" class="form-control" id="" placeholder="Input field">
         @error('name')
         <div class="alert alert-danger">{{ $message }}</div>
         @enderror
     </div>
-    <div class="col-5">
+    <div class="col-6 input_group">
         <label for="">category</label>
         <select name="category_id" id="input" class="form-control" required="required">
             <option value="">---Lựa chọn danh mục---</option>
@@ -39,47 +34,53 @@
     </div>
     </div>
     <div class="row g-3">  
-    <div class="col-5">
-        <label for="">price</label>
-        <input type="text" name="price" value="{{old('price')}}" class="form-control" id="" placeholder="Input field">
-        @error('price')
-        <div class="alert alert-danger">{{ $message }}</div>
-        @enderror
+        <div class="col-6 input_group">
+            <label for="">price</label>
+            <input type="text" name="price" value="{{old('price')}}" class="form-control" id="" placeholder="Input field">
+            @error('price')
+            <div class="alert alert-danger">{{ $message }}</div>
+            @enderror
+        </div>
+        <div class="col-6 input_group">
+            <label for="">price_discount</label>
+            <input type="text" name="price_discount" value="{{old('price_discount')}}" class="form-control" id="" placeholder="Input field">
+            @error('price_discount')
+            <div class="alert alert-danger">{{ $message }}</div>
+            @enderror
+        </div>
     </div>
-    <div class="col-5">
-        <label for="">price_discount</label>
-        <input type="text" name="price_discount" value="{{old('price_discount')}}" class="form-control" id="" placeholder="Input field">
-         @error('price_discount')
-        <div class="alert alert-danger">{{ $message }}</div>
-        @enderror
+    <div class="row">
+        <div class="col-6 input_group">
+            <label for="">image</label>
+            <input type="file" name="file"  class="form-control" id="upload" placeholder="Input field">
+            @error('file')
+            <div class="alert alert-danger">{{ $message }}</div>
+            @enderror
+        </div> 
     </div>
-    </div>
-    <div class="col-5">
-        <label for="">image</label>
-        <input type="file" name="file"  class="form-control" id="upload" placeholder="Input field">
-        @error('file')
-        <div class="alert alert-danger">{{ $message }}</div>
-        @enderror
-    </div> 
+    
     <div>
         <img id="blah" src="" width="150px" />
     </div>
-    <div class="form-group">
-        <label>Ghi chú</label>
+    <div class="row">
+        <div class="col-12">
+            <label>Ghi chú</label>
         <textarea class="form-control" name="description" required>{{old('description')}}</textarea>
+        </div>
+        
     </div>
     @error('description')
         <div class="alert alert-danger">{{ $message }}</div>
     @enderror
     <div class="row g-3">
-    <div class="col-5">
+    <div class="col-6 input_group">
         <label for="">coupon</label>
         <input type="text" name="coupon" value="{{old('coupon')}}" class="form-control" id="" placeholder="Input field">
         @error('coupon')
             <div class="alert alert-danger">{{ $message }}</div>
         @enderror
     </div>   
-    <div class="col-5">
+    <div class="col-6 input_group">
         <label for="">count_coupon</label>
         <input type="text" name="count_coupon" value="{{old('count_coupon')}}" class="form-control" id="" placeholder="Input field">
         @error('count_coupon')
@@ -88,14 +89,14 @@
     </div>
     </div>
     <div class="row g-3">
-    <div class="col-5">
+    <div class="col-6 input_group">
         <label for="">time_preparation</label>
         <input type="text" name="time_preparation" value="{{old('time_preparation')}}" class="form-control" id="" placeholder="Input field">
         @error('time_preparation')
             <div class="alert alert-danger">{{ $message }}</div>
         @enderror
     </div> 
-    <div class="col-5">
+    <div class="col-6 input_group">
             <label for="">ưu đãi</label>  
             <select name="status" id="input" class="form-control" required="required">
                 @if(old('status') == 1)
@@ -111,22 +112,18 @@
     
     </div>
     <br>
-    <div class="col-6">
-        <div class="card card-primary">
-            <div class="card-header">
-                <h3 class="card-title">Thông tin nhà hàng</h3>
-            </div>
-        </div>
+    <div class="form_title">
+        Thông tin nhà hàng
     </div>
     <div class="row g-3">
-    <div class="col-5">
+    <div class="col-6 input_group">
         <label for="">Tên nhà hàng</label>
         <input type="text" name="restaurant_name" value="{{old('restaurant_name')}}" class="form-control" id="" placeholder="Input field">
     @error('restaurant_name')
         <div class="alert alert-danger">{{ $message }}</div>
     @enderror
     </div>
-    <div class="col-5">
+    <div class="col-6 input_group">
         <label for="">Địa chỉ nhà hàng</label>
         <input type="text" name="restaurant_address" value="{{old('restaurant_address')}}" class="form-control" id="" placeholder="Input field">
     @error('restaurant_address')
@@ -135,7 +132,7 @@
     </div>
     </div>
     <div class="row g-3">
-    <div class="col-5">
+    <div class="col-6 input_group">
         <label for="">time_open</label>
         <input type="text" name="time_open" value="{{old('time_open')}}" class="form-control" id="" placeholder="Input field">
     
@@ -143,7 +140,7 @@
         <div class="alert alert-danger">{{ $message }}</div>
     @enderror
     </div>
-    <div class="col-5">
+    <div class="col-6 input_group">
         <label for="">time_close</label>
         <input type="text" name="time_close" value="{{old('time_close')}}" class="form-control" id="" placeholder="Input field">
     @error('time_close')
@@ -152,14 +149,14 @@
     </div>
     </div>
     <div class="row g-3">
-    <div class="col-5">
+    <div class="col-6 input_group">
         <label for="">explain</label>
         <input type="text" name="explain" value="{{old('explain')}}" class="form-control" id="" placeholder="Input field">
     @error('explain')
         <div class="alert alert-danger">{{ $message }}</div>
     @enderror
     </div>
-    <div class="col-5">
+    <div class="col-6 input_group">
         <label for="">phone</label>
         <input type="text" name="phone" value="{{old('phone')}}" class="form-control" id="" placeholder="Input field">
     @error('phone')
@@ -168,14 +165,14 @@
     </div>
     </div>
     <div class="row g-3">
-    <div class="col-5">
+    <div class="col-6 input_group">
         <label for="">service</label>
         <input type="text" name="service" value="{{old('service')}}" class="form-control" id="" placeholder="Input field">
     @error('service')
         <div class="alert alert-danger">{{ $message }}</div>
     @enderror
     </div>
-    <div class="col-5">
+    <div class="col-6 input_group">
         <label for="">tag</label>
         <input type="text" name="tag" value="{{old('tag')}}" class="form-control" id="" placeholder="Input field">
     @error('tag')
@@ -187,7 +184,7 @@
    <div>
        <button type="submit" class="btn btn-primary">Submit</button>
    </div>
-    
+</div>
 </form>
 @stop()
 @section('js')
@@ -198,7 +195,7 @@
             var reader = new FileReader();
             reader.onload = function(e) {
                 $('#blah').attr('src', e.target.result);
-            }
+            }   
             reader.readAsDataURL(input.files[0]);
         }
     }
@@ -209,6 +206,7 @@
 @stop()
 @section('css')
 <link rel="stylesheet" href="{{asset('Admin/plugins/summernote/summernote-bs4.min.css')}}">
+<link rel="stylesheet" href="{{ asset('Form/css/form.css') }}">
 @stop()
 
 

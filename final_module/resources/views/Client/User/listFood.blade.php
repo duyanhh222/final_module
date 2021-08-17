@@ -7,7 +7,7 @@
     </div>
     <button type="submit" class="btn btn-primary"> <i class="fas fa-search"></i> </button>
 </form>
-
+<br>
 <table class="table">
     <thead class="thead-primary">
     <tr>
