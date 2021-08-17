@@ -120,7 +120,7 @@
         <a class="nav-link" data-toggle="dropdown" href="#">
               <i class="flag-icon flag-icon-gb emg"></i>
         </a>
-        <div class="dropdown-menu dropdown-menu-right p-0"> 
+        <div class="dropdown-menu dropdown-menu-right p-0">
         </div>
       </li>
       <!-- Notifications Dropdown Menu -->
@@ -156,7 +156,7 @@
         </a>
       </li>
       <li class="nav-item">
-        <a href="">logout</a>
+        <a href="{{ route('admin.logout') }}">logout</a>
       </li>
     </ul>
   </nav>
@@ -201,12 +201,12 @@
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
-               with font-awesome or any other icon font library -->     
+               with font-awesome or any other icon font library -->
           <li class="nav-item">
             <a href="{{ route('admin.dashboard') }}" class="nav-link">
               <i class="nav-icon fas fa-home"></i>
               <p>
-              {{ __('Dashboard')}}                      
+              {{ __('Dashboard')}}
                 <i class="right fas fa-angle-left"></i>
               </p>
             </a>
@@ -215,11 +215,11 @@
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-shopping-cart"></i>
               <p>
-              {{ __('Category')}}  
+              {{ __('Category')}}
                 <i class="right fas fa-angle-left"></i>
               </p>
             </a>
-            <ul class="nav nav-treeview">     
+            <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a href="{{route('category.index')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
@@ -227,7 +227,7 @@
                 </a>
               </li>
             </ul>
-            <ul class="nav nav-treeview">     
+            <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a href="{{route('category.create')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
@@ -240,11 +240,11 @@
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-shopping-cart"></i>
               <p>
-              {{ __('food')}}  
+              {{ __('food')}}
                 <i class="right fas fa-angle-left"></i>
               </p>
             </a>
-            <ul class="nav nav-treeview">     
+            <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a href="{{route('food.index')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
@@ -252,7 +252,7 @@
                 </a>
               </li>
             </ul>
-            <ul class="nav nav-treeview">     
+            <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a href="{{route('food.create')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
@@ -263,7 +263,7 @@
           </li>
         </ul>
       </nav>
-              
+
       <!-- /.sidebar-menu -->
     </div>
     <!-- /.sidebar -->
@@ -272,7 +272,7 @@
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header)-->
-   
+
 
     <!-- Main content -->
     <section class="content">
@@ -298,7 +298,7 @@
                    @yield('main')
               </div>
               <!-- /.card-body -->
-             
+
               <!-- /.card-footer-->
             </div>
             <!-- /.card -->
