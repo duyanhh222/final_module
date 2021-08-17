@@ -37,7 +37,6 @@ Route::group(['prefix' => 'admin'],function(){
         Route::get('food/food/create','Admin\FoodController@create')->name('food.create');
         Route::get('food/detail/{food}','Admin\FoodController@show')->name('food.show');
     });
-    
 
 });
 
@@ -59,3 +58,4 @@ Route::get('/ann', function () {
 
 Route::get('/index', 'Client\HomeClientController@index')->name('client.index');
 Route::get('/home', 'Client\HomeClientController@home')->name('client.home');
+

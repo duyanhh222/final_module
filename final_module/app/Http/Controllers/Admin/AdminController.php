@@ -61,7 +61,7 @@ class AdminController extends Controller
     {
         return view('Admin.dashboard');
     }
-    public function out()
+    public function logout()
     {
         Session::forget('admin_name');
         Session::forget('message');
