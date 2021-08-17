@@ -4,14 +4,14 @@
 <form action="{{route('category.store')}}" method="POST" enctype="multipart/form-data">
     @csrf
     <legend>Form title</legend>
-    <div class="form-group">
+    <div class="col-4">
         <label for="">name</label>
         <input type="text" name="name" class="form-control" id="" placeholder="Input field">
     </div>
     @error('name')
         <div class="alert alert-danger">{{ $message }}</div>
     @enderror
-    <div class="form-group">
+    <div class="col-4">
         <label for="">image</label>
         <input type="file" name="file"  class="form-control" id="upload"  placeholder="Input field">
     </div>

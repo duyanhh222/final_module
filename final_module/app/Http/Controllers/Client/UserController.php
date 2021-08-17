@@ -24,18 +24,18 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function slugify($str) { 
-        $str = trim(mb_strtolower($str)); 
-        $str = preg_replace('/(à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ)/', 'a', $str); 
-        $str = preg_replace('/(è|é|ẹ|ẻ|ẽ|ê|ề|ế|ệ|ể|ễ)/', 'e', $str); 
-        $str = preg_replace('/(ì|í|ị|ỉ|ĩ)/', 'i', $str); 
-        $str = preg_replace('/(ò|ó|ọ|ỏ|õ|ô|ồ|ố|ộ|ổ|ỗ|ơ|ờ|ớ|ợ|ở|ỡ)/', 'o', $str); 
-        $str = preg_replace('/(ù|ú|ụ|ủ|ũ|ư|ừ|ứ|ự|ử|ữ)/', 'u', $str); 
-        $str = preg_replace('/(ỳ|ý|ỵ|ỷ|ỹ)/', 'y', $str); 
-        $str = preg_replace('/(đ)/', 'd', $str); 
-        $str = preg_replace('/[^a-z0-9-\s]/', '', $str); 
-        $str = preg_replace('/([\s]+)/', '-', $str); 
-        return $str; 
+    public function slugify($str) {
+        $str = trim(mb_strtolower($str));
+        $str = preg_replace('/(à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ)/', 'a', $str);
+        $str = preg_replace('/(è|é|ẹ|ẻ|ẽ|ê|ề|ế|ệ|ể|ễ)/', 'e', $str);
+        $str = preg_replace('/(ì|í|ị|ỉ|ĩ)/', 'i', $str);
+        $str = preg_replace('/(ò|ó|ọ|ỏ|õ|ô|ồ|ố|ộ|ổ|ỗ|ơ|ờ|ớ|ợ|ở|ỡ)/', 'o', $str);
+        $str = preg_replace('/(ù|ú|ụ|ủ|ũ|ư|ừ|ứ|ự|ử|ữ)/', 'u', $str);
+        $str = preg_replace('/(ỳ|ý|ỵ|ỷ|ỹ)/', 'y', $str);
+        $str = preg_replace('/(đ)/', 'd', $str);
+        $str = preg_replace('/[^a-z0-9-\s]/', '', $str);
+        $str = preg_replace('/([\s]+)/', '-', $str);
+        return $str;
     }
 
     public function loadRegister()
@@ -60,7 +60,7 @@ class UserController extends Controller
             $newUser->user_restaurent = 0;
             $newUser->save();
             Session::put('register_success', "Đăng ký tài khoản thành công");
-            Mail::to($email)->send(new SendMail()); 
+            Mail::to($email)->send(new SendMail());
             return redirect()->route('client.login');
         }
     }
@@ -82,10 +82,10 @@ class UserController extends Controller
             Session::put('user_level',$user->user_level);
             Session::put('user_restaurant',$user->user_restaurent);
 
-            return redirect()->route('client.createFood');
+            return redirect()->route('client.home');
         }
             Session::put('login_fail', 'Kiểm tra lại email hoặc mật khẩu');
-            return view('Client.login');
+        return redirect()->route('client.loadLogin');
     }
 
     public function showList()

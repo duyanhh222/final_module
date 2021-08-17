@@ -19,6 +19,8 @@ Route::group(['prefix' => 'admin'],function(){
 
     Route::get('/login','Admin\AdminController@index')->name('admin.login');
     Route::post('/login','Admin\AdminController@check')->name('admin.check.login');
+    Route::get('/logout','Admin\AdminController@logout')->name('admin.logout');
+
     Route::group(['middleware' => 'check_login'],function(){
         Route::get('/dashboard','Admin\AdminController@dashboard')->name('admin.dashboard');
 
@@ -37,7 +39,6 @@ Route::group(['prefix' => 'admin'],function(){
         Route::get('food/food/create','Admin\FoodController@create')->name('food.create');
         Route::get('food/detail/{food}','Admin\FoodController@show')->name('food.show');
     });
-    
 
 });
 
@@ -60,3 +61,8 @@ Route::get('/ann', function () {
 
 Route::get('/index', 'Client\HomeClientController@index')->name('client.index');
 Route::get('/home', 'Client\HomeClientController@home')->name('client.home');
+
+Route::get('/{id}/category', 'Client\HomeClientController@category')->name('client.category');
+Route::get('/product/search', 'Client\HomeClientController@search')->name('client.search');
+Route::get('/{id}/tag', 'Client\HomeClientController@tag')->name('client.tag');
+

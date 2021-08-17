@@ -34,7 +34,7 @@ class FoodController extends Controller
     }
     public function index()
     {
-        $foods = Food::paginate(5);
+        $foods = Food::OrderBy('id','DESC')->paginate(5);
         $key = request()->key;
         if(isset($key)){
             $foods = Food::where('name','like','%'.$key.'%')->paginate(5);
@@ -80,7 +80,13 @@ class FoodController extends Controller
             'phone' => 'nullable|numeric|min:100000000|max:387420489',
             'tag' => 'required|max:255',
             'file' => 'required|image|mimes:jpeg,jpg,png|mimetypes:image/jpeg,image/png,image/jpg|max:5120'
-        ]);
+        ],
+        [
+            'phone.numeric' => 'phone must be number',
+            'phone.min' => 'phone have 10 digits ',
+            'phone.max' => 'phone have 10 digits '
+        ]    
+    );
         $categ1 = Category::where('id',$request->category_id)->first();
         $a = $categ1->amount + 1;
         Category::where('id',$request->category_id)->update(['amount' => $a]);
@@ -206,7 +212,13 @@ class FoodController extends Controller
             'phone' => 'max:255',
             'tag' => 'required|max:255',
             'file' => 'image|mimes:jpeg,jpg,png|mimetypes:image/jpeg,image/png,image/jpg|max:5120'
-        ]);
+        ],
+        [
+            'phone.numeric' => 'phone must be number',
+            'phone.min' => 'phone have 10 digits ',
+            'phone.max' => 'phone have 10 digits '
+        ]    
+    );
         $categ1 = Category::where('id',Session::get('categ1'))->first();
         $a = $categ1->amount - 1;
         Category::where('id',$food->category_id)->update(['amount' => $a]);
