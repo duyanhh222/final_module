@@ -1,7 +1,7 @@
 @extends('Layout.Admin.index')
 @section('title','Food')
 @section('main')
-<form action="" method="GET" class="form-inline" >
+<form style="float: right" action="" method="GET" class="form-inline" >
     <div class="form-group">
         <input class="form-control" name="key" id="" value="{{$key}}" placeholder="Tìm kiếm...">
     </div>
