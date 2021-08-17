@@ -14,6 +14,7 @@ use App\Models\Restaurant;
 use App\Models\Tag;
 use Mail;
 use App\Mail\SendMail;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Session;
 
 class UserController extends Controller
@@ -119,6 +120,9 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
+        $categ1 = Category::where('id',$request->category_id)->first();
+        $a = $categ1->amount + 1;
+        Category::where('id',$request->category_id)->update(['amount' => $a]);
         if($request->restaurant_name != null){
             $data = array();
             $data['name'] = $request->restaurant_name;
@@ -196,9 +200,24 @@ class UserController extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function edit(User $user)
+    public function edit($id)
     {
-        //
+        $food = Food::findOrFail($id);
+        $categoryId = $food->category_id;
+        $categ1 = Category::where('id',$categoryId)->first();
+        Session::put('categ1',$categ1->id);
+        $tags = '';
+        $foodtag = FoodTag::where('food_id',$id)->get();
+        
+        foreach($foodtag as $value){
+            $tagss = Tag::where('id',$value->tag_id)->first();
+            $tags .= $tagss->name.',';
+        }
+        $tags_name =trim($tags,',');
+        $restaurantId = $food->restaurant_id;
+        $restaurant = Restaurant::where('id',$restaurantId)->first();
+        $data = Category::all();
+        return view('Client.User.editFood',compact('food','data','restaurant','tags_name'));
     }
 
     /**
@@ -208,9 +227,108 @@ class UserController extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $user)
+    public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'name' => 'required|max:255',
+            'category_id' => 'required|integer',
+            'price' => 'required|numeric|min:0|gt:price_discount',
+            'price_discount' => 'required|numeric|min:0',
+            'coupon' => 'max:255',
+            'status' => 'required|numeric',
+            'on_sale' => 'required|numeric',
+            'count_coupon' => 'max:255',
+            'time_preparation' => 'max:255',
+            'restaurant_name' =>'max:255',
+            'restaurant_address' =>'max:255',
+            'time_open' =>'max:255',
+            'time_close' =>'max:255',
+            'explain' => 'max:255',
+            'service' => 'max:255',
+            'phone' => 'max:255',
+            'tag' => 'required|max:255',
+            'file' => 'image|mimes:jpeg,jpg,png|mimetypes:image/jpeg,image/png,image/jpg|max:5120'
+        ],
+        [
+            'phone.numeric' => 'phone must be number',
+            'phone.min' => 'phone have 10 digits ',
+            'phone.max' => 'phone have 10 digits '
+        ]    
+    );
+        $food = Food::findOrFail($id);
+        $categ1 = Category::where('id',Session::get('categ1'))->first();
+        $a = $categ1->amount - 1;
+        Category::where('id',$food->category_id)->update(['amount' => $a]);
+        Session::forget('categ1');
+        $categ2 = Category::where('id',$request->category_id)->first();
+        $b = $categ2->amount + 1;
+        Category::where('id',$request->category_id)->update(['amount' => $b]);
+        if($request->restaurant_name != null){
+            $data = array();
+            $data['name'] = $request->restaurant_name;
+            $data['address'] = $request->restaurant_address;
+            $data['time_open'] = $request->time_open;
+            $data['time_close'] = $request->time_close;
+            $data['service'] = $request->service;
+            $data['phone'] = $request->phone;
+            $data['explain'] = $request->explain;
+            $restaurantId = Restaurant::insertGetId($data);
+            $request->merge(['restaurant_id' => $restaurantId]);
+        }
+        if(!$request->has('file')){
+            $file_file = $request->file_file;
+            $request->merge(['image' => $file_file]);
+        }
+        if($request->has('file')){
+            $file = $food->image;
+            Storage::delete('/public/images/'. $file);
+            $file = $request->file;
+            $fileName = $file->getClientOriginalName();
+            $newFileName = date('d-m-Y-H-i') . "_$fileName";
+            $request->file('file')->storeAs('public/images', $newFileName);
+            $request->merge(['image' => $newFileName]);
+        }
+        $food->update($request->only( 'name','category_id','restaurant_id','price','price_discount','image','description','status','on_sale',
+            'coupon','count_coupon','time_preparation'));
+        if($request->tag != null){
+            $tags = $request->tag;
+            $hashtag = explode(',',$tags);
+            $count = 0;
+            $hash = array();
+            $tag2 = Tag::all();
+            for($i= 0;$i<count($hashtag);$i++){
+                $flag = 0;
+                foreach($tag2 as $value){
+                    if($this->slugify($hashtag[$i]) == $value->slug){
+                        $tagId = Tag::where('slug',$this->slugify($hashtag[$i]))->first();
+                        $hash[$count] = $tagId->id;
+                        $count++;
+                        $flag = 1;
+                    }
+                }
+                if($flag == 0){
+                    $dt = array();
+                    $dt['name'] = $hashtag[$i];
+                    $dt['slug'] = $this->slugify($hashtag[$i]);
+                    $tag3 = Tag::insertGetId($dt);
+                    $hash[$count] = $tag3;
+                    $count++;
+                }
+            }
+        }
+        if(isset($hash)){
+            FoodTag::where('food_id',$food->id)->delete();
+            foreach($hash as $value){
+                $arr = array();
+                $arr['food_id'] = $food->id;
+                $arr['tag_id'] = $value;
+                FoodTag::insertGetId($arr);
+            }
+        }
+        if(!isset($hash)){
+            FoodTag::where('food_id',$food->id)->delete();
+        }
+        return redirect()->route('client.listFood');
     }
 
     /**
@@ -219,8 +337,21 @@ class UserController extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function destroy(User $user)
+    public function destroy(Food $food)
     {
-        //
+        $categ1 = Category::where('id',$food->category_id)->first();
+        $a = $categ1->amount - 1;
+        Category::where('id',$food->category_id)->update(['amount' => $a]);
+        $tags = FoodTag::where('food_id',$food->id)->get();
+        if(isset($tags)){
+            foreach($tags as $value){
+                FoodTag::where('food_id',$food->id)->delete();
+            }
+        }
+      $file = $food->image;
+      Storage::delete('/public/images/'. $file);
+      $food->delete();
+      return redirect()->route('client.listFood');
+      
     }
 }

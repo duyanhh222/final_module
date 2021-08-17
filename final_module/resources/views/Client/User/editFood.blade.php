@@ -1,7 +1,7 @@
 @extends('Layout.Admin.index')
 @section('title','Food')
 @section('main')
-<form action="{{route('food.update',$food->id)}}" method="POST" enctype="multipart/form-data">
+<form action="{{route('client.updateFood',$food->id)}}" method="POST" enctype="multipart/form-data">
 @csrf
     <legend>Form title</legend>
     <div class="col-6">

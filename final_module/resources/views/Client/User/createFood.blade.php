@@ -26,7 +26,7 @@
             <option value="">---Lựa chọn danh mục---</option>
             @foreach($categories as $category)
             @if(old('category_id') == $category->id)
-            <option value="{{$cat->id}}" selected>{{$category->name}} </option>  
+            <option value="{{$category->id}}" selected>{{$category->name}} </option>  
             @endif
             @if(old('category_id') != $category->id)
             <option value="{{$category->id}}" >{{$category->name}} </option>

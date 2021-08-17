@@ -32,13 +32,10 @@
             <td>{{$food->status}}</td>
             <td>{{$food->on_sale}}</td>
             <td>
-                <a href="{{route('food.show',$food->id)}}" class="btn btn-sm btn-primary">
-                    <i class="fa fa-file"></i>
-                </a>
-                <a href="{{route('food.edit',$food->id)}}" class="btn btn-sm btn-success">
+                <a href="{{route('client.editFood',$food->id)}}" class="btn btn-sm btn-success">
                     <i class="fas fa-edit"></i>
                 </a>
-                <a href="{{route('food.destroy',$food->id)}}" class="btn btn-sm btn-danger btndelete" onclick="return confirm('Bạn chắc chắn muốn xóa?')">
+                <a href="{{route('client.destroyFood',$food->id)}}" class="btn btn-sm btn-danger btndelete" onclick="return confirm('Bạn chắc chắn muốn xóa?')">
                     <i class="fas fa-trash"></i>
                 </a>
             </td>
