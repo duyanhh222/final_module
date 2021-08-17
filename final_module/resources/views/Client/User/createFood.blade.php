@@ -72,32 +72,6 @@
         <div class="alert alert-danger">{{ $message }}</div>
     @enderror
     <div class="row g-3">
-        <div class="col-5">
-            <label for="">ưu đãi</label>  
-            <select name="status" id="input" class="form-control" required="required">
-                @if(old('status') == 1)
-                <option value="1" selected>Có</option>  
-                <option value="0" >Không</option>  
-                @else
-                <option value="0" selected>Không</option>  
-                <option value="1" >Có</option>  
-                @endif
-            </select>
-        </div>
-    <div class="col-5">
-        <label for="">đề cử</label>  
-        <select name="on_sale" id="input" class="form-control" required="required">
-                @if(old('on_sale') == 1)
-                <option value="1" selected>Có</option>  
-                <option value="0" >Không</option>  
-                @else
-                <option value="0" selected>Không</option>  
-                <option value="1" >Có</option>  
-                @endif
-        </select>
-    </div>
-    </div>
-    <div class="row g-3">
     <div class="col-5">
         <label for="">coupon</label>
         <input type="text" name="coupon" value="{{old('coupon')}}" class="form-control" id="" placeholder="Input field">
@@ -113,6 +87,7 @@
         @enderror
     </div>
     </div>
+    <div class="row g-3">
     <div class="col-5">
         <label for="">time_preparation</label>
         <input type="text" name="time_preparation" value="{{old('time_preparation')}}" class="form-control" id="" placeholder="Input field">
@@ -120,6 +95,20 @@
             <div class="alert alert-danger">{{ $message }}</div>
         @enderror
     </div> 
+    <div class="col-5">
+            <label for="">ưu đãi</label>  
+            <select name="status" id="input" class="form-control" required="required">
+                @if(old('status') == 1)
+                <option value="1" selected>Có</option>  
+                <option value="0" >Không</option>  
+                @else
+                <option value="0" selected>Không</option>  
+                <option value="1" >Có</option>  
+                @endif
+            </select>
+        </div>
+    </div>
+    
     </div>
     <br>
     <div class="col-6">
