@@ -1,4 +1,4 @@
-@extends('Layout.Admin.index')
+@extends('Layout.Client.index')
 @section('title','Food')
 @section('main')
 <form action="{{route('client.storeFood')}}" method="POST" enctype="multipart/form-data">
