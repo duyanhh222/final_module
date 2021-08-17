@@ -53,7 +53,10 @@
                                             </ul>
                                         </li>
                                     </ul>
+
                                 </div>
+                                <a class="btn btn-outline-primary" href="{{ route('client.loadLogin') }}">Đăng nhập</a>
+                                <a class="btn btn-outline-primary" href="{{ route('client.loadRegister') }}">Đăng ký</a>
                             </div>
                         </div>
                     </div>
