@@ -65,6 +65,7 @@
     <div>
         <img id="blah" src="{{asset('storage/images/'.$food->image)}}" width="150px" />
     </div>
+    
     <div class="form-group">
         <label>Ghi chú</label>
         <textarea class="form-control" name="description" required>{{$food->description}}</textarea>
@@ -72,57 +73,47 @@
     @error('description')
         <div class="alert alert-danger">{{ $message }}</div>
     @enderror
+
     <div class="row g-3">
         <div class="col-5">
-        <label for="">ưu đãi</label>  
-        <select name="status" id="" class="form-control">
-            <option value="">--Lựa chọn trạng thái</option>
-            @if($food->status == 0)
-                <option value="1"  >Có</option>
-                <option value="0" selected>Không </option>  
-            @else
-                <option value="1" selected >Có</option>
-                <option value="0" >Không </option>  
-            @endif
-        </select>
+            <label for="">coupon</label>
+            <input type="text" name="coupon" value="{{$food->coupon}}" class="form-control" id="" placeholder="Input field">
+            @error('coupon')
+                <div class="alert alert-danger">{{ $message }}</div>
+            @enderror
+        </div>
+        <div class="col-5">
+            <label for="">count_coupon</label>
+            <input type="text" name="count_coupon" value="{{$food->count_coupon}}" class="form-control" id="" placeholder="Input field">
+            @error('count_coupon')
+                <div class="alert alert-danger">{{ $message }}</div>
+            @enderror
+        </div>
     </div>
-    <div class="col-5">
-        <label for="">đề cử</label>  
-        <select name="on_sale" id="" class="form-control"> 
-            <option value="">--Lựa chọn trạng thái</option>
-            @if($food->on_sale == 0)
-                <option value="1"  >Có</option>
-                <option value="0" selected>Không </option>  
-            @else
-                <option value="1" selected >Có</option>
-                <option value="0" >Không </option>  
-            @endif
-        </select>
-    </div>
-    </div>
+
     <div class="row g-3">
-    <div class="col-5">
-        <label for="">coupon</label>
-        <input type="text" name="coupon" value="{{$food->coupon}}" class="form-control" id="" placeholder="Input field">
-    @error('coupon')
-        <div class="alert alert-danger">{{ $message }}</div>
-    @enderror
+        <div class="col-5">
+            <label for="">time_preparation</label>
+            <input type="text" name="time_preparation" value="{{$food->time_preparation}}" class="form-control" id="" placeholder="Input field">
+            @error('time_preparation')
+                <div class="alert alert-danger">{{ $message }}</div>
+            @enderror
+        </div>
+        <div class="col-5">
+            <label for="">ưu đãi</label>  
+            <select name="status" id="" class="form-control">
+                <option value="">--Lựa chọn trạng thái</option>
+                @if($food->status == 0)
+                    <option value="1"  >Có</option>
+                    <option value="0" selected>Không </option>  
+                @else
+                    <option value="1" selected >Có</option>
+                    <option value="0" >Không </option>  
+                @endif
+            </select>
+        </div>
     </div>
-    <div class="col-5">
-        <label for="">count_coupon</label>
-        <input type="text" name="count_coupon" value="{{$food->count_coupon}}" class="form-control" id="" placeholder="Input field">
-    @error('count_coupon')
-        <div class="alert alert-danger">{{ $message }}</div>
-    @enderror
-    </div>
-    </div>
-    <div class="col-5">
-        <label for="">time_preparation</label>
-        <input type="text" name="time_preparation" value="{{$food->time_preparation}}" class="form-control" id="" placeholder="Input field">
-    @error('time_preparation')
-        <div class="alert alert-danger">{{ $message }}</div>
-    @enderror
-    </div>
+    
     <br>
     <div class="col-6">
         <div class="card card-primary">
