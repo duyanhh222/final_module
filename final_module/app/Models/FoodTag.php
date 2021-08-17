@@ -20,7 +20,7 @@ class FoodTag extends Model
 
     public function tag()
     {
-        return $this->belongsTo(Order::class, 'order_id');
+        return $this->belongsTo(Tag::class, 'tag_id');
     }
 
 }

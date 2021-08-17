@@ -3,7 +3,7 @@
 @section('main')
 <form action="" method="GET" class="form-inline" >
     <div class="form-group">
-        <input class="form-control" name="key" id="" value="{{$key}}" placeholder="Search...">
+        <input class="form-control" name="key" id="" value="{{$key}}" placeholder="Tìm kiếm...">
     </div>
     <button type="submit" class="btn btn-primary"> <i class="fas fa-search"></i> </button>
 </form>
@@ -24,8 +24,8 @@
         <tr>
             <td>{{$food->id}}</td>
             <td>{{$food->name}}</td>
-            <td>{{$food->price}}</td>
-            <td>{{$food->price_discount}}</td>
+            <td>{{number_format($food->price)}}đ</td>
+            <td>{{number_format($food->price_discount)}}đ</td>
             <td><img src="{{asset('storage/images/'.$food->image)}}" width="100px" alt=""></td>
             <td>{{$food->on_sale == 0?'Không':'Có'}}</td>
             <td>

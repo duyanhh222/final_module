@@ -3,6 +3,7 @@
 @section('main')
 <div class="col-12 col-md-12">
     <div class="row">
+        <h1> Chi tiết món ăn: {{ $food1->name }}</h1>
         <div class="col-12">
             <table class="table table-striped">
                 <thead>
@@ -15,20 +16,16 @@
                     <td>{{ $food1->category->name }}</td>
                 </tr>
                 <tr>
-                    <td>Tên sản phẩm</td>
-                    <td>{{ $food1->name }}</td>
-                </tr>
-                <tr>
                     <td>Đã bán</td>
                     <td>{{ $food1->sell_quantity }}</td>
                 </tr>
                 <tr>
                     <td>Giá bán</td>
-                    <td>{{ $food1->price }}</td>
+                    <td>{{ number_format($food1->price) }}đ</td>
                 </tr>
                 <tr>
                     <td>Giá giảm</td>
-                    <td>{{ $food1->price_discount }}</td>
+                    <td>{{ number_format($food1->price_discount) }}đ</td>
                 </tr>
                 <tr>
                     <td>Ưu đãi</td>
@@ -77,6 +74,21 @@
                     @else
                     <td>Món ăn ko rõ nhà hàng</td>
                     @endif
+                </tr>
+                <tr>
+                    <td>Tag</td>
+                    <td>
+                        @if(count($tags) > 1)
+                        @foreach($tags as $tag)
+                        {{$tag->tag->name}},
+                        @endforeach
+                        @elseif(count($tags) <= 1)
+                            @foreach($tags as $tag)
+                                {{$tag->tag->name}}
+                            @endforeach
+                        @endif
+
+                    </td>
                 </tr>
                 <tr>
                 <td>Hình ảnh</td>

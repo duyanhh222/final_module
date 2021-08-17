@@ -199,6 +199,10 @@
    <div>
        <button type="submit" class="btn btn-primary">Thêm mới</button>
    </div>
+    <div>
+    <a class="btn btn-dark" style="float: right" href="{{route('food.index')}}">Quay lại</a>
+    </div>
+
 
 </form>
 @stop()

@@ -19,18 +19,18 @@ class FoodController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function slugify($str) { 
-        $str = trim(mb_strtolower($str)); 
-        $str = preg_replace('/(à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ)/', 'a', $str); 
-        $str = preg_replace('/(è|é|ẹ|ẻ|ẽ|ê|ề|ế|ệ|ể|ễ)/', 'e', $str); 
-        $str = preg_replace('/(ì|í|ị|ỉ|ĩ)/', 'i', $str); 
-        $str = preg_replace('/(ò|ó|ọ|ỏ|õ|ô|ồ|ố|ộ|ổ|ỗ|ơ|ờ|ớ|ợ|ở|ỡ)/', 'o', $str); 
-        $str = preg_replace('/(ù|ú|ụ|ủ|ũ|ư|ừ|ứ|ự|ử|ữ)/', 'u', $str); 
-        $str = preg_replace('/(ỳ|ý|ỵ|ỷ|ỹ)/', 'y', $str); 
-        $str = preg_replace('/(đ)/', 'd', $str); 
-        $str = preg_replace('/[^a-z0-9-\s]/', '', $str); 
-        $str = preg_replace('/([\s]+)/', '-', $str); 
-        return $str; 
+    public function slugify($str) {
+        $str = trim(mb_strtolower($str));
+        $str = preg_replace('/(à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ)/', 'a', $str);
+        $str = preg_replace('/(è|é|ẹ|ẻ|ẽ|ê|ề|ế|ệ|ể|ễ)/', 'e', $str);
+        $str = preg_replace('/(ì|í|ị|ỉ|ĩ)/', 'i', $str);
+        $str = preg_replace('/(ò|ó|ọ|ỏ|õ|ô|ồ|ố|ộ|ổ|ỗ|ơ|ờ|ớ|ợ|ở|ỡ)/', 'o', $str);
+        $str = preg_replace('/(ù|ú|ụ|ủ|ũ|ư|ừ|ứ|ự|ử|ữ)/', 'u', $str);
+        $str = preg_replace('/(ỳ|ý|ỵ|ỷ|ỹ)/', 'y', $str);
+        $str = preg_replace('/(đ)/', 'd', $str);
+        $str = preg_replace('/[^a-z0-9-\s]/', '', $str);
+        $str = preg_replace('/([\s]+)/', '-', $str);
+        return $str;
     }
     public function index()
     {
@@ -85,7 +85,7 @@ class FoodController extends Controller
             'phone.numeric' => 'phone must be number',
             'phone.min' => 'phone have 10 digits ',
             'phone.max' => 'phone have 10 digits '
-        ]    
+        ]
     );
         $categ1 = Category::where('id',$request->category_id)->first();
         $a = $categ1->amount + 1;
@@ -157,7 +157,8 @@ class FoodController extends Controller
     public function show(Food $food)
     {
         $food1 = Food::with(['category','restaurant','user'])->where('id',$food->id)->first();
-        return view('Admin.Food.detail',compact('food1'));
+        $tags = FoodTag::where('food_id', $food->id)->get();
+        return view('Admin.Food.detail',compact('food1', 'tags'));
     }
 
     /**
@@ -172,7 +173,7 @@ class FoodController extends Controller
         Session::put('categ1',$categ1->id);
         $tags = '';
         $foodtag = FoodTag::where('food_id',$food->id)->get();
-        
+
         foreach($foodtag as $value){
             $tagss = Tag::where('id',$value->tag_id)->first();
             $tags .= $tagss->name.',';
@@ -217,7 +218,7 @@ class FoodController extends Controller
             'phone.numeric' => 'phone must be number',
             'phone.min' => 'phone have 10 digits ',
             'phone.max' => 'phone have 10 digits '
-        ]    
+        ]
     );
         $categ1 = Category::where('id',Session::get('categ1'))->first();
         $a = $categ1->amount - 1;
@@ -315,6 +316,6 @@ class FoodController extends Controller
       Storage::delete('/public/images/'. $file);
       $food->delete();
       return redirect()->route('food.index')->with('success','Xoas thành công');
-      
+
     }
 }

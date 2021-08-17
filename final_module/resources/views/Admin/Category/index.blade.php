@@ -6,10 +6,10 @@
         <thead>
             <tr>
                 <th>#</th>
-                <th>Category_name</th>
-                <th>Image</th>
-                <th>amount</th>
-                <th>Action</th>
+                <th>Tên danh mục</th>
+                <th>Ảnh</th>
+                <th>Số lượng địa điểm</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>

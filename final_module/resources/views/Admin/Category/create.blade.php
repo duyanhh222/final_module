@@ -3,16 +3,16 @@
 @section('main')
 <form action="{{route('category.store')}}" method="POST" enctype="multipart/form-data">
     @csrf
-    <legend>Form title</legend>
+    <legend>Thêm  mới danh mục</legend>
     <div class="col-4">
-        <label for="">name</label>
-        <input type="text" name="name" class="form-control" id="" placeholder="Input field">
+        <label for="">Tên danh mục</label>
+        <input type="text" name="name" class="form-control" id="" placeholder="Nhập tên danh mục">
     </div>
     @error('name')
         <div class="alert alert-danger">{{ $message }}</div>
     @enderror
     <div class="col-4">
-        <label for="">image</label>
+        <label for="">Ảnh</label>
         <input type="file" name="file"  class="form-control" id="upload"  placeholder="Input field">
     </div>
     <div>
@@ -21,7 +21,10 @@
     @error('file')
         <div class="alert alert-danger">{{ $message }}</div>
     @enderror
-    <button type="submit" class="btn btn-primary">Submit</button>
+    <button type="submit" class="btn btn-primary">Thêm</button>
+    <div>
+        <a class="btn btn-dark" style="float: right" href="{{route('category.index')}}">Quay lại</a>
+    </div>
 </form>
 
 @stop()
