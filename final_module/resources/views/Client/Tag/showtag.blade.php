@@ -95,7 +95,9 @@
                                 <div class="product_grid_border"></div>
 
                                 <!-- Product Item -->
+                                
                                 @foreach($food_tags as $food_tag)
+
                                     <div class="product_item discount">
                                         <div class="product_border"></div>
                                         @if(asset($food_tag->food->image))

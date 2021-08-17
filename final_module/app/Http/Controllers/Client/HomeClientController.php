@@ -58,7 +58,7 @@ class HomeClientController extends Controller
     public function tag($id)
     {
         $tag = Tag::findOrFail($id);
-        $food_tags = FoodTag::where('tag_id', $id)->paginate(2);
+        $food_tags = FoodTag::with('food')->where('tag_id', $id)->paginate(2);
         $categories = Category::all();
         return view('Client.Tag.showtag', compact('food_tags', 'categories', 'tag'));
 
