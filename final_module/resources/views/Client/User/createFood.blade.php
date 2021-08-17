@@ -1,7 +1,7 @@
 @extends('Client.Home.index')
 @section('content')
 <div class="container">
-    <form action="{{route('client.store')}}" method="POST" enctype="multipart/form-data">
+    <form action="{{route('client.storeFood')}}" method="POST" enctype="multipart/form-data">
     @csrf
         <legend>Form title</legend>
         <div class="form-group">
