@@ -90,8 +90,14 @@ class UserController extends Controller
 
     public function showList()
     {
-        $categories = Category::all();
-        return view('Client.User.listFood', compact('categories'));
+        $id = Session::get('user_id');
+        $foods = Food::where('user_id', '=', $id)->paginate(5);
+        $key = request()->key;
+        if(isset($key)){
+            $foods = Food::where('user_id', '=', $id)->where('name','like','%'.$key.'%')->paginate(5);
+        }
+        return view('Client.User.listFood',compact('foods','key'));
+        // $categories = Category::all();
     }
 
     /**

@@ -8194,9 +8194,9 @@ h1, h2, h3, h4, h5,
   .table thead th {
     border: none;
     padding: 30px;
-    font-size: 13px;
+    font-size: 15px;
     font-weight: 500;
-    color: white; }
+    color: black; }
   .table tbody tr {
     margin-bottom: 10px; }
   .table tbody th, .table tbody td {
@@ -8205,7 +8205,8 @@ h1, h2, h3, h4, h5,
     font-size: 14px;
     background: #fff;
     border-bottom: 4px solid #f8f9fd;
-    vertical-align: middle; }
+    vertical-align: middle; 
+    color: black; }
   .table tbody td.quantity {
     width: 10%; }
   .table tbody td .img {

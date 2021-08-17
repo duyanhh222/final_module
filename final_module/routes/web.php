@@ -51,7 +51,8 @@ Route::post('/user_register', 'Client\UserController@register')->name('client.re
 
 Route::get('/user/food', 'Client\UserController@showList')->name('client.listFood');
 Route::get('/user/create', 'Client\UserController@create')->name('client.createFood');
-Route::post('/user/create', 'Client\UserController@store')->name('client.store');
+Route::post('/user/create', 'Client\UserController@store')->name('client.storeFood');
+Route::get('user/{food}/edit','Admin\FoodController@edit')->name('client.editFood');
 
 Route::get('/ann', function () {
     return view('Client.register');
