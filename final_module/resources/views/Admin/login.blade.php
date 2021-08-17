@@ -69,11 +69,12 @@
 					</div>
 
 					<div class="error-message">
-                        @if ($errors->any())
-                            @foreach($errors->all() as $nameError)
-                                <p style="color:red">{{ $nameError }}</p>
-                            @endforeach
-                        @endif
+					@error('email')
+						<div class="alert alert-danger">{{ $message }}</div>
+					@enderror
+					@error('password')
+						<div class="alert alert-danger">{{ $message }}</div>
+					@enderror
                     </div>
 
 					@if (Session::has('message'))

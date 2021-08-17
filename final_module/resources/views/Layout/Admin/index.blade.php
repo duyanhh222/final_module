@@ -94,6 +94,7 @@
               </p>
             </a>
           </li>
+          @if(Session::has('admin_name'))
           <li class="nav-item">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-shopping-cart"></i>
@@ -119,6 +120,7 @@
               </li>
             </ul>
           </li>
+          @endif
           <li class="nav-item">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-shopping-cart"></i>
