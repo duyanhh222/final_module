@@ -82,9 +82,20 @@ class FoodController extends Controller
             'file' => 'required|image|mimes:jpeg,jpg,png|mimetypes:image/jpeg,image/png,image/jpg|max:5120'
         ],
         [
-            'phone.numeric' => 'phone must be number',
-            'phone.min' => 'phone have 10 digits ',
-            'phone.max' => 'phone have 10 digits '
+            'phone.numeric' => 'số điện thoại phải là chữ số',
+            'phone.min' => 'số điện thoại phải có 10 chữ số ',
+            'phone.max' => 'số điện thoại phải có 10 chữ số ',
+            'name.required' => 'tên món ăn không được để trống',
+            'category_id.required' => 'tên danh mục không được để trống',
+            'price.required' => 'giá không được để trống',
+            'price.min' => 'giá tiền nhỏ nhất bằng 0',
+            'price.gt' => 'Giá tiền phải lớn hơn giá khuyến mại',
+            'price_discount.required' => 'giá không được để trống',
+            'price_discount.min' => 'giá tiền nhỏ nhất bằng 0',
+            'status.required' => 'Ưu đãi không được để trống',
+            'file.required' => 'Ảnh không được để trống',
+            'tag.required' => 'Tag không được để trống'
+
         ]
     );
         $categ1 = Category::where('id',$request->category_id)->first();
@@ -215,9 +226,19 @@ class FoodController extends Controller
             'file' => 'image|mimes:jpeg,jpg,png|mimetypes:image/jpeg,image/png,image/jpg|max:5120'
         ],
         [
-            'phone.numeric' => 'phone must be number',
-            'phone.min' => 'phone have 10 digits ',
-            'phone.max' => 'phone have 10 digits '
+            'phone.numeric' => 'số điện thoại phải là chữ số',
+            'phone.min' => 'số điện thoại phải có 10 chữ số ',
+            'phone.max' => 'số điện thoại phải có 10 chữ số ',
+            'name.required' => 'tên món ăn không được để trống',
+            'category_id.required' => 'tên danh mục không được để trống',
+            'price.required' => 'giá không được để trống',
+            'price.min' => 'giá tiền nhỏ nhất bằng 0',
+            'price.gt' => 'Giá tiền phải lớn hơn giá khuyến mại',
+            'price_discount.required' => 'giá không được để trống',
+            'price_discount.min' => 'giá tiền nhỏ nhất bằng 0',
+            'status.required' => 'Ưu đãi không được để trống',
+            'file.required' => 'Ảnh không được để trống',
+            'tag.required' => 'Tag không được để trống'
         ]
     );
         $categ1 = Category::where('id',Session::get('categ1'))->first();
