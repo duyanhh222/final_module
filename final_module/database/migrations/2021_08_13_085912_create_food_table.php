@@ -27,10 +27,8 @@ class CreateFoodTable extends Migration
             $table->integer('on_sale')->nullable();
             $table->unsignedInteger('user_id')->nullable();
             $table->string('coupon')->nullable();
-            $table->integer('count_coupon')->default(0);
-
+            $table->integer('count_coupon')->nullable()->default(0);
             $table->integer('time_preparation')->nullable();
-
             $table->integer('view_count')->default(0);
             $table->timestamps();
         });
