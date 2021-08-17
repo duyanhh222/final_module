@@ -21,6 +21,13 @@
     @error('file')
         <div class="alert alert-danger">{{ $message }}</div>
     @enderror
+    <div class="col-4">
+        <label for="">Số lượng địa điểm</label>
+        <input type="number" name="amount" value="{{old('amount')}}" class="form-control" id="" placeholder="">
+    </div>
+    @error('amount')
+    <div class="alert alert-danger">{{ $message }}</div>
+    @enderror
     <button type="submit" class="btn btn-primary">Thêm</button>
     <div>
         <a class="btn btn-dark" style="float: right" href="{{route('category.index')}}">Quay lại</a>
