@@ -13,5 +13,8 @@ class Tag extends Model
     protected $fillable=[
         'name','count','slug'
     ];
-
+    public function foods()
+    {
+            return $this->belongsToMany(Food::class, 'food_tags', 'tag_id', 'food_id');
+    }
 }

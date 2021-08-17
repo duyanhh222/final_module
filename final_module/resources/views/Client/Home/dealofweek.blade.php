@@ -9,7 +9,7 @@
                     <div class="deals_title">Tags</div>
                     <div class="deals_slider_container">
                         @foreach($tags as $tag)
-                            <button type="button" class="btn btn-outline-info" style="margin: 5px"><i class="bi bi-tag-fill" style="color: red"> </i><a style="color: #187caa" href="#">{{ $tag->name }}</a></button>
+                            <button type="button" class="btn btn-outline-info" style="margin: 5px"><i class="bi bi-tag-fill" style="color: red"> </i><a style="color: #187caa" href="{{ route('client.tag', $tag->id) }}">{{ $tag->name }}</a></button>
 
                     @endforeach
                         <!-- Deals Slider -->

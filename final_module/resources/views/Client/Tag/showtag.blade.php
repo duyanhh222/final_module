@@ -24,7 +24,7 @@
                  data-image-src="{{ asset('Client/images/shop_background.jpg') }}"></div>
             <div class="home_overlay"></div>
             <div class="home_content d-flex flex-column align-items-center justify-content-center">
-                <h2 class="home_title">{{ $category->name }}</h2>
+                <h2 class="home_title">{{ $tag->name }}</h2>
             </div>
         </div>
 
@@ -68,7 +68,7 @@
 
                         <div class="shop_content">
                             <div class="shop_bar clearfix">
-                                <div class="shop_product_count"><span>{{ count($foods) }}</span> sản phẩm được tìm thấy
+                                <div class="shop_product_count"><span>{{ count($food_tags) }}</span> sản phẩm được tìm thấy theo tag: {{ $tag->name }}
                                 </div>
                                 <div class="shop_sorting">
                                     <span>Sort by:</span>
@@ -95,41 +95,39 @@
                                 <div class="product_grid_border"></div>
 
                                 <!-- Product Item -->
-                                @foreach($foods as $food)
+                                @foreach($food_tags as $food_tag)
                                     <div class="product_item discount">
                                         <div class="product_border"></div>
-                                        @if(asset($food->image))
+                                        @if(asset($food_tag->food->image))
                                             <div
                                                 class="product_image d-flex flex-column align-items-center justify-content-center">
-                                                <img src="{{asset('storage/images/'. $food->image)}}" alt=""></div>
+                                                <img src="{{asset('storage/images/'. $food_tag->food->image)}}" alt=""></div>
                                         @endif
                                         <div class="product_content">
-                                            <div class="product_price">{{ number_format($food->price_discount) }}đ<span>{{ number_format($food->price) }}đ</span>
+                                            <div class="product_price">{{ number_format($food_tag->food->price_discount) }}đ<span>{{ number_format($food_tag->food->price) }}đ</span>
                                             </div>
                                             <div class="product_name">
                                                 <div><a href="#" tabindex="0">
-                                                        @if(strlen($food->name) >20)
-                                                            {{ substr($food->name, 0, 20) }}...
+                                                        @if(strlen($food_tag->food->name) >20)
+                                                            {{ substr($food_tag->food->name, 0, 20) }}...
                                                         @else
-                                                            {{ $food->name }}
+                                                            {{ $food_tag->food->name }}
                                                         @endif</a></div>
                                             </div>
-                                            <div class="char_subtitle">
-                                                @if(isset($food->restaurant->address))
-                                                    @if(strlen($food->restaurant->address) >20)
-                                                        {{ substr($food->restaurant->address, 0, 20) }}...
-                                                    @else
-                                                        {{ $food->restaurant->address }}
-                                                    @endif
-                                                @endif
-                                            </div>
+{{--                                            <div class="char_subtitle">--}}
+{{--                                                @if(isset($food_tag->restaurant->address))--}}
+{{--                                                    @if(strlen($food_tag->restaurant->address) >20)--}}
+{{--                                                        {{ substr($food_tag->restaurant->address, 0, 20) }}...--}}
+{{--                                                    @else--}}
+{{--                                                        {{ $food_tag->restaurant->address }}--}}
+{{--                                                    @endif--}}
+{{--                                                @endif--}}
+{{--                                            </div>--}}
                                         </div>
                                         <div class="product_fav"><i class="fas fa-heart"></i></div>
                                         <ul class="product_marks">
-                                            <li class="product_mark product_discount">-{{ intval((($food->price - $food->price_discount)) /
-                                                                                                            $food->price * 100) }}
-                                                %
-                                            </li>
+                                            <li class="product_mark product_discount">-{{ intval((($food_tag->food->price - $food_tag->food->price_discount)) /
+                                                                                                            $food_tag->food->price * 100) }}%</li>
 
                                         </ul>
                                     </div>
@@ -139,7 +137,7 @@
                             <!-- Shop Page Navigation -->
 
                             <div class="shop_page_nav d-flex flex-row">
-                                {{ $foods->links() }}
+                                {{ $food_tags->links() }}
                             </div>
 
 
@@ -299,3 +297,4 @@
     <script src="{{ asset('Client/js/shop_custom.js') }}"></script>
     </body>
 @endsection
+

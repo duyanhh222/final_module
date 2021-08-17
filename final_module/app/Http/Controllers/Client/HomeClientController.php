@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Client;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Food;
+use App\Models\FoodTag;
 use App\Models\Tag;
 use Illuminate\Http\Request;
 
@@ -51,6 +52,15 @@ class HomeClientController extends Controller
         $categories = Category::orderByDesc('count')->get();
 
         return view('Client.Food.resultsearch', compact('foods', 'categories', 'keyword'));
+
+    }
+
+    public function tag($id)
+    {
+        $tag = Tag::findOrFail($id);
+        $food_tags = FoodTag::where('tag_id', $id)->paginate(2);
+        $categories = Category::all();
+        return view('Client.Tag.showtag', compact('food_tags', 'categories', 'tag'));
 
     }
 }

@@ -58,3 +58,4 @@ Route::get('/index', 'Client\HomeClientController@index')->name('client.index');
 Route::get('/home', 'Client\HomeClientController@home')->name('client.home');
 Route::get('/{id}/category', 'Client\HomeClientController@category')->name('client.category');
 Route::get('/product/search', 'Client\HomeClientController@search')->name('client.search');
+Route::get('/{id}/tag', 'Client\HomeClientController@tag')->name('client.tag');
