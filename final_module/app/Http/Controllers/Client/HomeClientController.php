@@ -49,7 +49,7 @@ class HomeClientController extends Controller
         }
         $foods = Food::where('name', 'LIKE', '%' .$keyword. '%')->orderBy('created_at','desc')->paginate(1);
         $foods->withPath("search?_token=$request->token&keyword=$request->keyword");
-        $categories = Category::orderByDesc('count')->get();
+        $categories = Category::orderByDesc('amount')->get();
 
         return view('Client.Food.resultsearch', compact('foods', 'categories', 'keyword'));
 
