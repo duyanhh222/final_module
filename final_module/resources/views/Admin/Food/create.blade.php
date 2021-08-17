@@ -3,7 +3,7 @@
 @section('main')
 <form action="{{route('food.store')}}" method="POST" enctype="multipart/form-data">
 @csrf
-    <legend>Form title</legend>
+    <legend>Thêm mới món ăn</legend>
     <div class="col-6">
         <div class="card card-warning">
             <div class="card-header">
@@ -14,19 +14,19 @@
     <br>
     <div class="row g-3">
     <div class="col-5">
-        <label for="">name</label>
-        <input type="text" name="name" value="{{old('name')}}" class="form-control" id="" placeholder="Input field">
+        <label for="">Tên món</label>
+        <input type="text" name="name" value="{{old('name')}}" class="form-control" id="" placeholder="Nhập tên món">
         @error('name')
         <div class="alert alert-danger">{{ $message }}</div>
         @enderror
     </div>
     <div class="col-5">
-        <label for="">category</label>
+        <label for="">Danh mục</label>
         <select name="category_id" id="input" class="form-control" required="required">
-            <option value="">---Lựa chọn danh mục---</option>
+            <option value="" disabled selected>Chọn danh mục</option>
             @foreach($data as $cat)
             @if(old('category_id') == $cat->id)
-            <option value="{{$cat->id}}" selected>{{$cat->name}} </option>  
+            <option value="{{$cat->id}}" selected>{{$cat->name}} </option>
             @endif
             @if(old('category_id') != $cat->id)
             <option value="{{$cat->id}}" >{{$cat->name}} </option>
@@ -38,29 +38,29 @@
         @enderror
     </div>
     </div>
-    <div class="row g-3">  
+    <div class="row g-3">
     <div class="col-5">
-        <label for="">price</label>
-        <input type="text" name="price" value="{{old('price')}}" class="form-control" id="" placeholder="Input field">
+        <label for="">Giá</label>
+        <input type="text" name="price" value="{{old('price')}}" class="form-control" id="" placeholder="Nhập giá">
         @error('price')
         <div class="alert alert-danger">{{ $message }}</div>
         @enderror
     </div>
     <div class="col-5">
-        <label for="">price_discount</label>
-        <input type="text" name="price_discount" value="{{old('price_discount')}}" class="form-control" id="" placeholder="Input field">
+        <label for="">Giá khuyến mại</label>
+        <input type="text" name="price_discount" value="{{old('price_discount')}}" class="form-control" id="" placeholder="Nhập giá khuyến mại">
          @error('price_discount')
         <div class="alert alert-danger">{{ $message }}</div>
         @enderror
     </div>
     </div>
     <div class="col-5">
-        <label for="">image</label>
+        <label for="">Ảnh</label>
         <input type="file" name="file"  class="form-control" id="upload" placeholder="Input field">
         @error('file')
         <div class="alert alert-danger">{{ $message }}</div>
         @enderror
-    </div> 
+    </div>
     <div>
         <img id="blah" src="" width="150px" />
     </div>
@@ -73,53 +73,53 @@
     @enderror
     <div class="row g-3">
         <div class="col-5">
-            <label for="">ưu đãi</label>  
+            <label for="">Ưu đãi</label>
             <select name="status" id="input" class="form-control" required="required">
                 @if(old('status') == 1)
-                <option value="1" selected>Có</option>  
-                <option value="0" >Không</option>  
+                <option value="1" selected>Có</option>
+                <option value="0" >Không</option>
                 @else
-                <option value="0" selected>Không</option>  
-                <option value="1" >Có</option>  
+                <option value="0" selected>Không</option>
+                <option value="1" >Có</option>
                 @endif
             </select>
         </div>
     <div class="col-5">
-        <label for="">đề cử</label>  
+        <label for="">Đề cử</label>
         <select name="on_sale" id="input" class="form-control" required="required">
                 @if(old('on_sale') == 1)
-                <option value="1" selected>Có</option>  
-                <option value="0" >Không</option>  
+                <option value="1" selected>Có</option>
+                <option value="0" >Không</option>
                 @else
-                <option value="0" selected>Không</option>  
-                <option value="1" >Có</option>  
+                <option value="0" selected>Không</option>
+                <option value="1" >Có</option>
                 @endif
         </select>
     </div>
     </div>
     <div class="row g-3">
     <div class="col-5">
-        <label for="">coupon</label>
-        <input type="text" name="coupon" value="{{old('coupon')}}" class="form-control" id="" placeholder="Input field">
+        <label for="">Mã giảm giá</label>
+        <input type="text" name="coupon" value="{{old('coupon')}}" class="form-control" id="" placeholder="Nhập mã giảm  giá">
         @error('coupon')
             <div class="alert alert-danger">{{ $message }}</div>
         @enderror
-    </div>   
+    </div>
     <div class="col-5">
-        <label for="">count_coupon</label>
-        <input type="text" name="count_coupon" value="{{old('count_coupon')}}" class="form-control" id="" placeholder="Input field">
+        <label for="">Số lượng mã giảm giá</label>
+        <input type="text" name="count_coupon" value="{{old('count_coupon')}}" class="form-control" id="" placeholder="Nhập số lượng mã giảm giá">
         @error('count_coupon')
             <div class="alert alert-danger">{{ $message }}</div>
         @enderror
     </div>
     </div>
     <div class="col-5">
-        <label for="">time_preparation</label>
-        <input type="text" name="time_preparation" value="{{old('time_preparation')}}" class="form-control" id="" placeholder="Input field">
+        <label for="">Thời gian chuẩn bị</label>
+        <input type="text" name="time_preparation" value="{{old('time_preparation')}}" class="form-control" id="" placeholder="Nhập thời gian chuẩn bị">
         @error('time_preparation')
             <div class="alert alert-danger">{{ $message }}</div>
         @enderror
-    </div> 
+    </div>
     </div>
     <br>
     <div class="col-6">
@@ -132,14 +132,14 @@
     <div class="row g-3">
     <div class="col-5">
         <label for="">Tên nhà hàng</label>
-        <input type="text" name="restaurant_name" value="{{old('restaurant_name')}}" class="form-control" id="" placeholder="Input field">
+        <input type="text" name="restaurant_name" value="{{old('restaurant_name')}}" class="form-control" id="" placeholder="Nhập tên nhà hàng">
     @error('restaurant_name')
         <div class="alert alert-danger">{{ $message }}</div>
     @enderror
     </div>
     <div class="col-5">
         <label for="">Địa chỉ nhà hàng</label>
-        <input type="text" name="restaurant_address" value="{{old('restaurant_address')}}" class="form-control" id="" placeholder="Input field">
+        <input type="text" name="restaurant_address" value="{{old('restaurant_address')}}" class="form-control" id="" placeholder="Nhập địa chỉ nhà hàng">
     @error('restaurant_address')
         <div class="alert alert-danger">{{ $message }}</div>
     @enderror
@@ -147,58 +147,59 @@
     </div>
     <div class="row g-3">
     <div class="col-5">
-        <label for="">time_open</label>
-        <input type="text" name="time_open" value="{{old('time_open')}}" class="form-control" id="" placeholder="Input field">
-    
+        <label for="">Giờ mở cửa</label>
+        <input type="text" name="time_open" value="{{old('time_open')}}" class="form-control" id="" placeholder="Nhập giờ mở cửa">
+
     @error('time_open')
         <div class="alert alert-danger">{{ $message }}</div>
     @enderror
     </div>
     <div class="col-5">
-        <label for="">time_close</label>
-        <input type="text" name="time_close" value="{{old('time_close')}}" class="form-control" id="" placeholder="Input field">
+        <label for="">Giờ đóng cửa</label>
+        <input type="text" name="time_close" value="{{old('time_close')}}" class="form-control" id="" placeholder="Nhập giờ đóng cửa">
     @error('time_close')
         <div class="alert alert-danger">{{ $message }}</div>
     @enderror
     </div>
     </div>
     <div class="row g-3">
+        <div class="col-5">
+            <label for="">Phí dịch vụ</label>
+            <input type="text" name="service" value="{{old('service')}}" class="form-control" id="" placeholder="Nhập phí dịch vụ">
+            @error('service')
+            <div class="alert alert-danger">{{ $message }}</div>
+            @enderror
+        </div>
     <div class="col-5">
-        <label for="">explain</label>
-        <input type="text" name="explain" value="{{old('explain')}}" class="form-control" id="" placeholder="Input field">
-    @error('explain')
-        <div class="alert alert-danger">{{ $message }}</div>
-    @enderror
-    </div>
-    <div class="col-5">
-        <label for="">phone</label>
-        <input type="text" name="phone" value="{{old('phone')}}" class="form-control" id="" placeholder="Input field">
+        <label for="">Số điện thoại</label>
+        <input type="text" name="phone" value="{{old('phone')}}" class="form-control" id="" placeholder="Nhập số điện thoại">
     @error('phone')
         <div class="alert alert-danger">{{ $message }}</div>
     @enderror
     </div>
     </div>
     <div class="row g-3">
+        <div class="col-5">
+            <label for="">Giải thích phí dịch vụ</label>
+            <input type="text" name="explain" value="{{old('explain')}}" class="form-control" id="" placeholder="Giải thích phí dịch vụ">
+            @error('explain')
+            <div class="alert alert-danger">{{ $message }}</div>
+            @enderror
+        </div>
+
     <div class="col-5">
-        <label for="">service</label>
-        <input type="text" name="service" value="{{old('service')}}" class="form-control" id="" placeholder="Input field">
-    @error('service')
-        <div class="alert alert-danger">{{ $message }}</div>
-    @enderror
-    </div>
-    <div class="col-5">
-        <label for="">tag</label>
-        <input type="text" name="tag" value="{{old('tag')}}" class="form-control" id="" placeholder="Input field">
+        <label for="">Tag</label>
+        <input type="text" name="tag" value="{{old('tag')}}" class="form-control" id="" placeholder="Nhập tag">
     @error('tag')
         <div class="alert alert-danger">{{ $message }}</div>
     @enderror
-    </div>  
     </div>
-    
+    </div>
+
    <div>
-       <button type="submit" class="btn btn-primary">Submit</button>
+       <button type="submit" class="btn btn-primary">Thêm mới</button>
    </div>
-    
+
 </form>
 @stop()
 @section('js')
