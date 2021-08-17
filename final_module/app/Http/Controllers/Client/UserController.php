@@ -120,6 +120,30 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'name' => 'required|max:255',
+            'category_id' => 'required|integer',
+            'price' => 'required|numeric|min:0|gt:price_discount',
+            'price_discount' => 'required|numeric|min:0',
+            'status' => 'required|numeric',
+            'coupon' => 'max:255',
+            'count_coupon' => 'max:255',
+            'time_preparation' => 'max:255',
+            'restaurant_name' =>'max:255',
+            'restaurant_address' =>'max:255',
+            'time_open' =>'max:255',
+            'time_close' =>'max:255',
+            'explain' => 'max:255',
+            'service' => 'max:255',
+            'phone' => 'nullable|numeric|min:100000000|max:387420489',
+            'tag' => 'required|max:255',
+            'file' => 'required|image|mimes:jpeg,jpg,png|mimetypes:image/jpeg,image/png,image/jpg|max:5120'
+        ],
+        [
+            'phone.numeric' => 'phone must be number',
+            'phone.min' => 'phone have 10 digits ',
+            'phone.max' => 'phone have 10 digits '
+        ]);
         $categ1 = Category::where('id',$request->category_id)->first();
         $a = $categ1->amount + 1;
         Category::where('id',$request->category_id)->update(['amount' => $a]);
@@ -144,6 +168,7 @@ class UserController extends Controller
         }
         $id = Session::get('user_id');
         $request->merge(['user_id' => $id]);
+        $request->merge(['on_sale' => 0]);
         $foodId = Food::insertGetId($request->only( 'name','category_id','restaurant_id','price','price_discount','image','description','status','on_sale',
             'coupon','count_coupon','time_preparation', 'user_id'));
         if($request->tag != null){
@@ -236,7 +261,6 @@ class UserController extends Controller
             'price_discount' => 'required|numeric|min:0',
             'coupon' => 'max:255',
             'status' => 'required|numeric',
-            'on_sale' => 'required|numeric',
             'count_coupon' => 'max:255',
             'time_preparation' => 'max:255',
             'restaurant_name' =>'max:255',
@@ -253,8 +277,7 @@ class UserController extends Controller
             'phone.numeric' => 'phone must be number',
             'phone.min' => 'phone have 10 digits ',
             'phone.max' => 'phone have 10 digits '
-        ]    
-    );
+        ]);
         $food = Food::findOrFail($id);
         $categ1 = Category::where('id',Session::get('categ1'))->first();
         $a = $categ1->amount - 1;
@@ -288,7 +311,7 @@ class UserController extends Controller
             $request->file('file')->storeAs('public/images', $newFileName);
             $request->merge(['image' => $newFileName]);
         }
-        $food->update($request->only( 'name','category_id','restaurant_id','price','price_discount','image','description','status','on_sale',
+        $food->update($request->only( 'name','category_id','restaurant_id','price','price_discount','image','description','status',
             'coupon','count_coupon','time_preparation'));
         if($request->tag != null){
             $tags = $request->tag;
