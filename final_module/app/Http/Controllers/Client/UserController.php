@@ -135,7 +135,7 @@ class UserController extends Controller
             'time_close' =>'max:255',
             'explain' => 'max:255',
             'service' => 'max:255',
-            'phone' => 'nullable|numeric|min:100000000|max:387420489',
+            'phone' => 'nullable|numeric|min:100000000|max:1000000000',
             'tag' => 'required|max:255',
             'file' => 'required|image|mimes:jpeg,jpg,png|mimetypes:image/jpeg,image/png,image/jpg|max:5120'
         ],
@@ -233,7 +233,7 @@ class UserController extends Controller
         Session::put('categ1',$categ1->id);
         $tags = '';
         $foodtag = FoodTag::where('food_id',$id)->get();
-        
+
         foreach($foodtag as $value){
             $tagss = Tag::where('id',$value->tag_id)->first();
             $tags .= $tagss->name.',';
@@ -375,6 +375,6 @@ class UserController extends Controller
       Storage::delete('/public/images/'. $file);
       $food->delete();
       return redirect()->route('client.listFood');
-      
+
     }
 }

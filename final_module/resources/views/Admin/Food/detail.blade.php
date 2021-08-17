@@ -80,7 +80,7 @@
                     <td>
                         @if(count($tags) > 1)
                         @foreach($tags as $tag)
-                        {{$tag->tag->name}},
+                        {{ $tag->tag->name }},
                         @endforeach
                         @elseif(count($tags) <= 1)
                             @foreach($tags as $tag)

@@ -35,7 +35,7 @@
                 <a href="{{route('food.edit',$food->id)}}" class="btn btn-sm btn-success">
                     <i class="fas fa-edit"></i>
                 </a>
-                <a href="{{route('food.destroy',$food->id)}}" class="btn btn-sm btn-danger btndelete" onclick="return confirm('Bạn chắc chắn muốn xóa?')">
+                <a href="{{route('food.destroy',$food->id)}}" class="btn btn-sm btn-danger btn delete" onclick="return confirm('Bạn chắc chắn muốn xóa?')">
                     <i class="fas fa-trash"></i>
                 </a>
             </td>

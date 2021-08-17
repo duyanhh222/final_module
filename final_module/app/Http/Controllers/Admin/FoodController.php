@@ -77,7 +77,7 @@ class FoodController extends Controller
             'time_close' =>'max:255',
             'explain' => 'max:255',
             'service' => 'max:255',
-            'phone' => 'nullable|numeric|min:100000000|max:387420489',
+            'phone' => 'nullable|numeric|min:100000000|max:1000000000',
             'tag' => 'required|max:255',
             'file' => 'required|image|mimes:jpeg,jpg,png|mimetypes:image/jpeg,image/png,image/jpg|max:5120'
         ],
@@ -336,7 +336,7 @@ class FoodController extends Controller
       $file = $food->image;
       Storage::delete('/public/images/'. $file);
       $food->delete();
-      return redirect()->route('food.index')->with('success','Xoas thành công');
+      return redirect()->route('food.index')->with('success','Xoá thành công');
 
     }
 }
