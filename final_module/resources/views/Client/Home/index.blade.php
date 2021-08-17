@@ -53,10 +53,23 @@
                                             </ul>
                                         </li>
                                     </ul>
-
                                 </div>
+                                @if(Session::has('user_name'))
+                                <div class="top_bar_menu">
+                                    <ul class="standard_dropdown top_bar_dropdown">
+                                        <li>
+                                            <a href="#">{{Session::get('user_name')}}<i class="fas fa-chevron-down"></i></a>
+                                            <ul>
+                                                <li><a href="#">Hồ sơ</a></li>
+                                                <li><a href="#">Đăng xuất</a></li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </div>
+                                @else
                                 <a class="btn btn-outline-primary" href="{{ route('client.loadLogin') }}">Đăng nhập</a>
                                 <a class="btn btn-outline-primary" href="{{ route('client.loadRegister') }}">Đăng ký</a>
+                                @endif
                             </div>
                         </div>
                     </div>
