@@ -34,8 +34,12 @@ class FoodController extends Controller
     }
     public function index()
     {
-        $foods = Food::paginate(5);
-        return view('Admin.Food.index',compact('foods'));
+        $foods = Food::OrderBy('id','DESC')->paginate(5);
+        $key = request()->key;
+        if(isset($key)){
+            $foods = Food::where('name','like','%'.$key.'%')->paginate(5);
+        }
+        return view('Admin.Food.index',compact('foods','key'));
     }
 
     /**
@@ -62,6 +66,8 @@ class FoodController extends Controller
             'category_id' => 'required|integer',
             'price' => 'required|numeric|min:0|gt:price_discount',
             'price_discount' => 'required|numeric|min:0',
+            'status' => 'required|numeric',
+            'on_sale' => 'required|numeric',
             'coupon' => 'max:255',
             'count_coupon' => 'max:255',
             'time_preparation' => 'max:255',
@@ -71,10 +77,16 @@ class FoodController extends Controller
             'time_close' =>'max:255',
             'explain' => 'max:255',
             'service' => 'max:255',
-            'phone' => 'max:255',
-            'tag' => 'max:255',
+            'phone' => 'nullable|numeric|min:100000000|max:387420489',
+            'tag' => 'required|max:255',
             'file' => 'required|image|mimes:jpeg,jpg,png|mimetypes:image/jpeg,image/png,image/jpg|max:5120'
-        ]);
+        ],
+        [
+            'phone.numeric' => 'phone must be number',
+            'phone.min' => 'phone have 10 digits ',
+            'phone.max' => 'phone have 10 digits '
+        ]    
+    );
         $categ1 = Category::where('id',$request->category_id)->first();
         $a = $categ1->amount + 1;
         Category::where('id',$request->category_id)->update(['amount' => $a]);
@@ -187,6 +199,8 @@ class FoodController extends Controller
             'price' => 'required|numeric|min:0|gt:price_discount',
             'price_discount' => 'required|numeric|min:0',
             'coupon' => 'max:255',
+            'status' => 'required|numeric',
+            'on_sale' => 'required|numeric',
             'count_coupon' => 'max:255',
             'time_preparation' => 'max:255',
             'restaurant_name' =>'max:255',
@@ -196,9 +210,15 @@ class FoodController extends Controller
             'explain' => 'max:255',
             'service' => 'max:255',
             'phone' => 'max:255',
-            'tag' => 'max:255',
+            'tag' => 'required|max:255',
             'file' => 'image|mimes:jpeg,jpg,png|mimetypes:image/jpeg,image/png,image/jpg|max:5120'
-        ]);
+        ],
+        [
+            'phone.numeric' => 'phone must be number',
+            'phone.min' => 'phone have 10 digits ',
+            'phone.max' => 'phone have 10 digits '
+        ]    
+    );
         $categ1 = Category::where('id',Session::get('categ1'))->first();
         $a = $categ1->amount - 1;
         Category::where('id',$food->category_id)->update(['amount' => $a]);

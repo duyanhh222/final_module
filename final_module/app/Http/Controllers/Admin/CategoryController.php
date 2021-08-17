@@ -50,6 +50,8 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
+        if(!$request->has('file')){
+        }
         $request->validate([
             'name' => 'required|unique:categories',
             'file' => 'required|image|mimes:jpeg,jpg,png|mimetypes:image/jpeg,image/png,image/jpg|max:5120'

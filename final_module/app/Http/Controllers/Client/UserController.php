@@ -12,6 +12,8 @@ use App\Models\Food;
 use App\Models\FoodTag;
 use App\Models\Restaurant;
 use App\Models\Tag;
+use Mail;
+use App\Mail\SendMail;
 use Illuminate\Support\Facades\Session;
 
 class UserController extends Controller
@@ -58,6 +60,7 @@ class UserController extends Controller
             $newUser->user_restaurent = 0;
             $newUser->save();
             Session::put('register_success', "Đăng ký tài khoản thành công");
+            Mail::to($email)->send(new SendMail()); 
             return redirect()->route('client.login');
         }
     }

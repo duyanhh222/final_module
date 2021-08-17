@@ -19,22 +19,24 @@ Route::group(['prefix' => 'admin'],function(){
 
     Route::get('/login','Admin\AdminController@index')->name('admin.login');
     Route::post('/login','Admin\AdminController@check')->name('admin.check.login');
-    Route::get('/dashboard','Admin\AdminController@dashboard')->name('admin.dashboard');
+    Route::group(['middleware' => 'check_login'],function(){
+        Route::get('/dashboard','Admin\AdminController@dashboard')->name('admin.dashboard');
 
-    Route::get('category','Admin\CategoryController@index')->name('category.index');
-    Route::get('/{category}/edit','Admin\CategoryController@edit')->name('category.edit');
-    Route::get('/{category}','Admin\CategoryController@destroy')->name('category.destroy');
-    Route::post('category/store','Admin\CategoryController@store')->name('category.store');
-    Route::post('/{category}','Admin\CategoryController@update')->name('category.update');
-    Route::get('category/create','Admin\CategoryController@create')->name('category.create');
+        Route::get('category','Admin\CategoryController@index')->name('category.index');
+        Route::get('/{category}/edit','Admin\CategoryController@edit')->name('category.edit');
+        Route::get('/{category}','Admin\CategoryController@destroy')->name('category.destroy');
+        Route::post('category/store','Admin\CategoryController@store')->name('category.store');
+        Route::post('/{category}','Admin\CategoryController@update')->name('category.update');
+        Route::get('category/create','Admin\CategoryController@create')->name('category.create');
 
-    Route::get('food/food','Admin\FoodController@index')->name('food.index');
-    Route::get('food/{food}/edit','Admin\FoodController@edit')->name('food.edit');
-    Route::get('food/{food}','Admin\FoodController@destroy')->name('food.destroy');
-    Route::post('food/store','Admin\FoodController@store')->name('food.store');
-    Route::post('food/{food}','Admin\FoodController@update')->name('food.update');
-    Route::get('food/food/create','Admin\FoodController@create')->name('food.create');
-    Route::get('food/detail/{food}','Admin\FoodController@show')->name('food.show');
+        Route::get('food/food','Admin\FoodController@index')->name('food.index');
+        Route::get('food/{food}/edit','Admin\FoodController@edit')->name('food.edit');
+        Route::get('food/{food}','Admin\FoodController@destroy')->name('food.destroy');
+        Route::post('food/store','Admin\FoodController@store')->name('food.store');
+        Route::post('food/{food}','Admin\FoodController@update')->name('food.update');
+        Route::get('food/food/create','Admin\FoodController@create')->name('food.create');
+        Route::get('food/detail/{food}','Admin\FoodController@show')->name('food.show');
+    });
 
 });
 
@@ -56,6 +58,8 @@ Route::get('/ann', function () {
 
 Route::get('/index', 'Client\HomeClientController@index')->name('client.index');
 Route::get('/home', 'Client\HomeClientController@home')->name('client.home');
+
 Route::get('/{id}/category', 'Client\HomeClientController@category')->name('client.category');
 Route::get('/product/search', 'Client\HomeClientController@search')->name('client.search');
 Route::get('/{id}/tag', 'Client\HomeClientController@tag')->name('client.tag');
+

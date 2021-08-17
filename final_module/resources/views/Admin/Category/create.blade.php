@@ -4,16 +4,19 @@
 <form action="{{route('category.store')}}" method="POST" enctype="multipart/form-data">
     @csrf
     <legend>Form title</legend>
-    <div class="form-group">
+    <div class="col-4">
         <label for="">name</label>
         <input type="text" name="name" class="form-control" id="" placeholder="Input field">
     </div>
     @error('name')
         <div class="alert alert-danger">{{ $message }}</div>
     @enderror
-    <div class="form-group">
+    <div class="col-4">
         <label for="">image</label>
-        <input type="file" name="file"  class="form-control" id="" placeholder="Input field">
+        <input type="file" name="file"  class="form-control" id="upload"  placeholder="Input field">
+    </div>
+    <div>
+        <img id="blah" src="" width="200px" />
     </div>
     @error('file')
         <div class="alert alert-danger">{{ $message }}</div>
@@ -21,4 +24,21 @@
     <button type="submit" class="btn btn-primary">Submit</button>
 </form>
 
+@stop()
+@section('js')
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script type="text/javascript">
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                $('#blah').attr('src', e.target.result);
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+    $("#upload").change(function() {
+    readURL(this);
+});
+</script>
 @stop()

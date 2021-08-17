@@ -156,7 +156,7 @@
         </a>
       </li>
       <li class="nav-item">
-        <a href="">{{__('Log Out')}}</a>
+        <a href="">logout</a>
       </li>
     </ul>
   </nav>
