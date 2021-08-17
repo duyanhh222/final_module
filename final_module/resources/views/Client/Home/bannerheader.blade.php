@@ -22,13 +22,19 @@
         </ol>
         <div class="carousel-inner">
             <div class="carousel-item active" style="width: 1800px">
-                <img src="{{asset('Client/images/banner1.png')}}" class="d-block w-100"  style="width:40%!important" alt="...">
+                <img src="{{asset('Client/images/banner1.png')}}" class="d-block w-100"  style="width:40%!important; height: 450px" alt="...">
             </div>
-            <div class="carousel-item">
-                <img src="{{asset('Client/images/banner1.png')}}" class="d-block w-100" alt="...">
+{{--            <div class="banner_content" style="float: right;  padding-right: 250px; padding-top: 1px ">--}}
+{{--                                <h1 class="banner_text">new era</h1>--}}
+{{--                                <div class="banner_price"><span>$530</span>$460</div>--}}
+{{--                                <div class="banner_product_name">Apple Iphone 6s</div>--}}
+{{--                                <div class="button banner_button"><a href="#">Shop Now</a></div>--}}
+{{--                            </div>--}}
+            <div class="carousel-item" style="width: 1800px">
+                <img src="{{asset('Client/images/banner2.png')}}" class="d-block w-100"  style="width:40%!important; height: 450px"  alt="...">
             </div>
-            <div class="carousel-item">
-                <img src="{{asset('Client/images/banner1.png')}}" class="d-block w-100" alt="...">
+            <div class="carousel-item" style="width: 1800px">
+                <img src="{{asset('Client/images/banner3.png')}}" class="d-block w-100"  style="width:40%!important; height: 450px"  alt="...">
             </div>
         </div>
         <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">

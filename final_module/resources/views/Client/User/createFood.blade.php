@@ -4,7 +4,6 @@
     <form action="{{route('client.store')}}" method="POST" enctype="multipart/form-data">
     @csrf
         <legend>Form title</legend>
-
         <div class="form-group">
             <label for="">name</label>
             <input type="text" name="name" value="{{old('name')}}" class="form-control" id="" placeholder="Input field">
@@ -106,6 +105,7 @@
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
+
 </div>
 @stop()
 @section('js')
