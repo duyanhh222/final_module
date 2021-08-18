@@ -63,7 +63,7 @@
                 <tr>
                     <td>Tên người dùng</td>
                     @if($food_show->user != null)
-                    <td>{{$food_show->user->name}}</td>
+                    <td>{{$food_show->user->user_name}}</td>
                     @else
                     <td>Món ăn do admin tạo</td>
                     @endif
