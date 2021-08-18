@@ -8,7 +8,7 @@
             <table class="table table-striped">
                 <thead>
                 <tr>
-                    
+
                     <td>Tên sản phẩm</td>
                     <td>{{ $food_show->name }}</td>
                 </tr>
