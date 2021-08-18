@@ -167,9 +167,9 @@ class FoodController extends Controller
      */
     public function show(Food $food)
     {
-        $food1 = Food::with(['category','restaurant','user'])->where('id',$food->id)->first();
+        $food_shows = Food::with(['category','restaurant','user'])->where('id',$food->id)->first();
         $tags = FoodTag::where('food_id', $food->id)->get();
-        return view('Admin.Food.detail',compact('food1', 'tags'));
+        return view('Admin.Food.detail',compact('food_shows', 'tags'));
     }
 
     /**
