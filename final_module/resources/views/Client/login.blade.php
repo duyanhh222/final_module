@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>Login V18</title>
+	<title>Đăng nhập</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 <!--===============================================================================================-->	
@@ -36,7 +36,7 @@
 				<form class="login100-form validate-form" method="post" action="{{ route('client.login') }}">
                     @csrf
 					<span class="login100-form-title p-b-43">
-						Login to continue
+						Đăng nhập
 					</span>
 					
 					
@@ -50,20 +50,20 @@
 					<div class="wrap-input100 validate-input" data-validate="Password is required">
 						<input class="input100" type="password" name="password">
 						<span class="focus-input100"></span>
-						<span class="label-input100">Password</span>
+						<span class="label-input100">Mật khẩu</span>
 					</div>
 
 					<div class="flex-sb-m w-full p-t-3 p-b-32">
 						<div class="contact100-form-checkbox">
 							<input class="input-checkbox100" id="ckb1" type="checkbox" name="remember-me">
 							<label class="label-checkbox100" for="ckb1">
-								Remember me
+								Nhớ tài khoản
 							</label>
 						</div>
 
 						<div>
 							<a href="#" class="txt1">
-								Forgot Password?
+								Quên mật khẩu?
 							</a>
 						</div>
 					</div>
@@ -85,13 +85,13 @@
 
 					<div class="container-login100-form-btn">
 						<button class="login100-form-btn">
-							Login
+							Đăng nhập
 						</button>
 					</div>
 					
 					<div class="text-center p-t-46 p-b-20">
 						<span class="txt2">
-							or sign up using
+							Hoặc tiếp tục với
 						</span>
 					</div>
 
