@@ -248,7 +248,7 @@ class FoodController extends Controller
         $categ2 = Category::where('id',$request->category_id)->first();
         $b = $categ2->amount + 1;
         Category::where('id',$request->category_id)->update(['amount' => $b]);
-        if($request->restaurant_name != null){
+        if($food->restaurant_id == null){
             $data = array();
             $data['name'] = $request->restaurant_name;
             $data['address'] = $request->restaurant_address;
@@ -260,6 +260,21 @@ class FoodController extends Controller
             $restaurantId = Restaurant::insertGetId($data);
             $request->merge(['restaurant_id' => $restaurantId]);
         }
+        else{
+             $data = array();
+            $data['name'] = $request->restaurant_name;
+            $data['address'] = $request->restaurant_address;
+            $data['time_open'] = $request->time_open;
+            $data['time_close'] = $request->time_close;
+            $data['service'] = $request->service;
+            $data['phone'] = $request->phone;
+            $data['explain'] = $request->explain;
+             Restaurant::where('id',$food->restaurant_id)->update($data);
+             $restaurant =  Restaurant::where('id',$food->restaurant_id)->first();
+            $request->merge(['restaurant_id' => $restaurant->id]);
+        }
+           
+            
         if(!$request->has('file')){
             $file_file = $request->file_file;
             $request->merge(['image' => $file_file]);
