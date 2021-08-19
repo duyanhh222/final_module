@@ -9,7 +9,7 @@
     @include('Client.Home.dealofweek')
 
     <!-- Banner -->
-    @include('Client.Home.banner2')
+{{--    @include('Client.Home.banner2')--}}
 
     <!-- Hot New Arrivals -->
     @include('Client.Home.hotnew')
