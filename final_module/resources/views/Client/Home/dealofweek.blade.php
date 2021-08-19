@@ -119,9 +119,9 @@
                                                     @endif
                                                 @endif
                                             </div>
-{{--                                            <div class="product_extras">--}}
-{{--                                                <button class="product_cart_button">Thêm vào giỏ hàng</button>--}}
-{{--                                            </div>--}}
+                                            <div class="product_extras">
+                                                <button class="product_cart_button">Thêm vào giỏ hàng</button>
+                                            </div>
                                         </div>
                                         <div class="product_fav"><i class="fas fa-heart"></i></div>
                                         <ul class="product_marks">

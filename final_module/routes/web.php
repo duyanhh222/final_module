@@ -68,3 +68,5 @@ Route::get('/{id}/category', 'Client\HomeClientController@category')->name('clie
 Route::get('/product/search', 'Client\HomeClientController@search')->name('client.search');
 Route::get('/{id}/tag', 'Client\HomeClientController@tag')->name('client.tag');
 
+Route::get('/show/cart', 'Client\CartController@index')->name('show.cart');
+Route::post('/add/cart', 'Client\CartController@store')->name('add.cart');
