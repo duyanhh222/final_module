@@ -24,7 +24,7 @@
 
     <!-- Reviews -->
     <!-- Recently Viewed -->
-    @include('Client.Home.reviewviewed')
+{{--    @include('Client.Home.reviewviewed')--}}
 
 
 @endsection

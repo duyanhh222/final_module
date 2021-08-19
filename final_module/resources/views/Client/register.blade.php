@@ -20,27 +20,27 @@
             <div class="container">
                 <div class="signup-content">
                     <div class="signup-form">
-                        <h2 class="form-title">Sign up</h2>
+                        <h2 class="form-title">Đăng ký</h2>
                         <form method="POST" class="register-form" id="register-form" action="{{ route('client.register') }}">
                             @csrf
                             <div class="form-group">
                                 <label for="name"><i class="zmdi zmdi-account material-icons-name"></i></label>
-                                <input type="text" name="name" value="{{ old('name')}}" id="name" placeholder="Your Name" required>
+                                <input type="text" name="name" value="{{ old('name')}}" id="name" placeholder="Nhập tên của bạn" required>
                             </div>
                             <div class="form-group">
                                 <label for="email"><i class="zmdi zmdi-email"></i></label>
-                                <input type="email" name="email" value="{{ old('email')}}" id="email" placeholder="Your Email" required>
+                                <input type="email" name="email" value="{{ old('email')}}" id="email" placeholder="Email" required>
                             </div>
                             <div class="form-group">
                                 <label for="pass"><i class="zmdi zmdi-lock"></i></label>
-                                <input type="password" name="password" id="password" placeholder="Password" required>
+                                <input type="password" name="password" id="password" placeholder="Mật khẩu" required>
                             </div>
                             <div class="form-group">
                                 <label for="re-pass"><i class="zmdi zmdi-lock-outline"></i></label>
-                                <input type="password" name="re_password" id="re_pass" placeholder="Repeat your password" required>
+                                <input type="password" name="re_password" id="re_pass" placeholder="Nhập lại mật khẩu" required>
                             </div>
                             <div class="form-group form-button">
-                                <input type="submit" name="signup" id="signup" class="form-submit" value="Register">
+                                <input type="submit" name="signup" id="signup" class="form-submit" value="Đăng ký">
                             </div>
                         </form>
                     </div>
@@ -54,7 +54,7 @@
                     </div>
                     <div class="signup-image">
                         <figure><img src="{{ asset('Register/images/signup-image.jpg') }}" alt="sing up image"></figure>
-                        <a href="{{ route('client.loadLogin') }}" class="signup-image-link">I am already member</a>
+                        <a href="{{ route('client.loadLogin') }}" class="signup-image-link">Tôi đã có tài khoản</a>
                     </div>
                 </div>
             </div>

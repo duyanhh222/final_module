@@ -170,13 +170,13 @@
 
                                 <!-- Main Nav Menu -->
 
-                                <div class="main_nav_menu ml-auto">
+                                <!-- <div class="main_nav_menu ml-auto">
                                     <ul class="standard_dropdown main_nav_dropdown">
                                         <li><a href="">Home<i class="fas fa-chevron-down"></i></a></li>
                                         <li><a href="blog.html">Blog<i class="fas fa-chevron-down"></i></a></li>
                                         <li><a href="">Contact<i class="fas fa-chevron-down"></i></a></li>
                                     </ul>
-                                </div>
+                                </div> -->
 
                                 <!-- Menu Trigger -->
 
@@ -200,15 +200,15 @@
     @yield('content')
 
 <!-- Footer -->
-    <div class="brands">
+    <!-- <div class="brands">
         <div class="container">
             <div class="row">
                 <div class="col">
-                    <div class="brands_slider_container">
+                    <div class="brands_slider_container"> -->
 
                         <!-- Brands Slider -->
 
-                        <div class="owl-carousel owl-theme brands_slider">
+                        <!-- <div class="owl-carousel owl-theme brands_slider">
 
                             <div class="owl-item"><div class="brands_item d-flex flex-column justify-content-center"><img src="{{ asset('Client/images/brands_1.jpg') }}" alt=""></div></div>
                             <div class="owl-item"><div class="brands_item d-flex flex-column justify-content-center"><img src="{{ asset('Client/images/brands_2.jpg') }}" alt=""></div></div>
@@ -219,17 +219,17 @@
                             <div class="owl-item"><div class="brands_item d-flex flex-column justify-content-center"><img src="{{ asset('Client/images/brands_7.jpg') }}" alt=""></div></div>
                             <div class="owl-item"><div class="brands_item d-flex flex-column justify-content-center"><img src="{{ asset('Client/images/brands_8.jpg') }}" alt=""></div></div>
 
-                        </div>
+                        </div> -->
 
                         <!-- Brands Slider Navigation -->
-                        <div class="brands_nav brands_prev"><i class="fas fa-chevron-left"></i></div>
+                        <!-- <div class="brands_nav brands_prev"><i class="fas fa-chevron-left"></i></div>
                         <div class="brands_nav brands_next"><i class="fas fa-chevron-right"></i></div>
 
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
     @section('footer')
         <footer class="footer">
             <div class="container">
