@@ -127,7 +127,7 @@
                                 <div class="cart">
                                     <div class="cart_container d-flex flex-row align-items-center justify-content-end">
                                         <div class="cart_icon">
-                                            <a href="">
+                                            <a href="{{route('show.cart')}}">
                                                 <img src="{{ asset('Client/images/cart.png') }}" alt="">
                                             </a>
                                             <div class="cart_count"><span>0</span></div>
