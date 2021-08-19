@@ -16,7 +16,9 @@
                         <div class="row fill_height">
                             <div class="col-lg-4 col-md-6 fill_height">
                                 <div class="banner_2_content">
+                                    @if($sell_quantity->get($food)->category != null)
                                     <div class="banner_2_category">{{ $sell_quantity->get($food)->category->name }}</div>
+                                    @endif
                                     <div class="banner_2_title">{{ $sell_quantity->get($food)->name }}</div>
                                     <div class="banner_2_text">{!! $sell_quantity->get($food)->description !!}</div>
                                     <div class="rating_r rating_r_4 banner_2_rating"><i></i><i></i><i></i><i></i><i></i></div>
