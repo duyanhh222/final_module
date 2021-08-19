@@ -26,40 +26,43 @@
                     <div class="cart_container">
                         <div class="cart_title">Giỏ hàng</div>
                         <div class="cart_items">
-                            <form method="post"  action="">
+                            <form method="post"  action="{{route('update.cart')}}">
                                 @csrf
-                                <!-- @if(!empty(session()->get('cart')))
-                            @foreach($products as $product) -->
+                                
+                            @foreach($carts as $cart)
                             <ul class="cart_list">
 
                                 <li class="cart_item clearfix">
-                                    <div class="cart_item_image"><img src="{{asset('storage/images/' . $product->prd_image) }}" alt=""></div>
+                                    <div class="cart_item_image"><img src="{{asset('storage/images/' . $cart->food->image) }}" alt=""></div>
                                     <div class="cart_item_info d-flex flex-md-row flex-column justify-content-between">
                                         <div class="cart_item_name cart_info_col">
                                             <div class="cart_item_title">Tên sản phẩm</div>
-                                            <!-- <div class="cart_item_text">{{ $product->prd_name }}</div> -->
+                                            <div class="cart_item_text">{{ $cart->food->name }}</div>
                                         </div>
 
                                         <div class="cart-quantity col-lg-2 col-md-2 col-sm-12">
-                                            <input type="number" name="quantity[{{ $product->prd_id }}]" id="quantity" class="form-control form-blue quantity" value="{{ $cart[$product->prd_id] }}" min="1">
+                                            <input type="number" name="num[{{$cart->id}}]" id="quantity" class="form-control form-blue quantity" value="{{ $cart->quantity }}" min="1">
                                         </div>
                                         <div class="cart_item_price cart_info_col">
                                             <div class="cart_item_title">Giá</div>
-                                            <!-- <div class="cart_item_text">{{ number_format($product->prd_price_discount) }}</div> -->
+                                            @if($cart->food->price_discount == 0)
+                                            <div class="cart_item_text">{{ number_format($cart->food->price) }}</div>
+                                            @else
+                                            <div class="cart_item_text">{{ number_format($cart->food->price_discount) }}</div>
+                                            @endif
                                         </div>
                                         <div class="cart_item_price cart_info_col">
-                                            <a href="{{route('cart.delete',['id' => $product->prd_id])}}">Xóa</a>
+                                            <a href="{{route('delete.cart',$cart->id)}}">Xóa</a>
 
                                         </div>
-{{--                                        <div class="cart_item_total cart_info_col">--}}
-{{--                                            <div class="cart_item_title">Tổng tiền</div>--}}
-{{--                                            <div class="cart_item_text">$2000</div>--}}
-{{--                                        </div>--}}
+                                       <div class="cart_item_total cart_info_col">
+                                           <div class="cart_item_title">Tổng tiền</div>
+                                           <div class="cart_item_text">{{ number_format($cart->total) }}</div>
+                                       </div>
                                     </div>
                                 </li>
                             </ul>
-                            <!-- @endforeach
-                                @endif -->
+                            @endforeach
                                 <div class="cart_buttons">
                                     <button type="submit" class="button cart_button_clear">Cập nhật giỏ hàng</button>
                                 </div>

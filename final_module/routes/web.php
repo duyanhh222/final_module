@@ -70,3 +70,5 @@ Route::get('/{id}/tag', 'Client\HomeClientController@tag')->name('client.tag');
 
 Route::get('/show/cart', 'Client\CartController@index')->name('show.cart');
 Route::post('/add/cart', 'Client\CartController@store')->name('add.cart');
+Route::post('/update/cart', 'Client\CartController@update')->name('update.cart');
+Route::get('/delete/{cart}/cart', 'Client\CartController@destroy')->name('delete.cart');

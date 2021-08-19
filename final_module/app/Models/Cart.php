@@ -12,4 +12,12 @@ class Cart extends Model
     protected $fillable = [
         'user_id','food_id','quantity','total'
     ];
+    public function food()
+    {
+        return $this->belongsTo(Food::class, 'food_id');
+    }
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
 }
