@@ -1,4 +1,4 @@
-@extends('client.Home.index')
+@extends('Client.Home.index')
 
 @section('title', 'Trang chủ')
 @section('content')
