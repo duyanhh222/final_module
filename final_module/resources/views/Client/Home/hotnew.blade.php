@@ -37,7 +37,7 @@
                                                                 {{ $fastDelivery->get($food)->name }}
                                                             @endif</a></div></div>
                                                     <div class="char_subtitle">
-                                                        @if(isset($mostView->get($food)->restaurant->address))
+                                                        @if(isset($fastDelivery->get($food)->restaurant->address))
                                                             @if(strlen($fastDelivery->get($food)->restaurant->address) >20)
                                                                 {{ substr($fastDelivery->get($food)->restaurant->address, 0, 20) }}...
                                                             @else
