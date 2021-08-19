@@ -102,16 +102,27 @@ class FoodController extends Controller
         $a = $categ1->amount + 1;
         Category::where('id',$request->category_id)->update(['amount' => $a]);
         if($request->restaurant_name != null){
-            $data = array();
-            $data['name'] = $request->restaurant_name;
-            $data['address'] = $request->restaurant_address;
-            $data['time_open'] = $request->time_open;
-            $data['time_close'] = $request->time_close;
-            $data['service'] = $request->service;
-            $data['phone'] = $request->phone;
-            $data['explain'] = $request->explain;
-            $restaurantId = Restaurant::insertGetId($data);
-            $request->merge(['restaurant_id' => $restaurantId]);
+            $restaurant_flag = 0;
+            $restaurants = Restaurant::all();
+            foreach($restaurants as $value){
+                if($this->slugify($request->restaurant_name) == $this->slugify($value->name) &&
+                $this->slugify($request->restaurant_address) == $this->slugify($value->address)){
+                    $request->merge(['restaurant_id' => $value->id]);
+                    $restaurant_flag = 1;
+                }
+            }
+            if($restaurant_flag == 0){
+                $data = array();
+                $data['name'] = $request->restaurant_name;
+                $data['address'] = $request->restaurant_address;
+                $data['time_open'] = $request->time_open;
+                $data['time_close'] = $request->time_close;
+                $data['service'] = $request->service;
+                $data['phone'] = $request->phone;
+                $data['explain'] = $request->explain;
+                $restaurantId = Restaurant::insertGetId($data);
+                $request->merge(['restaurant_id' => $restaurantId]);
+            }                          
         }
         if($request->has('file')){
             $file = $request->file;
@@ -248,33 +259,27 @@ class FoodController extends Controller
         $categ2 = Category::where('id',$request->category_id)->first();
         $b = $categ2->amount + 1;
         Category::where('id',$request->category_id)->update(['amount' => $b]);
-        if($food->restaurant_id == null){
+        $restaurant_flag = 0;
+        $restaurants = Restaurant::all();
+        foreach($restaurants as $value){
+            if($this->slugify($request->restaurant_name) == $this->slugify($value->name) &&
+                $this->slugify($request->restaurant_address) == $this->slugify($value->address)){
+                $request->merge(['restaurant_id' => $value->id]);
+                $restaurant_flag = 1;
+            }
+        }
+        if($restaurant_flag == 0){
             $data = array();
-            $data['name'] = $request->restaurant_name;
-            $data['address'] = $request->restaurant_address;
-            $data['time_open'] = $request->time_open;
-            $data['time_close'] = $request->time_close;
-            $data['service'] = $request->service;
-            $data['phone'] = $request->phone;
-            $data['explain'] = $request->explain;
-            $restaurantId = Restaurant::insertGetId($data);
-            $request->merge(['restaurant_id' => $restaurantId]);
-        }
-        else{
-             $data = array();
-            $data['name'] = $request->restaurant_name;
-            $data['address'] = $request->restaurant_address;
-            $data['time_open'] = $request->time_open;
-            $data['time_close'] = $request->time_close;
-            $data['service'] = $request->service;
-            $data['phone'] = $request->phone;
-            $data['explain'] = $request->explain;
-             Restaurant::where('id',$food->restaurant_id)->update($data);
-             $restaurant =  Restaurant::where('id',$food->restaurant_id)->first();
-            $request->merge(['restaurant_id' => $restaurant->id]);
-        }
-           
-            
+        $data['name'] = $request->restaurant_name;
+        $data['address'] = $request->restaurant_address;
+        $data['time_open'] = $request->time_open;
+        $data['time_close'] = $request->time_close;
+        $data['service'] = $request->service;
+        $data['phone'] = $request->phone;
+        $data['explain'] = $request->explain;
+        $restaurantId = Restaurant::insertGetId($data);
+        $request->merge(['restaurant_id' => $restaurantId]);
+        }                                        
         if(!$request->has('file')){
             $file_file = $request->file_file;
             $request->merge(['image' => $file_file]);
