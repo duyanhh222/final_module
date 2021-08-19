@@ -1,5 +1,5 @@
 @extends('Layout.Client.index')
-@section('title','Food')
+@section('title','Thêm món ăn')
 @section('main')
 <form action="{{route('client.storeFood')}}" method="POST" enctype="multipart/form-data" class="formcrud">
 @csrf
@@ -10,7 +10,7 @@
     <div class="row g-3">
     <div class="col-6 input_group">
         <label for="">Tên món</label>
-        <input type="text" name="name" value="{{old('name')}}" class="form-control" id="" placeholder="">
+        <input type="text" name="name" value="{{old('name')}}" class="form-control" id="" placeholder="Nhập tên món ăn">
         @error('name')
         <div class="alert alert-danger">{{ $message }}</div>
         @enderror
@@ -36,14 +36,14 @@
     <div class="row g-3">  
         <div class="col-6 input_group">
             <label for="">Giá</label>
-            <input type="text" name="price" value="{{old('price')}}" class="form-control" id="" placeholder="">
+            <input type="text" name="price" value="{{old('price')}}" class="form-control" id="" placeholder="Thêm giá tiền">
             @error('price')
             <div class="alert alert-danger">{{ $message }}</div>
             @enderror
         </div>
         <div class="col-6 input_group">
             <label for="">Giá khuyến mại</label>
-            <input type="text" name="price_discount" value="{{old('price_discount')}}" class="form-control" id="" placeholder="">
+            <input type="text" name="price_discount" value="{{old('price_discount')}}" class="form-control" id="" placeholder="Thêm khuyến mại">
             @error('price_discount')
             <div class="alert alert-danger">{{ $message }}</div>
             @enderror
@@ -51,8 +51,11 @@
     </div>
     <div class="row">
         <div class="col-6 input_group">
-            <label for="">Ảnh</label>
-            <input type="file" name="file"  class="form-control" id="upload" placeholder="">
+            <label class="custom-file-upload">
+            <i class="fas fa-images fa-4x"></i>
+                <input type="file" name="file"  class="form-control" id="upload" placeholder="">
+            </label>
+            
             @error('file')
             <div class="alert alert-danger">{{ $message }}</div>
             @enderror
@@ -65,7 +68,7 @@
     <div class="row">
         <div class="col-12">
             <label>Ghi chú</label>
-        <textarea class="form-control" name="description" required>{{old('description')}}</textarea>
+            <textarea class="form-control" name="description" required>{{old('description')}}</textarea>
         </div>
         
     </div>
@@ -75,14 +78,14 @@
     <div class="row g-3">
     <div class="col-6 input_group">
         <label for="">Mã giảm giá</label>
-        <input type="text" name="coupon" value="{{old('coupon')}}" class="form-control" id="" placeholder="">
+        <input type="text" name="coupon" value="{{old('coupon')}}" class="form-control" id="" placeholder="Thêm mã giảm giá">
         @error('coupon')
             <div class="alert alert-danger">{{ $message }}</div>
         @enderror
     </div>   
     <div class="col-6 input_group">
         <label for="">Số lượng mã giảm giá</label>
-        <input type="text" name="count_coupon" value="{{old('count_coupon')}}" class="form-control" id="" placeholder="">
+        <input type="text" name="count_coupon" value="{{old('count_coupon')}}" class="form-control" id="" placeholder="Số lượng mã giảm giá">
         @error('count_coupon')
             <div class="alert alert-danger">{{ $message }}</div>
         @enderror
@@ -91,7 +94,7 @@
     <div class="row g-3">
     <div class="col-6 input_group">
         <label for="">Thời gian chuẩn bị</label>
-        <input type="text" name="time_preparation" value="{{old('time_preparation')}}" class="form-control" id="" placeholder="">
+        <input type="text" name="time_preparation" value="{{old('time_preparation')}}" class="form-control" id="" placeholder="Nhập thời gian chuẩn bị">
         @error('time_preparation')
             <div class="alert alert-danger">{{ $message }}</div>
         @enderror
@@ -118,14 +121,14 @@
     <div class="row g-3">
     <div class="col-6 input_group">
         <label for="">Tên nhà hàng</label>
-        <input type="text" name="restaurant_name" value="{{old('restaurant_name')}}" class="form-control" id="" placeholder="">
+        <input type="text" name="restaurant_name" value="{{old('restaurant_name')}}" class="form-control" id="" placeholder="Thêm tên nhà hàng">
     @error('restaurant_name')
         <div class="alert alert-danger">{{ $message }}</div>
     @enderror
     </div>
     <div class="col-6 input_group">
         <label for="">Địa chỉ nhà hàng</label>
-        <input type="text" name="restaurant_address" value="{{old('restaurant_address')}}" class="form-control" id="" placeholder="">
+        <input type="text" name="restaurant_address" value="{{old('restaurant_address')}}" class="form-control" id="" placeholder="Thêm địa chỉ">
     @error('restaurant_address')
         <div class="alert alert-danger">{{ $message }}</div>
     @enderror
@@ -134,7 +137,7 @@
     <div class="row g-3">
     <div class="col-6 input_group">
         <label for="">Giờ mở cửa</label>
-        <input type="text" name="time_open" value="{{old('time_open')}}" class="form-control" id="" placeholder="">
+        <input type="text" name="time_open" value="{{old('time_open')}}" class="form-control" id="" placeholder="Giờ mở cửa">
     
     @error('time_open')
         <div class="alert alert-danger">{{ $message }}</div>
@@ -142,7 +145,7 @@
     </div>
     <div class="col-6 input_group">
         <label for="">Giờ đóng cửa</label>
-        <input type="text" name="time_close" value="{{old('time_close')}}" class="form-control" id="" placeholder="">
+        <input type="text" name="time_close" value="{{old('time_close')}}" class="form-control" id="" placeholder="Giờ đóng cửa">
     @error('time_close')
         <div class="alert alert-danger">{{ $message }}</div>
     @enderror
@@ -151,14 +154,14 @@
     <div class="row g-3">
     <div class="col-6 input_group">
         <label for="">Giả thích phí dịch vụ</label>
-        <input type="text" name="explain" value="{{old('explain')}}" class="form-control" id="" placeholder="">
+        <input type="text" name="explain" value="{{old('explain')}}" class="form-control" id="" placeholder="Thông tin phí dịch vụ">
     @error('explain')
         <div class="alert alert-danger">{{ $message }}</div>
     @enderror
     </div>
     <div class="col-6 input_group">
         <label for="">Số điện thoại</label>
-        <input type="text" name="phone" value="{{old('phone')}}" class="form-control" id="" placeholder="">
+        <input type="text" name="phone" value="{{old('phone')}}" class="form-control" id="" placeholder="Số điện thoại">
     @error('phone')
         <div class="alert alert-danger">{{ $message }}</div>
     @enderror
@@ -167,14 +170,14 @@
     <div class="row g-3">
     <div class="col-6 input_group">
         <label for="">Phí dịch vụ</label>
-        <input type="text" name="service" value="{{old('service')}}" class="form-control" id="" placeholder="">
+        <input type="text" name="service" value="{{old('service')}}" class="form-control" id="" placeholder="Phí dịch vụ">
     @error('service')
         <div class="alert alert-danger">{{ $message }}</div>
     @enderror
     </div>
     <div class="col-6 input_group">
         <label for="">Tags</label>
-        <input type="text" name="tag" value="{{old('tag')}}" class="form-control" id="" placeholder="">
+        <input type="text" name="tag" value="{{old('tag')}}" class="form-control" id="" placeholder="Thêm tags">
     @error('tag')
         <div class="alert alert-danger">{{ $message }}</div>
     @enderror
@@ -182,8 +185,8 @@
     </div>
     
    <div>
-        <button type="submit" class="btn btn-primary">Submit</button>
-        <a class="btn btn-dark" style="float: right; margin-right:15px;" href="{{route('client.listFood')}}">Quay lại</a>
+        <button type="submit" class="btn btn-primary">Thêm</button>
+        <a class="btn btn-dark" style="" href="{{route('client.listFood')}}">Quay lại</a>
    </div>
 </div>
 </form>
