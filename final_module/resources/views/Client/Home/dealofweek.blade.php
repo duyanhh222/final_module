@@ -122,9 +122,9 @@
                                                 @endif
                                             </div>
                                             <div class="product_extras">
-                                                <form action="{{route('add.cart')}}" method="POST" role="form">   
-                                                    @csrf                                                
-                                                        <input type="hidden" class="form-control" name="food_id" value="{{$mostView->get($food)->id}}" > 
+                                                <form action="{{route('add.cart')}}" method="POST" role="form">
+                                                    @csrf
+                                                        <input type="hidden" class="form-control" name="food_id" value="{{$mostView->get($food)->id}}" >
                                                         <input type="hidden" class="form-control" name="user_id" value="{{Session::get('user_id')}}" >
                                                         <button type="submit" class="product_cart_button">Thêm vào giỏ hàng</button>
                                                 </form>
@@ -154,8 +154,10 @@
                                     <div class="border_active"></div>
                                     <div class="product_item discount d-flex flex-column align-items-center justify-content-center text-center">
                                         @if(asset($onSale->get($food)->image))
+                                            <a href="{{ route('client.food', $onSale->get($food)->id) }}">
                                         <div class="product_image d-flex flex-column align-items-center justify-content-center"><img src="{{asset('storage/images/'. $onSale->get($food)->image)}}"  width="175px" alt=""></div>
-                                            @endif
+                                            </a>
+                                                @endif
                                             <div class="product_content">
                                             <div class="product_price discount">{{ number_format($onSale->get($food)->price_discount) }}đ<span>{{ number_format($onSale->get($food)->price) }}đ</span></div>
                                             <div class="product_name"><div><a href="{{ route('client.food', $onSale->get($food)->id) }}">
