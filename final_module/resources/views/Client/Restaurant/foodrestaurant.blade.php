@@ -24,7 +24,7 @@
                  data-image-src="{{ asset('Client/images/shop_background.jpg') }}"></div>
             <div class="home_overlay"></div>
             <div class="home_content d-flex flex-column align-items-center justify-content-center">
-                <h2 class="home_title">{{ $category->name }}</h2>
+                <h2 class="home_title">{{ $restaurant->name }}</h2>
             </div>
         </div>
 
@@ -68,7 +68,7 @@
 
                         <div class="shop_content">
                             <div class="shop_bar clearfix">
-                                <div class="shop_product_count"><span>{{ count($foods) }}</span> sản phẩm được tìm thấy
+                                <div class="shop_product_count"><span>{{ count($foods) }}</span> sản phẩm được tìm thấy theo: {{ $restaurant->name }}
                                 </div>
                                 <div class="shop_sorting">
                                     <span>Sort by:</span>
@@ -150,8 +150,6 @@
             </div>
         </div>
 
-
-
     </div>
 
     <script src="{{ asset('Client/js/jquery-3.3.1.min.js') }}"></script>
@@ -170,3 +168,4 @@
     <script src="{{ asset('Client/js/shop_custom.js') }}"></script>
     </body>
 @endsection
+

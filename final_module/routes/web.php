@@ -70,3 +70,7 @@ Route::get('/{id}/tag', 'Client\HomeClientController@tag')->name('client.tag');
 
 Route::get('/show/cart', 'Client\CartController@index')->name('show.cart');
 Route::post('/add/cart', 'Client\CartController@store')->name('add.cart');
+
+
+Route::get('/{id}/food', 'Client\HomeClientController@food')->name('client.food');
+Route::get('/{id}/restaurant', 'Client\HomeClientController@restaurant')->name('client.restaurant');

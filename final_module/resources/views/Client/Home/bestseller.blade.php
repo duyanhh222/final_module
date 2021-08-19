@@ -25,11 +25,13 @@
                             <div class="bestsellers_item discount">
                                 <div class="bestsellers_item_container d-flex flex-row align-items-center justify-content-start">
                                     @if(asset($mostNew->get($food)->image))
+                                        <a href="{{ route('client.food', $mostNew->get($food)->id) }}">
                                     <div class="bestsellers_image"><img src="{{asset('storage/images/'. $mostNew->get($food)->image)}}" width="175px" alt=""></div>
-                                    @endif
+                                        </a>
+                                            @endif
                                         <div class="bestsellers_content">
-                                        <div class="bestsellers_category"><a href="#">Headphones</a></div>
-                                        <div class="bestsellers_name"><a href="product.html">
+                                        <div class="bestsellers_category"><a href="{{ route('client.category', $mostNew->get($food)->category->id) }}">{{ $mostNew->get($food)->category->name }}</a></div>
+                                        <div class="bestsellers_name"><a href="{{ route('client.food', $mostNew->get($food)->id) }}">
                                                 @if(strlen($mostNew->get($food)->name) >20)
                                                     {{ substr($mostNew->get($food)->name, 0, 20) }}...
                                                 @else

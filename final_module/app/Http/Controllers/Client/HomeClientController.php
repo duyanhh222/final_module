@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Food;
 use App\Models\FoodTag;
+use App\Models\Restaurant;
 use App\Models\Tag;
 use Illuminate\Http\Request;
 
@@ -62,5 +63,22 @@ class HomeClientController extends Controller
         $categories = Category::all();
         return view('Client.Tag.showtag', compact('food_tags', 'categories', 'tag'));
 
+    }
+
+    public function food($id)
+    {
+        $tags = FoodTag::where('food_id', $id)->get();
+        $categories = Category::all();
+        //$contact = Config::orderByDesc('config_id')->first();
+        $food = Food::findOrFail($id);
+        return view('Client.Food.fooddetail', compact('food',  'categories', 'tags'));
+    }
+
+    public function restaurant($id)
+    {
+        $categories = Category::all();
+        $restaurant = Restaurant::findOrFail($id);
+        $foods = Food::where('restaurant_id', $id)->paginate(5);
+        return view('Client.Restaurant.foodrestaurant', compact('restaurant', 'foods', 'categories'));
     }
 }
