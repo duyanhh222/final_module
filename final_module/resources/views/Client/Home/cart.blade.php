@@ -1,21 +1,21 @@
-@extends('client.Home.index')
+@extends('Client.Home.index')
 
 @section('title', 'Trang chủ')
 @section('content')
 
-    <link rel="stylesheet" type="text/css" href="{{ asset('client/styles/bootstrap4/bootstrap.min.css') }}">
-    <link href="{{ asset('client/plugins/fontawesome-free-5.0.1/css/fontawesome-all.css') }}" rel="stylesheet" type="text/css">
-    <link rel="stylesheet" type="text/css" href="{{ asset('client/styles/cart_styles.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('client/styles/cart_responsive.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('Client/styles/bootstrap4/bootstrap.min.css') }}">
+    <link href="{{ asset('Client/plugins/fontawesome-free-5.0.1/css/fontawesome-all.css') }}" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="{{ asset('Client/styles/cart_styles.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('Client/styles/cart_responsive.css') }}">
 
 
-    <link rel="stylesheet" type="text/css" href="{{ asset('client/styles/bootstrap4/bootstrap.min.css') }}">
-    <link href="{{ asset('client/plugins/fontawesome-free-5.0.1/css/fontawesome-all.css') }}" rel="stylesheet" type="text/css">
-    <link rel="stylesheet" type="text/css" href="{{ asset('client/plugins/OwlCarousel2-2.2.1/owl.carousel.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('client/plugins/OwlCarousel2-2.2.1/owl.theme.default.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('client/plugins/OwlCarousel2-2.2.1/animate.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('client/styles/product_styles.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('client/styles/product_responsive.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('Client/styles/bootstrap4/bootstrap.min.css') }}">
+    <link href="{{ asset('Client/plugins/fontawesome-free-5.0.1/css/fontawesome-all.css') }}" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="{{ asset('Client/plugins/OwlCarousel2-2.2.1/owl.carousel.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('Client/plugins/OwlCarousel2-2.2.1/owl.theme.default.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('Client/plugins/OwlCarousel2-2.2.1/animate.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('Client/styles/product_styles.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('Client/styles/product_responsive.css') }}">
 <div class="super_container">
     <!-- Cart -->
 
@@ -26,40 +26,43 @@
                     <div class="cart_container">
                         <div class="cart_title">Giỏ hàng</div>
                         <div class="cart_items">
-                            <form method="post"  action="">
+                            <form method="post"  action="{{route('update.cart')}}">
                                 @csrf
-                                <!-- @if(!empty(session()->get('cart')))
-                            @foreach($products as $product) -->
+                                
+                            @foreach($carts as $cart)
                             <ul class="cart_list">
 
                                 <li class="cart_item clearfix">
-                                    <div class="cart_item_image"><img src="{{asset('storage/images/' . $product->prd_image) }}" alt=""></div>
+                                    <div class="cart_item_image"><img src="{{asset('storage/images/' . $cart->food->image) }}" alt="" width="100px"></div>
                                     <div class="cart_item_info d-flex flex-md-row flex-column justify-content-between">
                                         <div class="cart_item_name cart_info_col">
                                             <div class="cart_item_title">Tên sản phẩm</div>
-                                            <!-- <div class="cart_item_text">{{ $product->prd_name }}</div> -->
+                                            <div class="cart_item_text">{{ $cart->food->name }}</div>
                                         </div>
 
                                         <div class="cart-quantity col-lg-2 col-md-2 col-sm-12">
-                                            <input type="number" name="quantity[{{ $product->prd_id }}]" id="quantity" class="form-control form-blue quantity" value="{{ $cart[$product->prd_id] }}" min="1">
+                                            <input type="number" name="num[{{$cart->id}}]" id="quantity" class="form-control form-blue quantity" value="{{ $cart->quantity }}" min="1">
                                         </div>
                                         <div class="cart_item_price cart_info_col">
                                             <div class="cart_item_title">Giá</div>
-                                            <!-- <div class="cart_item_text">{{ number_format($product->prd_price_discount) }}</div> -->
+                                            @if($cart->food->price_discount == 0)
+                                            <div class="cart_item_text">{{ number_format($cart->food->price) }}</div>
+                                            @else
+                                            <div class="cart_item_text">{{ number_format($cart->food->price_discount) }}</div>
+                                            @endif
                                         </div>
                                         <div class="cart_item_price cart_info_col">
-                                            <a href="{{route('cart.delete',['id' => $product->prd_id])}}">Xóa</a>
+                                            <a href="{{route('delete.cart',$cart->id)}}">Xóa</a>
 
                                         </div>
-{{--                                        <div class="cart_item_total cart_info_col">--}}
-{{--                                            <div class="cart_item_title">Tổng tiền</div>--}}
-{{--                                            <div class="cart_item_text">$2000</div>--}}
-{{--                                        </div>--}}
+                                       <div class="cart_item_total cart_info_col">
+                                           <div class="cart_item_title">Tổng tiền</div>
+                                           <div class="cart_item_text">{{ number_format($cart->total) }}</div>
+                                       </div>
                                     </div>
                                 </li>
                             </ul>
-                            <!-- @endforeach
-                                @endif -->
+                            @endforeach
                                 <div class="cart_buttons">
                                     <button type="submit" class="button cart_button_clear">Cập nhật giỏ hàng</button>
                                 </div>
@@ -113,29 +116,29 @@
     </div>
 
 
-    <script src="{{ asset('client/js/jquery-3.3.1.min.js') }}"></script>
-    <script src="{{ asset('client/styles/bootstrap4/popper.js') }}"></script>
-    <script src="{{ asset('client/styles/bootstrap4/bootstrap.min.js') }}"></script>
-    <script src="{{ asset('client/plugins/greensock/TweenMax.min.js') }}"></script>
-    <script src="{{ asset('client/plugins/greensock/TimelineMax.min.js') }}"></script>
-    <script src="{{ asset('client/plugins/scrollmagic/ScrollMagic.min.js') }}"></script>
-    <script src="{{ asset('client/plugins/greensock/animation.gsap.min.js') }}"></script>
-    <script src="{{ asset('client/plugins/greensock/ScrollToPlugin.min.js') }}"></script>
-    <script src="{{ asset('client/plugins/easing/easing.js') }}"></script>
-    <script src="{{ asset('client/js/cart_custom.js') }}"></script>
+    <script src="{{ asset('Client/js/jquery-3.3.1.min.js') }}"></script>
+    <script src="{{ asset('Client/styles/bootstrap4/popper.js') }}"></script>
+    <script src="{{ asset('Client/styles/bootstrap4/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('Client/plugins/greensock/TweenMax.min.js') }}"></script>
+    <script src="{{ asset('Client/plugins/greensock/TimelineMax.min.js') }}"></script>
+    <script src="{{ asset('Client/plugins/scrollmagic/ScrollMagic.min.js') }}"></script>
+    <script src="{{ asset('Client/plugins/greensock/animation.gsap.min.js') }}"></script>
+    <script src="{{ asset('Client/plugins/greensock/ScrollToPlugin.min.js') }}"></script>
+    <script src="{{ asset('Client/plugins/easing/easing.js') }}"></script>
+    <script src="{{ asset('Client/js/cart_custom.js') }}"></script>
 
 
 
 
-    <script src="{{ asset('client/js/jquery-3.3.1.min.js') }}"></script>
-    <script src="{{ asset('client/styles/bootstrap4/popper.js') }}"></script>
-    <script src="{{ asset('client/styles/bootstrap4/bootstrap.min.js') }}"></script>
-    <script src="{{ asset('client/plugins/greensock/TweenMax.min.js') }}"></script>
-    <script src="{{ asset('client/plugins/greensock/TimelineMax.min.js') }}"></script>
-    <script src="{{ asset('client/plugins/scrollmagic/ScrollMagic.min.js') }}"></script>
-    <script src="{{ asset('client/plugins/greensock/animation.gsap.min.js') }}"></script>
-    <script src="{{ asset('client/plugins/greensock/ScrollToPlugin.min.js') }}"></script>
-    <script src="{{ asset('client/plugins/OwlCarousel2-2.2.1/owl.carousel.js') }}"></script>
-    <script src="{{ asset('client/plugins/easing/easing.js') }}"></script>
-    <script src="{{ asset('client/js/product_custom.js') }}"></script>
+    <script src="{{ asset('Client/js/jquery-3.3.1.min.js') }}"></script>
+    <script src="{{ asset('Client/styles/bootstrap4/popper.js') }}"></script>
+    <script src="{{ asset('Client/styles/bootstrap4/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('Client/plugins/greensock/TweenMax.min.js') }}"></script>
+    <script src="{{ asset('Client/plugins/greensock/TimelineMax.min.js') }}"></script>
+    <script src="{{ asset('Client/plugins/scrollmagic/ScrollMagic.min.js') }}"></script>
+    <script src="{{ asset('Client/plugins/greensock/animation.gsap.min.js') }}"></script>
+    <script src="{{ asset('Client/plugins/greensock/ScrollToPlugin.min.js') }}"></script>
+    <script src="{{ asset('Client/plugins/OwlCarousel2-2.2.1/owl.carousel.js') }}"></script>
+    <script src="{{ asset('Client/plugins/easing/easing.js') }}"></script>
+    <script src="{{ asset('Client/js/product_custom.js') }}"></script>
 @endsection
