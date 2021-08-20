@@ -186,7 +186,7 @@
     </div>
     </div>
     <div>
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" class="btn btn-primary">Cập nhật</button>
         <a class="btn btn-dark"  href="{{route('client.listFood')}}">Quay lại</a>
     </div>
     

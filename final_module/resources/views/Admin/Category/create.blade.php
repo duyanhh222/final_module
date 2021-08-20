@@ -12,21 +12,16 @@
         <div class="alert alert-danger">{{ $message }}</div>
     @enderror
     <div class="col-4">
-        <label for="">Ảnh</label>
-        <input type="file" name="file"  class="form-control" id="upload"  placeholder="Input field">
+        <label class="custom-file-upload">
+            <i class="fas fa-images fa-4x"></i>
+            <input type="file" name="file"  class="form-control" id="upload" placeholder="">
+        </label>
     </div>
     <div>
         <img id="blah" src="" width="200px" />
     </div>
     @error('file')
         <div class="alert alert-danger">{{ $message }}</div>
-    @enderror
-    <div class="col-4">
-        <label for="">Số lượng địa điểm</label>
-        <input type="number" name="amount" value="{{old('amount')}}" class="form-control" id="" placeholder="">
-    </div>
-    @error('amount')
-    <div class="alert alert-danger">{{ $message }}</div>
     @enderror
     
     <div>
@@ -52,4 +47,8 @@
     readURL(this);
 });
 </script>
+@stop()
+
+@section('css')
+<link rel="stylesheet" href="{{ asset('Form/css/form.css') }}">
 @stop()
