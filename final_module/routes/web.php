@@ -77,3 +77,8 @@ Route::get('/{id}/restaurant', 'Client\HomeClientController@restaurant')->name('
 Route::post('/update/cart', 'Client\CartController@update')->name('update.cart');
 Route::get('/delete/{cart}/cart', 'Client\CartController@destroy')->name('delete.cart');
 
+
+Route::get('/config', 'Admin\ConfigController@index')->name('config.index');
+Route::get('/config/edit', 'Admin\ConfigController@edit')->name('config.edit');
+Route::post('/config/edit', 'Admin\ConfigController@update')->name('config.update');
+
