@@ -126,6 +126,14 @@
                                         </div>
                                         <div class="product_fav"><i class="fas fa-heart"></i></div>
                                         <ul class="product_marks">
+                                        <div class="product_extras">
+                                                <form action="{{route('add.cart')}}" method="POST" role="form">
+                                                    @csrf
+                                                        <input type="hidden" class="form-control" name="food_id" value="{{$food->get($food)->id}}" >
+                                                        <input type="hidden" class="form-control" name="user_id" value="{{Session::get('user_id')}}" >
+                                                        <button type="submit" class="product_cart_button">Thêm vào giỏ hàng</button>
+                                                </form>
+                                            </div>
                                             <li class="product_mark product_discount">-{{ intval((($food->price - $food->price_discount)) /
                                                                                                             $food->price * 100) }}
                                                 %

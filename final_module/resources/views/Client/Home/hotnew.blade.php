@@ -108,7 +108,7 @@
                                                     </form>
                                                     </div>
                                                 </div>
-                                                <div class="product_fav"><i class="fas fa-heart"></i></div>
+                                                <div class="product_fav"><i class="fas fa-heart "></i></div>
                                                 <ul class="product_marks">
                                                     <li class="product_mark product_discount">-{{ intval((($sell_quantity->get($food)->price - $sell_quantity->get($food)->price_discount)) /
                                                                                                             $sell_quantity->get($food)->price * 100) }}%</li>
@@ -153,7 +153,7 @@
                                             </div>
                                        <form action="#"><button class="arrivals_single_button">Thêm vào giỏ hàng</button></form>
                                     </div>
-                                    <div class="arrivals_single_fav product_fav active"><i class="fas fa-heart"></i></div>
+                                    <div class="arrivals_single_fav product_fav"><i class="fas fa-heart"></i></div>
                                     <ul class="arrivals_single_marks product_marks">
                                     </ul>
                                 </div>

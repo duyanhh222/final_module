@@ -1,3 +1,43 @@
+
+<!-- Popular Categories -->
+
+<div class="popular_categories">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3">
+                <div class="popular_categories_content">
+                    <div class="popular_categories_title">Danh mục</div>
+                    <div class="popular_categories_slider_nav">
+                        <div class="popular_categories_prev popular_categories_nav"><i class="fas fa-angle-left ml-auto"></i></div>
+                        <div class="popular_categories_next popular_categories_nav"><i class="fas fa-angle-right ml-auto"></i></div>
+                    </div>
+                    <div class="popular_categories_link"><a href="#">tất cả danh mục</a></div>
+                </div>
+            </div>
+
+            <!-- Popular Categories Slider -->
+
+            <div class="col-lg-9">
+                <div class="popular_categories_slider_container">
+                    <div class="owl-carousel owl-theme popular_categories_slider">
+
+                        <!-- Popular Categories Item -->
+                        @foreach($categories as $category)
+                        <div class="owl-item">
+                            <div class="popular_category d-flex flex-column align-items-center justify-content-center">
+                                <div class="popular_category_image"><img src="{{asset('storage/images/'. $category->image)}}" alt=""></div>
+                                <div class="popular_category_text"> <a href="{{ route('client.category', $category->id) }}">{{ $category->name }}</a></div>
+                            </div>
+                        </div>
+                        @endforeach
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div class="deals_featured">
     <div class="container">
         <div class="row">
@@ -130,7 +170,22 @@
                                                 </form>
                                             </div>
                                         </div>
-                                        <div class="product_fav"><i class="fas fa-heart"></i></div>
+                                        <?php
+                                        $flag = 0;
+                                        ?>
+                                        @foreach($like as $value)
+                                            @if($value->food_id == $mostView->get($food)->id)
+                                                <?php $flag =1  ?>
+                                        <a href="{{route('disslike',$mostView->get($food)->id)}}">
+                                            <div class="product_fav active"><i class="fas fa-heart "></i></div>
+                                        </a>  
+                                            @endif
+                                        @endforeach
+                                        @if($flag == 0)
+                                        <a href="{{route('like',$mostView->get($food)->id)}}">
+                                            <div class="product_fav"><i class="fas fa-heart "></i></div>
+                                        </a>  
+                                        @endif
                                         <ul class="product_marks">
                                             <li class="product_mark product_discount">-{{ intval((($mostView->get($food)->price - $mostView->get($food)->price_discount)) /
                                                                                                             $mostView->get($food)->price * 100) }}%</li>
@@ -176,11 +231,16 @@
                                                 @endif
                                                 @endif
                                             </div>
-{{--                                            <div class="product_extras">--}}
-{{--                                                <button class="product_cart_button">Thêm vào giỏ hàng</button>--}}
-{{--                                            </div>--}}
+                                            <div class="product_extras">
+                                                <form action="{{route('add.cart')}}" method="POST" role="form">
+                                                    @csrf
+                                                        <input type="hidden" class="form-control" name="food_id" value="{{$onSale->get($food)->id}}" >
+                                                        <input type="hidden" class="form-control" name="user_id" value="{{Session::get('user_id')}}" >
+                                                        <button type="submit" class="product_cart_button">Thêm vào giỏ hàng</button>
+                                                </form>
+                                            </div>
                                         </div>
-                                        <div class="product_fav"><i class="fas fa-heart"></i></div>
+                                        <div class="product_fav active"><i class="fas fa-heart "></i></div>
                                         <ul class="product_marks">
                                             <li class="product_mark product_discount">-{{ intval((($onSale->get($food)->price - $onSale->get($food)->price_discount)) /
                                                                                                             $onSale->get($food)->price * 100) }}%</li>
@@ -196,45 +256,6 @@
                     </div>
                 </div>
 
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Popular Categories -->
-
-<div class="popular_categories">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-3">
-                <div class="popular_categories_content">
-                    <div class="popular_categories_title">Danh mục</div>
-                    <div class="popular_categories_slider_nav">
-                        <div class="popular_categories_prev popular_categories_nav"><i class="fas fa-angle-left ml-auto"></i></div>
-                        <div class="popular_categories_next popular_categories_nav"><i class="fas fa-angle-right ml-auto"></i></div>
-                    </div>
-                    <div class="popular_categories_link"><a href="#">tất cả danh mục</a></div>
-                </div>
-            </div>
-
-            <!-- Popular Categories Slider -->
-
-            <div class="col-lg-9">
-                <div class="popular_categories_slider_container">
-                    <div class="owl-carousel owl-theme popular_categories_slider">
-
-                        <!-- Popular Categories Item -->
-                        @foreach($categories as $category)
-                        <div class="owl-item">
-                            <div class="popular_category d-flex flex-column align-items-center justify-content-center">
-                                <div class="popular_category_image"><img src="{{asset('storage/images/'. $category->image)}}" alt=""></div>
-                                <div class="popular_category_text"> <a href="{{ route('client.category', $category->id) }}">{{ $category->name }}</a></div>
-                            </div>
-                        </div>
-                        @endforeach
-
-                    </div>
-                </div>
             </div>
         </div>
     </div>

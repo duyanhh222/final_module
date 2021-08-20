@@ -60,7 +60,7 @@
 
                                         </div>
                                 </div>
-                                <div class="bestsellers_fav active"><i class="fas fa-heart"></i></div>
+                                <div class="bestsellers_fav active"><i class="fas fa-heart "></i></div>
                                 <ul class="bestsellers_marks">
                                     <li class="bestsellers_mark bestsellers_discount">-{{ intval((($mostNew->get($food)->price - $mostNew->get($food)->price_discount)) /
                                                                                                             $fastDelivery->get($food)->price * 100) }}%</li>
