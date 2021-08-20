@@ -4,11 +4,13 @@ namespace App\Http\Controllers\Client;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use App\Models\Favorite;
 use App\Models\Food;
 use App\Models\FoodTag;
 use App\Models\Restaurant;
 use App\Models\Tag;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class HomeClientController extends Controller
 {
@@ -21,6 +23,9 @@ class HomeClientController extends Controller
 
     public function home()
     {
+        if(Session::has('user_id')){
+            $like = Favorite::where('user_id',Session::get('user_id'))->get();
+        }
         $mostView = Food::orderByDesc('view_count')->limit('16')->get();
         $categories = Category::all();
         $onSale = Food::where('on_sale', 1)->limit('16')->get();
@@ -29,7 +34,7 @@ class HomeClientController extends Controller
         $mostNew = Food::orderByDesc('created_at')->limit('12')->get();
         $bestPrice = Food::orderByDesc('price_discount')->first();
         $tags = Tag::all();
-        return view('Client.home', compact('categories', 'tags', 'bestPrice', 'mostNew' ,'mostView', 'onSale', 'fastDelivery',  'sell_quantity'));
+        return view('Client.home', compact('categories', 'tags', 'bestPrice', 'mostNew' ,'mostView', 'onSale', 'fastDelivery',  'sell_quantity','like'));
     }
 
     public function category($id)

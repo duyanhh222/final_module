@@ -42,9 +42,13 @@
                     <!-- Description -->
                     <div class="col-lg-5 order-3">
                         <div class="product_description">
-                            <div class="product_category"><a href="{{ route('client.category', $food->category->id) }}">{{ $food->category->name }}</a></div>
+                            @if($food->category != null)
+                            <div class="product_category"><a href="{{ route('client.category', $food->category->id) }}"> {{ $food->category->name }}</a></div>
+                            @endif
                             <div class="product_name">{{ $food->name }}</div>
-                            <div class="product_category"><a href="{{ route('client.restaurant', $food->restaurant->id) }}">{{ $food->restaurant->name }}</a></div>
+                            @if($food->restaurant != null)
+                            <div class="product_category"><a href="{{ route('client.restaurant', $food->restaurant->id) }}">{{ $food->restaurant->name }}  </a></div>
+                            @endif
                             <div class="product_category">
                                 @foreach($tags as $tag)
 

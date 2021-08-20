@@ -130,7 +130,22 @@
                                                 </form>
                                             </div>
                                         </div>
-                                        <div class="product_fav"><i class="fas fa-heart"></i></div>
+                                        <?php
+                                        $flag = 0;
+                                        ?>
+                                        @foreach($like as $value)
+                                            @if($value->food_id == $mostView->get($food)->id)
+                                                <?php $flag =1  ?>
+                                        <a href="{{route('disslike',$mostView->get($food)->id)}}">
+                                            <div class="product_fav active"><i class="fas fa-heart "></i></div>
+                                        </a>  
+                                            @endif
+                                        @endforeach
+                                        @if($flag == 0)
+                                        <a href="{{route('like',$mostView->get($food)->id)}}">
+                                            <div class="product_fav"><i class="fas fa-heart "></i></div>
+                                        </a>  
+                                        @endif
                                         <ul class="product_marks">
                                             <li class="product_mark product_discount">-{{ intval((($mostView->get($food)->price - $mostView->get($food)->price_discount)) /
                                                                                                             $mostView->get($food)->price * 100) }}%</li>
@@ -185,7 +200,7 @@
                                                 </form>
                                             </div>
                                         </div>
-                                        <div class="product_fav"><i class="fas fa-heart"></i></div>
+                                        <div class="product_fav active"><i class="fas fa-heart "></i></div>
                                         <ul class="product_marks">
                                             <li class="product_mark product_discount">-{{ intval((($onSale->get($food)->price - $onSale->get($food)->price_discount)) /
                                                                                                             $onSale->get($food)->price * 100) }}%</li>
