@@ -54,7 +54,6 @@ class CategoryController extends Controller
         }
         $request->validate([
             'name' => 'required|unique:categories',
-            'amount' => 'required|numeric',
             'file' => 'required|image|mimes:jpeg,jpg,png|mimetypes:image/jpeg,image/png,image/jpg|max:5120'
         ]);
         if($request->has('file')){
@@ -64,6 +63,7 @@ class CategoryController extends Controller
             $request->file('file')->storeAs('public/images', $newFileName);
             $request->merge(['image' => $newFileName]);
         }
+        $request->merge(['amount' => 0]);
         Category::create($request->only('name','image', 'amount'));
         return redirect()->route('category.index')->with('success','Thêm thành công');
     }
@@ -101,7 +101,6 @@ class CategoryController extends Controller
     {
         $request->validate([
             'name' => 'required|unique:categories,name,'.$category->id,
-            'amount' => 'required|numeric',
             'file' => 'image|mimes:jpeg,jpg,png|mimetypes:image/jpeg,image/png,image/jpg|max:5120'
         ]);
         if(!$request->has('file')){
@@ -117,7 +116,7 @@ class CategoryController extends Controller
             $request->file('file')->storeAs('public/images', $newFileName);
             $request->merge(['image' => $newFileName]);
         }
-        $category->update($request->only('name','image','amount'));
+        $category->update($request->only('name','image'));
         return redirect()->route('category.index')->with('success','Sửa thành công');
     }
 

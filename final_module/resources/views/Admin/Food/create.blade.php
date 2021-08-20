@@ -51,8 +51,10 @@
     </div>
     <div class="row">
         <div class="col-6 input_group">
-        <label for="">Ảnh</label>
-        <input type="file" name="file"  class="form-control" id="upload" placeholder="Input field">
+        <label class="custom-file-upload">
+            <i class="fas fa-images fa-4x"></i>
+            <input type="file" name="file"  class="form-control" id="upload" placeholder="">
+        </label>
         @error('file')
         <div class="alert alert-danger">{{ $message }}</div>
         @enderror
@@ -197,7 +199,7 @@
 
    <div>
        <button type="submit" class="btn btn-primary">Thêm mới</button>
-       <a class="btn btn-dark" style="float: right; margin-right:15px;" href="{{route('food.index')}}">Quay lại</a>
+       <a class="btn btn-dark" href="{{route('food.index')}}">Quay lại</a>
     </div>
     
 
