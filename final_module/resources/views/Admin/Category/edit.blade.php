@@ -22,16 +22,10 @@
     <div>
         <img id="blah" src="{{asset('storage/images/'.$category->image)}}" width="200px" />
     </div>
-    <div class="col-4">
-        <label for="">Số lượng địa điểm</label>
-        <input type="number" name="amount" value="{{$category->amount}}" class="form-control" id="" placeholder="Input field">
-    </div>
-    @error('amount')
-        <div class="alert alert-danger">{{ $message }}</div>
-    @enderror
-    <button type="submit" class="btn btn-primary">Cập nhật</button>
+    
     <div>
-        <a class="btn btn-dark" style="float: right" href="{{route('category.index')}}">Quay lại</a>
+        <button type="submit" class="btn btn-primary">Cập nhật</button>
+        <a class="btn btn-dark" href="{{route('category.index')}}">Quay lại</a>
     </div>
 </form>
 

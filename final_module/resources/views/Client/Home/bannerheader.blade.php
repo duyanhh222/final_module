@@ -57,7 +57,7 @@
                     <div class="char_icon"><img src="{{asset('Client/images/char_1.png')}}" alt=""></div>
                     <div class="char_content">
                         <div class="char_title">Miễn phí giao hàng</div>
-                        <div class="char_subtitle">từ 100k</div>
+
                     </div>
                 </div>
             </div>
@@ -69,7 +69,7 @@
                     <div class="char_icon"><img src="{{asset('Client/images/char_2.png')}}" alt=""></div>
                     <div class="char_content">
                         <div class="char_title">Đổi trả</div>
-                        <div class="char_subtitle">khi có lỗi</div>
+
                     </div>
                 </div>
             </div>
@@ -81,7 +81,7 @@
                     <div class="char_icon"><img src="{{asset('Client/images/char_3.png')}}" alt=""></div>
                     <div class="char_content">
                         <div class="char_title">Tiết kiệm</div>
-                        <div class="char_subtitle">thời gian tiền bạc</div>
+
                     </div>
                 </div>
             </div>
@@ -93,7 +93,7 @@
                     <div class="char_icon"><img src="{{asset('Client/images/char_4.png')}}" alt=""></div>
                     <div class="char_content">
                         <div class="char_title">Chính hãng</div>
-                        <div class="char_subtitle">nhập khẩu sạch sẽ</div>
+
                     </div>
                 </div>
             </div>

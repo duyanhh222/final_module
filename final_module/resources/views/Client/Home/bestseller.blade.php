@@ -38,7 +38,7 @@
                                                     {{ $mostNew->get($food)->name }}
                                                 @endif</a></div>
                                             <div class="char_subtitle">
-                                                @if(isset($mostView->get($food)->restaurant->address))
+                                                @if(isset($mostNew->get($food)->restaurant->address))
                                                     @if(strlen($mostNew->get($food)->restaurant->address) >20)
                                                         {{ substr($mostNew->get($food)->restaurant->address, 0, 20) }}...
                                                     @else
@@ -50,9 +50,9 @@
 
                                             <div class="bestsellers_price discount">{{ number_format($mostNew->get($food)->price_discount) }}đ<span>{{ number_format($mostNew->get($food)->price) }}đ</span></div>
                                             <div class="product_extras">
-                                            <form action="{{route('add.cart')}}" method="POST" role="form">   
-                                                @csrf                                                
-                                                    <input type="hidden" class="form-control" name="food_id" value="{{$mostNew->get($food)->id}}" > 
+                                            <form action="{{route('add.cart')}}" method="POST" role="form">
+                                                @csrf
+                                                    <input type="hidden" class="form-control" name="food_id" value="{{$mostNew->get($food)->id}}" >
                                                     <input type="hidden" class="form-control" name="user_id" value="{{Session::get('user_id')}}" >
                                                     <button type="submit" class="product_cart_button">Thêm vào giỏ hàng</button>
                                             </form>
