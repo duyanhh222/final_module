@@ -101,10 +101,10 @@
                                             <input type="search" name="keyword" required="required" class="header_search_input" placeholder="Tìm kiếm sản phẩm...">
                                             <div class="custom_dropdown">
                                                 <div class="custom_dropdown_list">
-                                                    <span class="custom_dropdown_placeholder clc">All Categories</span>
+                                                    <span class="custom_dropdown_placeholder clc">Tất cả danh mục</span>
                                                     <i class="fas fa-chevron-down"></i>
                                                     <ul class="custom_list clc">
-                                                        <li><a class="clc" href="#">All Categories</a></li>
+                                                        <li><a class="clc" href="#">Tất cả danh mục</a></li>
                                                         @foreach($categories as $category)
                                                         <li><a class="clc" href="#">{{ $category->name }}</a></li>
                                                         @endforeach

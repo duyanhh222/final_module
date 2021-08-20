@@ -6,7 +6,7 @@
             <div class="col">
                 <div class="tabbed_container">
                     <div class="tabs clearfix tabs-right">
-                        <div class="new_arrivals_title">Hot New Arrivals</div>
+                        <div class="new_arrivals_title">Giao nhanh</div>
                         <ul class="clearfix">
                             <li class="active">Giao nhanh</li>
                             <li>Bán chạy</li>
