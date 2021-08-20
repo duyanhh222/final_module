@@ -99,7 +99,7 @@
                                                 @endif
                                             </div>
                                         </div>
-                                        <div class="product_fav"><i class="fas fa-heart"></i></div>
+                                        <div class="product_fav"><i class="fas fa-heart"></i></div>                                       
                                         <ul class="product_marks">
                                             <li class="product_mark product_discount">-{{ intval((($food->price - $food->price_discount)) /
                                                                                                             $food->price * 100) }}%</li>
