@@ -53,7 +53,12 @@
                                 @endforeach
                             </div>
                             <div class="product_name">{{ number_format($food->price_discount) }}đ</div>
-                            <a class="btn btn-primary" href="{{route('add.cart',['id'=>$food->id])}}">Thêm vào giỏ hàng</a>
+                            <form action="{{route('add.cart')}}" method="POST" role="form">
+                                @csrf
+                                <input type="hidden" class="form-control" name="food_id" value="{{$food->id}}" >
+                                <input type="hidden" class="form-control" name="user_id" value="{{Session::get('user_id')}}" >
+                                <button type="submit" class="btn btn-primary">Thêm vào giỏ hàng</button>
+                            </form>
                             <div class="rating_r rating_r_4 product_rating"><i></i><i></i><i></i><i></i><i></i></div>
                             <div class="product_text"><i class="bi bi-eye-fill" style="color:green"></i> Lượt xem: {{ $food->view_count }}</div>
                             @if(isset($food->restaurant->address))
