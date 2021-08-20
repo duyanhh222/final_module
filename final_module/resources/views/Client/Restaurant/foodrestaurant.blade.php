@@ -69,7 +69,7 @@
                         <div class="shop_content">
                             <div class="shop_bar clearfix">
                                 <div class="shop_product_count"><span>{{ count($foods) }}</span> sản phẩm được tìm thấy
-                                    theo: {{ $restaurant->name }}
+                                    theo nhà hàng: {{ $restaurant->name }}
                                 </div>
                                 <div class="shop_sorting">
                                     <span>Sort by:</span>
