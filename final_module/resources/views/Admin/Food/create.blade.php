@@ -75,29 +75,28 @@
     @enderror
     <div class="row g-3">
         <div class="col-6 input_group">
-            <label for="">Ưu đãi</label>
-            <select name="status" id="input" class="form-control" required="required">
-                @if(old('status') == 1)
-                <option value="1" selected>Có</option>
-                <option value="0" >Không</option>
-                @else
-                <option value="0" selected>Không</option>
-                <option value="1" >Có</option>
-                @endif
-            </select>
+            @if(old('status') == 1)
+                <input type="checkbox" name="status" value="1" checked="checked">
+            @else
+                <input type="checkbox" name="status" value="1">
+            @endif
+            <label for="">
+                Ưu đãi
+            </label>
         </div>
-    <div class="col-6 input_group">
-        <label for="">Đề cử</label>
-        <select name="on_sale" id="input" class="form-control" required="required">
-                @if(old('on_sale') == 1)
-                <option value="1" selected>Có</option>
-                <option value="0" >Không</option>
-                @else
-                <option value="0" selected>Không</option>
-                <option value="1" >Có</option>
-                @endif
-        </select>
-    </div>
+        <div class="col-6 input_group">
+            
+        </div>
+        <div class="col-6 input_group">
+            @if(old('on_sale') == 1)
+                <input type="checkbox" name="on_sale" value="1" checked="checked">
+            @else
+                <input type="checkbox" name="on_sale" value="1">
+            @endif
+            <label for="">
+                Đề cử
+            </label>
+        </div>
     </div>
     <div class="row g-3">
     <div class="col-6 input_group">

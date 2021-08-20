@@ -11,22 +11,22 @@
     <thead>
         <tr>
             <th>#</th>
+            <th>Ảnh</th>
             <th>Tên món</th>
             <th>Giá</th>
             <th>Giá khuyến mại</th>
-            <th>Ảnh</th>
             <th>Đề cử</th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-        @foreach($foods as $food)
+        @foreach($foods as $key => $food)
         <tr>
-            <td>{{$food->id}}</td>
+            <td>{{ ++$key }}</td>
+            <td><img src="{{asset('storage/images/'.$food->image)}}" width="100px" alt=""></td>
             <td>{{$food->name}}</td>
             <td>{{number_format($food->price)}}đ</td>
             <td>{{number_format($food->price_discount)}}đ</td>
-            <td><img src="{{asset('storage/images/'.$food->image)}}" width="100px" alt=""></td>
             <td>{{$food->on_sale == 0?'Không':'Có'}}</td>
             <td>
                 <a href="{{route('food.show',$food->id)}}" class="btn btn-sm btn-primary">

@@ -12,9 +12,12 @@
         <div class="alert alert-danger">{{ $message }}</div>
     @enderror
     <div class="col-4">
-        <label for="">Ảnh</label>
-        <input type="file" name="file"  class="form-control" id="upload" placeholder="Input field">
-        <input type="hidden" name="file_file" value="{{$category->image}}">
+        <label class="custom-file-upload">
+            <i class="fas fa-images fa-4x"></i>
+            <input type="file" name="file"  class="form-control" id="upload" placeholder="Input field">
+            <input type="hidden" name="file_file" value="{{$category->image}}">
+        </label>
+        
     </div>
     @error('file')
         <div class="alert alert-danger">{{ $message }}</div>
@@ -46,4 +49,7 @@
     readURL(this);
 });
 </script>
+@stop()
+@section('css')
+<link rel="stylesheet" href="{{ asset('Form/css/form.css') }}">
 @stop()
