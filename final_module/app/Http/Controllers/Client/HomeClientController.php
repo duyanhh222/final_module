@@ -34,7 +34,14 @@ class HomeClientController extends Controller
         $mostNew = Food::orderByDesc('created_at')->limit('12')->get();
         $bestPrice = Food::orderByDesc('price_discount')->first();
         $tags = Tag::all();
-        return view('Client.home', compact('categories', 'tags', 'bestPrice', 'mostNew' ,'mostView', 'onSale', 'fastDelivery',  'sell_quantity','like'));
+        if(isset($like)){
+            return view('Client.home', compact('categories', 'tags', 'bestPrice', 'mostNew' ,'mostView', 'onSale', 'fastDelivery',  'sell_quantity','like'));
+        }
+        else
+        {
+            return view('Client.home', compact('categories', 'tags', 'bestPrice', 'mostNew' ,'mostView', 'onSale', 'fastDelivery',  'sell_quantity'));
+
+        }
     }
 
     public function category($id)

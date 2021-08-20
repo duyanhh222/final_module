@@ -49,17 +49,39 @@
 
 
                                             <div class="bestsellers_price discount">{{ number_format($mostNew->get($food)->price_discount) }}đ<span>{{ number_format($mostNew->get($food)->price) }}đ</span></div>
+                                            @if(Session::has('user_id'))
                                             <div class="product_extras">
-                                            <form action="{{route('add.cart')}}" method="POST" role="form">
-                                                @csrf
-                                                    <input type="hidden" class="form-control" name="food_id" value="{{$mostNew->get($food)->id}}" >
-                                                    <input type="hidden" class="form-control" name="user_id" value="{{Session::get('user_id')}}" >
-                                                    <button type="submit" class="product_cart_button">Thêm vào giỏ hàng</button>
-                                            </form>
+                                            <input type="hidden" class="form-control" name="food_id" value="{{$mostNew->get($food)->id}}" >
+                                            <input type="hidden" class="userId_{{$mostNew->get($food)->id}}" name="user_id" value="{{Session::get('user_id')}}" >
+                                            <button type="button" class="product_cart_button" id="addCart" data-id="{{$mostNew->get($food)->id}}">Thêm vào giỏ hàng</button>
                                             </div>
+                                            @else
+                                                <div class="product_extras">
+                                                    <button type="button" class="product_cart_button"><a href="{{route('client.login')}}">Thêm vào giỏ hàng</a></button>
+                                                </div>
+                                            @endif
                                         </div>
                                 </div>
-                                <div class="bestsellers_fav active"><i class="fas fa-heart "></i></div>
+                                @if(Session::has('user_id'))
+                                            <?php $flag = 0; ?>                                       
+                                            @foreach($like as $value)
+                                                @if($value->food_id == $mostNew->get($food)->id)
+                                                    <?php $flag =1  ?>
+                                            <a href="" data-url="{{route('like',$mostNew->get($food)->id)}}" id="likee" >
+                                                <div class="product_fav active"><i class="fas fa-heart "></i></div>
+                                            </a>  
+                                                @endif
+                                            @endforeach
+                                            @if($flag == 0)
+                                            <a href="" data-url="{{route('like',$mostNew->get($food)->id)}}" id="likee" >
+                                                <div class="product_fav"><i class="fas fa-heart "></i></div>
+                                            </a>  
+                                            @endif
+                                        @else
+                                            <a href="{{route('client.login')}}">
+                                                <div class="product_fav"><i class="fas fa-heart "></i></div>
+                                            </a>  
+                                        @endif
                                 <ul class="bestsellers_marks">
                                     <li class="bestsellers_mark bestsellers_discount">-{{ intval((($mostNew->get($food)->price - $mostNew->get($food)->price_discount)) /
                                                                                                             $fastDelivery->get($food)->price * 100) }}%</li>

@@ -17,15 +17,18 @@ class FavoriteController extends Controller
      */
     public function like(Request $request,$like)
     {
-        $request->merge(['food_id' => $like]);
+        $favorite = Favorite::where('user_id',Session::get('user_id'))->where('food_id',$like)->first();
+        if(isset($favorite)){
+            Favorite::where('user_id',Session::get('user_id'))->where('food_id',$like)->delete();  
+            return response()->json(['message' => 'Bỏ mục yêu thích']);
+        }
+        else{
+            $request->merge(['food_id' => $like]);
         $request->merge(['user_id' => Session::get('user_id')]);
         Favorite::create($request->only('user_id','food_id'));
-        return redirect()->route('favorite');
-    }
-    public function disslike($like)
-    {
-        Favorite::where('user_id',Session::get('user_id'))->where('food_id',$like)->delete();  
-        return redirect()->route('favorite');
+        return response()->json(['message' => 'Thêm vào mục yêu thích thành công']);
+        }
+        
     }
     public function index()
     {

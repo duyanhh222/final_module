@@ -41,12 +41,33 @@ class CartController extends Controller
      */
     public function store(Request $request)
     {
-        $request->merge(['quantity' => 1]);
-        $food = Food::where('id',$request->food_id)->first();
-        $total = $food->price;
-        $request->merge(['total' => $total]);
-        Cart::create($request->only('user_id','food_id','quantity','total'));
-        return redirect()->route('show.cart');
+       
+       
+        $carts = Cart::where('user_id',Session::get('user_id'))->get();
+        $flag = 0;
+        foreach($carts as $cart){
+            if($request->food_id == $cart->food_id){
+                return Response()->json(['message' => 'sản phẩm đã có trong giỏ hàng']);
+                $flag = 1;
+            }
+        }
+        if($flag == 0){
+            $food = Food::where('id',$request->food_id)->first();
+            if($food->price_discount > 0){
+                $total = $food->price_discount;
+            }
+            else{
+                $total = $food->price;
+            }
+            $data = array();
+            $data['food_id'] = $request->food_id;
+            $data['user_id'] = $request->user_id;
+            $data['quantity']    = 1;
+            $data['total'] = $total;
+            Cart::create($data);
+            return Response()->json(['message' => 'Thêm vào giỏ hàng thành công']);
+        }
+        
     }
 
     /**
