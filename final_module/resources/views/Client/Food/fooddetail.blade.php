@@ -72,6 +72,8 @@
                             @if($food->count_coupon > 0)
                             <div class="product_text"><p><i class="bi bi-check-circle-fill" style="color:green"></i> Số lượng mã giảm giá: {{ $food->count_coupon }}</p></div>
                             @endif
+                                <div class="product_text"><p><i class="bi bi-check-circle-fill" style="color:green"></i> Thời gian chuẩn bị: {{ $food->time_preparation }} phút</p></div>
+                                <div class="product_text"><p><i class="far fa-clock" style="color:green"></i> Giờ mở cửa: {{ $food->restaurant->time_open }} - {{ $food->restaurant->time_close }}</p></div>
                             <div class="product_text"><p><i class="bi bi-check-circle-fill" style="color:green"></i> Ghi chú: {!! $food->description  !!} </p></div>
                         </div>
                             <button class="btn btn-secondary" onclick="window.history.go(-1); return false;">Quay lại</button>

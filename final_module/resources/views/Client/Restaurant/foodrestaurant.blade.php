@@ -68,7 +68,8 @@
 
                         <div class="shop_content">
                             <div class="shop_bar clearfix">
-                                <div class="shop_product_count"><span>{{ count($foods) }}</span> sản phẩm được tìm thấy theo: {{ $restaurant->name }}
+                                <div class="shop_product_count"><span>{{ count($foods) }}</span> sản phẩm được tìm thấy
+                                    theo nhà hàng: {{ $restaurant->name }}
                                 </div>
                                 <div class="shop_sorting">
                                     <span>Sort by:</span>
@@ -99,15 +100,17 @@
                                     <div class="product_item discount">
                                         <div class="product_border"></div>
                                         @if(asset($food->image))
+                                            <a href="{{ route('client.food', $food->id) }}">
                                             <div
                                                 class="product_image d-flex flex-column align-items-center justify-content-center">
                                                 <img src="{{asset('storage/images/'. $food->image)}}" alt=""></div>
-                                        @endif
+                                            </a>
+                                                @endif
                                         <div class="product_content">
                                             <div class="product_price">{{ number_format($food->price_discount) }}đ<span>{{ number_format($food->price) }}đ</span>
                                             </div>
                                             <div class="product_name">
-                                                <div><a href="#" tabindex="0">
+                                                <div><a href="{{ route('client.food', $food->id) }}" tabindex="0">
                                                         @if(strlen($food->name) >20)
                                                             {{ substr($food->name, 0, 20) }}...
                                                         @else
@@ -126,20 +129,20 @@
                                         </div>
                                         <div class="product_fav"><i class="fas fa-heart"></i></div>
                                         <ul class="product_marks">
-                                        <div class="product_extras">
-                                                <form action="{{route('add.cart')}}" method="POST" role="form">
-                                                    @csrf
-                                                        <input type="hidden" class="form-control" name="food_id" value="{{$food->get($food)->id}}" >
-                                                        <input type="hidden" class="form-control" name="user_id" value="{{Session::get('user_id')}}" >
-                                                        <button type="submit" class="product_cart_button">Thêm vào giỏ hàng</button>
-                                                </form>
-                                            </div>
                                             <li class="product_mark product_discount">-{{ intval((($food->price - $food->price_discount)) /
                                                                                                             $food->price * 100) }}
                                                 %
                                             </li>
-
                                         </ul>
+
+                                        <form action="{{route('add.cart')}}" method="POST" role="form">
+                                            @csrf
+                                            <input type="hidden" class="form-control" name="food_id"
+                                                   value="{{$food->id}}">
+                                            <input type="hidden" class="form-control" name="user_id"
+                                                   value="{{Session::get('user_id')}}">
+                                            <button type="submit" class="btn btn-primary">Thêm vào giỏ hàng</button>
+                                        </form>
                                     </div>
                                 @endforeach
                             </div>

@@ -99,15 +99,16 @@
                                     <div class="product_item discount">
                                         <div class="product_border"></div>
                                         @if(asset($food->image))
-                                            <div
-                                                class="product_image d-flex flex-column align-items-center justify-content-center">
+                                            <a href="{{ route('client.food', $food->id) }}">
+                                            <div class="product_image d-flex flex-column align-items-center justify-content-center">
                                                 <img src="{{asset('storage/images/'. $food->image)}}" alt=""></div>
+                                            </a>
                                         @endif
                                         <div class="product_content">
                                             <div class="product_price">{{ number_format($food->price_discount) }}đ<span>{{ number_format($food->price) }}đ</span>
                                             </div>
                                             <div class="product_name">
-                                                <div><a href="#" tabindex="0">
+                                                <div><a href="{{ route('client.food', $food->id) }}" tabindex="0">
                                                         @if(strlen($food->name) >20)
                                                             {{ substr($food->name, 0, 20) }}...
                                                         @else

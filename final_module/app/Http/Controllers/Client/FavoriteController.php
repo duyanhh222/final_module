@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Client;
 
 use App\Http\Controllers\Controller;
+use App\Models\Config;
 use App\Models\Favorite;
 use Illuminate\Http\Request;
 use App\Models\Category;
@@ -28,13 +29,13 @@ class FavoriteController extends Controller
         Favorite::create($request->only('user_id','food_id'));
         return response()->json(['message' => 'Thêm vào mục yêu thích thành công']);
         }
-        
     }
     public function index()
     {
+        $config = Config::find(1);
         $categories = Category::all();
         $foods = Favorite::with(['food'])->where('user_id',Session::get('user_id'))->paginate(20);
-        return view('Client.Food.favorite',compact('foods','categories'));
+        return view('Client.Food.favorite',compact('foods', 'config','categories'));
     }
 
     /**
