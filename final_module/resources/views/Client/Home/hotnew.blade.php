@@ -26,11 +26,13 @@
                                         <div class="border_active"></div>
                                         <div class="product_item is_new d-flex flex-column align-items-center justify-content-center text-center">
                                             @if(asset($fastDelivery->get($food)->image))
+                                                <a href="{{ route('client.food', $fastDelivery->get($food)->id) }}">
                                             <div class="product_image d-flex flex-column align-items-center justify-content-center"><img src="{{asset('storage/images/'. $fastDelivery->get($food)->image)}}" width="175px" alt=""></div>
-                                            @endif
+                                                </a>
+                                                    @endif
                                                 <div class="product_content">
                                                     <div class="product_price discount">{{ number_format($fastDelivery->get($food)->price_discount) }}đ<span>{{ number_format($fastDelivery->get($food)->price) }}đ</span></div>
-                                                <div class="product_name"><div><a href="product.html">
+                                                <div class="product_name"><div><a href="{{ route('client.food', $fastDelivery->get($food)->id) }}">
                                                             @if(strlen($fastDelivery->get($food)->name) >20)
                                                                 {{ substr($fastDelivery->get($food)->name, 0, 20) }}...
                                                             @else
@@ -46,9 +48,9 @@
                                                         @endif
                                                     </div>
                                                 <div class="product_extras">
-                                                    <form action="{{route('add.cart')}}" method="POST" role="form">   
-                                                        @csrf                                                
-                                                            <input type="hidden" class="form-control" name="food_id" value="{{$fastDelivery->get($food)->id}}" > 
+                                                    <form action="{{route('add.cart')}}" method="POST" role="form">
+                                                        @csrf
+                                                            <input type="hidden" class="form-control" name="food_id" value="{{$fastDelivery->get($food)->id}}" >
                                                             <input type="hidden" class="form-control" name="user_id" value="{{Session::get('user_id')}}" >
                                                             <button type="submit" class="product_cart_button">Thêm vào giỏ hàng</button>
                                                     </form>
@@ -76,11 +78,13 @@
                                             <div class="border_active"></div>
                                             <div class="product_item is_new d-flex flex-column align-items-center justify-content-center text-center">
                                                 @if(asset($sell_quantity->get($food)->image))
-                                                    <div class="product_image d-flex flex-column align-items-center justify-content-center"><img src="{{asset('storage/images/'. $sell_quantity->get($food)->image)}}" width="175px" alt=""></div>
-                                                @endif
+                                                    <a href="{{ route('client.food', $sell_quantity->get($food)->id) }}">
+                                                        <div class="product_image d-flex flex-column align-items-center justify-content-center"><img src="{{asset('storage/images/'. $sell_quantity->get($food)->image)}}" width="175px" alt=""></div>
+                                                    </a>
+                                                        @endif
                                                 <div class="product_content">
                                                     <div class="product_price discount">{{ number_format($sell_quantity->get($food)->price_discount) }}đ<span>{{ number_format($sell_quantity->get($food)->price) }}đ</span></div>
-                                                    <div class="product_name"><div><a href="product.html">
+                                                    <div class="product_name"><div><a href="{{ route('client.food', $sell_quantity->get($food)->id) }}">
                                                                 @if(strlen($sell_quantity->get($food)->name) >20)
                                                                     {{ substr($sell_quantity->get($food)->name, 0, 20) }}...
                                                                 @else
@@ -122,12 +126,14 @@
                             <div class="arrivals_single clearfix">
                                 <div class="d-flex flex-column align-items-center justify-content-center">
                                     @if(asset($bestPrice->image))
+                                        <a href="{{ route('client.food', $bestPrice->id) }}">
                                     <div class="arrivals_single_image"><img src="{{asset('storage/images/'. $bestPrice->image)}}" width="175px" alt=""></div>
-                                    @endif
+                                        </a>
+                                            @endif
                                         <div class="arrivals_single_content">
-                                        <div class="arrivals_single_category"><a href="#">{{ $bestPrice->category->name }}</a></div>
+                                        <div class="arrivals_single_category"><a href="{{ route('client.category', $bestPrice->category->id) }}">{{ $bestPrice->category->name }}</a></div>
                                         <div class="arrivals_single_name_container clearfix">
-                                            <div class="arrivals_single_name"><a href="#">
+                                            <div class="arrivals_single_name"><a href="{{ route('client.food', $bestPrice->id) }}">
                                                     @if(strlen($bestPrice->name) >20)
                                                         {{ substr($bestPrice->name, 0, 20) }}...
                                                     @else

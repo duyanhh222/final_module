@@ -8,10 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class Cart extends Model
 {
     use HasFactory;
+
     protected $table = 'carts';
     protected $fillable = [
         'user_id','food_id','quantity','total'
     ];
+
     public function food()
     {
         return $this->belongsTo(Food::class, 'food_id');
@@ -20,4 +22,5 @@ class Cart extends Model
     {
         return $this->belongsTo(User::class, 'user_id');
     }
+
 }
