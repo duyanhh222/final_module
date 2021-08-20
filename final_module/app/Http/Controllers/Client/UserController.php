@@ -125,7 +125,7 @@ class UserController extends Controller
             'category_id' => 'required|integer',
             'price' => 'required|numeric|min:0|gt:price_discount',
             'price_discount' => 'required|numeric|min:0',
-            'status' => 'required|numeric',
+            //'status' => 'required|numeric',
             'coupon' => 'max:255',
             'count_coupon' => 'max:255',
             'time_preparation' => 'max:255',
@@ -169,6 +169,9 @@ class UserController extends Controller
         $id = Session::get('user_id');
         $request->merge(['user_id' => $id]);
         $request->merge(['on_sale' => 0]);
+        if (!isset($request->status)){
+            $request->merge(['status' => 0]);
+        }
         $foodId = Food::insertGetId($request->only( 'name','category_id','restaurant_id','price','price_discount','image','description','status','on_sale',
             'coupon','count_coupon','time_preparation', 'user_id'));
         if($request->tag != null){
@@ -260,7 +263,6 @@ class UserController extends Controller
             'price' => 'required|numeric|min:0|gt:price_discount',
             'price_discount' => 'required|numeric|min:0',
             'coupon' => 'max:255',
-            'status' => 'required|numeric',
             'count_coupon' => 'max:255',
             'time_preparation' => 'max:255',
             'restaurant_name' =>'max:255',
@@ -310,6 +312,9 @@ class UserController extends Controller
             $newFileName = date('d-m-Y-H-i') . "_$fileName";
             $request->file('file')->storeAs('public/images', $newFileName);
             $request->merge(['image' => $newFileName]);
+        }
+        if (!isset($request->status)){
+            $request->merge(['status' => 0]);
         }
         $food->update($request->only( 'name','category_id','restaurant_id','price','price_discount','image','description','status',
             'coupon','count_coupon','time_preparation'));

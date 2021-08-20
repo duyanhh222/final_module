@@ -77,31 +77,30 @@
     @enderror
     <div class="row g-3">
         <div class="col-6 input_group">
-        <label for="">Ưu đãi</label>  
-        <select name="status" id="" class="form-control">
-            <option value="">--Lựa chọn trạng thái</option>
             @if($food->status == 0)
-                <option value="1"  >Có</option>
-                <option value="0" selected>Không </option>  
+                <input type="checkbox" name="status" value="1">
             @else
-                <option value="1" selected >Có</option>
-                <option value="0" >Không </option>  
+            <input type="checkbox" name="status" value="1" checked="checked">
             @endif
-        </select>
-    </div>
-    <div class="col-6 input_group">
-        <label for="">Đề cử</label>  
-        <select name="on_sale" id="" class="form-control"> 
-            <option value="">--Lựa chọn trạng thái</option>
+            
+            <label for="">
+                Ưu đãi
+            </label>
+        </div>
+        <div class="col-6 input_group">
+         
+        </div>
+        <div class="col-6 input_group">
             @if($food->on_sale == 0)
-                <option value="1"  >Có</option>
-                <option value="0" selected>Không </option>  
+                <input type="checkbox" name="on_sale" value="1">
             @else
-                <option value="1" selected >Có</option>
-                <option value="0" >Không </option>  
+            <input type="checkbox" name="on_sale" value="1" checked="checked">
             @endif
-        </select>
-    </div>
+            
+            <label for="">
+                Đề cử
+            </label>
+        </div>
     </div>
     <div class="row g-3">
     <div class="col-6 input_group">
@@ -112,7 +111,7 @@
     @enderror
     </div>
     <div class="col-6 input_group">
-        <label for="">Đề cử</label>
+        <label for="">Số lượng mã giảm giá</label>
         <input type="text" name="count_coupon" value="{{$food->count_coupon}}" class="form-control" id="" placeholder="">
     @error('count_coupon')
         <div class="alert alert-danger">{{ $message }}</div>

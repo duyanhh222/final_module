@@ -102,17 +102,21 @@
             @enderror
         </div>
         <div class="col-6 input_group">
-            <label for="">Ưu đãi</label>  
-            <select name="status" id="" class="form-control">
-                <option value="">--Lựa chọn trạng thái</option>
-                @if($food->status == 0)
-                    <option value="1"  >Có</option>
-                    <option value="0" selected>Không </option>  
-                @else
-                    <option value="1" selected >Có</option>
-                    <option value="0" >Không </option>  
-                @endif
-            </select>
+            <!-- <input type="checkbox" name="status" value="1">
+            <label for="">
+                Ưu đãi
+            </label> -->
+        </div>
+        <div class="col-6 input_group checkbox">
+            @if($food->status == 0)
+                <input type="checkbox" name="status" value="1">
+            @else
+            <input type="checkbox" name="status" value="1" checked="checked">
+            @endif
+            
+            <label for="">
+                Ưu đãi
+            </label>
         </div>
     </div>
     
