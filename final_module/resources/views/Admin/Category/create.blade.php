@@ -28,9 +28,10 @@
     @error('amount')
     <div class="alert alert-danger">{{ $message }}</div>
     @enderror
-    <button type="submit" class="btn btn-primary">Thêm</button>
+    
     <div>
-        <a class="btn btn-dark" style="float: right" href="{{route('category.index')}}">Quay lại</a>
+        <button type="submit" class="btn btn-primary">Thêm</button>
+        <a class="btn btn-dark"  href="{{route('category.index')}}">Quay lại</a>
     </div>
 </form>
 
