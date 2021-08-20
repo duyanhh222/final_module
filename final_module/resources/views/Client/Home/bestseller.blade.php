@@ -49,14 +49,15 @@
 
 
                                             <div class="bestsellers_price discount">{{ number_format($mostNew->get($food)->price_discount) }}đ<span>{{ number_format($mostNew->get($food)->price) }}đ</span></div>
-                                            <div class="product_extras">
+
                                             <form action="{{route('add.cart')}}" method="POST" role="form">
                                                 @csrf
                                                     <input type="hidden" class="form-control" name="food_id" value="{{$mostNew->get($food)->id}}" >
                                                     <input type="hidden" class="form-control" name="user_id" value="{{Session::get('user_id')}}" >
-                                                    <button type="submit" class="product_cart_button">Thêm vào giỏ hàng</button>
+                                                    <button type="submit" class="btn btn-primary">Thêm vào giỏ hàng</button>
                                             </form>
-                                            </div>
+
+
                                         </div>
                                 </div>
                                 <div class="bestsellers_fav active"><i class="fas fa-heart "></i></div>

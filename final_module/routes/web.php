@@ -80,3 +80,8 @@ Route::get('/like/{like}/food', 'Client\FavoriteController@like')->name('like');
 Route::get('/disslike/{like}/food', 'Client\FavoriteController@disslike')->name('disslike');
 Route::get('/favorite', 'Client\FavoriteController@index')->name('favorite');
 
+
+Route::get('/config', 'Admin\ConfigController@index')->name('config.index');
+Route::get('/config/edit', 'Admin\ConfigController@edit')->name('config.edit');
+Route::post('/config/edit', 'Admin\ConfigController@update')->name('config.update');
+

@@ -22,7 +22,9 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('Form/css/roboto-font.css') }}">
 	<link rel="stylesheet" type="text/css" href="{{ asset('Form/fonts/font-awesome-5/css/fontawesome-all.min.css') }}">
 	<!-- Main Style Css -->
+
     <link rel="stylesheet" href="{{ asset('Form/css/style.css') }}"/>
+    <link rel="icon" href="{{ asset('storage/images/'.  $config->logo ) }}">
     @yield('css')
 </head>
 
@@ -41,8 +43,8 @@
                 <div class="container">
                     <div class="row">
                         <div class="col d-flex flex-row">
-                            <div class="top_bar_contact_item"><div class="top_bar_icon"><img src="{{ asset('Client/images/phone.png') }}" alt=""></div>113</div>
-                            <div class="top_bar_contact_item"><div class="top_bar_icon"><img src="{{ asset('Client/images/mail.png') }}" alt=""></div><a href="mailto:">an@gmail.com</a></div>
+                            <div class="top_bar_contact_item"><div class="top_bar_icon"><img src="{{ asset('Client/images/phone.png') }}" alt=""></div>{{ $config->phone }}</div>
+                            <div class="top_bar_contact_item"><div class="top_bar_icon"><img src="{{ asset('Client/images/mail.png') }}" alt=""></div><a href="mailto:">{{ $config->email }}</a></div>
                             <div class="top_bar_content ml-auto">
                                 <div class="top_bar_menu">
                                     <ul class="standard_dropdown top_bar_dropdown">
@@ -149,37 +151,7 @@
 
     @yield('content')
 
-<!-- Footer -->
-    <!-- <div class="brands">
-        <div class="container">
-            <div class="row">
-                <div class="col">
-                    <div class="brands_slider_container"> -->
 
-                        <!-- Brands Slider -->
-
-                        <!-- <div class="owl-carousel owl-theme brands_slider">
-
-                            <div class="owl-item"><div class="brands_item d-flex flex-column justify-content-center"><img src="{{ asset('Client/images/brands_1.jpg') }}" alt=""></div></div>
-                            <div class="owl-item"><div class="brands_item d-flex flex-column justify-content-center"><img src="{{ asset('Client/images/brands_2.jpg') }}" alt=""></div></div>
-                            <div class="owl-item"><div class="brands_item d-flex flex-column justify-content-center"><img src="{{ asset('Client/images/brands_3.jpg') }}" alt=""></div></div>
-                            <div class="owl-item"><div class="brands_item d-flex flex-column justify-content-center"><img src="{{ asset('Client/images/brands_4.jpg') }}" alt=""></div></div>
-                            <div class="owl-item"><div class="brands_item d-flex flex-column justify-content-center"><img src="{{ asset('Client/images/brands_5.jpg') }}" alt=""></div></div>
-                            <div class="owl-item"><div class="brands_item d-flex flex-column justify-content-center"><img src="{{ asset('Client/images/brands_6.jpg') }}" alt=""></div></div>
-                            <div class="owl-item"><div class="brands_item d-flex flex-column justify-content-center"><img src="{{ asset('Client/images/brands_7.jpg') }}" alt=""></div></div>
-                            <div class="owl-item"><div class="brands_item d-flex flex-column justify-content-center"><img src="{{ asset('Client/images/brands_8.jpg') }}" alt=""></div></div>
-
-                        </div> -->
-
-                        <!-- Brands Slider Navigation -->
-                        <!-- <div class="brands_nav brands_prev"><i class="fas fa-chevron-left"></i></div>
-                        <div class="brands_nav brands_next"><i class="fas fa-chevron-right"></i></div>
-
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div> -->
     @section('footer')
         <footer class="footer">
             <div class="container">
@@ -191,48 +163,39 @@
                                 <div class="logo"><a href="#">Eat Clean</a></div>
                             </div>
                             <div class="footer_title">Liên hệ</div>
-                            <div class="footer_phone">0326222518</div>
-                            <div class="footer_contact_text">
-                                <p>tvanit.work@gmail.com</p>
-                                <p>Trên trời</p>
-                            </div>
                             <div class="footer_social">
                                 <ul>
-                                    <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
-                                    <li><a href="#"><i class="fab fa-twitter"></i></a></li>
-                                    <li><a href="#"><i class="fab fa-youtube"></i></a></li>
-                                    <li><a href="#"><i class="fab fa-google"></i></a></li>
-                                    <li><a href="#"><i class="fab fa-vimeo-v"></i></a></li>
+                                    <li><a href="{{ $config->facebook }}"><i class="fab fa-facebook-f"></i></a></li>
+
                                 </ul>
                             </div>
+                            <div class="footer_phone">{{ $config->phone }}</div>
+                            <div class="footer_contact_text">
+                                <p>{{ $config->email }}</p>
+                                <p>{{ $config->address }}</p>
+                            </div>
+
                         </div>
                     </div>
 
                     <div class="col-lg-2 offset-lg-2">
                         <div class="footer_column">
-                            <div class="footer_title">Find it Fast</div>
+                            <div class="footer_title">Tìm danh mục</div>
                             <ul class="footer_list">
-                                <li><a href="#">Computers & Laptops</a></li>
-                                <li><a href="#">Cameras & Photos</a></li>
-                                <li><a href="#">Hardware</a></li>
-                                <li><a href="#">Smartphones & Tablets</a></li>
-                                <li><a href="#">TV & Audio</a></li>
+                                @foreach($categories as $category)
+                                <li><a href="{{  route('client.category', $category->id) }}">{{ $category->name }}</a></li>
+                                @endforeach
                             </ul>
                         </div>
                     </div>
-
-
-                    <div class="col-lg-2">
+                    <div class="col-lg-2 offset-lg-2">
                         <div class="footer_column">
-                            <div class="footer_title">Customer Care</div>
+                            <div class="footer_title">Tải về ứng dụng</div>
                             <ul class="footer_list">
-                                <li><a href="#">My Account</a></li>
-                                <li><a href="#">Order Tracking</a></li>
-                                <li><a href="#">Wish List</a></li>
-                                <li><a href="#">Customer Services</a></li>
-                                <li><a href="#">Returns / Exchange</a></li>
-                                <li><a href="#">FAQs</a></li>
-                                <li><a href="#">Product Support</a></li>
+                                <li><a href="#"><img src="{{ asset('Client/images/AppStore-vn.png') }}" alt="" width="150px"></a></li>
+                                <li><a href="#"><img src="{{ asset('Client/images/PlayStore-vn.png') }}" alt="" width="150px"></a></li>
+                                <li><a href="#"><img src="{{ asset('Client/images/Huawei-gallery-vn.png') }}" alt="" width="150px"></a></li>
+
                             </ul>
                         </div>
                     </div>
@@ -268,6 +231,7 @@
                                 <li><a href="#"><img src="{{ asset('Client/images/logos_4.png') }}" alt=""></a></li>
                             </ul>
                         </div>
+
                     </div>
                 </div>
             </div>

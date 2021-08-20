@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Client;
 use App\Http\Controllers\Controller;
 use App\Models\Cart;
 use App\Models\Category;
+use App\Models\Config;
 use App\Models\Food;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
@@ -18,9 +19,10 @@ class CartController extends Controller
      */
     public function index()
     {
+        $config = Config::find(1);
         $categories = Category::all();
         $carts = Cart::with('food','user')->where('user_id',Session::get('user_id'))->get();
-        return view('Client.Home.cart',compact('categories','carts'));
+        return view('Client.Home.cart',compact('categories', 'config', 'carts'));
     }
 
     /**
@@ -86,10 +88,10 @@ class CartController extends Controller
             $food = Food::where('id',$cart->food_id)->first();
             if($food->price_discount == 0){
                 $total = (int)$request->num[$cart->id] * $food->price;
-            }           
+            }
             else{
                  $total = (int)$request->num[$cart->id] * $food->price_discount;
-            }        
+            }
             $request->merge(['total' => $total]);
             $request->merge(['quantity' => (int)$request->num[$cart->id]]);
             Cart::where('id',$cart->id)->update($request->only('total','quantity'));

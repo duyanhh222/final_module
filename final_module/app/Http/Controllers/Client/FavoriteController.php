@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Client;
 
 use App\Http\Controllers\Controller;
+use App\Models\Config;
 use App\Models\Favorite;
 use Illuminate\Http\Request;
 use App\Models\Category;
@@ -19,19 +20,21 @@ class FavoriteController extends Controller
     {
         $request->merge(['food_id' => $like]);
         $request->merge(['user_id' => Session::get('user_id')]);
-        Favorite::create($request->only('user_id','food_id'));
+        Favorite::create($request->only('user_id', 'food_id'));
         return redirect()->route('favorite');
     }
     public function disslike($like)
     {
-        Favorite::where('user_id',Session::get('user_id'))->where('food_id',$like)->delete();  
+
+        Favorite::where('user_id',Session::get('user_id'))->where('food_id',$like)->delete();
         return redirect()->route('favorite');
     }
     public function index()
     {
+        $config = Config::find(1);
         $categories = Category::all();
         $foods = Favorite::with(['food'])->where('user_id',Session::get('user_id'))->paginate(20);
-        return view('Client.Food.favorite',compact('foods','categories'));
+        return view('Client.Food.favorite',compact('foods', 'config','categories'));
     }
 
     /**

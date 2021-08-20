@@ -101,8 +101,9 @@
                                         @if(asset($mostView->get($food)->image))
                                             <a href="{{ route('client.food', $mostView->get($food)->id) }}">
                                         <div class="product_image d-flex flex-column align-items-center justify-content-center"><img src="{{asset('storage/images/'. $mostView->get($food)->image)}}" alt=""  width="175px"></div>
-                                        @endif
                                             </a>
+                                                @endif
+
                                             <div class="product_content">
                                             <div class="product_price discount">{{ number_format($mostView->get($food)->price_discount) }}đ<span>{{ number_format($mostView->get($food)->price) }}đ</span></div>
                                             <div class="product_name"><div><a href="{{ route('client.food', $mostView->get($food)->id) }}">
@@ -138,13 +139,13 @@
                                                 <?php $flag =1  ?>
                                         <a href="{{route('disslike',$mostView->get($food)->id)}}">
                                             <div class="product_fav active"><i class="fas fa-heart "></i></div>
-                                        </a>  
+                                        </a>
                                             @endif
                                         @endforeach
                                         @if($flag == 0)
                                         <a href="{{route('like',$mostView->get($food)->id)}}">
                                             <div class="product_fav"><i class="fas fa-heart "></i></div>
-                                        </a>  
+                                        </a>
                                         @endif
                                         <ul class="product_marks">
                                             <li class="product_mark product_discount">-{{ intval((($mostView->get($food)->price - $mostView->get($food)->price_discount)) /
