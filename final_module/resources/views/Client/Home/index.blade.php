@@ -22,6 +22,7 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('Form/css/roboto-font.css') }}">
 	<link rel="stylesheet" type="text/css" href="{{ asset('Form/fonts/font-awesome-5/css/fontawesome-all.min.css') }}">
 	<!-- Main Style Css -->
+
     <link rel="stylesheet" href="{{ asset('Form/css/style.css') }}"/>
     <link rel="icon" href="{{ asset('storage/images/'.  $config->logo ) }}">
     @yield('css')

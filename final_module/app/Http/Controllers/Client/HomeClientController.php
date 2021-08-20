@@ -18,8 +18,9 @@ class HomeClientController extends Controller
     public function index()
     {
         $categories = Category::all();
-
-        return view('Client.Home.index', compact('categories'));
+        $config = Config::find(1);
+        dd($config);
+        return view('Client.Home.index', compact('categories', 'config'));
     }
 
     public function home()
@@ -36,7 +37,7 @@ class HomeClientController extends Controller
         $bestPrice = Food::orderByDesc('price_discount')->first();
         $tags = Tag::all();
         $config = Config::find(1);
-        return view('Client.home', compact('categories', 'config',  'tags', 'bestPrice', 'mostNew' ,'mostView', 'onSale', 'fastDelivery',  'sell_quantity'));
+        return view('Client.home', compact('categories', 'config',  'tags', 'bestPrice', 'mostNew' ,'mostView', 'onSale', 'fastDelivery',  'sell_quantity', 'like'));
 
     }
 
