@@ -95,7 +95,15 @@
                                             <div class="char_subtitle">
                                             </div>
                                         </div>
-                                        <div class="product_fav"><i class="fas fa-heart"></i></div>                                       
+                                        @if(Session::has('user_id'))
+                                           <a href="" data-url="{{route('dislike',$food->food->id)}}" id="dislikee" class="name_{{$food->id}}" data-id="{{$food->id}}">
+                                                <div class="product_fav active"><i class="fas fa-heart "></i></div>
+                                            </a>                                                                                         
+                                        @else
+                                            <a href="{{route('client.login')}}">
+                                                <div class="product_fav"><i class="fas fa-heart "></i></div>
+                                            </a>  
+                                        @endif                                    
                                         <ul class="product_marks">
                                             <li class="product_mark product_discount">-{{ intval((($food->food->price - $food->food->price_discount)) /
                                                                                                             $food->food->price * 100) }}%</li>

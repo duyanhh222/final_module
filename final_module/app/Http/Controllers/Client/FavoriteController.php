@@ -30,12 +30,29 @@ class FavoriteController extends Controller
         return response()->json(['message' => 'Thêm vào mục yêu thích thành công']);
         }
     }
+    public function dislike($like)
+    {
+        $favorite = Favorite::where('user_id',Session::get('user_id'))->where('food_id',$like)->first();
+        if(isset($favorite)){
+            Favorite::where('user_id',Session::get('user_id'))->where('food_id',$like)->delete();  
+            return response()->json(['message' => 'Bỏ mục yêu thích']);
+        }
+    }
     public function index()
     {
+        if(Session::has('user_id')){
+            $like = Favorite::where('user_id',Session::get('user_id'))->get();
+        }
         $config = Config::find(1);
         $categories = Category::all();
         $foods = Favorite::with(['food'])->where('user_id',Session::get('user_id'))->paginate(20);
-        return view('Client.Food.favorite',compact('foods', 'config','categories'));
+        if(isset($like)){
+            return view('Client.Food.favorite',compact('foods', 'config','categories','like'));
+
+        }
+        else{
+            return view('Client.Food.favorite',compact('foods', 'config','categories'));
+        }
     }
 
     /**

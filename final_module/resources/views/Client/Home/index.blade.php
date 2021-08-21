@@ -295,7 +295,26 @@ $(document).ready(function(){
         });
     });
 });
+$(document).ready(function(){
 
+$(document).on('click','#dislikee', function(e){
+    e.preventDefault();
+    var url = $(this).attr('data-url');
+    $.ajax({
+        type: "GET",
+        url: url,
+        data:{
+            _token: $('meta[name="csrf-token"]').attr('content')
+        },
+        dataType: "json",
+        success: function (response) {
+            window.location.reload()
+            document.querySelector('#toast').innerHTML = document.querySelector('#toast').innerHTML = ' <div class="alert alert-primary" role="alert">'+ response.message +'</div>';
+           
+        }
+    });
+});
+});
 </script>  
 @yield('js')
 
