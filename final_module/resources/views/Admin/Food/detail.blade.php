@@ -1,12 +1,34 @@
 @extends('Layout.Admin.index')
-@section('title','Food_detail')
+@section('title','Chi tiết')
+@section('css')
+<style>
+.head_food{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.image_food{
+    max-height: 400px;
+}
+.image_food img{
+    max-height: 400px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+</style>
+@endsection
 @section('main')
 <div class="col-12 col-md-12">
-    <div class="row">
-        <h1> Chi tiết món ăn: {{ $food_show->name }}</h1>
+    <div class="container">
+        <div class="head_food">
+            <h1> Chi tiết món ăn: {{ $food_show->name }}</h1>
+        </div>
+        
+        <div class="image_food">
+            <img src="{{ asset('storage/images/' .$food_show->image) }}" alt="">
+        </div>
         <div class="col-12">
-            <table class="table table-striped">
-                <thead>
+            <table class="table table-striped">  
                 <tr>
 
                     <td>Tên sản phẩm</td>
@@ -91,29 +113,12 @@
 
                     </td>
                 </tr>
-                <tr>
-                <td>Hình ảnh</td>
-                    <td><img src="{{ asset('storage/images/' .$food_show->image) }}" alt="" width="150px"></td>
-                </tr>
-
-                <tr>
-                    <td><a class="btn btn-warning" href="{{route('food.edit', $food_show->id)}}">Sửa</a>
-                    </td>
-                    <td><a class="btn btn-danger" href="{{route('food.destroy', $food_show->id)}}"
-                            class="text-danger"
-                            onclick="return confirm('Bạn chắc chắn muốn xóa?')">Xóa</a></td>
-                </tr>
-                <tr>
-                    <td>
-                    <td><a class="btn btn-dark" style="float: right" href="{{route('food.index')}}">Quay lại</a>
-                    </td>
-
-                </tr>
-
-
-                </thead>
-
             </table>
+            <div>
+                <a class="btn btn-warning" href="{{route('food.edit', $food_show->id)}}">Sửa</a>
+                <a class="btn btn-danger" href="{{route('food.destroy', $food_show->id)}}" class="text-danger" onclick="return confirm('Bạn chắc chắn muốn xóa?')">Xóa</a>
+                <a class="btn btn-dark" href="{{route('food.index')}}">Quay lại</a>
+            </div>
         </div>
     </div>
 </div>
