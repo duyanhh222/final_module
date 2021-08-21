@@ -7,6 +7,7 @@ use App\Models\Config;
 use App\Models\Favorite;
 use Illuminate\Http\Request;
 use App\Models\Category;
+use App\Models\Cart;
 use Illuminate\Support\Facades\Session;
 
 class FavoriteController extends Controller
@@ -42,12 +43,13 @@ class FavoriteController extends Controller
     {
         if(Session::has('user_id')){
             $like = Favorite::where('user_id',Session::get('user_id'))->get();
+            $carts = Cart::where('user_id',Session::get('user_id'))->get();
         }
         $config = Config::find(1);
         $categories = Category::all();
         $foods = Favorite::with(['food'])->where('user_id',Session::get('user_id'))->paginate(20);
         if(isset($like)){
-            return view('Client.Food.favorite',compact('foods', 'config','categories','like'));
+            return view('Client.Food.favorite',compact('foods', 'config','categories','like','carts'));
 
         }
         else{

@@ -74,8 +74,9 @@
                             <div class="food_grid">
                                 <div class="food_grid_border"></div>
                                 <!-- food Item -->
+                                <div id="parent">
                                 @foreach($foods as $food)
-                                    <div class="product_item discount">
+                                    <div class="product_item discount" id="child{{$food->id}}">
                                         <div class="product_border"></div>
                                         @if(asset($food->food->image))
                                             <div class="product_image d-flex flex-column align-items-center justify-content-center"><img src="{{asset('storage/images/'. $food->food->image)}}" alt=""></div>
@@ -111,6 +112,7 @@
                                         </ul>
                                     </div>
                                 @endforeach
+                                </div>
                             </div>
                             <!-- Shop Page Navigation -->
                             <div class="shop_page_nav d-flex flex-row">

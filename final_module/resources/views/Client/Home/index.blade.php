@@ -271,7 +271,7 @@ $(document).ready(function(){
             },
             dataType: "json",
             success: function (response) {
-                document.querySelector('#toast').innerHTML = ' <div class="alert alert-primary" role="alert">'+ response.message +'</div>';
+                document.querySelector('#toast').innerHTML = ' <div class="alert alert-primary" role="alert"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>'+ response.message +'</div>';
                 document.querySelector('#count_carts').innerHTML = document.querySelector('#count_carts').innerHTML = ''+response.data+'';
 
             }
@@ -292,7 +292,7 @@ $(document).ready(function(){
             },
             dataType: "json",
             success: function (response) {
-                document.querySelector('#toast').innerHTML = document.querySelector('#toast').innerHTML = ' <div class="alert alert-primary" role="alert">'+ response.message +'</div>';
+                document.querySelector('#toast').innerHTML = document.querySelector('#toast').innerHTML = ' <div class="alert alert-primary" role="alert"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>'+ response.message +'</div>';
             }
         });
     });
@@ -301,6 +301,7 @@ $(document).ready(function(){
 
 $(document).on('click','#dislikee', function(e){
     e.preventDefault();
+    var id = $(this).attr('data-id');
     var url = $(this).attr('data-url');
     $.ajax({
         type: "GET",
@@ -310,8 +311,8 @@ $(document).on('click','#dislikee', function(e){
         },
         dataType: "json",
         success: function (response) {
-            window.location.reload()
-            document.querySelector('#toast').innerHTML = document.querySelector('#toast').innerHTML = ' <div class="alert alert-primary" role="alert">'+ response.message +'</div>';
+            $('#child'+id).remove();
+            document.querySelector('#toast').innerHTML = document.querySelector('#toast').innerHTML = ' <div class="alert alert-primary" role="alert"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>'+ response.message +'</div>';
            
         }
     });
