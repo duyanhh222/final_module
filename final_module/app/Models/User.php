@@ -44,4 +44,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Food::class, 'id');
     }
+
+    public function bill()
+    {
+        return $this->hasMany(Bill::class, 'id');
+    }
 }

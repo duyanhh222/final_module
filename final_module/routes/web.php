@@ -38,6 +38,9 @@ Route::group(['prefix' => 'admin'],function(){
         Route::post('food/{food}','Admin\FoodController@update')->name('food.update');
         Route::get('food/food/create','Admin\FoodController@create')->name('food.create');
         Route::get('food/detail/{food}','Admin\FoodController@show')->name('food.show');
+
+        Route::get('/bill/bill','Admin\BillController@index')->name('bill.index');
+
     });
 
 });
@@ -83,4 +86,6 @@ Route::get('/favorite', 'Client\FavoriteController@index')->name('favorite');
 Route::get('/config', 'Admin\ConfigController@index')->name('config.index');
 Route::get('/config/edit', 'Admin\ConfigController@edit')->name('config.edit');
 Route::post('/config/edit', 'Admin\ConfigController@update')->name('config.update');
+
+
 
