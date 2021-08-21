@@ -47,16 +47,38 @@
                                                             @endif
                                                         @endif
                                                     </div>
+                                                @if(Session::has('user_id'))
                                                 <div class="product_extras">
-                                                    <form action="{{route('add.cart')}}" method="POST" role="form">
-                                                        @csrf
-                                                            <input type="hidden" class="form-control" name="food_id" value="{{$fastDelivery->get($food)->id}}" >
-                                                            <input type="hidden" class="form-control" name="user_id" value="{{Session::get('user_id')}}" >
-                                                            <button type="submit" class="product_cart_button">Thêm vào giỏ hàng</button>
-                                                    </form>
+                                                <input type="hidden" class="form-control" name="food_id" value="{{$fastDelivery->get($food)->id}}" >
+                                                <input type="hidden" class="userId_{{$fastDelivery->get($food)->id}}" name="user_id" value="{{Session::get('user_id')}}" >
+                                                <button type="button" class="product_cart_button" id="addCart" data-id="{{$fastDelivery->get($food)->id}}">Thêm vào giỏ hàng</button>
                                                </div>
+                                               @else
+                                                    <div class="product_extras">
+                                                        <button type="button" class="product_cart_button"><a href="{{route('client.login')}}">Thêm vào giỏ hàng</a></button>
+                                                    </div>
+                                                @endif
                                             </div>
-                                            <div class="product_fav"><i class="fas fa-heart"></i></div>
+                                            @if(Session::has('user_id'))
+                                            <?php $flag = 0; ?>                                       
+                                            @foreach($like as $value)
+                                                @if($value->food_id == $fastDelivery->get($food)->id)
+                                                    <?php $flag =1  ?>
+                                            <a href="" data-url="{{route('like',$fastDelivery->get($food)->id)}}" id="likee" >
+                                                <div class="product_fav active"><i class="fas fa-heart "></i></div>
+                                            </a>  
+                                                @endif
+                                            @endforeach
+                                            @if($flag == 0)
+                                            <a href="" data-url="{{route('like',$fastDelivery->get($food)->id)}}" id="likee" >
+                                                <div class="product_fav"><i class="fas fa-heart "></i></div>
+                                            </a>  
+                                            @endif
+                                        @else
+                                            <a href="{{route('client.login')}}">
+                                                <div class="product_fav"><i class="fas fa-heart "></i></div>
+                                            </a>  
+                                        @endif
                                             <ul class="product_marks">
                                                 <li class="product_mark product_discount">-{{ intval((($fastDelivery->get($food)->price - $fastDelivery->get($food)->price_discount)) /
                                                                                                             $fastDelivery->get($food)->price * 100) }}%</li>
@@ -99,16 +121,38 @@
                                                             @endif
                                                         @endif
                                                     </div>
+                                                    @if(Session::has('user_id'))
                                                    <div class="product_extras">
-                                                   <form action="{{route('add.cart')}}" method="POST" role="form">   
-                                                        @csrf                                                
-                                                            <input type="hidden" class="form-control" name="food_id" value="{{$sell_quantity->get($food)->id}}" > 
-                                                            <input type="hidden" class="form-control" name="user_id" value="{{Session::get('user_id')}}" >
-                                                            <button type="submit" class="product_cart_button">Thêm vào giỏ hàng</button>
-                                                    </form>
+                                                        <input type="hidden" class="form-control" name="food_id" value="{{$sell_quantity->get($food)->id}}" >
+                                                        <input type="hidden" class="userId_{{$sell_quantity->get($food)->id}}" name="user_id" value="{{Session::get('user_id')}}" >
+                                                        <button type="button" class="product_cart_button" id="addCart" data-id="{{$sell_quantity->get($food)->id}}">Thêm vào giỏ hàng</button>
                                                     </div>
+                                                    @else
+                                                        <div class="product_extras">
+                                                            <button type="button" class="product_cart_button"><a href="{{route('client.login')}}">Thêm vào giỏ hàng</a></button>
+                                                        </div>
+                                                    @endif
                                                 </div>
+                                                @if(Session::has('user_id'))
+                                            <?php $flag = 0; ?>                                       
+                                            @foreach($like as $value)
+                                                @if($value->food_id == $sell_quantity->get($food)->id)
+                                                    <?php $flag =1  ?>
+                                            <a href="" data-url="{{route('like',$sell_quantity->get($food)->id)}}" id="likee" >
+                                                <div class="product_fav active"><i class="fas fa-heart "></i></div>
+                                            </a>  
+                                                @endif
+                                            @endforeach
+                                            @if($flag == 0)
+                                            <a href="" data-url="{{route('like',$sell_quantity->get($food)->id)}}" id="likee" >
                                                 <div class="product_fav"><i class="fas fa-heart "></i></div>
+                                            </a>  
+                                            @endif
+                                        @else
+                                            <a href="{{route('client.login')}}">
+                                                <div class="product_fav"><i class="fas fa-heart "></i></div>
+                                            </a>  
+                                        @endif
                                                 <ul class="product_marks">
                                                     <li class="product_mark product_discount">-{{ intval((($sell_quantity->get($food)->price - $sell_quantity->get($food)->price_discount)) /
                                                                                                             $sell_quantity->get($food)->price * 100) }}%</li>
@@ -151,7 +195,9 @@
                                                     @endif
                                                 @endif
                                             </div>
-                                       <form action="#"><button class="arrivals_single_button">Thêm vào giỏ hàng</button></form>
+                                       <input type="hidden" class="form-control" name="food_id" value="{{$bestPrice->id}}" >
+                                        <input type="hidden" class="userId_{{$bestPrice->id}}" name="user_id" value="{{Session::get('user_id')}}" >
+                                        <button type="button" class="arrivals_single_button" id="addCart" data-id="{{$bestPrice->id}}">Thêm vào giỏ hàng</button>
                                     </div>
                                     <div class="arrivals_single_fav product_fav"><i class="fas fa-heart"></i></div>
                                     <ul class="arrivals_single_marks product_marks">

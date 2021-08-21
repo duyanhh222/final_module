@@ -75,65 +75,17 @@
                             <div class="food_grid">
                                 <div class="food_grid_border"></div>
                                 <!-- food Item -->
-                                <!-- @foreach($foods as $food)
-                                <div class="featured_slider_item">
-                                    <div class="border_active"></div>
-                                    <div class="product_item discount d-flex flex-column align-items-center justify-content-center text-center">
-                                        @if(asset($food->image))
-                                            <a href="{{ route('client.food', $food->id) }}">
-                                        <div class="product_image d-flex flex-column align-items-center justify-content-center"><img src="{{asset('storage/images/'. $food->image)}}" alt=""  width="175px"></div>
-                                        @endif
-                                            </a>
-                                            <div class="product_content">
-                                            <div class="product_price discount">{{ number_format($food->price_discount) }}đ<span>{{ number_format($food->price) }}đ</span></div>
-                                            <div class="product_name"><div><a href="{{ route('client.food', $food->id) }}">
-                                                        @if(strlen($food->name) >20)
-                                                            {{ substr($food->name, 0, 20) }}...
-                                                        @else
-                                                            {{ $food->name }}
-                                                        @endif
-                                                        </a></div></div>
-                                            <div class="char_subtitle">
-                                                @if(isset($food->restaurant->address))
-                                                    @if(strlen($food->restaurant->address) >20)
-                                                        {{ substr($food->restaurant->address, 0, 20) }}...
-                                                    @else
-                                                        {{ $food->restaurant->address }}
-                                                    @endif
-                                                @endif
-                                            </div>
-                                            <div class="product_extras">
-                                                <div class="product_color">
-                                                    <form action="{{route('add.cart')}}" method="POST" role="form">
-                                                    @csrf
-                                                        <input type="hidden" class="form-control" name="food_id" value="{{$food->id}}" >
-                                                        <input type="hidden" class="form-control" name="user_id" value="{{Session::get('user_id')}}" >
-                                                        <button type="submit" class="product_cart_button">Thêm vào giỏ hàng</button>
-                                                </form>
-                                                </div>
-                                                
-                                            </div>
-                                        </div>
-                                        <a href="">
-                                            <div class="product_fav active"><i class="fas fa-heart "></i></div>
-                                        </a>                                      
-                                        <ul class="product_marks">
-                                            <li class="product_mark product_discount">-{{ intval((($food->price - $food->price_discount)) /
-                                                                                                            $food->price * 100) }}%</li>
-
-                                        </ul>
-                                    </div>
-                                </div>
-                                @endforeach -->
                                 @foreach($foods as $food)
                                     <div class="product_item discount">
                                         <div class="product_border"></div>
                                         @if(asset($food->image))
+                                            <a href="{{ route('client.food', $food->id) }}">
                                             <div class="product_image d-flex flex-column align-items-center justify-content-center"><img src="{{asset('storage/images/'. $food->image)}}" alt=""></div>
+                                            </a>
                                         @endif
                                         <div class="product_content">
                                             <div class="product_price">{{ number_format($food->price_discount) }}đ<span>{{ number_format($food->price) }}đ</span></div>
-                                            <div class="product_name"><div><a href="#" tabindex="0">
+                                            <div class="product_name"><div><a href="{{ route('client.food', $food->id) }}" tabindex="0">
                                                         @if(strlen($food->name) >20)
                                                             {{ substr($food->name, 0, 20) }}...
                                                         @else
@@ -149,15 +101,12 @@
                                                 @endif
                                             </div>
                                             <div class="product_extras">
-                                            <form action="{{route('add.cart')}}" method="POST" role="form">   
-                                                @csrf                                                
-                                                    <input type="hidden" class="form-control" name="food_id" value="{{$food->id}}" > 
-                                                    <input type="hidden" class="form-control" name="user_id" value="{{Session::get('user_id')}}" >
-                                                    <button type="submit" class="product_cart_button">Thêm vào giỏ hàng</button>
-                                            </form>
+                                            <input type="hidden" class="form-control" name="food_id" value="{{$food->id}}" >
+                                            <input type="hidden" class="userId_{{$food->id}}" name="user_id" value="{{Session::get('user_id')}}" >
+                                            <button type="button" class="product_cart_button" id="addCart" data-id="{{$food->id}}">Thêm vào giỏ hàng</button>
                                         </div>
                                         </div>
-                                        <div class="product_fav"><i class="fas fa-heart"></i></div>                                       
+                                        <div class="product_fav"><i class="fas fa-heart"></i></div>
                                         <ul class="product_marks">
                                             <li class="product_mark product_discount">-{{ intval((($food->price - $food->price_discount)) /
                                                                                                             $food->price * 100) }}%</li>

@@ -20,7 +20,8 @@
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 	<link rel="stylesheet" href="{{ asset('Table/css/style.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('Form/css/roboto-font.css') }}">
-	<link rel="stylesheet" type="text/css" href="{{ asset('Form/fonts/font-awesome-5/css/fontawesome-all.min.css') }}">
+	<link rel="stylesheet" type="text/css" href="{{ asset('toast.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('Form/fonts/font-awesome-5/css/fontawesome-all.min.css') }}">
 	<!-- Main Style Css -->
 
     <link rel="stylesheet" href="{{ asset('Form/css/style.css') }}"/>
@@ -29,13 +30,12 @@
 </head>
 
 <body>
-
+<div id="toast"></div>
 <div class="super_container">
 
     <!-- Header -->
     @section('header')
         <header class="header">
-
             <!-- Top Bar -->
             <!-- Top Bar -->
 
@@ -150,6 +150,7 @@
     @show
 
     @yield('content')
+   
 
 
     @section('footer')
@@ -238,7 +239,7 @@
         </div>
     </div>
 
-
+    
     <script src="{{ asset('Client/js/jquery-3.3.1.min.js') }}"></script>
     <script src="{{ asset('Client/styles/bootstrap4/popper.js') }}"></script>
     <script src="{{ asset('Client/styles/bootstrap4/bootstrap.min.js') }}"></script>
@@ -251,8 +252,53 @@
     <script src="{{ asset('Client/plugins/slick-1.8.0/slick.js') }}"></script>
     <script src="{{ asset('Client/plugins/easing/easing.js') }}"></script>
     <script src="{{ asset('Client/js/custom.js') }}"></script>
+    
+    
+<script>
+$(document).ready(function(){
+    $(document).on('click','#addCart', function(e){
+        e.preventDefault();
+        var food_id = $(this).attr('data-id');
+		var user_id = $('.userId_'+food_id).val();
+        var _token = $('input[name=_token]').val();
+        $.ajax({
+            type: "POST",
+            url: "{{route('add.cart')}}",
+            data:{
+                food_id: food_id,
+				user_id: user_id,
+                _token: _token
+            },
+            dataType: "json",
+            success: function (response) {
+                document.querySelector('#toast').innerHTML = ' <div class="alert alert-primary" role="alert">'+ response.message +'</div>';
+            }
+        });
+    });
+});
 
+$(document).ready(function(){
+
+    $(document).on('click','#likee', function(e){
+        e.preventDefault();
+        var url = $(this).attr('data-url');
+        $.ajax({
+            type: "GET",
+            url: url,
+            data:{
+                _token: $('meta[name="csrf-token"]').attr('content')
+            },
+            dataType: "json",
+            success: function (response) {
+                document.querySelector('#toast').innerHTML = document.querySelector('#toast').innerHTML = ' <div class="alert alert-primary" role="alert">'+ response.message +'</div>';
+            }
+        });
+    });
+});
+
+</script>  
 @yield('js')
+
 </body>
 
 </html>

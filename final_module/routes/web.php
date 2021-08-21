@@ -77,7 +77,6 @@ Route::get('/{id}/restaurant', 'Client\HomeClientController@restaurant')->name('
 Route::post('/update/cart', 'Client\CartController@update')->name('update.cart');
 Route::get('/delete/{cart}/cart', 'Client\CartController@destroy')->name('delete.cart');
 Route::get('/like/{like}/food', 'Client\FavoriteController@like')->name('like');
-Route::get('/disslike/{like}/food', 'Client\FavoriteController@disslike')->name('disslike');
 Route::get('/favorite', 'Client\FavoriteController@index')->name('favorite');
 
 
