@@ -132,7 +132,7 @@
                                             <a href="{{route('show.cart')}}">
                                                 <img src="{{ asset('Client/images/cart.png') }}" alt="">
                                             </a>
-                                            <div class="cart_count"><span>0</span></div>
+                                            <div class="cart_count"><span id="count_carts">{{count($carts)}}</span></div>
                                         </div>
                                         <div class="cart_content">
                                             <div class="cart_text"><a href="">Giỏ hàng</a></div>
@@ -272,6 +272,8 @@ $(document).ready(function(){
             dataType: "json",
             success: function (response) {
                 document.querySelector('#toast').innerHTML = ' <div class="alert alert-primary" role="alert">'+ response.message +'</div>';
+                document.querySelector('#count_carts').innerHTML = document.querySelector('#count_carts').innerHTML = ''+response.data+'';
+
             }
         });
     });

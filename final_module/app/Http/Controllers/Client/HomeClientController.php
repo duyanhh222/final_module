@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Client;
 
 use App\Http\Controllers\Controller;
+use App\Models\Cart;
 use App\Models\Category;
 use App\Models\Config;
 use App\Models\Favorite;
@@ -27,6 +28,7 @@ class HomeClientController extends Controller
     {
         if(Session::has('user_id')){
             $like = Favorite::where('user_id',Session::get('user_id'))->get();
+            $carts = Cart::where('user_id',Session::get('user_id'))->get();
         }
         $mostView = Food::orderByDesc('view_count')->limit('16')->get();
         $categories = Category::all();
@@ -38,7 +40,7 @@ class HomeClientController extends Controller
         $tags = Tag::all();
         $config = Config::find(1);
         if(isset($like)){
-            return view('Client.home', compact('categories', 'config',  'tags', 'bestPrice', 'mostNew' ,'mostView', 'onSale', 'fastDelivery',  'sell_quantity', 'like'));
+            return view('Client.home', compact('categories', 'config',  'tags', 'bestPrice', 'mostNew' ,'mostView', 'onSale', 'fastDelivery',  'sell_quantity', 'like','carts'));
         }
         else
         {

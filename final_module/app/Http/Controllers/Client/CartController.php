@@ -49,7 +49,7 @@ class CartController extends Controller
         $flag = 0;
         foreach($carts as $cart){
             if($request->food_id == $cart->food_id){
-                return Response()->json(['message' => 'sản phẩm đã có trong giỏ hàng']);
+                return Response()->json(['message' => 'sản phẩm đã có trong giỏ hàng','data'=>count($carts)]);
                 $flag = 1;
             }
         }
@@ -67,7 +67,8 @@ class CartController extends Controller
             $data['quantity']    = 1;
             $data['total'] = $total;
             Cart::create($data);
-            return Response()->json(['message' => 'Thêm vào giỏ hàng thành công']);
+            $carts = Cart::where('user_id',Session::get('user_id'))->get();
+            return Response()->json(['message' => 'Thêm vào giỏ hàng thành công','data'=>count($carts)]);
         }
         
     }
