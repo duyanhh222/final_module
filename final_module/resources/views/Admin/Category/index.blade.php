@@ -1,6 +1,18 @@
 @extends('Layout.Admin.index')
 @section('title','Category')
 @section('main')
+
+<div class="row">
+    <div class="col-6">
+        <h3>Danh sách danh mục</h3>
+    </div>
+    <div class="col-6">
+        <div style="float:right">
+            <a href="{{route('category.create')}}" class="btn btn-primary">Thêm mới</a>
+        </div>
+    </div>
+</div>
+
 <div class="table-responsive">
     <table class="table table-hover">
         <thead>

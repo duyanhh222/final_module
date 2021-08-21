@@ -1,6 +1,17 @@
 @extends('Layout.Client.index')
 @section('title','Food')
 @section('main')
+
+<div class="row">
+    <div class="col-6">
+        <h3>Danh sách món ăn của bạn</h3>
+    </div>
+    <div class="col-6">
+        <div style="float:right">
+            <a href="{{route('client.createFood')}}" class="btn btn-primary">Thêm mới</a>
+        </div>
+    </div>
+</div>
 <form action="" method="GET" class="form-inline search_form" >
     <div class="wrap">
         <div class="search">     
@@ -19,7 +30,7 @@
         <th style="text-align: center">Giá</th>
         <th style="text-align: center">Giá khuyến mãi</th>
         <th style="text-align: center">Lượt xem</th>
-        <th>Actions</th>
+        <th></th>
     </tr>
     </thead>
     <tbody>

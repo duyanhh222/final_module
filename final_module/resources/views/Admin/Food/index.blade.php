@@ -1,6 +1,18 @@
 @extends('Layout.Admin.index')
 @section('title','Food')
 @section('main')
+
+<div class="row">
+    <div class="col-6">
+        <h3>Danh sách món ăn</h3>
+    </div>
+    <div class="col-6">
+        <div style="float:right">
+            <a href="{{route('food.create')}}" class="btn btn-primary">Thêm mới</a>
+        </div>
+    </div>
+</div>
+
 <form style="float: right" action="" method="GET" class="form-inline" >
     <div class="form-group">
         <input class="form-control" name="key" id="" value="{{$key}}" placeholder="Tìm kiếm...">
