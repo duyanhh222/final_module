@@ -132,11 +132,14 @@
                                             <a href="{{route('show.cart')}}">
                                                 <img src="{{ asset('Client/images/cart.png') }}" alt="">
                                             </a>
-                                            <div class="cart_count"><span id="count_carts">{{count($carts)}}</span></div>
+                                            @if(Session::has('user_id'))
+                                             <div class="cart_count"><span id="count_carts">{{count($carts)}}</span></div>
+                                            @else
+                                             <div class="cart_count"><span id="count_carts">0</span></div>
+                                            @endif
                                         </div>
                                         <div class="cart_content">
-                                            <div class="cart_text"><a href="">Giỏ hàng</a></div>
-                                            <div class="cart_price">0đ</div>
+                                            <div class="cart_text"><a href="{{route('show.cart')}}">Giỏ hàng</a></div>
                                         </div>
                                     </div>
                                 </div>

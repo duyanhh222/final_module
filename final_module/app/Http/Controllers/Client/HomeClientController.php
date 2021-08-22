@@ -62,6 +62,9 @@ class HomeClientController extends Controller
     {
         $config = Config::find(1);
         $keyword = $request->input('keyword');
+        if(Session::has('user_id')){
+            $carts = Cart::where('user_id',Session::get('user_id'))->get();
+        }
         if (!$keyword)
         {
             return redirect()->route('client.home');
@@ -69,37 +72,57 @@ class HomeClientController extends Controller
         $foods = Food::where('name', 'LIKE', '%' .$keyword. '%')->orderBy('created_at','desc')->paginate(1);
         $foods->withPath("search?_token=$request->token&keyword=$request->keyword");
         $categories = Category::orderByDesc('amount')->get();
-
+        if(isset($carts)){
+            return view('Client.Food.resultsearch', compact('foods', 'config','categories', 'keyword','carts'));
+        }
         return view('Client.Food.resultsearch', compact('foods', 'config','categories', 'keyword'));
 
     }
 
     public function tag($id)
     {
+        if(Session::has('user_id')){
+            $carts = Cart::where('user_id',Session::get('user_id'))->get();
+        }
         $config = Config::find(1);
         $tag = Tag::findOrFail($id);
         $food_tags = FoodTag::with('food')->where('tag_id', $id)->paginate(2);
         $categories = Category::all();
+        if(isset($carts)){
+            return view('Client.Tag.showtag', compact('food_tags', 'config','categories', 'tag','carts'));
+        }
         return view('Client.Tag.showtag', compact('food_tags', 'config','categories', 'tag'));
 
     }
 
     public function food($id)
     {
+        if(Session::has('user_id')){
+            $carts = Cart::where('user_id',Session::get('user_id'))->get();
+        }
         $config = Config::find(1);
         $tags = FoodTag::where('food_id', $id)->get();
         $categories = Category::all();
         //$contact = Config::orderByDesc('config_id')->first();
         $food = Food::findOrFail($id);
+        if(isset($carts)){
+            return view('Client.Food.fooddetail', compact('food', 'config', 'categories', 'tags','carts'));
+        }
         return view('Client.Food.fooddetail', compact('food', 'config', 'categories', 'tags'));
     }
 
     public function restaurant($id)
     {
+        if(Session::has('user_id')){
+            $carts = Cart::where('user_id',Session::get('user_id'))->get();
+        }
         $config = Config::find(1);
         $categories = Category::all();
         $restaurant = Restaurant::findOrFail($id);
         $foods = Food::where('restaurant_id', $id)->paginate(5);
+        if(isset($carts)){
+            return view('Client.Restaurant.foodrestaurant', compact('restaurant', 'config','foods', 'categories','carts'));
+        }
         return view('Client.Restaurant.foodrestaurant', compact('restaurant', 'config','foods', 'categories'));
     }
 }

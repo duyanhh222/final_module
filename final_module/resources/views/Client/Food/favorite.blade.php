@@ -79,8 +79,10 @@
                                     <div class="product_item discount" id="child{{$food->id}}">
                                         <div class="product_border"></div>
                                         @if(asset($food->food->image))
+                                        <a href="{{ route('client.food', $food->food->id) }}">
                                             <div class="product_image d-flex flex-column align-items-center justify-content-center"><img src="{{asset('storage/images/'. $food->food->image)}}" alt=""></div>
-                                        @endif
+                                        </a>
+                                            @endif
                                         <div class="product_content">
                                             @if($food->food->price_discount > 0)
                                             <div class="product_price">{{ number_format($food->food->price_discount) }}đ<span>{{ number_format($food->food->price) }}đ</span></div>
@@ -95,6 +97,17 @@
                                                         @endif</a></div></div>
                                             <div class="char_subtitle">
                                             </div>
+                                            @if(Session::has('user_id'))
+                                            <div class="product_extras">
+                                            <input type="hidden" class="form-control" name="food_id" value="{{$food->food->id}}" >
+                                            <input type="hidden" class="userId_{{$food->food->id}}" name="user_id" value="{{Session::get('user_id')}}" >
+                                            <button type="button" class="btn btn-primary" id="addCart" data-id="{{$food->food->id}}">Thêm vào giỏ hàng</button>
+                                            </div>
+                                            @else
+                                                <div class="product_extras">
+                                                    <button type="button" class="btn btn-primary"><a href="{{route('client.login')}}">Thêm vào giỏ hàng</a></button>
+                                                </div>
+                                            @endif
                                         </div>
                                         @if(Session::has('user_id'))
                                            <a href="" data-url="{{route('dislike',$food->food->id)}}" id="dislikee" class="name_{{$food->id}}" data-id="{{$food->id}}">
