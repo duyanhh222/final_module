@@ -64,7 +64,7 @@
                                             <ul>
                                                 <li><a href="#">Hồ sơ</a></li>
                                                 <li><a href="{{route('client.listFood')}}">Xem bài viết</a></li>
-                                                <li><a href="#">Đăng xuất</a></li>
+                                                <li><a href="{{route('user.logout')}}">Đăng xuất</a></li>
                                             </ul>
                                         </li>
                                     </ul>

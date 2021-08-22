@@ -78,7 +78,7 @@
                         </div>
                     </div>
                     <div id="customer">
-                        <form id="buy-now" method="post" action="">
+                        <form id="buy-now" method="post" action="{{route('bill.create')}}">
                             @csrf
                             @if(count($errors)>0)
                                 <div class="alert alert-danger">
@@ -95,13 +95,13 @@
 
 
                                 <div id="customer-name" class="col-lg-4 col-md-4 col-sm-12">
-                                    <input placeholder="Họ và tên (bắt buộc)" type="text" name="customer_name" value="{{old('name')}}" class="form-control" required>
+                                    <input placeholder="Họ và tên (bắt buộc)" type="text" name="name" @if(old('name') != null ) value="{{old('name')}}" @else value="{{Session::get('user_name')}}" @endif class="form-control" required>
                                 </div>
                                 <div id="customer-phone" class="col-lg-4 col-md-4 col-sm-12">
-                                    <input placeholder="Số điện thoại (bắt buộc)" type="text" name="customer_phone" value="{{old('phone')}}" class="form-control" required>
+                                    <input placeholder="Số điện thoại (bắt buộc)" type="text" name="phone"  @if(old('phone') != null ) value="{{old('phone')}}" @else value="{{Session::get('user_phone')}}" @endif class="form-control" required>
                                 </div>
                                 <div id="customer-add" class="col-lg-12 col-md-12 col-sm-12">
-                                    <input placeholder="Địa chỉ nhà riêng hoặc cơ quan (bắt buộc)" type="text" name="address" value="{{old('add')}}" class="form-control" required>
+                                    <input placeholder="Địa chỉ nhà riêng hoặc cơ quan (bắt buộc)" type="text" name="address"  @if(old('address') != null ) value="{{old('address')}}" @else value="{{Session::get('user_address')}}" @endif class="form-control" required>
                                 </div>
                                 <div class="cart_buttons">
                                     <button type="submit" class="button cart_button_checkout">Đặt hàng</button>

@@ -88,5 +88,7 @@ Route::get('/config', 'Admin\ConfigController@index')->name('config.index');
 Route::get('/config/edit', 'Admin\ConfigController@edit')->name('config.edit');
 Route::post('/config/edit', 'Admin\ConfigController@update')->name('config.update');
 
+Route::post('/bil', 'Client\BillController@create_bill')->name('bill.create');
+Route::get('/user_logout', 'Client\UserController@logout')->name('user.logout');
 
 
