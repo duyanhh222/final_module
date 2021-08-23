@@ -21,8 +21,12 @@ class CartController extends Controller
     {
         $config = Config::find(1);
         $categories = Category::all();
+        $cart_quantity = 0;
         $carts = Cart::with('food','user')->where('user_id',Session::get('user_id'))->get();
-        return view('Client.Home.cart',compact('categories', 'config', 'carts'));
+        foreach($carts as $cart){
+            $cart_quantity += $cart->quantity;
+        }
+        return view('Client.Home.cart',compact('categories', 'config', 'carts','cart_quantity'));
     }
 
     /**
@@ -47,9 +51,17 @@ class CartController extends Controller
        
         $carts = Cart::where('user_id',Session::get('user_id'))->get();
         $flag = 0;
+        $quantity = 0;
+        $cart_quantity = 0;
+        foreach($carts as $cart){
+            $cart_quantity += $cart->quantity;
+        }
         foreach($carts as $cart){
             if($request->food_id == $cart->food_id){
-                return Response()->json(['message' => 'sản phẩm đã có trong giỏ hàng','data'=>count($carts)]);
+                $quantity = $cart->quantity + 1;
+                Cart::where('user_id',Session::get('user_id'))->where('food_id',$cart->food_id)->update(['quantity' => $quantity]);
+                $cart_quantity += 1;
+                return Response()->json(['message' => 'Thêm vào giỏ hàng thành công','data'=>$cart_quantity]);
                 $flag = 1;
             }
         }
@@ -67,8 +79,8 @@ class CartController extends Controller
             $data['quantity']    = 1;
             $data['total'] = $total;
             Cart::create($data);
-            $carts = Cart::where('user_id',Session::get('user_id'))->get();
-            return Response()->json(['message' => 'Thêm vào giỏ hàng thành công','data'=>count($carts)]);
+            $cart_quantity += 1;
+            return Response()->json(['message' => 'Thêm vào giỏ hàng thành công','data'=>$cart_quantity]);
         }
         
     }
