@@ -44,12 +44,16 @@ class FavoriteController extends Controller
         if(Session::has('user_id')){
             $like = Favorite::where('user_id',Session::get('user_id'))->get();
             $carts = Cart::where('user_id',Session::get('user_id'))->get();
+            $cart_quantity = 0;
+            foreach($carts as $cart){
+                $cart_quantity += $cart->quantity;
+            }
         }
         $config = Config::find(1);
         $categories = Category::all();
         $foods = Favorite::with(['food'])->where('user_id',Session::get('user_id'))->paginate(20);
         if(isset($like)){
-            return view('Client.Food.favorite',compact('foods', 'config','categories','like','carts'));
+            return view('Client.Food.favorite',compact('foods', 'config','categories','like','cart_quantity'));
 
         }
         else{

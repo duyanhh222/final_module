@@ -64,6 +64,7 @@
                                             <ul>
                                                 <li><a href="#">Hồ sơ</a></li>
                                                 <li><a href="{{route('client.listFood')}}">Xem bài viết</a></li>
+                                                <li><a href="{{route('favorite')}}">Xem danh sách yêu thích</a></li>
                                                 <li><a href="{{route('user.logout')}}">Đăng xuất</a></li>
                                             </ul>
                                         </li>
@@ -133,7 +134,7 @@
                                                 <img src="{{ asset('Client/images/cart.png') }}" alt="">
                                             </a>
                                             @if(Session::has('user_id'))
-                                             <div class="cart_count"><span id="count_carts">{{count($carts)}}</span></div>
+                                             <div class="cart_count"><span id="count_carts">{{$cart_quantity}}</span></div>
                                             @else
                                              <div class="cart_count"><span id="count_carts">0</span></div>
                                             @endif

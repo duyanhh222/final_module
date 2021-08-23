@@ -29,6 +29,10 @@ class HomeClientController extends Controller
         if(Session::has('user_id')){
             $like = Favorite::where('user_id',Session::get('user_id'))->get();
             $carts = Cart::where('user_id',Session::get('user_id'))->get();
+            $cart_quantity = 0;
+            foreach($carts as $cart){
+                $cart_quantity += $cart->quantity;
+            }
         }
         $mostView = Food::orderByDesc('view_count')->limit('16')->get();
         $categories = Category::all();
@@ -40,7 +44,7 @@ class HomeClientController extends Controller
         $tags = Tag::all();
         $config = Config::find(1);
         if(isset($like)){
-            return view('Client.home', compact('categories', 'config',  'tags', 'bestPrice', 'mostNew' ,'mostView', 'onSale', 'fastDelivery',  'sell_quantity', 'like','carts'));
+            return view('Client.home', compact('categories', 'config',  'tags', 'bestPrice', 'mostNew' ,'mostView', 'onSale', 'fastDelivery',  'sell_quantity', 'like','cart_quantity'));
         }
         else
         {
@@ -64,6 +68,10 @@ class HomeClientController extends Controller
         $keyword = $request->input('keyword');
         if(Session::has('user_id')){
             $carts = Cart::where('user_id',Session::get('user_id'))->get();
+            $cart_quantity = 0;
+            foreach($carts as $cart){
+                $cart_quantity += $cart->quantity;
+            }
         }
         if (!$keyword)
         {
@@ -73,7 +81,7 @@ class HomeClientController extends Controller
         $foods->withPath("search?_token=$request->token&keyword=$request->keyword");
         $categories = Category::orderByDesc('amount')->get();
         if(isset($carts)){
-            return view('Client.Food.resultsearch', compact('foods', 'config','categories', 'keyword','carts'));
+            return view('Client.Food.resultsearch', compact('foods', 'config','categories', 'keyword','cart_quantity'));
         }
         return view('Client.Food.resultsearch', compact('foods', 'config','categories', 'keyword'));
 
@@ -83,13 +91,17 @@ class HomeClientController extends Controller
     {
         if(Session::has('user_id')){
             $carts = Cart::where('user_id',Session::get('user_id'))->get();
+            $cart_quantity = 0;
+            foreach($carts as $cart){
+                $cart_quantity += $cart->quantity;
+            }
         }
         $config = Config::find(1);
         $tag = Tag::findOrFail($id);
         $food_tags = FoodTag::with('food')->where('tag_id', $id)->paginate(2);
         $categories = Category::all();
         if(isset($carts)){
-            return view('Client.Tag.showtag', compact('food_tags', 'config','categories', 'tag','carts'));
+            return view('Client.Tag.showtag', compact('food_tags', 'config','categories', 'tag','cart_quantity'));
         }
         return view('Client.Tag.showtag', compact('food_tags', 'config','categories', 'tag'));
 
@@ -99,6 +111,10 @@ class HomeClientController extends Controller
     {
         if(Session::has('user_id')){
             $carts = Cart::where('user_id',Session::get('user_id'))->get();
+            $cart_quantity = 0;
+            foreach($carts as $cart){
+                $cart_quantity += $cart->quantity;
+            }
         }
         $config = Config::find(1);
         $tags = FoodTag::where('food_id', $id)->get();
@@ -106,7 +122,7 @@ class HomeClientController extends Controller
         //$contact = Config::orderByDesc('config_id')->first();
         $food = Food::findOrFail($id);
         if(isset($carts)){
-            return view('Client.Food.fooddetail', compact('food', 'config', 'categories', 'tags','carts'));
+            return view('Client.Food.fooddetail', compact('food', 'config', 'categories', 'tags','cart_quantity'));
         }
         return view('Client.Food.fooddetail', compact('food', 'config', 'categories', 'tags'));
     }
@@ -115,13 +131,17 @@ class HomeClientController extends Controller
     {
         if(Session::has('user_id')){
             $carts = Cart::where('user_id',Session::get('user_id'))->get();
+            $cart_quantity = 0;
+            foreach($carts as $cart){
+                $cart_quantity += $cart->quantity;
+            }
         }
         $config = Config::find(1);
         $categories = Category::all();
         $restaurant = Restaurant::findOrFail($id);
         $foods = Food::where('restaurant_id', $id)->paginate(5);
         if(isset($carts)){
-            return view('Client.Restaurant.foodrestaurant', compact('restaurant', 'config','foods', 'categories','carts'));
+            return view('Client.Restaurant.foodrestaurant', compact('restaurant', 'config','foods', 'categories','cart_quantity'));
         }
         return view('Client.Restaurant.foodrestaurant', compact('restaurant', 'config','foods', 'categories'));
     }
