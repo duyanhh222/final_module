@@ -63,6 +63,7 @@
                                             <a href="#">{{Session::get('user_name')}}<i class="fas fa-chevron-down"></i></a>
                                             <ul>
                                                 <li><a href="#">Hồ sơ</a></li>
+                                                <li><a href="{{route('favorite')}}">Yêu thích</a></li>
                                                 <li><a href="{{route('client.listFood')}}">Xem bài viết</a></li>
                                                 <li><a href="{{route('favorite')}}">Xem danh sách yêu thích</a></li>
                                                 <li><a href="{{route('user.logout')}}">Đăng xuất</a></li>
