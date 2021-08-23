@@ -9,12 +9,11 @@
                     <div class="deals_title">Tags</div>
                     <div class="deals_slider_container">
                         @foreach($tags as $tag)
-                            <button type="button" class="btn btn-outline-info" style="margin: 5px"><i
-                                    class="bi bi-tag-fill" style="color: red"> </i><a style="color: #187caa"
-                                                                                      href="{{ route('client.tag', $tag->id) }}">{{ $tag->name }}</a>
+                            <button type="button" class="btn btn-outline-info" style="margin: 5px">
+                                <i class="bi bi-tag-fill" style="color: red"> </i>
+                                <a style="color: #187caa" href="{{ route('client.tag', $tag->id) }}">{{ $tag->name }}</a>
                             </button>
-
-                    @endforeach
+                        @endforeach
                     <!-- Deals Slider -->
                         <div class="owl-carousel owl-theme deals_slider">
                         </div>
@@ -22,9 +21,11 @@
                     </div>
 
                     <div class="deals_slider_nav_container">
-                        <div class="deals_slider_prev deals_slider_nav"><i class="fas fa-chevron-left ml-auto"></i>
+                        <div class="deals_slider_prev deals_slider_nav">
+                            <i class="fas fa-chevron-left ml-auto"></i>
                         </div>
-                        <div class="deals_slider_next deals_slider_nav"><i class="fas fa-chevron-right ml-auto"></i>
+                        <div class="deals_slider_next deals_slider_nav">
+                            <i class="fas fa-chevron-right ml-auto"></i>
                         </div>
                     </div>
                 </div>
@@ -48,22 +49,18 @@
                                 @for($food = 0; $food < count($mostView); $food++)
                                     <div class="featured_slider_item">
                                         <div class="border_active"></div>
-                                        <div
-                                            class="product_item discount d-flex flex-column align-items-center justify-content-center text-center">
+                                        <div class="product_item discount d-flex flex-column align-items-center justify-content-center text-center">
                                             @if(asset($mostView->get($food)->image))
                                                 <a href="{{ route('client.food', $mostView->get($food)->id) }}">
-                                                    <div
-                                                        class="product_image d-flex flex-column align-items-center justify-content-center">
-                                                        <img
-                                                            src="{{asset('storage/images/'. $mostView->get($food)->image)}}"
-                                                            alt="" width="175px"></div>
+                                                    <div class="product_image d-flex flex-column align-items-center justify-content-center">
+                                                        <img src="{{asset('storage/images/'. $mostView->get($food)->image)}}" alt="" width="175px">
+                                                    </div>
                                                 </a>
                                             @endif
 
                                             <div class="product_content">
-                                                <div
-                                                    class="product_price discount">{{ number_format($mostView->get($food)->price_discount) }}
-                                                    đ<span>{{ number_format($mostView->get($food)->price) }}đ</span>
+                                                <div class="product_price discount">{{ number_format($mostView->get($food)->price_discount) }}đ
+                                                    <span>{{ number_format($mostView->get($food)->price) }}đ</span>
                                                 </div>
                                                 <div class="product_name">
                                                     <div>
@@ -73,7 +70,8 @@
                                                             @else
                                                                 {{ $mostView->get($food)->name }}
                                                             @endif
-                                                        </a></div>
+                                                        </a>
+                                                    </div>
                                                 </div>
                                                 <div class="char_subtitle">
                                                     @if(isset($mostView->get($food)->restaurant->address))
@@ -169,13 +167,13 @@
                                                     class="product_price discount">{{ number_format($onSale->get($food)->price_discount) }}
                                                     đ<span>{{ number_format($onSale->get($food)->price) }}đ</span></div>
                                                 <div class="product_name">
-                                                    <div><a href="{{ route('client.food', $onSale->get($food)->id) }}">
+                                                    <daiv><a href="{{ route('client.food', $onSale->get($food)->id) }}">
                                                             @if(strlen($onSale->get($food)->name) >20)
                                                                 {{ substr($onSale->get($food)->name, 0, 20) }}...
                                                             @else
                                                                 {{ $onSale->get($food)->name }}
                                                             @endif
-                                                        </a></div>
+                                                        </a></daiv>
                                                 </div>
                                                 <div class="char_subtitle">
                                                     @if(isset($mostView->get($food)->restaurant->address))
@@ -198,6 +196,7 @@
                                                         <button type="button" class="product_cart_button" id="addCart"
                                                                 data-id="{{$onSale->get($food)->id}}">Thêm vào giỏ hàng
                                                         </button>
+                                                    </div>
                                                         <!-- </form> -->
                                                         @else
                                                             <div class="product_extras">
@@ -206,7 +205,7 @@
                                                                         hàng</a></button>
                                                             </div>
                                                         @endif
-                                                    </div>
+                                                    
                                             </div>
                                             @if(Session::has('user_id'))
                                                 <?php $flag = 0; ?>
