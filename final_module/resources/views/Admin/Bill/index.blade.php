@@ -37,7 +37,7 @@
 
                     </td>
                     <td>
-                        <a href="" class="btn btn-sm btn-success">
+                        <a href="{{ route('bill.detail', $bill->id) }}" class="btn btn-sm btn-success">
                             <i class="fas fa-edit"></i>
                         </a>
                     </td>

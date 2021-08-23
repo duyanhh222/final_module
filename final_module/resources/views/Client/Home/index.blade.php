@@ -65,6 +65,7 @@
                                                 <li><a href="#">Hồ sơ</a></li>
                                                 <li><a href="{{route('favorite')}}">Yêu thích</a></li>
                                                 <li><a href="{{route('client.listFood')}}">Xem bài viết</a></li>
+                                                <li><a href="{{route('client.bill')}}">Đơn hàng</a></li>
                                                 <li><a href="{{route('user.logout')}}">Đăng xuất</a></li>
                                             </ul>
                                         </li>
@@ -154,7 +155,7 @@
     @show
 
     @yield('content')
-   
+
 
 
     @section('footer')
@@ -243,7 +244,7 @@
         </div>
     </div>
 
-    
+
     <script src="{{ asset('Client/js/jquery-3.3.1.min.js') }}"></script>
     <script src="{{ asset('Client/styles/bootstrap4/popper.js') }}"></script>
     <script src="{{ asset('Client/styles/bootstrap4/bootstrap.min.js') }}"></script>
@@ -256,8 +257,8 @@
     <script src="{{ asset('Client/plugins/slick-1.8.0/slick.js') }}"></script>
     <script src="{{ asset('Client/plugins/easing/easing.js') }}"></script>
     <script src="{{ asset('Client/js/custom.js') }}"></script>
-    
-    
+
+
 <script>
 $(document).ready(function(){
     $(document).on('click','#addCart', function(e){
@@ -317,12 +318,12 @@ $(document).on('click','#dislikee', function(e){
         success: function (response) {
             $('#child'+id).remove();
             document.querySelector('#toast').innerHTML = document.querySelector('#toast').innerHTML = ' <div class="alert alert-primary" role="alert"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>'+ response.message +'</div>';
-           
+
         }
     });
 });
 });
-</script>  
+</script>
 @yield('js')
 
 </body>

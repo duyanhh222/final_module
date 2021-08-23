@@ -17,4 +17,9 @@ class Bill extends Model
     {
         return $this->belongsTo(User::class, 'user_id');
     }
+
+    public function foods()
+    {
+        return $this->belongsToMany(Food::class, 'bill_details', 'bill_id', 'food_id')->withPivot('quantity');
+    }
 }
