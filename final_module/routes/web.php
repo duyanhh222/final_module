@@ -44,7 +44,7 @@ Route::group(['prefix' => 'admin'],function(){
         Route::post('/{id}/bill/detail','Admin\BillController@update')->name('bill.update');
 
 
-        Route::get('/config', 'Admin\ConfigController@index')->name('config.index');
+        Route::get('/config/config', 'Admin\ConfigController@index')->name('config.index');
         Route::get('/config/edit', 'Admin\ConfigController@edit')->name('config.edit');
         Route::post('/config/edit', 'Admin\ConfigController@update')->name('config.update');
 
