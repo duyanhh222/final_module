@@ -65,7 +65,6 @@
                                                 <li><a href="#">Hồ sơ</a></li>
                                                 <li><a href="{{route('favorite')}}">Yêu thích</a></li>
                                                 <li><a href="{{route('client.listFood')}}">Xem bài viết</a></li>
-                                                <li><a href="{{route('favorite')}}">Xem danh sách yêu thích</a></li>
                                                 <li><a href="{{route('user.logout')}}">Đăng xuất</a></li>
                                             </ul>
                                         </li>
@@ -84,7 +83,7 @@
 
             <!-- Header Main -->
 
-            <div class="header_main">
+            <div class="header_main" style="box-shadow: 5px 5px 5px rgb(245 184 154 / 30%);">
                 <div class="container">
                     <div class="row">
 
