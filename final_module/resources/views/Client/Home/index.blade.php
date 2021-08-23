@@ -88,7 +88,7 @@
                 <div class="container">
                     <div class="row">
 
-                        <!-- Logo -->
+                        <!-- Logo --> 
                         <div class="col-lg-2 col-sm-3 col-3 order-1">
                             <div class="logo_container">
                                 <div class="logo"><a href="{{ route('client.home') }}">Eat Clean</a></div>
