@@ -278,14 +278,11 @@ $(document).ready(function(){
             success: function (response) {
                 document.querySelector('#toast').innerHTML = ' <div class="alert alert-primary" role="alert"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>'+ response.message +'</div>';
                 document.querySelector('#count_carts').innerHTML = document.querySelector('#count_carts').innerHTML = ''+response.data+'';
-
             }
         });
     });
 });
-
 $(document).ready(function(){
-
     $(document).on('click','#likee', function(e){
         e.preventDefault();
         var url = $(this).attr('data-url');
@@ -303,7 +300,6 @@ $(document).ready(function(){
     });
 });
 $(document).ready(function(){
-
 $(document).on('click','#dislikee', function(e){
     e.preventDefault();
     var id = $(this).attr('data-id');
@@ -318,7 +314,6 @@ $(document).on('click','#dislikee', function(e){
         success: function (response) {
             $('#child'+id).remove();
             document.querySelector('#toast').innerHTML = document.querySelector('#toast').innerHTML = ' <div class="alert alert-primary" role="alert"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>'+ response.message +'</div>';
-
         }
     });
 });
