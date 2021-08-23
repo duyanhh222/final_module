@@ -82,13 +82,23 @@ class UserController extends Controller
             Session::put('user_name',$user->user_name);
             Session::put('user_level',$user->user_level);
             Session::put('user_restaurant',$user->user_restaurent);
-
+            Session::put('user_phone',$user->user_phone);
+            Session::put('user_address',$user->user_address);
             return redirect()->route('client.home');
         }
             Session::put('login_fail', 'Kiểm tra lại email hoặc mật khẩu');
         return redirect()->route('client.loadLogin');
     }
-
+    public function logout()
+    {
+        Session::forget('user_id');
+        Session::forget('user_name');
+        Session::forget('user_level');
+        Session::forget('user_phone');
+        Session::forget('user_address');
+        Session::forget('user_restaurant');
+        return redirect()->route('client.loadLogin');
+    }
     public function showList()
     {
         $id = Session::get('user_id');

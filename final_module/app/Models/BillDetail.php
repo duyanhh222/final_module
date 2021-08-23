@@ -9,6 +9,11 @@ class BillDetail extends Model
 {
     use HasFactory;
 
+
+    protected $table = 'bill_details';
+    protected $fillable = [
+        'bill_id','restaurant_id','quantity','food_id'
+    ];
     public function food()
     {
         return $this->belongsTo(Food::class, 'food_id');
@@ -18,4 +23,6 @@ class BillDetail extends Model
     {
         return $this->belongsTo(Bill::class, 'bill_id');
     }
+
+
 }

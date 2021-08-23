@@ -57,9 +57,6 @@
                                 @endforeach
                             </div>
                             <div class="product_name">{{ number_format($food->price_discount) }}đ</div>
-                                <input type="hidden" class="form-control" name="food_id" value="{{$food->id}}" >
-                                <input type="hidden" class="userId_{{$food->id}}" name="user_id" value="{{Session::get('user_id')}}" >
-                                <button type="button" class="product_cart_button" id="addCart" data-id="{{$food->id}}">Thêm vào giỏ hàng</button>
                             <div class="rating_r rating_r_4 product_rating"><i></i><i></i><i></i><i></i><i></i></div>
                             <div class="product_text"><i class="bi bi-eye-fill" style="color:green"></i> Lượt xem: {{ $food->view_count }}</div>
                             @if(isset($food->restaurant->address))
@@ -76,6 +73,9 @@
                                 <div class="product_text"><p><i class="far fa-clock" style="color:green"></i> Giờ mở cửa: {{ $food->restaurant->time_open }} - {{ $food->restaurant->time_close }}</p></div>
                             <div class="product_text"><p><i class="bi bi-check-circle-fill" style="color:green"></i> Ghi chú: {!! $food->description  !!} </p></div>
                         </div>
+                            <input type="hidden" class="form-control" name="food_id" value="{{$food->id}}" >
+                            <input type="hidden" class="userId_{{$food->id}}" name="user_id" value="{{Session::get('user_id')}}" >
+                            <button type="button" class="btn btn-primary" id="addCart" data-id="{{$food->id}}">Thêm vào giỏ hàng</button>
                             <button class="btn btn-secondary" onclick="window.history.go(-1); return false;">Quay lại</button>
                         </div>
 

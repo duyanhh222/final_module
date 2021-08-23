@@ -64,7 +64,7 @@
                                             <ul>
                                                 <li><a href="#">Hồ sơ</a></li>
                                                 <li><a href="{{route('client.listFood')}}">Xem bài viết</a></li>
-                                                <li><a href="#">Đăng xuất</a></li>
+                                                <li><a href="{{route('user.logout')}}">Đăng xuất</a></li>
                                             </ul>
                                         </li>
                                     </ul>
@@ -132,11 +132,14 @@
                                             <a href="{{route('show.cart')}}">
                                                 <img src="{{ asset('Client/images/cart.png') }}" alt="">
                                             </a>
-                                            <div class="cart_count"><span>0</span></div>
+                                            @if(Session::has('user_id'))
+                                             <div class="cart_count"><span id="count_carts">{{count($carts)}}</span></div>
+                                            @else
+                                             <div class="cart_count"><span id="count_carts">0</span></div>
+                                            @endif
                                         </div>
                                         <div class="cart_content">
-                                            <div class="cart_text"><a href="">Giỏ hàng</a></div>
-                                            <div class="cart_price">0đ</div>
+                                            <div class="cart_text"><a href="{{route('show.cart')}}">Giỏ hàng</a></div>
                                         </div>
                                     </div>
                                 </div>
@@ -271,7 +274,9 @@ $(document).ready(function(){
             },
             dataType: "json",
             success: function (response) {
-                document.querySelector('#toast').innerHTML = ' <div class="alert alert-primary" role="alert">'+ response.message +'</div>';
+                document.querySelector('#toast').innerHTML = ' <div class="alert alert-primary" role="alert"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>'+ response.message +'</div>';
+                document.querySelector('#count_carts').innerHTML = document.querySelector('#count_carts').innerHTML = ''+response.data+'';
+
             }
         });
     });
@@ -290,12 +295,32 @@ $(document).ready(function(){
             },
             dataType: "json",
             success: function (response) {
-                document.querySelector('#toast').innerHTML = document.querySelector('#toast').innerHTML = ' <div class="alert alert-primary" role="alert">'+ response.message +'</div>';
+                document.querySelector('#toast').innerHTML = document.querySelector('#toast').innerHTML = ' <div class="alert alert-primary" role="alert"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>'+ response.message +'</div>';
             }
         });
     });
 });
+$(document).ready(function(){
 
+$(document).on('click','#dislikee', function(e){
+    e.preventDefault();
+    var id = $(this).attr('data-id');
+    var url = $(this).attr('data-url');
+    $.ajax({
+        type: "GET",
+        url: url,
+        data:{
+            _token: $('meta[name="csrf-token"]').attr('content')
+        },
+        dataType: "json",
+        success: function (response) {
+            $('#child'+id).remove();
+            document.querySelector('#toast').innerHTML = document.querySelector('#toast').innerHTML = ' <div class="alert alert-primary" role="alert"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>'+ response.message +'</div>';
+           
+        }
+    });
+});
+});
 </script>  
 @yield('js')
 
