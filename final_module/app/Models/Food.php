@@ -33,4 +33,9 @@ class Food extends Model
     {
         return $this->belongsToMany(Tag::class, 'food_tags', 'food_id', 'tag_id');
     }
+
+    public function bills()
+    {
+        return $this->belongsToMany(Bill::class, 'bill_details', 'food_id', 'bill_id');
+    }
 }

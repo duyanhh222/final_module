@@ -40,6 +40,8 @@ Route::group(['prefix' => 'admin'],function(){
         Route::get('food/detail/{food}','Admin\FoodController@show')->name('food.show');
 
         Route::get('/bill/bill','Admin\BillController@index')->name('bill.index');
+        Route::get('/{id}/bill/detail','Admin\BillController@detail')->name('bill.detail');
+        Route::post('/{id}/bill/detail','Admin\BillController@update')->name('bill.update');
 
     });
 
