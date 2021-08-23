@@ -5,28 +5,28 @@
         <div class="four col-md-3">
             <div class="counter-box colored">
                 <i class="fas fa-utensils"></i>
-                <span class="counter">2147</span>
+                <span class="counter">{{ $numberOfRestaurant }}</span>
                 <p>Số lượng nhà hàng</p>
             </div>
         </div>
         <div class="four col-md-3">
             <div class="counter-box">
                 <i class="fa fa-user"></i>
-                <span class="counter">3275</span>
+                <span class="counter">{{ $numberOfUser }}</span>
                 <p>Số lượng thành viên</p>
             </div>
         </div>
         <div class="four col-md-3">
             <div class="counter-box">
                 <i class="fas fa-drumstick-bite"></i>
-                <span class="counter">289</span>
+                <span class="counter">{{ $numberOfFood }}</span>
                 <p>Số lượng món ăn</p>
             </div>
         </div>
         <div class="four col-md-3">
             <div class="counter-box">
             <i class="fas fa-file-invoice-dollar"></i>
-                <span class="counter">1563</span>
+                <span class="counter">{{ $numberOfBill }}</span>
                 <p>Số lượng đơn hàng</p>
             </div>
         </div>
