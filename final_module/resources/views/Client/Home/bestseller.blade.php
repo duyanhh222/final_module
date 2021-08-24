@@ -62,7 +62,7 @@
                                             <button type="button" class="btn btn-primary" id="addCart" data-id="{{$mostNew->get($food)->id}}">Thêm vào giỏ hàng</button>
                                             
                                             @else                    
-                                                    <button type="button" class="btn btn-primary"><a href="{{route('client.login')}}">Thêm vào giỏ hàng</a></button>
+                                                    <button type="button" class="btn btn-primary"><a href="{{route('client.login')}}" style="color:white!important">Thêm vào giỏ hàng</a></button>
                                             @endif
                                         </div>
                                 </div>
