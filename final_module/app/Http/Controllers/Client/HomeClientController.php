@@ -112,7 +112,7 @@ class HomeClientController extends Controller
         if(isset($carts)){
             return view('Client.Tag.showtag', compact('food_tags', 'like', 'config','categories', 'tag','cart_quantity'));
         }
-        return view('Client.Tag.showtag', compact('food_tags', 'like', 'config','categories', 'tag'));
+        return view('Client.Tag.showtag', compact('food_tags', 'config','categories', 'tag'));
 
     }
 
