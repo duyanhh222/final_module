@@ -67,7 +67,11 @@ class HomeClientController extends Controller
         $categories = Category::all();
         $category = Category::findOrFail($id);
         $foods = Food::where('category_id', $id)->paginate(2);
-        return view('Client.Category.showcategory', compact('category', 'config', 'categories', 'foods', 'like','cart_quantity'));
+        if(isset($carts)) {
+            return view('Client.Category.showcategory', compact('category', 'config', 'categories', 'foods', 'like','cart_quantity'));
+
+        }
+        return view('Client.Category.showcategory', compact('category', 'config', 'categories', 'foods'));
     }
 
     public function search(Request $request)
