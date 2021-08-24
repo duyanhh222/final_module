@@ -46,7 +46,15 @@
                                                     @endif
                                                 @endif
                                             </div>
-                                            <div class="bestsellers_price discount">{{ number_format($mostNew->get($food)->price_discount) }}đ<span>{{ number_format($mostNew->get($food)->price) }}đ</span></div>
+                                            @if ($mostView->get($food)->price_discount > 0)
+                                                <div class="bestsellers_price discount">{{ number_format($mostNew->get($food)->price_discount) }}đ
+                                                    <span style="text-decoration: line-through black solid;">{{ number_format($mostView->get($food)->price) }}đ</span>
+                                                </div>
+                                                @else
+                                                <div class="product_price discount">{{ number_format($mostView->get($food)->price) }}đ
+                                                    <span></span>
+                                                </div>
+                                                @endif
                                             @if(Session::has('user_id'))
                                             
                                             <input type="hidden" class="form-control" name="food_id" value="{{$mostNew->get($food)->id}}" >
