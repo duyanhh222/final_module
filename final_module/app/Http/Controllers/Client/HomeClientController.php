@@ -144,6 +144,7 @@ class HomeClientController extends Controller
     public function restaurant($id)
     {
         if(Session::has('user_id')){
+            $like = Favorite::where('user_id',Session::get('user_id'))->get();
             $carts = Cart::where('user_id',Session::get('user_id'))->get();
             $cart_quantity = 0;
             foreach($carts as $cart){
@@ -155,7 +156,7 @@ class HomeClientController extends Controller
         $restaurant = Restaurant::findOrFail($id);
         $foods = Food::where('restaurant_id', $id)->paginate(5);
         if(isset($carts)){
-            return view('Client.Restaurant.foodrestaurant', compact('restaurant', 'config','foods', 'categories','cart_quantity'));
+            return view('Client.Restaurant.foodrestaurant', compact('restaurant', 'config','foods', 'categories','cart_quantity','like'));
         }
         return view('Client.Restaurant.foodrestaurant', compact('restaurant', 'config','foods', 'categories'));
     }

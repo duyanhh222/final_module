@@ -127,7 +127,26 @@
                                                 @endif
                                             </div>
                                         </div>
-                                        <div class="product_fav"><i class="fas fa-heart"></i></div>
+                                        @if(Session::has('user_id'))
+                                            <?php $flag = 0; ?>                                       
+                                            @foreach($like as $value)
+                                                @if($value->food_id == $food->id)
+                                                    <?php $flag =1  ?>
+                                            <a href="" data-url="{{route('like',$food->id)}}" id="likee" >
+                                                <div class="product_fav active"><i class="fas fa-heart "></i></div>
+                                            </a>  
+                                                @endif
+                                            @endforeach
+                                            @if($flag == 0)
+                                            <a href="" data-url="{{route('like',$food->id)}}" id="likee" >
+                                                <div class="product_fav"><i class="fas fa-heart "></i></div>
+                                            </a>  
+                                            @endif
+                                        @else
+                                            <a href="{{route('client.login')}}">
+                                                <div class="product_fav"><i class="fas fa-heart "></i></div>
+                                            </a>  
+                                        @endif
                                         <ul class="product_marks">
                                             <li class="product_mark product_discount">-{{ intval((($food->price - $food->price_discount)) /
                                                                                                             $food->price * 100) }}
@@ -135,15 +154,17 @@
                                             </li>
                                         </ul>
 
-                                        <form action="{{route('add.cart')}}" method="POST" role="form">
-                                            @csrf
-                                            <input type="hidden" class="form-control" name="food_id"
-                                                   value="{{$food->id}}">
-                                            <input type="hidden" class="form-control" name="user_id"
-                                                   value="{{Session::get('user_id')}}">
-                                            <button type="submit" class="btn btn-primary">Thêm vào giỏ hàng</button>
-                                        </form>
+                                        @if(Session::has('user_id'))
+                                            
+                                            <input type="hidden" class="form-control" name="food_id" value="{{$food->id}}" >
+                                            <input type="hidden" class="userId_{{$food->id}}" name="user_id" value="{{Session::get('user_id')}}" >
+                                            <button type="button" class="btn btn-primary" id="addCart" data-id="{{$food->id}}">Thêm vào giỏ hàng</button>
+                                            
+                                        @else                    
+                                            <button type="button" class="btn btn-primary"><a href="{{route('client.login')}}">Thêm vào giỏ hàng</a></button>
+                                        @endif
                                     </div>
+
                                 @endforeach
                             </div>
 
