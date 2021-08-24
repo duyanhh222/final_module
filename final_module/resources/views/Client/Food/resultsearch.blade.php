@@ -84,7 +84,15 @@
                                             </a>
                                         @endif
                                         <div class="product_content">
-                                            <div class="product_price">{{ number_format($food->price_discount) }}đ<span>{{ number_format($food->price) }}đ</span></div>
+                                                @if ($food->price_discount > 0)
+                                                <div class="product_price">{{ number_format($food->price_discount) }}đ
+                                                    <span style="text-decoration: line-through black solid;">{{ number_format($food->price) }}đ</span>
+                                                </div>
+                                                @else
+                                                <div class="product_price">{{ number_format($mostView->get($food)->price) }}đ
+                                                    <span></span>
+                                                </div>
+                                                @endif
                                             <div class="product_name"><div><a href="{{ route('client.food', $food->id) }}" tabindex="0">
                                                         @if(strlen($food->name) >20)
                                                             {{ substr($food->name, 0, 20) }}...
@@ -108,7 +116,7 @@
                                                         
                                                     @else
                                                         
-                                                            <button type="button" class="btn btn-primary"><a href="{{route('client.login')}}">Thêm vào giỏ hàng</a></button>
+                                                            <button type="button" class="btn btn-primary"><a href="{{route('client.login')}}" style="color:white!important">Thêm vào giỏ hàng</a></button>
                                                         
                                                     @endif
 

@@ -31,7 +31,15 @@
                                                 </a>
                                                     @endif
                                                 <div class="product_content">
-                                                    <div class="product_price discount">{{ number_format($fastDelivery->get($food)->price_discount) }}đ<span>{{ number_format($fastDelivery->get($food)->price) }}đ</span></div>
+                                                @if ($mostView->get($food)->price_discount > 0)
+                                                <div class="product_price discount">{{ number_format($mostView->get($food)->price_discount) }}đ
+                                                    <span style="text-decoration: line-through black solid;">{{ number_format($mostView->get($food)->price) }}đ</span>
+                                                </div>
+                                                @else
+                                                <div class="product_price discount">{{ number_format($mostView->get($food)->price) }}đ
+                                                    <span></span>
+                                                </div>
+                                                @endif
                                                 <div class="product_name"><div><a href="{{ route('client.food', $fastDelivery->get($food)->id) }}">
                                                             @if(strlen($fastDelivery->get($food)->name) >20)
                                                                 {{ substr($fastDelivery->get($food)->name, 0, 20) }}...
@@ -105,7 +113,15 @@
                                                     </a>
                                                         @endif
                                                 <div class="product_content">
-                                                    <div class="product_price discount">{{ number_format($sell_quantity->get($food)->price_discount) }}đ<span>{{ number_format($sell_quantity->get($food)->price) }}đ</span></div>
+                                                @if ($mostView->get($food)->price_discount > 0)
+                                                <div class="product_price discount">{{ number_format($mostView->get($food)->price_discount) }}đ
+                                                    <span style="text-decoration: line-through black solid;">{{ number_format($mostView->get($food)->price) }}đ</span>
+                                                </div>
+                                                @else
+                                                <div class="product_price discount">{{ number_format($mostView->get($food)->price) }}đ
+                                                    <span></span>
+                                                </div>
+                                                @endif
                                                     <div class="product_name"><div><a href="{{ route('client.food', $sell_quantity->get($food)->id) }}">
                                                                 @if(strlen($sell_quantity->get($food)->name) >20)
                                                                     {{ substr($sell_quantity->get($food)->name, 0, 20) }}...

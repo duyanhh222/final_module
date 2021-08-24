@@ -18,7 +18,7 @@
                  data-image-src="{{ asset('Client/images/shop_background.jpg') }}"></div>
             <div class="home_overlay"></div>
             <div class="home_content d-flex flex-column align-items-center justify-content-center">
-                <h2 class="home_title">Kết quả tìm kiếm</h2>
+                <h2 class="home_title">Danh sách yêu thích</h2>
             </div>
         </div>
         <!-- Shop -->
@@ -105,7 +105,7 @@
                                             </div>
                                             @else
                                                 <div class="product_extras">
-                                                    <button type="button" class="btn btn-primary"><a href="{{route('client.login')}}">Thêm vào giỏ hàng</a></button>
+                                                    <button type="button" class="btn btn-primary"><a href="{{route('client.login')}}" style="color:white!important">Thêm vào giỏ hàng</a></button>
                                                 </div>
                                             @endif
                                         </div>

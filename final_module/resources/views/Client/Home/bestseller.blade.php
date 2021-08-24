@@ -46,7 +46,15 @@
                                                     @endif
                                                 @endif
                                             </div>
-                                            <div class="bestsellers_price discount">{{ number_format($mostNew->get($food)->price_discount) }}đ<span>{{ number_format($mostNew->get($food)->price) }}đ</span></div>
+                                            @if ($mostView->get($food)->price_discount > 0)
+                                                <div class="bestsellers_price discount">{{ number_format($mostNew->get($food)->price_discount) }}đ
+                                                    <span style="text-decoration: line-through black solid;">{{ number_format($mostView->get($food)->price) }}đ</span>
+                                                </div>
+                                                @else
+                                                <div class="product_price discount">{{ number_format($mostView->get($food)->price) }}đ
+                                                    <span></span>
+                                                </div>
+                                                @endif
                                             @if(Session::has('user_id'))
                                             
                                             <input type="hidden" class="form-control" name="food_id" value="{{$mostNew->get($food)->id}}" >
@@ -54,7 +62,7 @@
                                             <button type="button" class="btn btn-primary" id="addCart" data-id="{{$mostNew->get($food)->id}}">Thêm vào giỏ hàng</button>
                                             
                                             @else                    
-                                                    <button type="button" class="btn btn-primary"><a href="{{route('client.login')}}">Thêm vào giỏ hàng</a></button>
+                                                    <button type="button" class="btn btn-primary"><a href="{{route('client.login')}}" style="color:white!important">Thêm vào giỏ hàng</a></button>
                                             @endif
                                         </div>
                                 </div>

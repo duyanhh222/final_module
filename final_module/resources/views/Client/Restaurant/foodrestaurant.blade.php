@@ -107,8 +107,15 @@
                                             </a>
                                                 @endif
                                         <div class="product_content">
-                                            <div class="product_price">{{ number_format($food->price_discount) }}đ<span>{{ number_format($food->price) }}đ</span>
+                                            @if ( $food->price_discount > 0 )
+                                            <div class="product_price">{{ number_format($food->price_discount) }}đ
+                                                <span>{{ number_format($food->price) }}đ</span>
                                             </div>
+                                            @else
+                                            <div class="product_price">
+                                                {{ number_format($food->price) }}đ
+                                            </div>
+                                            @endif
                                             <div class="product_name">
                                                 <div><a href="{{ route('client.food', $food->id) }}" tabindex="0">
                                                         @if(strlen($food->name) >20)
@@ -161,7 +168,7 @@
                                             <button type="button" class="btn btn-primary" id="addCart" data-id="{{$food->id}}">Thêm vào giỏ hàng</button>
                                             
                                         @else                    
-                                            <button type="button" class="btn btn-primary"><a href="{{route('client.login')}}">Thêm vào giỏ hàng</a></button>
+                                            <button type="button" class="btn btn-primary"><a href="{{route('client.login')}}" style="color:white!important">Thêm vào giỏ hàng</a></button>
                                         @endif
                                     </div>
 
