@@ -105,8 +105,13 @@
                                             </a>
                                         @endif
                                         <div class="product_content">
+                                            @if ( $food->price_discount > 0 )
                                             <div class="product_price">{{ number_format($food->price_discount) }}đ<span>{{ number_format($food->price) }}đ</span>
                                             </div>
+                                            @else 
+                                            <div class="product_price">{{ number_format($food->price) }}đ
+                                            </div>
+                                            @endif
                                             <div class="product_name">
                                                 <div><a href="{{ route('client.food', $food->id) }}" tabindex="0">
                                                         @if(strlen($food->name) >20)
