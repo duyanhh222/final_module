@@ -31,12 +31,12 @@
                                                 </a>
                                                     @endif
                                                 <div class="product_content">
-                                                @if ($mostView->get($food)->price_discount > 0)
-                                                <div class="product_price discount">{{ number_format($mostView->get($food)->price_discount) }}đ
-                                                    <span style="text-decoration: line-through black solid;">{{ number_format($mostView->get($food)->price) }}đ</span>
+                                                @if ($fastDelivery->get($food)->price_discount > 0)
+                                                <div class="product_price discount">{{ number_format($fastDelivery->get($food)->price_discount) }}đ
+                                                    <span style="text-decoration: line-through black solid;">{{ number_format($fastDelivery->get($food)->price) }}đ</span>
                                                 </div>
                                                 @else
-                                                <div class="product_price discount">{{ number_format($mostView->get($food)->price) }}đ
+                                                <div class="product_price discount">{{ number_format($fastDelivery->get($food)->price) }}đ
                                                     <span></span>
                                                 </div>
                                                 @endif
@@ -68,24 +68,24 @@
                                                 @endif
                                             </div>
                                             @if(Session::has('user_id'))
-                                            <?php $flag = 0; ?>                                       
+                                            <?php $flag = 0; ?>
                                             @foreach($like as $value)
                                                 @if($value->food_id == $fastDelivery->get($food)->id)
                                                     <?php $flag =1  ?>
                                             <a href="" data-url="{{route('like',$fastDelivery->get($food)->id)}}" id="likee" >
                                                 <div class="product_fav active"><i class="fas fa-heart "></i></div>
-                                            </a>  
+                                            </a>
                                                 @endif
                                             @endforeach
                                             @if($flag == 0)
                                             <a href="" data-url="{{route('like',$fastDelivery->get($food)->id)}}" id="likee" >
                                                 <div class="product_fav"><i class="fas fa-heart "></i></div>
-                                            </a>  
+                                            </a>
                                             @endif
                                         @else
                                             <a href="{{route('client.login')}}">
                                                 <div class="product_fav"><i class="fas fa-heart "></i></div>
-                                            </a>  
+                                            </a>
                                         @endif
                                             <ul class="product_marks">
                                                 <li class="product_mark product_discount">-{{ intval((($fastDelivery->get($food)->price - $fastDelivery->get($food)->price_discount)) /
@@ -113,12 +113,12 @@
                                                     </a>
                                                         @endif
                                                 <div class="product_content">
-                                                @if ($mostView->get($food)->price_discount > 0)
-                                                <div class="product_price discount">{{ number_format($mostView->get($food)->price_discount) }}đ
-                                                    <span style="text-decoration: line-through black solid;">{{ number_format($mostView->get($food)->price) }}đ</span>
+                                                @if ($sell_quantity->get($food)->price_discount > 0)
+                                                <div class="product_price discount">{{ number_format($sell_quantity->get($food)->price_discount) }}đ
+                                                    <span style="text-decoration: line-through black solid;">{{ number_format($sell_quantity->get($food)->price) }}đ</span>
                                                 </div>
                                                 @else
-                                                <div class="product_price discount">{{ number_format($mostView->get($food)->price) }}đ
+                                                <div class="product_price discount">{{ number_format($sell_quantity->get($food)->price) }}đ
                                                     <span></span>
                                                 </div>
                                                 @endif
@@ -150,24 +150,24 @@
                                                     @endif
                                                 </div>
                                                 @if(Session::has('user_id'))
-                                            <?php $flag = 0; ?>                                       
+                                            <?php $flag = 0; ?>
                                             @foreach($like as $value)
                                                 @if($value->food_id == $sell_quantity->get($food)->id)
                                                     <?php $flag =1  ?>
                                             <a href="" data-url="{{route('like',$sell_quantity->get($food)->id)}}" id="likee" >
                                                 <div class="product_fav active"><i class="fas fa-heart "></i></div>
-                                            </a>  
+                                            </a>
                                                 @endif
                                             @endforeach
                                             @if($flag == 0)
                                             <a href="" data-url="{{route('like',$sell_quantity->get($food)->id)}}" id="likee" >
                                                 <div class="product_fav"><i class="fas fa-heart "></i></div>
-                                            </a>  
+                                            </a>
                                             @endif
                                         @else
                                             <a href="{{route('client.login')}}">
                                                 <div class="product_fav"><i class="fas fa-heart "></i></div>
-                                            </a>  
+                                            </a>
                                         @endif
                                                 <ul class="product_marks">
                                                     <li class="product_mark product_discount">-{{ intval((($sell_quantity->get($food)->price - $sell_quantity->get($food)->price_discount)) /

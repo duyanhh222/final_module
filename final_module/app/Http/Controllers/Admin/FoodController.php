@@ -77,7 +77,7 @@ class FoodController extends Controller
             'service' => 'max:255',
             'phone' => 'nullable|numeric|min:100000000|max:1000000000',
             'tag' => 'required|max:255',
-            'file' => 'required|image|mimes:jpeg,jpg,png|mimetypes:image/jpeg,image/png,image/jpg|max:5120'
+            'file' => 'required|image|mimes:jpeg,jpg,png|mimetypes:image/jpeg,image/png,image/jpg|max:51200'
         ],
         [
             'phone.numeric' => 'số điện thoại phải là chữ số',
@@ -120,7 +120,7 @@ class FoodController extends Controller
                 $data['explain'] = $request->explain;
                 $restaurantId = Restaurant::insertGetId($data);
                 $request->merge(['restaurant_id' => $restaurantId]);
-            }                          
+            }
         }
         if($request->has('file')){
             $file = $request->file;
@@ -283,7 +283,7 @@ class FoodController extends Controller
         $data['explain'] = $request->explain;
         $restaurantId = Restaurant::insertGetId($data);
         $request->merge(['restaurant_id' => $restaurantId]);
-        }                                        
+        }
         if(!$request->has('file')){
             $file_file = $request->file_file;
             $request->merge(['image' => $file_file]);
