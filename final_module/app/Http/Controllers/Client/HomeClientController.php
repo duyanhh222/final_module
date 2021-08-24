@@ -50,16 +50,24 @@ class HomeClientController extends Controller
         {
             return view('Client.home', compact('categories', 'config',  'tags', 'bestPrice', 'mostNew' ,'mostView', 'onSale', 'fastDelivery',  'sell_quantity'));
 
-        }        
+        }
     }
 
     public function category($id)
     {
+        if(Session::has('user_id')){
+            $like = Favorite::where('user_id',Session::get('user_id'))->get();
+            $carts = Cart::where('user_id',Session::get('user_id'))->get();
+            $cart_quantity = 0;
+            foreach($carts as $cart){
+                $cart_quantity += $cart->quantity;
+            }
+        }
         $config = Config::find(1);
         $categories = Category::all();
         $category = Category::findOrFail($id);
         $foods = Food::where('category_id', $id)->paginate(2);
-        return view('Client.Category.showcategory', compact('category', 'config', 'categories', 'foods'));
+        return view('Client.Category.showcategory', compact('category', 'config', 'categories', 'foods', 'like','cart_quantity'));
     }
 
     public function search(Request $request)
@@ -90,6 +98,7 @@ class HomeClientController extends Controller
     public function tag($id)
     {
         if(Session::has('user_id')){
+            $like = Favorite::where('user_id',Session::get('user_id'))->get();
             $carts = Cart::where('user_id',Session::get('user_id'))->get();
             $cart_quantity = 0;
             foreach($carts as $cart){
@@ -101,9 +110,9 @@ class HomeClientController extends Controller
         $food_tags = FoodTag::with('food')->where('tag_id', $id)->paginate(2);
         $categories = Category::all();
         if(isset($carts)){
-            return view('Client.Tag.showtag', compact('food_tags', 'config','categories', 'tag','cart_quantity'));
+            return view('Client.Tag.showtag', compact('food_tags', 'like', 'config','categories', 'tag','cart_quantity'));
         }
-        return view('Client.Tag.showtag', compact('food_tags', 'config','categories', 'tag'));
+        return view('Client.Tag.showtag', compact('food_tags', 'like', 'config','categories', 'tag'));
 
     }
 
