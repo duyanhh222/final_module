@@ -65,7 +65,7 @@
                                                 <li><a href="#">Hồ sơ</a></li>
                                                 <li><a href="{{route('favorite')}}">Yêu thích</a></li>
                                                 <li><a href="{{route('client.listFood')}}">Xem bài viết</a></li>
-                                                <li><a href="{{route('favorite')}}">Xem danh sách yêu thích</a></li>
+                                                <li><a href="{{route('client.bill')}}">Đơn hàng</a></li>
                                                 <li><a href="{{route('user.logout')}}">Đăng xuất</a></li>
                                             </ul>
                                         </li>
@@ -84,7 +84,7 @@
 
             <!-- Header Main -->
 
-            <div class="header_main">
+            <div class="header_main" style="box-shadow: 5px 5px 5px rgb(245 184 154 / 30%);">
                 <div class="container">
                     <div class="row">
 
@@ -155,7 +155,7 @@
     @show
 
     @yield('content')
-   
+
 
 
     @section('footer')
@@ -244,7 +244,7 @@
         </div>
     </div>
 
-    
+
     <script src="{{ asset('Client/js/jquery-3.3.1.min.js') }}"></script>
     <script src="{{ asset('Client/styles/bootstrap4/popper.js') }}"></script>
     <script src="{{ asset('Client/styles/bootstrap4/bootstrap.min.js') }}"></script>
@@ -257,8 +257,8 @@
     <script src="{{ asset('Client/plugins/slick-1.8.0/slick.js') }}"></script>
     <script src="{{ asset('Client/plugins/easing/easing.js') }}"></script>
     <script src="{{ asset('Client/js/custom.js') }}"></script>
-    
-    
+
+
 <script>
 $(document).ready(function(){
     $(document).on('click','#addCart', function(e){
@@ -278,14 +278,11 @@ $(document).ready(function(){
             success: function (response) {
                 document.querySelector('#toast').innerHTML = ' <div class="alert alert-primary" role="alert"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>'+ response.message +'</div>';
                 document.querySelector('#count_carts').innerHTML = document.querySelector('#count_carts').innerHTML = ''+response.data+'';
-
             }
         });
     });
 });
-
 $(document).ready(function(){
-
     $(document).on('click','#likee', function(e){
         e.preventDefault();
         var url = $(this).attr('data-url');
@@ -303,7 +300,6 @@ $(document).ready(function(){
     });
 });
 $(document).ready(function(){
-
 $(document).on('click','#dislikee', function(e){
     e.preventDefault();
     var id = $(this).attr('data-id');
@@ -318,12 +314,11 @@ $(document).on('click','#dislikee', function(e){
         success: function (response) {
             $('#child'+id).remove();
             document.querySelector('#toast').innerHTML = document.querySelector('#toast').innerHTML = ' <div class="alert alert-primary" role="alert"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>'+ response.message +'</div>';
-           
         }
     });
 });
 });
-</script>  
+</script>
 @yield('js')
 
 </body>

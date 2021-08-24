@@ -40,6 +40,13 @@ Route::group(['prefix' => 'admin'],function(){
         Route::get('food/detail/{food}','Admin\FoodController@show')->name('food.show');
 
         Route::get('/bill/bill','Admin\BillController@index')->name('bill.index');
+        Route::get('/{id}/bill/detail','Admin\BillController@detail')->name('bill.detail');
+        Route::post('/{id}/bill/detail','Admin\BillController@update')->name('bill.update');
+
+
+        Route::get('/config/config', 'Admin\ConfigController@index')->name('config.index');
+        Route::get('/config/edit', 'Admin\ConfigController@edit')->name('config.edit');
+        Route::post('/config/edit', 'Admin\ConfigController@update')->name('config.update');
 
     });
 
@@ -84,11 +91,11 @@ Route::get('/like/{like}/food', 'Client\FavoriteController@like')->name('like');
 Route::get('/favorite', 'Client\FavoriteController@index')->name('favorite');
 
 
-Route::get('/config', 'Admin\ConfigController@index')->name('config.index');
-Route::get('/config/edit', 'Admin\ConfigController@edit')->name('config.edit');
-Route::post('/config/edit', 'Admin\ConfigController@update')->name('config.update');
 
 Route::post('/bil', 'Client\BillController@create_bill')->name('bill.create');
 Route::get('/user_logout', 'Client\UserController@logout')->name('user.logout');
+
+Route::get('/my-bill', 'Client\UserBillController@index')->name('client.bill');
+Route::get('/{id}/detail-bill', 'Client\UserBillController@detail')->name('client.bill.detail');
 
 

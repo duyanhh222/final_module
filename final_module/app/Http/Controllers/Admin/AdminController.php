@@ -4,6 +4,10 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Admin;
+use App\Models\Food;
+use App\Models\User;
+use App\Models\Restaurant;
+use App\Models\Bill;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
@@ -59,7 +63,15 @@ class AdminController extends Controller
     }
     public function dashboard()
     {
-        return view('Admin.dashboard');
+        $bills = Bill::all();
+        $numberOfBill = $bills->count();
+        $users = User::all();
+        $numberOfUser = $users->count();
+        $foods = Food::all();
+        $numberOfFood = $foods->count();
+        $restaurants = Restaurant::all();
+        $numberOfRestaurant = $restaurants->count();
+        return view('Admin.dashboard', compact('numberOfBill', 'numberOfUser', 'numberOfFood', 'numberOfRestaurant'));
     }
     public function logout()
     {
