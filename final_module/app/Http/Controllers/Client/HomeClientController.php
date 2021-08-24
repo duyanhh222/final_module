@@ -79,6 +79,7 @@ class HomeClientController extends Controller
         $config = Config::find(1);
         $keyword = $request->input('keyword');
         if(Session::has('user_id')){
+            $like = Favorite::where('user_id',Session::get('user_id'))->get();
             $carts = Cart::where('user_id',Session::get('user_id'))->get();
             $cart_quantity = 0;
             foreach($carts as $cart){
@@ -93,7 +94,7 @@ class HomeClientController extends Controller
         $foods->withPath("search?_token=$request->token&keyword=$request->keyword");
         $categories = Category::orderByDesc('amount')->get();
         if(isset($carts)){
-            return view('Client.Food.resultsearch', compact('foods', 'config','categories', 'keyword','cart_quantity'));
+            return view('Client.Food.resultsearch', compact('foods', 'config','categories', 'keyword','cart_quantity','like'));
         }
         return view('Client.Food.resultsearch', compact('foods', 'config','categories', 'keyword'));
 
