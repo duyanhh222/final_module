@@ -68,7 +68,7 @@ class CartController extends Controller
         if($flag == 0){
             $food = Food::where('id',$request->food_id)->first();
             if($food->price_discount > 0){
-                $total = $food->price_discount;
+                $total = $food->price_discount ;
             }
             else{
                 $total = $food->price;
