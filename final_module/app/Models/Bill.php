@@ -9,9 +9,9 @@ class Bill extends Model
 {
     use HasFactory;
     protected $primaryKey = 'id';
-    protected $able = 'bills';
+    protected $table = 'bills';
     protected $fillable = [
-        'user_id','phone','address','name','status','total'
+        'user_id','phone','restaurant_id','address','name','status','total'
     ];
     public function user()
     {
@@ -21,5 +21,10 @@ class Bill extends Model
     public function foods()
     {
         return $this->belongsToMany(Food::class, 'bill_details', 'bill_id', 'food_id')->withPivot('quantity');
+    }
+
+    public function restaurant()
+    {
+        return $this->belongsTo(Restaurant::class, 'restaurant_id');
     }
 }
