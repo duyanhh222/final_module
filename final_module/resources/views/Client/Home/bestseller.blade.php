@@ -48,25 +48,14 @@
                                             </div>
                                             <div class="bestsellers_price discount">{{ number_format($mostNew->get($food)->price_discount) }}đ<span>{{ number_format($mostNew->get($food)->price) }}đ</span></div>
                                             @if(Session::has('user_id'))
-                                            <div class="product_extras">
+                                            
                                             <input type="hidden" class="form-control" name="food_id" value="{{$mostNew->get($food)->id}}" >
                                             <input type="hidden" class="userId_{{$mostNew->get($food)->id}}" name="user_id" value="{{Session::get('user_id')}}" >
-                                            <button type="button" class="product_cart_button" id="addCart" data-id="{{$mostNew->get($food)->id}}">Thêm vào giỏ hàng</button>
-                                            </div>
-                                            @else
-                                                <div class="product_extras">
-                                                    <button type="button" class="product_cart_button"><a href="{{route('client.login')}}">Thêm vào giỏ hàng</a></button>
-                                                </div>
+                                            <button type="button" class="btn btn-primary" id="addCart" data-id="{{$mostNew->get($food)->id}}">Thêm vào giỏ hàng</button>
+                                            
+                                            @else                    
+                                                    <button type="button" class="btn btn-primary"><a href="{{route('client.login')}}">Thêm vào giỏ hàng</a></button>
                                             @endif
-
-                                            <form action="{{route('add.cart')}}" method="POST" role="form">
-                                                @csrf
-                                                    <input type="hidden" class="form-control" name="food_id" value="{{$mostNew->get($food)->id}}" >
-                                                    <input type="hidden" class="form-control" name="user_id" value="{{Session::get('user_id')}}" >
-                                                    <button type="submit" class="btn btn-primary">Thêm vào giỏ hàng</button>
-                                            </form>
-
-
                                         </div>
                                 </div>
                                 @if(Session::has('user_id'))
