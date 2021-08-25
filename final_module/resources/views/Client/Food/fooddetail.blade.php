@@ -75,9 +75,15 @@
                                 @endif
                             <div class="product_text"><p><i class="bi bi-check-circle-fill" style="color:green"></i> Ghi chú: {!! $food->description  !!} </p></div>
                         </div>
+                        @if(Session::has('user_id'))
                             <input type="hidden" class="form-control" name="food_id" value="{{$food->id}}" >
                             <input type="hidden" class="userId_{{$food->id}}" name="user_id" value="{{Session::get('user_id')}}" >
                             <button type="button" class="btn btn-primary" id="addCart" data-id="{{$food->id}}">Thêm vào giỏ hàng</button>
+                        @else
+                            <button type="button" class="btn btn-primary"><a
+                                    href="{{route('client.login')}}">Thêm vào giỏ hàng</a>
+                            </button>
+                        @endif
                             <button class="btn btn-secondary" onclick="window.history.go(-1); return false;">Quay lại</button>
                         </div>
 
