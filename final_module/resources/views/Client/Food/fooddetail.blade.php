@@ -56,9 +56,18 @@
                                             style="margin: 5px"><i class="bi bi-tag-fill" style="color: red"> </i><a style="color: #187caa" href="{{ route('client.tag', $tag->tag->id) }}">{{ $tag->tag->name }}</a></button>
                                 @endforeach
                             </div>
-                            <div class="product_name">{{ number_format($food->price_discount) }}đ</div>
+                                <div class="product_text"><i class="bi bi-eye-fill" style="color:green"></i> Lượt xem: {{ $food->view_count }}</div>
+
+                            @if ($food->price_discount > 0)
+                                    <div class="product_price discount">{{ number_format($food->price_discount) }}đ
+                                        <span style="text-decoration: line-through black solid;">{{ number_format($food->price) }}đ</span>
+                                    </div>
+                                @else
+                                    <div class="product_price discount">{{ number_format($food->price) }}đ
+                                        <span></span>
+                                    </div>
+                                @endif
                             <div class="rating_r rating_r_4 product_rating"><i></i><i></i><i></i><i></i><i></i></div>
-                            <div class="product_text"><i class="bi bi-eye-fill" style="color:green"></i> Lượt xem: {{ $food->view_count }}</div>
                             @if(isset($food->restaurant->address))
                                 <div class="product_text"><p><i class="bi bi-check-circle-fill" style="color:green"></i> Địa chỉ: {{ $food->restaurant->address }}</p></div>
                             @endif
