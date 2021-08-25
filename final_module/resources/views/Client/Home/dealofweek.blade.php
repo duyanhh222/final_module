@@ -234,7 +234,7 @@
                                                         </a></daiv>
                                                 </div>
                                                 <div class="char_subtitle">
-                                                    @if(isset($mostView->get($food)->restaurant->address))
+                                                    @if(isset($onSale->get($food)->restaurant->address))
                                                         @if(strlen($onSale->get($food)->restaurant->address) >20)
                                                             {{ substr($onSale->get($food)->restaurant->address, 0, 20) }}
                                                             ...
@@ -263,7 +263,7 @@
                                                                         hàng</a></button>
                                                             </div>
                                                         @endif
-                                                    
+
                                             </div>
                                             @if(Session::has('user_id'))
                                                 <?php $flag = 0; ?>
