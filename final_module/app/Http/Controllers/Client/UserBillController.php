@@ -29,7 +29,7 @@ class UserBillController extends Controller
         $config = Config::find(1);
         $id = Session::get('user_id');
         $bills = Bill::where('user_id', $id)->get();
-        return view('Client.Bill.bill',  compact('bills', 'config', 'cart_quantity', 'categories', 'carts'));
+        return view('Client.Bill.bill',  compact('bills',  'config', 'cart_quantity', 'categories', 'carts'));
     }
 
     public function detail($id)

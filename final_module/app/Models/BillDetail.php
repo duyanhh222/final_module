@@ -12,7 +12,7 @@ class BillDetail extends Model
 
     protected $table = 'bill_details';
     protected $fillable = [
-        'bill_id','restaurant_id','quantity','food_id'
+        'bill_id','quantity','food_id'
     ];
     public function food()
     {
