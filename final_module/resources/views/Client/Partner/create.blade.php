@@ -88,7 +88,7 @@
                         </div>
                         <div class="row justify-content-between text-left">
                             <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Phí dịch vụ<span class="text-danger"> *</span></label> <input type="text" id="job" name="service" placeholder="Nhập phí dịch vụ"> </div>
-                            <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Giải thích phí dịch vụ<span class="text-danger"> *</span></label> <input type="text" id="explain" name="job" placeholder="Giải thích phí dịch vụ" > </div>
+                            <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Giải thích phí dịch vụ<span class="text-danger"> *</span></label> <input type="text" id="explain" name="explain" placeholder="Giải thích phí dịch vụ" > </div>
                         </div>
                         <div class="row justify-content-between text-left">
                             <div class="form-group col-12 flex-column d-flex"> <label class="form-control-label px-3">Địa chỉ<span class="text-danger"> *</span></label> <input type="text" id="ans" name="address" placeholder="Nhập địa chỉ" > </div>
