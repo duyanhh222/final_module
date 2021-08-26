@@ -120,82 +120,39 @@
     </div>
     <div class="row">
         <div class="col-6 input_group">
-        <label for="">Thời gian chuẩn bị</label>
-        <input type="text" name="time_preparation" value="{{$food->time_preparation}}" class="form-control" id="" placeholder="">
-    @error('time_preparation')
-        <div class="alert alert-danger">{{ $message }}</div>
-    @enderror
-    </div>
+            <label for="">Thời gian chuẩn bị</label>
+            <input type="text" name="time_preparation" value="{{$food->time_preparation}}" class="form-control" id="" placeholder="">
+        @error('time_preparation')
+            <div class="alert alert-danger">{{ $message }}</div>
+        @enderror
+        </div>
+
+        <div class="col-6 input_group">
+            <label for="">Tags</label>
+            <input type="text" name="tag" @if($tags_name != null) value="{{$tags_name}}" @endif class="form-control" id="" placeholder="">
+        @error('tag')
+            <div class="alert alert-danger">{{ $message }}</div>
+        @enderror
+        </div>
     </div>
     
-    <br>
-    <div class="form_title">
-        Thông tin nhà hàng
-    </div>
     <div class="row g-3">
-    <div class="col-6 input_group">
-        <label for="">Tên nhà hàng</label>
-        <input type="text" name="restaurant_name" @if($restaurant != null) value="{{$restaurant->name}}" @endif class="form-control" id="" placeholder="">
-    @error('restaurant_name')
-        <div class="alert alert-danger">{{ $message }}</div>
-    @enderror
-    </div>
-    <div class="col-6 input_group">
-        <label for="">Địa chỉ nhà hàng</label>
-        <input type="text" name="restaurant_address" @if($restaurant != null) value="{{$restaurant->address}}" @endif class="form-control" id="" placeholder="">
-    
-    @error('restaurant_address')
-        <div class="alert alert-danger">{{ $message }}</div>
-    @enderror
-    </div>
-    </div>
-    <div class="row g-3">
-    <div class="col-6 input_group">
-        <label for="">Thời gian mở cửa</label>
-        <input type="text" name="time_open" @if($restaurant != null) value="{{$restaurant->time_open}}" @endif class="form-control" id="" placeholder="">
-    @error('time_open')
-        <div class="alert alert-danger">{{ $message }}</div>
-    @enderror
-    </div>
-    <div class="col-6 input_group">
-        <label for="">Thời gian đóng cửa</label>
-        <input type="text" name="time_close" @if($restaurant != null) value="{{$restaurant->time_close}}" @endif class="form-control" id="" placeholder="">
-    @error('time_close')
-        <div class="alert alert-danger">{{ $message }}</div>
-    @enderror
-    </div>
-    </div>
-    <div class="row g-3">
-    <div class="col-6 input_group">
-        <label for="">Giải thích phí dịch vụ</label>
-        <input type="text" name="explain" @if($restaurant != null) value="{{$restaurant->explain}}" @endif class="form-control" id="" placeholder="">
-    @error('explain')
-        <div class="alert alert-danger">{{ $message }}</div>
-    @enderror
-    </div>
-    <div class="col-6 input_group">
-        <label for="">Số điện thoại</label>
-        <input type="text" name="phone" @if($restaurant != null) value="{{$restaurant->phone}}" @endif class="form-control" id="" placeholder="">
-    @error('phone')
-        <div class="alert alert-danger">{{ $message }}</div>
-    @enderror
-    </div>
-    </div>
-    <div class="row g-3">
-    <div class="col-6 input_group">
-        <label for="">Phí dịch vụ</label>
-        <input type="text" name="service" @if($restaurant != null) value="{{$restaurant->service}}" @endif class="form-control" id="" placeholder="">
-    @error('service')
-        <div class="alert alert-danger">{{ $message }}</div>
-    @enderror
-    </div>
-    <div class="col-6 input_group">
-        <label for="">Tags</label>
-        <input type="text" name="tag" @if($tags_name != null) value="{{$tags_name}}" @endif class="form-control" id="" placeholder="">
-    @error('tag')
-        <div class="alert alert-danger">{{ $message }}</div>
-    @enderror
-    </div>
+        <div class="col-6 input_group">
+            <label for="">Nhà hàng</label>
+            <select name="restaurant_id" id="input" class="form-control" required="required">
+            <option value="">---Lựa chọn nhà hàng---</option>
+                @foreach($restaurants as $restaurant)
+                @if($restaurantId == $restaurant->id)
+                <option value="{{$restaurant->id}}" selected>{{$restaurant->name}} </option>  
+                @else
+                <option value="{{$restaurant->id}}">{{$restaurant->name}} </option>  
+                @endif
+                @endforeach
+            </select>
+        @error('category_id')
+            <div class="alert alert-danger">{{ $message }}</div>
+        @enderror
+        </div>
     </div>
     <div>
         <button type="submit" class="btn btn-primary">Cập nhật</button>
