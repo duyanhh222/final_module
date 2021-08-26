@@ -392,4 +392,9 @@ class UserController extends Controller
       return redirect()->route('client.listFood');
 
     }
+
+    public function dashboard() 
+    {
+        return view('Client.User.dashboard');
+    }
 }

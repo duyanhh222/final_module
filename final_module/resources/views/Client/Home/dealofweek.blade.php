@@ -225,13 +225,13 @@
                                                 </div>
                                                 @endif
                                                 <div class="product_name">
-                                                    <daiv><a href="{{ route('client.food', $onSale->get($food)->id) }}">
+                                                    <div><a href="{{ route('client.food', $onSale->get($food)->id) }}">
                                                             @if(strlen($onSale->get($food)->name) >20)
                                                                 {{ substr($onSale->get($food)->name, 0, 20) }}...
                                                             @else
                                                                 {{ $onSale->get($food)->name }}
                                                             @endif
-                                                        </a></daiv>
+                                                        </a></div>
                                                 </div>
                                                 <div class="char_subtitle">
                                                     @if(isset($onSale->get($food)->restaurant->address))
