@@ -163,6 +163,12 @@
     <div class="container">
 
         <article class="card">
+{{--            @if (Session::has('success'))--}}
+{{--                <p class="text-success">--}}
+{{--                    <i class="fa fa-check" aria-hidden="true"></i>--}}
+{{--                    {{ Session::get('success') }}--}}
+{{--                </p>--}}
+{{--            @endif--}}
             <header class="card-header"> Đơn hàng / Chi tiết</header>
             <div class="card-body">
                 <h6>Mã đơn hàng: {{ $bill->id }}</h6>
@@ -247,7 +253,12 @@
                                         class="img-sm bbill"></div>
                                 <figcaption class="info align-self-center">
                                     <p class="title"><strong>{{ $food_bill->food->name }}</strong>
-                                        <br> <span class="text-muted">{{ $food_bill->food->restaurant->name }}</span></p> <span class="text-muted">{{ number_format($food_bill->food->price_discount) }}đ </span>
+                                        <br> <span class="text-muted">{{ $food_bill->food->restaurant->name }}</span></p>
+                                    @if($food_bill->food->price_discount == 0)
+                                        <span class="text-muted">{{ number_format($food_bill->food->price) }}đ </span>
+                                    @else
+                                        <span class="text-muted">{{ number_format($food_bill->food->price_discount) }}đ </span>
+                                    @endif
                                 </figcaption>
                             </figure>
                         </li>

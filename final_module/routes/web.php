@@ -92,11 +92,12 @@ Route::get('/favorite', 'Client\FavoriteController@index')->name('favorite');
 
 
 
-Route::post('/bill', 'Client\BillController@create_bill')->name('bill.create');
+Route::post('/bill-create', 'Client\BillController@create_bill')->name('bill.create');
 Route::get('/user_logout', 'Client\UserController@logout')->name('user.logout');
 
 Route::get('/my-bill', 'Client\UserBillController@index')->name('client.bill');
 Route::get('/{id}/detail-bill', 'Client\UserBillController@detail')->name('client.bill.detail');
+Route::get('/{id}/my-bill', 'Client\UserBillController@destroy')->name('client.bill.destroy');
 
 Route::get('/partner', 'Client\PartnerController@create')->name('client.partner');
 Route::post('/partner', 'Client\PartnerController@store')->name('client.partner.add');

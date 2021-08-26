@@ -247,7 +247,12 @@
                                         class="img-sm bbill"></div>
                                 <figcaption class="info align-self-center">
                                     <p class="title"><strong>{{ $food_bill->food->name }}</strong>
-                                        <br> <span class="text-muted">{{ $food_bill->food->restaurant->name }}</span></p> <span class="text-muted">{{ number_format($food_bill->food->price_discount) }}đ </span>
+                                        <br> <span class="text-muted">{{ $food_bill->food->restaurant->name }}</span></p>
+                                    @if($food_bill->food->price_discount == 0)
+                                        <span class="text-muted">{{ number_format($food_bill->food->price) }}đ </span>
+                                    @else
+                                        <span class="text-muted">{{ number_format($food_bill->food->price_discount) }}đ </span>
+                                    @endif
                                 </figcaption>
                             </figure>
                         </li>
