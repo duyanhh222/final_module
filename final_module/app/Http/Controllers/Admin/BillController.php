@@ -11,7 +11,7 @@ class BillController extends Controller
 {
     public function index()
     {
-        $bills = Bill::paginate(5);
+        $bills = Bill::with('restaurant')->paginate(5);
         return view('Admin.Bill.index', compact('bills'));
     }
 

@@ -42,10 +42,10 @@
                     @foreach($bills as $bill)
                     <tr >
                         <td>
-                            {{ $bill->id }}
+                            TNAG{{mt_rand(1000,10000) }}
                         </td>
 
-                        <td><a href="#"></a></td>
+                        <td><a href="#">{{$bill->restaurant->name}}</a></td>
                         <td>
                             {{ number_format($bill->total) }}đ
 {{--                            <small class="d-block">Far far away, behind the word mountains</small>--}}

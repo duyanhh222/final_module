@@ -7,6 +7,7 @@ use App\Models\Cart;
 use App\Models\Category;
 use App\Models\Config;
 use App\Models\Food;
+use App\Models\Restaurant;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
@@ -26,7 +27,26 @@ class CartController extends Controller
         foreach($carts as $cart){
             $cart_quantity += $cart->quantity;
         }
-        return view('Client.Home.cart',compact('categories', 'config', 'carts','cart_quantity'));
+        $check = array();
+        for($i= 0;$i<1000000;$i++)
+            $check[$i] = 1;
+        $data = array();
+        $name = array();
+        foreach($carts as $cart){
+            $total = 0;
+            if($check[$cart->food->restaurant_id] == 1){
+                foreach($carts as $value){
+                   if($value->food->restaurant_id == $cart->food->restaurant_id ){
+                       $total += $value->total; 
+                   } 
+                }
+                $data[$cart->food->restaurant_id] = $total;
+                $restaurant_name = Restaurant::where('id',$cart->food->restaurant_id)->first();
+                $name[$cart->food->restaurant_id] = $restaurant_name->name;
+                $check[$cart->food->restaurant_id] = 0;
+            }
+        }
+        return view('Client.Home.cart',compact('categories', 'config', 'carts','cart_quantity','data','name'));
     }
 
     /**
@@ -49,7 +69,7 @@ class CartController extends Controller
     {
        
        
-        $carts = Cart::where('user_id',Session::get('user_id'))->get();
+        $carts = Cart::with(['food'])->where('user_id',Session::get('user_id'))->get();
         $flag = 0;
         $quantity = 0;
         $cart_quantity = 0;
@@ -59,7 +79,16 @@ class CartController extends Controller
         foreach($carts as $cart){
             if($request->food_id == $cart->food_id){
                 $quantity = $cart->quantity + 1;
+                if($cart->food->price_discount == 0)
+                {
+                    $total = $cart->total + $cart->food->price;
+                }             
+                else{
+                    $total = $cart->total + $cart->food->price_discount;
+                } 
                 Cart::where('user_id',Session::get('user_id'))->where('food_id',$cart->food_id)->update(['quantity' => $quantity]);
+                Cart::where('user_id',Session::get('user_id'))->where('food_id',$cart->food_id)->update(['total' => $total]);
+
                 $cart_quantity += 1;
                 return Response()->json(['message' => 'Thêm vào giỏ hàng thành công','data'=>$cart_quantity]);
                 $flag = 1;
