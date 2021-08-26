@@ -100,20 +100,11 @@
             @enderror
         </div> 
         <div class="col-6 input_group">
-            <!-- <label for="">Ưu đãi</label>  
-            <select name="status" id="input" class="form-control" required="required">
-                @if(old('status') == 1)
-                <option value="1" selected>Có</option>  
-                <option value="0" >Không</option>  
-                @else
-                <option value="0" selected>Không</option>  
-                <option value="1" >Có</option>  
-                @endif
-            </select> -->
-            <!-- <input type="checkbox" name="status" value="1">
-            <label for="">
-                Ưu đãi
-            </label> -->
+            <label for="">Tags</label>
+            <input type="text" name="tag" value="{{old('tag')}}" class="form-control" id="" placeholder="Thêm tags">
+            @error('tag')
+            <div class="alert alert-danger">{{ $message }}</div>
+            @enderror
         </div>
         <div class="col-6 input_group">
             @if(old('status') == 1)
@@ -129,74 +120,24 @@
     </div>
     
     </div>
-    <br>
-    <div class="form_title">
-        Thông tin nhà hàng
-    </div>
     <div class="row g-3">
     <div class="col-6 input_group">
-        <label for="">Tên nhà hàng</label>
-        <input type="text" name="restaurant_name" value="{{old('restaurant_name')}}" class="form-control" id="" placeholder="Thêm tên nhà hàng">
-    @error('restaurant_name')
+        <label for="">Nhà hàng</label>
+        <select name="restaurant_id" id="input" class="form-control" required="required">
+            <option value="">---Lựa chọn nhà hàng--</option>
+            @foreach($restaurants as $restaurant)
+            @if(old('restaurant_id') == $restaurant->id)
+            <option value="{{$restaurant->id}}" selected>{{$restaurant->name}} </option>  
+            @endif
+            @if(old('restaurant_id') != $restaurant->id)
+            <option value="{{$restaurant->id}}" >{{$restaurant->name}} </option>
+            @endif
+            @endforeach
+        </select>
+        @error('restaurant_id')
         <div class="alert alert-danger">{{ $message }}</div>
-    @enderror
+        @enderror
     </div>
-    <div class="col-6 input_group">
-        <label for="">Địa chỉ nhà hàng</label>
-        <input type="text" name="restaurant_address" value="{{old('restaurant_address')}}" class="form-control" id="" placeholder="Thêm địa chỉ">
-    @error('restaurant_address')
-        <div class="alert alert-danger">{{ $message }}</div>
-    @enderror
-    </div>
-    </div>
-    <div class="row g-3">
-    <div class="col-6 input_group">
-        <label for="">Giờ mở cửa</label>
-        <input type="text" name="time_open" value="{{old('time_open')}}" class="form-control" id="" placeholder="Giờ mở cửa">
-    
-    @error('time_open')
-        <div class="alert alert-danger">{{ $message }}</div>
-    @enderror
-    </div>
-    <div class="col-6 input_group">
-        <label for="">Giờ đóng cửa</label>
-        <input type="text" name="time_close" value="{{old('time_close')}}" class="form-control" id="" placeholder="Giờ đóng cửa">
-    @error('time_close')
-        <div class="alert alert-danger">{{ $message }}</div>
-    @enderror
-    </div>
-    </div>
-    <div class="row g-3">
-    <div class="col-6 input_group">
-        <label for="">Giả thích phí dịch vụ</label>
-        <input type="text" name="explain" value="{{old('explain')}}" class="form-control" id="" placeholder="Thông tin phí dịch vụ">
-    @error('explain')
-        <div class="alert alert-danger">{{ $message }}</div>
-    @enderror
-    </div>
-    <div class="col-6 input_group">
-        <label for="">Số điện thoại</label>
-        <input type="text" name="phone" value="{{old('phone')}}" class="form-control" id="" placeholder="Số điện thoại">
-    @error('phone')
-        <div class="alert alert-danger">{{ $message }}</div>
-    @enderror
-    </div>
-    </div>
-    <div class="row g-3">
-    <div class="col-6 input_group">
-        <label for="">Phí dịch vụ</label>
-        <input type="text" name="service" value="{{old('service')}}" class="form-control" id="" placeholder="Phí dịch vụ">
-    @error('service')
-        <div class="alert alert-danger">{{ $message }}</div>
-    @enderror
-    </div>
-    <div class="col-6 input_group">
-        <label for="">Tags</label>
-        <input type="text" name="tag" value="{{old('tag')}}" class="form-control" id="" placeholder="Thêm tags">
-    @error('tag')
-        <div class="alert alert-danger">{{ $message }}</div>
-    @enderror
-    </div>  
     </div>
     
    <div>
