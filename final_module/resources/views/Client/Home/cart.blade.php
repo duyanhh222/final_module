@@ -70,9 +70,25 @@
                         </div>
 
                         <!-- Order Total -->
+                        
+                        <div class="col-5">
+                        <table class="table table-striped"> 
+                            <?php $total = 0; ?>
+                        @foreach($data as $key=>$value)
+                            <tr class="food_row">
+                                <td>Tổng hóa đơn của nhà hàng {{$name[$key]}}</td>
+                                <?php $total += $value; ?>
+                                <td>{{number_format($value)}}</td>
+                            </tr>
+                        @endforeach
+                        </table>
+                        </div>
                         <div class="order_total">
-                            <div class="order_total_content text-md-right">
-                                <div class="order_total_title">Tổng hóa đơn:</div>
+                            <div class="order_total_content text-md-right">                             
+                                <div class="order_total_title">                                                               
+                                        Tổng hóa đơn:{{number_format($total)}}               
+                                </div>
+                                
                                 <div class="order_total_amount"></div>
                             </div>
                         </div>
