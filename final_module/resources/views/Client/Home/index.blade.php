@@ -71,10 +71,14 @@
                                         </li>
                                     </ul>
                                 </div>
+
                                 @else
                                 <a class="btn btn-outline-primary" href="{{ route('client.loadLogin') }}">Đăng nhập</a>
                                 <a class="btn btn-outline-primary" href="{{ route('client.loadRegister') }}">Đăng ký</a>
                                 @endif
+                                <div class="top_bar_menu">
+                                    <button class="btn btn-info"  href="{{ route('client.partner') }}"><a href="{{ route('client.partner') }}">Đăng ký đối tác</a></button>
+                                </div>
                             </div>
                         </div>
                     </div>

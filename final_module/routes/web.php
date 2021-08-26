@@ -45,8 +45,8 @@ Route::group(['prefix' => 'admin'],function(){
 
 
         Route::get('/config/config', 'Admin\ConfigController@index')->name('config.index');
-        Route::get('/config/edit', 'Admin\ConfigController@edit')->name('config.edit');
-        Route::post('/config/edit', 'Admin\ConfigController@update')->name('config.update');
+        Route::get('/config/config/edit', 'Admin\ConfigController@edit')->name('config.edit');
+        Route::post('/config/config/edit', 'Admin\ConfigController@update')->name('config.update');
 
     });
 
@@ -93,10 +93,15 @@ Route::get('/favorite', 'Client\FavoriteController@index')->name('favorite');
 
 
 
-Route::post('/bil', 'Client\BillController@create_bill')->name('bill.create');
+Route::post('/bill', 'Client\BillController@create_bill')->name('bill.create');
 Route::get('/user_logout', 'Client\UserController@logout')->name('user.logout');
 
 Route::get('/my-bill', 'Client\UserBillController@index')->name('client.bill');
 Route::get('/{id}/detail-bill', 'Client\UserBillController@detail')->name('client.bill.detail');
+
+Route::get('/partner', 'Client\PartnerController@create')->name('client.partner');
+Route::post('/partner', 'Client\PartnerController@store')->name('client.partner.add');
+Route::get('/partner/success', 'Client\PartnerController@success')->name('client.partner.success');
+
 
 
