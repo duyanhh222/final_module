@@ -56,6 +56,7 @@ class UserController extends Controller
             $newUser->user_name = $name;
             $newUser->user_email = $email;
             $newUser->user_password = $password;
+            $newUser->user_level = 0;
             $newUser->user_phone = 0;
             $newUser->user_address = 0;
             $newUser->user_restaurent = 0;
@@ -77,7 +78,11 @@ class UserController extends Controller
         $password = $request->password;
         $user = User::where('user_email',$email)->where('user_password',$password)->first();
         if(isset($user)){
-            Session::put('level','user');
+            if ($user->user_level == '2') {
+                Session::put('level','restaurant');
+            } else {
+                Session::put('level','user');
+            }
             Session::put('user_id',$user->id);
             Session::put('user_name',$user->user_name);
             Session::put('user_level',$user->user_level);
@@ -93,7 +98,7 @@ class UserController extends Controller
     {
         Session::forget('user_id');
         Session::forget('user_name');
-        Session::forget('user_level');
+        Session::forget('level');
         Session::forget('user_phone');
         Session::forget('user_address');
         Session::forget('user_restaurant');
@@ -119,7 +124,8 @@ class UserController extends Controller
     public function create()
     {
         $categories = Category::all();
-        return view('Client.User.createFood', compact('categories'));
+        $restaurants = Restaurant::all();
+        return view('Client.User.createFood', compact('categories', 'restaurants'));
     }
 
     /**
@@ -139,13 +145,7 @@ class UserController extends Controller
             'coupon' => 'max:255',
             'count_coupon' => 'max:255',
             'time_preparation' => 'max:255',
-            'restaurant_name' =>'max:255',
-            'restaurant_address' =>'max:255',
-            'time_open' =>'max:255',
-            'time_close' =>'max:255',
-            'explain' => 'max:255',
-            'service' => 'max:255',
-            'phone' => 'nullable|numeric|min:100000000|max:1000000000',
+            'restaurant_id' => 'required|integer',
             'tag' => 'required|max:255',
             'file' => 'required|image|mimes:jpeg,jpg,png|mimetypes:image/jpeg,image/png,image/jpg|max:5120'
         ],
@@ -157,18 +157,6 @@ class UserController extends Controller
         $categ1 = Category::where('id',$request->category_id)->first();
         $a = $categ1->amount + 1;
         Category::where('id',$request->category_id)->update(['amount' => $a]);
-        if($request->restaurant_name != null){
-            $data = array();
-            $data['name'] = $request->restaurant_name;
-            $data['address'] = $request->restaurant_address;
-            $data['time_open'] = $request->time_open;
-            $data['time_close'] = $request->time_close;
-            $data['service'] = $request->service;
-            $data['phone'] = $request->phone;
-            $data['explain'] = $request->explain;
-            $restaurantId = Restaurant::insertGetId($data);
-            $request->merge(['restaurant_id' => $restaurantId]);
-        }
         if($request->has('file')){
             $file = $request->file;
             $fileName = $file->getClientOriginalName();
@@ -253,9 +241,9 @@ class UserController extends Controller
         }
         $tags_name =trim($tags,',');
         $restaurantId = $food->restaurant_id;
-        $restaurant = Restaurant::where('id',$restaurantId)->first();
+        $restaurants = Restaurant::all();
         $data = Category::all();
-        return view('Client.User.editFood',compact('food','data','restaurant','tags_name'));
+        return view('Client.User.editFood',compact('food','data','restaurants','tags_name', 'restaurantId'));
     }
 
     /**
@@ -275,13 +263,6 @@ class UserController extends Controller
             'coupon' => 'max:255',
             'count_coupon' => 'max:255',
             'time_preparation' => 'max:255',
-            'restaurant_name' =>'max:255',
-            'restaurant_address' =>'max:255',
-            'time_open' =>'max:255',
-            'time_close' =>'max:255',
-            'explain' => 'max:255',
-            'service' => 'max:255',
-            'phone' => 'max:255',
             'tag' => 'required|max:255',
             'file' => 'image|mimes:jpeg,jpg,png|mimetypes:image/jpeg,image/png,image/jpg|max:5120'
         ],
@@ -298,18 +279,6 @@ class UserController extends Controller
         $categ2 = Category::where('id',$request->category_id)->first();
         $b = $categ2->amount + 1;
         Category::where('id',$request->category_id)->update(['amount' => $b]);
-        if($request->restaurant_name != null){
-            $data = array();
-            $data['name'] = $request->restaurant_name;
-            $data['address'] = $request->restaurant_address;
-            $data['time_open'] = $request->time_open;
-            $data['time_close'] = $request->time_close;
-            $data['service'] = $request->service;
-            $data['phone'] = $request->phone;
-            $data['explain'] = $request->explain;
-            $restaurantId = Restaurant::insertGetId($data);
-            $request->merge(['restaurant_id' => $restaurantId]);
-        }
         if(!$request->has('file')){
             $file_file = $request->file_file;
             $request->merge(['image' => $file_file]);
