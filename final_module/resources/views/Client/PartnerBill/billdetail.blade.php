@@ -1,6 +1,7 @@
-@extends('Layout.Admin.index')
-@section('title','Hóa đơn')
+@extends('Layout.Client.index')
+@section('title','Food')
 @section('main')
+
 
     <style>@import url('https://fonts.googleapis.com/css?family=Open+Sans&display=swap');
 
@@ -163,12 +164,12 @@
     <div class="container">
 
         <article class="card">
-{{--            @if (Session::has('success'))--}}
-{{--                <p class="text-success">--}}
-{{--                    <i class="fa fa-check" aria-hidden="true"></i>--}}
-{{--                    {{ Session::get('success') }}--}}
-{{--                </p>--}}
-{{--            @endif--}}
+            {{--            @if (Session::has('success'))--}}
+            {{--                <p class="text-success">--}}
+            {{--                    <i class="fa fa-check" aria-hidden="true"></i>--}}
+            {{--                    {{ Session::get('success') }}--}}
+            {{--                </p>--}}
+            {{--            @endif--}}
             <header class="card-header"> Đơn hàng / Chi tiết</header>
             <div class="card-body">
                 <h6>Mã đơn hàng: {{ $bill->id }}</h6>
@@ -231,13 +232,13 @@
                         active
                         @endif"><span class="icon"> <i class="fa fa-truck"></i> </span> <span class="text"> Đang giao hàng </span>
                     </div>
-{{--                    <div class="step--}}
-{{--                        @if($bill->status == 4)--}}
-{{--                        active--}}
-{{--                         @elseif( $bill->status == 5 )--}}
-{{--                        active--}}
-{{--                        @endif"><span class="icon"> <i class="fa fa-box"></i> </span> <span--}}
-{{--                            class="text">Hoàn thành</span></div>--}}
+                    {{--                    <div class="step--}}
+                    {{--                        @if($bill->status == 4)--}}
+                    {{--                        active--}}
+                    {{--                         @elseif( $bill->status == 5 )--}}
+                    {{--                        active--}}
+                    {{--                        @endif"><span class="icon"> <i class="fa fa-box"></i> </span> <span--}}
+                    {{--                            class="text">Hoàn thành</span></div>--}}
                     <div class="step  {{ $bill->status == 5?'active':'' }} "><span class="icon"> <i
                                 class="fa fa-box"></i> </span> <span class="text">Hoàn thành</span></div>
 
@@ -264,7 +265,7 @@
                         </li>
                     @endforeach
                 </ul>
-                <form action="{{ route('bill.update', $bill->id) }}" method="post">
+                <form action="" method="post">
                     @csrf
                     <div class="form-check">
                         <input class="form-check-input" type="radio" name="status" value="0"
@@ -325,3 +326,4 @@
     <script type='text/javascript'></script>
     </body>
 @stop()
+

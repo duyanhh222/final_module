@@ -49,4 +49,20 @@ class UserBillController extends Controller
         $bill_detail_food = BillDetail::where('bill_id', $id)->get();
         return view('Client.Bill.billdetail', compact('bill', 'cart_quantity', 'bill_detail_food' , 'config', 'categories', 'carts'));
     }
+
+    public function destroy($id)
+    {
+        $bill = Bill::where('id', $id)->first();
+        if($bill->status == 1)
+        {
+            $bill->delete();
+            $message = 'Hủy đơn hàng thành công!';
+        }
+        else
+        {
+            $message = 'Không hủy được đơn hàng đã xác nhận !';
+        }
+        Session::flash('success', $message);
+        return redirect()->route('client.bill');
+    }
 }

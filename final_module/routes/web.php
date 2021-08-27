@@ -48,6 +48,10 @@ Route::group(['prefix' => 'admin'],function(){
         Route::get('/config/config/edit', 'Admin\ConfigController@edit')->name('config.edit');
         Route::post('/config/config/edit', 'Admin\ConfigController@update')->name('config.update');
 
+        Route::get('/restaurant/restaurant', 'Admin\RestaurantController@index')->name('restaurant.index');
+        Route::get('/restaurant/{id}/update', 'Admin\RestaurantController@update')->name('restaurant.update');
+        Route::get('/restaurant/register', 'Admin\RestaurantController@register')->name('restaurant.register');
+
     });
 
 });
@@ -66,11 +70,14 @@ Route::post('/user/create', 'Client\UserController@store')->name('client.storeFo
 Route::get('user/{food}/edit','Client\UserController@edit')->name('client.editFood');
 Route::post('user/{food}','Client\UserController@update')->name('client.updateFood');
 Route::get('user/{food}','Client\UserController@destroy')->name('client.destroyFood');
-Route::get('user/dashboard','Client\UserController@dashboard')->name('client.dashboard');
+Route::get('a/dashboard','Client\UserController@dashboard')->name('client.dashboard');
 
-Route::get('/ann', function () {
-    return view('Client.register');
-});
+Route::get('/user/restaurant/bill', 'Client\RestaurantBillController@index')->name('client.restaurant.index');
+Route::get('/user/restaurant/{id}/detail', 'Client\RestaurantBillController@detail')->name('client.restaurant.detail');
+
+
+
+
 
 Route::get('/index', 'Client\HomeClientController@index')->name('client.index');
 Route::get('/home', 'Client\HomeClientController@home')->name('client.home');
@@ -93,15 +100,24 @@ Route::get('/favorite', 'Client\FavoriteController@index')->name('favorite');
 
 
 
-Route::post('/bill', 'Client\BillController@create_bill')->name('bill.create');
+Route::post('/bill-create', 'Client\BillController@create_bill')->name('bill.create');
 Route::get('/user_logout', 'Client\UserController@logout')->name('user.logout');
 
 Route::get('/my-bill', 'Client\UserBillController@index')->name('client.bill');
 Route::get('/{id}/detail-bill', 'Client\UserBillController@detail')->name('client.bill.detail');
+Route::get('/{id}/my-bill', 'Client\UserBillController@destroy')->name('client.bill.destroy');
 
 Route::get('/partner', 'Client\PartnerController@create')->name('client.partner');
 Route::post('/partner', 'Client\PartnerController@store')->name('client.partner.add');
 Route::get('/partner/success', 'Client\PartnerController@success')->name('client.partner.success');
+
+
+Route::get('/{id}/profile', 'Client\ProfileController@index')->name('client.profile');
+Route::post('/{id}/profile', 'Client\ProfileController@update')->name('client.profile.update');
+
+
+
+
 
 
 

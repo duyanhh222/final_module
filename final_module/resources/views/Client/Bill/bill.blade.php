@@ -22,7 +22,12 @@
 
         <div class="container">
             <h2 class="mb-5">Đơn hàng của tôi</h2>
-
+            @if (Session::has('success'))
+                <p class="text-success">
+                    <i class="fa fa-check" aria-hidden="true"></i>
+                    {{ Session::get('success') }}
+                </p>
+            @endif
 
             <div class="table-responsive">
 
@@ -36,16 +41,18 @@
                         <th scope="col">Trạng thái</th>
                         <th scope="col">Ngày đặt</th>
                         <th scope="col"></th>
+                        <th scope="col"></th>
                     </tr>
                     </thead>
                     <tbody>
                     @foreach($bills as $bill)
                     <tr >
                         <td>
-                            {{ $bill->id }}
+                            TNAG{{mt_rand(1000,10000) }}
                         </td>
 
-                        <td><a href="#"></a></td>
+                        <td><a href="{{ route('client.restaurant', $bill->restaurant->id) }}">{{ $bill->restaurant->name }}</a></td>
+
                         <td>
                             {{ number_format($bill->total) }}đ
 {{--                            <small class="d-block">Far far away, behind the word mountains</small>--}}
@@ -67,6 +74,7 @@
                         </td>
                         <td>{{ $bill->created_at }}</td>
                         <td><a href="{{ route('client.bill.detail', $bill->id) }}" class="more">Chi tiết</a></td>
+                        <td><a href="{{ route('client.bill.destroy', $bill->id) }}" class="more">Hủy</a></td>
 
                     </tr>
                     @endforeach

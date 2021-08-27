@@ -1,6 +1,6 @@
 @extends('Client.Home.index')
 
-@section('title', 'Đăng ký đối tác')
+@section('title', 'Hồ sơ')
 @section('content')
     <style>
         body {
@@ -69,29 +69,36 @@
             outline-width: 0
         }
     </style>
-
+    
     <div class="container-fluid px-1 py-5 mx-auto">
         <div class="row d-flex justify-content-center">
             <div class="col-xl-7 col-lg-8 col-md-9 col-11 text-center">
-                <h3>Đăng ký quán đối tác</h3>
                 <div class="card">
-                    <h5 class="text-center mb-4">Điền thông tin nhà hàng</h5>
-                    <form class="form-card" method="post" action="{{ route('client.partner.add') }}">
+                <h5 class="text-center mb-4">Địa chỉ nhận hàng</h5>
+                @foreach($address as $value)
+                <div class="row justify-content-between text-left">
+                    <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Địa chỉ<span class="text-danger"> *</span></label> <input type="text" id="fname"  value="{{$value->address}}" placeholder="Nhập tên người dùng" > </div>
+                </div>
+                @endforeach
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid px-1 py-5 mx-auto">
+        <div class="row d-flex justify-content-center">
+            <div class="col-xl-7 col-lg-8 col-md-9 col-11 text-center">
+                <h3>Hồ sơ</h3>
+                <div class="card">
+                    <h5 class="text-center mb-4">Thông tin cá nhân</h5>
+                    <form class="form-card" method="post" action="{{ route('client.profile.update',Session::get('user_id')) }}">
                         @csrf
                         <div class="row justify-content-between text-left">
-                            <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Tên nhà hàng<span class="text-danger"> *</span></label> <input type="text" id="fname" name="name" placeholder="Nhập tên nhà hàng" > </div>
-                            <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Số điện thoại<span class="text-danger"> *</span></label> <input type="text" id="lname" name="phone" placeholder="Nhập số điện thoại" > </div>
+                            <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Tên người dùng<span class="text-danger"> *</span></label> <input type="text" id="fname" name="user_name" value="{{$user->user_name}}" placeholder="Nhập tên người dùng" > </div>
+                            <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Số điện thoại<span class="text-danger"> *</span></label> <input type="text" id="lname" name="user_phone" value="{{$user->user_phone}}" placeholder="Nhập số điện thoại" > </div>
                         </div>
                         <div class="row justify-content-between text-left">
-                            <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Giờ mở cửa<span class="text-danger"> *</span></label> <input type="text" id="email" name="time_open" placeholder="Nhập giờ mở cửa" > </div>
-                            <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Giờ đóng cửa<span class="text-danger"> *</span></label> <input type="text" id="mob" name="time_close" placeholder="Nhập giờ đóng cửa" > </div>
-                        </div>
-                        <div class="row justify-content-between text-left">
-                            <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Phí dịch vụ<span class="text-danger"> *</span></label> <input type="text" id="job" name="service" placeholder="Nhập phí dịch vụ"> </div>
-                            <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Giải thích phí dịch vụ<span class="text-danger"> *</span></label> <input type="text" id="explain" name="explain" placeholder="Giải thích phí dịch vụ" > </div>
-                        </div>
-                        <div class="row justify-content-between text-left">
-                            <div class="form-group col-12 flex-column d-flex"> <label class="form-control-label px-3">Địa chỉ<span class="text-danger"> *</span></label> <input type="text" id="ans" name="address" placeholder="Nhập địa chỉ" > </div>
+                            <div class="form-group col-12 flex-column d-flex"> <label class="form-control-label px-3">Địa chỉ<span class="text-danger"> *</span></label> <input type="text" id="ans" name="user_address" value="{{$user->user_address}}" placeholder="Nhập địa chỉ" > </div>
+                            <div class="form-group col-12 flex-column d-flex"> <label class="form-control-label px-3">Thêm địa chỉ nhận hàng<span class="text-danger"> </span></label> <input type="text" id="ans" name="address" placeholder="Nhập địa chỉ" > </div>
                         </div>
                         <div class="row justify-content-end">
                             <div class="form-group col-sm-6"> <button type="submit" class="btn-block btn-primary">Đăng ký</button> </div>

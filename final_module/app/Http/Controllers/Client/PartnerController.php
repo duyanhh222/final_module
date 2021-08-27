@@ -39,7 +39,7 @@ class PartnerController extends Controller
         $restaurant->service = $request->service;
         $restaurant->explain = $request->explain;
         $restaurant->address = $request->address;
-        $restaurant->status = 0;
+        $restaurant->status = 1;
         $restaurant->save();
         $last_id = Restaurant::orderByDesc('id')->first();
         $user_id = Session::get('user_id');

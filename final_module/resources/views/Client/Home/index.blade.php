@@ -62,7 +62,7 @@
                                         <li>
                                             <a href="#">{{Session::get('user_name')}}<i class="fas fa-chevron-down"></i></a>
                                             <ul>
-                                                <li><a href="#">Hồ sơ</a></li>
+                                                <li><a href="{{route('client.profile',Session::get('user_id'))}}">Hồ sơ</a></li>
                                                 <li><a href="{{route('favorite')}}">Yêu thích</a></li>
                                                 <li><a href="{{route('client.listFood')}}">Xem bài viết</a></li>
                                                 <li><a href="{{route('client.bill')}}">Đơn hàng</a></li>
@@ -71,14 +71,15 @@
                                         </li>
                                     </ul>
                                 </div>
+                                    <div class="top_bar_menu">
+                                        <button class="btn btn-info"  href="{{ route('client.partner') }}"><a href="{{ route('client.partner') }}">Đăng ký đối tác</a></button>
+                                    </div>
 
                                 @else
                                 <a class="btn btn-outline-primary" href="{{ route('client.loadLogin') }}">Đăng nhập</a>
                                 <a class="btn btn-outline-primary" href="{{ route('client.loadRegister') }}">Đăng ký</a>
                                 @endif
-                                <div class="top_bar_menu">
-                                    <button class="btn btn-info"  href="{{ route('client.partner') }}"><a href="{{ route('client.partner') }}">Đăng ký đối tác</a></button>
-                                </div>
+
                             </div>
                         </div>
                     </div>
