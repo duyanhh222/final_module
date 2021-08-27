@@ -72,9 +72,12 @@ Route::post('user/{food}','Client\UserController@update')->name('client.updateFo
 Route::get('user/{food}','Client\UserController@destroy')->name('client.destroyFood');
 Route::get('dashboard','Client\UserController@dashboard')->name('client.dashboard');
 
-Route::get('/ann', function () {
-    return view('Client.register');
-});
+Route::get('/user/restaurant/bill', 'Client\RestaurantBillController@index')->name('client.restaurant.index');
+Route::get('/user/restaurant/{id}/detail', 'Client\RestaurantBillController@detail')->name('client.restaurant.detail');
+
+
+
+
 
 Route::get('/index', 'Client\HomeClientController@index')->name('client.index');
 Route::get('/home', 'Client\HomeClientController@home')->name('client.home');
@@ -111,6 +114,7 @@ Route::get('/partner/success', 'Client\PartnerController@success')->name('client
 
 Route::get('/{id}/profile', 'Client\ProfileController@index')->name('client.profile');
 Route::post('/{id}/profile', 'Client\ProfileController@update')->name('client.profile.update');
+
 
 
 
