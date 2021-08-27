@@ -11,7 +11,7 @@ class RestaurantController extends Controller
 {
     public function index()
     {
-        $restaurants = Restaurant::where('status', 2)->paginate(5);
+        $restaurants = Restaurant::with(['user'])->where('status', 2)->paginate(5);
         return view('Admin.Restaurant.index', compact('restaurants'));
     }
     public function register()
