@@ -9,6 +9,7 @@ use App\Models\Config;
 use App\Models\Food;
 use App\Models\Restaurant;
 use Illuminate\Http\Request;
+use App\Models\Use_address;
 use Illuminate\Support\Facades\Session;
 
 class CartController extends Controller
@@ -20,6 +21,7 @@ class CartController extends Controller
      */
     public function index()
     {
+        $address = Use_address::where('user_id',Session::get('user_id'))->get();
         $config = Config::find(1);
         $categories = Category::all();
         $cart_quantity = 0;
@@ -46,7 +48,7 @@ class CartController extends Controller
                 $check[$cart->food->restaurant_id] = 0;
             }
         }
-        return view('Client.Home.cart',compact('categories', 'config', 'carts','cart_quantity','data','name'));
+        return view('Client.Home.cart',compact('categories', 'config', 'carts','cart_quantity','data','name','address'));
     }
 
     /**
