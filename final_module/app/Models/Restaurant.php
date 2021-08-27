@@ -22,4 +22,8 @@ class Restaurant extends Model
     {
         return $this->hasMany(Bill::class, 'id');
     }
+    public function user()
+    {
+        return $this->hasOne(User::class, 'user_restaurent');
+    }
 }
