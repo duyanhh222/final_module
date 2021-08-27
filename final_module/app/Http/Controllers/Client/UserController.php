@@ -96,7 +96,7 @@ class UserController extends Controller
     {
         Session::forget('user_id');
         Session::forget('user_name');
-        Session::forget('level');
+        Session::forget('level_level');
         Session::forget('user_phone');
         Session::forget('user_address');
         Session::forget('user_restaurant');
