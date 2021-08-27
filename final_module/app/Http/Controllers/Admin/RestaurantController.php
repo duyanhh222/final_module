@@ -21,7 +21,7 @@ class RestaurantController extends Controller
     }
     public function update($id)
     {
-        $restaurant = Restaurant::findOrFail($id);
+        $restaurant = Restaurant::where('id', $id)->first();
         $restaurant->status = 2;
         $restaurant->save();
         $user = User::where('user_restaurent', $id)->first();

@@ -49,7 +49,7 @@ Route::group(['prefix' => 'admin'],function(){
         Route::post('/config/config/edit', 'Admin\ConfigController@update')->name('config.update');
 
         Route::get('/restaurant/restaurant', 'Admin\RestaurantController@index')->name('restaurant.index');
-        Route::get('/restaurant/restaurant', 'Admin\RestaurantController@update')->name('restaurant.update');
+        Route::get('/restaurant/{id}/update', 'Admin\RestaurantController@update')->name('restaurant.update');
         Route::get('/restaurant/register', 'Admin\RestaurantController@register')->name('restaurant.register');
 
     });
