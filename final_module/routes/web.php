@@ -69,8 +69,8 @@ Route::get('/user/create', 'Client\UserController@create')->name('client.createF
 Route::post('/user/create', 'Client\UserController@store')->name('client.storeFood');
 Route::get('user/{food}/edit','Client\UserController@edit')->name('client.editFood');
 Route::post('user/{food}','Client\UserController@update')->name('client.updateFood');
-Route::get('/user/{food}','Client\UserController@destroy')->name('client.destroyFood');
-Route::get('/user/dashboard','Client\UserController@dashboard')->name('client.dashboard');
+Route::get('user/{food}','Client\UserController@destroy')->name('client.destroyFood');
+Route::get('/dashboard','Client\UserController@dashboard')->name('client.dashboard');
 
 Route::get('/user/restaurant/bill', 'Client\RestaurantBillController@index')->name('client.restaurant.index');
 Route::get('/user/restaurant/{id}/detail', 'Client\RestaurantBillController@detail')->name('client.restaurant.detail');
