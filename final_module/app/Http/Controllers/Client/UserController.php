@@ -12,7 +12,9 @@ use App\Models\Food;
 use App\Models\FoodTag;
 use App\Models\Restaurant;
 use App\Models\Tag;
+use App\Models\Bill;
 use Mail;
+use DB;
 use App\Mail\SendMail;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Session;
@@ -78,11 +80,7 @@ class UserController extends Controller
         $password = $request->password;
         $user = User::where('user_email',$email)->where('user_password',$password)->first();
         if(isset($user)){
-            if ($user->user_level == '2') {
-                Session::put('level','restaurant');
-            } else {
-                Session::put('level','user');
-            }
+            Session::put('level', $user->user_level);
             Session::put('user_id',$user->id);
             Session::put('user_name',$user->user_name);
             Session::put('user_level',$user->user_level);
@@ -364,6 +362,22 @@ class UserController extends Controller
 
     public function dashboard() 
     {
-        return view('Client.User.dashboard');
+        if (Session::has('user_id')) {
+            $id = Session::get('user_id');
+        }
+        $totals = null;
+        $user = User::where('id', $id)->first();
+        $total = Bill::select(DB::raw("(sum(total)) as totals"), DB::raw("(count(created_at)) as number"))
+                ->where('status', '5')->where('restaurant_id', $user->user_restaurent)
+                ->get();
+        $start = request()->start;
+        $end = request()->end;
+        if (isset($start) && isset($end)) {
+            $totals = Bill::select(DB::raw("(sum(total)) as totals"), DB::raw("(count(created_at)) as number"), DB::raw("DATE_FORMAT(created_at, '%Y-%m-%d') as time"))
+                    ->where('status', '5')->where('restaurant_id', $user->user_restaurent)
+                    ->whereDate('created_at', '>=', $start)->whereDate('created_at', '<=', $end)
+                    ->orderBy('time')->groupBy('time')->get();
+        }
+        return view('Client.User.dashboard', compact('total', 'totals', 'start', 'end'));
     }
 }

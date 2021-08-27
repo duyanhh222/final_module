@@ -66,7 +66,7 @@ Route::post('/user/create', 'Client\UserController@store')->name('client.storeFo
 Route::get('user/{food}/edit','Client\UserController@edit')->name('client.editFood');
 Route::post('user/{food}','Client\UserController@update')->name('client.updateFood');
 Route::get('user/{food}','Client\UserController@destroy')->name('client.destroyFood');
-Route::get('dashboard','Client\UserController@dashboard')->name('client.dashboard');
+Route::get('user/dashboard','Client\UserController@dashboard')->name('client.dashboard');
 
 Route::get('/ann', function () {
     return view('Client.register');
