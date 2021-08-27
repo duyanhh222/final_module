@@ -38,4 +38,8 @@ class ProfileController extends Controller
         Use_address::create($request->only('user_id','address'));
         return redirect()->route('client.profile',$id);
     }
+    public function destroy($id)
+    {
+        # code...
+    }
 }

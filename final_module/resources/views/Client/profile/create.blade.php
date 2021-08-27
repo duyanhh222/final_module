@@ -77,7 +77,7 @@
                 <h5 class="text-center mb-4">Địa chỉ nhận hàng</h5>
                 @foreach($address as $value)
                 <div class="row justify-content-between text-left">
-                    <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Địa chỉ<span class="text-danger"> *</span></label> <input type="text" id="fname"  value="{{$value->address}}" placeholder="Nhập tên người dùng" > </div>
+                    <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Địa chỉ<span class="text-danger"> *</span></label> <input type="text" id="fname"  value="{{$value->address}}" placeholder="Nhập tên người dùng" > 
                 </div>
                 @endforeach
                 </div>
