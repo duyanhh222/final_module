@@ -116,83 +116,40 @@
     </div>
     <div class="row">
         <div class="col-6 input_group">
-        <label for="">Thời gian chuẩn bị</label>
-        <input type="text" name="time_preparation" value="{{old('time_preparation')}}" class="form-control" id="" placeholder="Nhập thời gian chuẩn bị">
-        @error('time_preparation')
-            <div class="alert alert-danger">{{ $message }}</div>
-        @enderror
-    </div>
+            <label for="">Thời gian chuẩn bị</label>
+            <input type="text" name="time_preparation" value="{{old('time_preparation')}}" class="form-control" id="" placeholder="Nhập thời gian chuẩn bị">
+            @error('time_preparation')
+                <div class="alert alert-danger">{{ $message }}</div>
+            @enderror
+            
+        </div>
+        <div class="col-6 input_group">
+            <label for="">Tag</label>
+            <input type="text" name="tag" value="{{old('tag')}}" class="form-control" id="" placeholder="Nhập tag">
+            @error('tag')
+                <div class="alert alert-danger">{{ $message }}</div>
+            @enderror
+        </div>
     </div>
     
     </div>
-    <br>
-    <div class="form_title">
-        Thông tin nhà hàng
-    </div>
     <div class="row g-3">
     <div class="col-6 input_group">
-        <label for="">Tên nhà hàng</label>
-        <input type="text" name="restaurant_name" value="{{old('restaurant_name')}}" class="form-control" id="" placeholder="Nhập tên nhà hàng">
-    @error('restaurant_name')
+        <label for="">Nhà hàng</label>
+        <select name="restaurant_id" id="input" class="form-control" required="required">
+            <option value="">---Lựa chọn nhà hàng--</option>
+            @foreach($restaurants as $restaurant)
+            @if(old('restaurant_id') == $restaurant->id)
+            <option value="{{$restaurant->id}}" selected>{{$restaurant->name}} </option>  
+            @endif
+            @if(old('restaurant_id') != $restaurant->id)
+            <option value="{{$restaurant->id}}" >{{$restaurant->name}} </option>
+            @endif
+            @endforeach
+        </select>
+        @error('restaurant_id')
         <div class="alert alert-danger">{{ $message }}</div>
-    @enderror
-    </div>
-    <div class="col-6 input_group">
-        <label for="">Địa chỉ nhà hàng</label>
-        <input type="text" name="restaurant_address" value="{{old('restaurant_address')}}" class="form-control" id="" placeholder="Nhập địa chỉ nhà hàng">
-    @error('restaurant_address')
-        <div class="alert alert-danger">{{ $message }}</div>
-    @enderror
-    </div>
-    </div>
-    <div class="row g-3">
-    <div class="col-6 input_group">
-        <label for="">Giờ mở cửa</label>
-        <input type="text" name="time_open" value="{{old('time_open')}}" class="form-control" id="" placeholder="Nhập giờ mở cửa">
-
-    @error('time_open')
-        <div class="alert alert-danger">{{ $message }}</div>
-    @enderror
-    </div>
-    <div class="col-6 input_group">
-        <label for="">Giờ đóng cửa</label>
-        <input type="text" name="time_close" value="{{old('time_close')}}" class="form-control" id="" placeholder="Nhập giờ đóng cửa">
-    @error('time_close')
-        <div class="alert alert-danger">{{ $message }}</div>
-    @enderror
-    </div>
-    </div>
-    <div class="row g-3">
-        <div class="col-6 input_group">
-            <label for="">Phí dịch vụ</label>
-            <input type="text" name="service" value="{{old('service')}}" class="form-control" id="" placeholder="Nhập phí dịch vụ">
-            @error('service')
-            <div class="alert alert-danger">{{ $message }}</div>
-            @enderror
-        </div>
-    <div class="col-6 input_group">
-        <label for="">Số điện thoại</label>
-        <input type="text" name="phone" value="{{old('phone')}}" class="form-control" id="" placeholder="Nhập số điện thoại">
-    @error('phone')
-        <div class="alert alert-danger">{{ $message }}</div>
-    @enderror
-    </div>
-    </div>
-    <div class="row g-3">
-        <div class="col-6 input_group">
-            <label for="">Giải thích phí dịch vụ</label>
-            <input type="text" name="explain" value="{{old('explain')}}" class="form-control" id="" placeholder="Giải thích phí dịch vụ">
-            @error('explain')
-            <div class="alert alert-danger">{{ $message }}</div>
-            @enderror
-        </div>
-
-    <div class="col-6 input_group">
-        <label for="">Tag</label>
-        <input type="text" name="tag" value="{{old('tag')}}" class="form-control" id="" placeholder="Nhập tag">
-    @error('tag')
-        <div class="alert alert-danger">{{ $message }}</div>
-    @enderror
+        @enderror
     </div>
     </div>
 

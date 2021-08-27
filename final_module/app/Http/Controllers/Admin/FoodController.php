@@ -50,7 +50,8 @@ class FoodController extends Controller
     public function create()
     {
         $data = Category::all();
-        return view('Admin.Food.create',compact('data'));
+        $restaurants = Restaurant::all();
+        return view('Admin.Food.create',compact('data', 'restaurants'));
     }
 
     /**
@@ -69,20 +70,10 @@ class FoodController extends Controller
             'coupon' => 'max:255',
             'count_coupon' => 'max:255',
             'time_preparation' => 'max:255',
-            'restaurant_name' =>'max:255',
-            'restaurant_address' =>'max:255',
-            'time_open' =>'max:255',
-            'time_close' =>'max:255',
-            'explain' => 'max:255',
-            'service' => 'max:255',
-            'phone' => 'nullable|numeric|min:100000000|max:1000000000',
             'tag' => 'required|max:255',
             'file' => 'required|image|mimes:jpeg,jpg,png|mimetypes:image/jpeg,image/png,image/jpg|max:51200'
         ],
         [
-            'phone.numeric' => 'số điện thoại phải là chữ số',
-            'phone.min' => 'số điện thoại phải có 10 chữ số ',
-            'phone.max' => 'số điện thoại phải có 10 chữ số ',
             'name.required' => 'tên món ăn không được để trống',
             'category_id.required' => 'tên danh mục không được để trống',
             'price.required' => 'giá không được để trống',
@@ -99,29 +90,6 @@ class FoodController extends Controller
         $categ1 = Category::where('id',$request->category_id)->first();
         $a = $categ1->amount + 1;
         Category::where('id',$request->category_id)->update(['amount' => $a]);
-        if($request->restaurant_name != null){
-            $restaurant_flag = 0;
-            $restaurants = Restaurant::all();
-            foreach($restaurants as $value){
-                if($this->slugify($request->restaurant_name) == $this->slugify($value->name) &&
-                $this->slugify($request->restaurant_address) == $this->slugify($value->address)){
-                    $request->merge(['restaurant_id' => $value->id]);
-                    $restaurant_flag = 1;
-                }
-            }
-            if($restaurant_flag == 0){
-                $data = array();
-                $data['name'] = $request->restaurant_name;
-                $data['address'] = $request->restaurant_address;
-                $data['time_open'] = $request->time_open;
-                $data['time_close'] = $request->time_close;
-                $data['service'] = $request->service;
-                $data['phone'] = $request->phone;
-                $data['explain'] = $request->explain;
-                $restaurantId = Restaurant::insertGetId($data);
-                $request->merge(['restaurant_id' => $restaurantId]);
-            }
-        }
         if($request->has('file')){
             $file = $request->file;
             $fileName = $file->getClientOriginalName();
@@ -208,9 +176,9 @@ class FoodController extends Controller
         }
         $tags_name =trim($tags,',');
         $restaurantId = $food->restaurant_id;
-        $restaurant = Restaurant::where('id',$restaurantId)->first();
+        $restaurants = Restaurant::all();
         $data = Category::all();
-        return view('Admin.Food.edit',compact('food','data','restaurant','tags_name'));
+        return view('Admin.Food.edit',compact('food','data','restaurants', 'restaurantId','tags_name'));
     }
 
     /**
@@ -263,27 +231,7 @@ class FoodController extends Controller
         $categ2 = Category::where('id',$request->category_id)->first();
         $b = $categ2->amount + 1;
         Category::where('id',$request->category_id)->update(['amount' => $b]);
-        $restaurant_flag = 0;
-        $restaurants = Restaurant::all();
-        foreach($restaurants as $value){
-            if($this->slugify($request->restaurant_name) == $this->slugify($value->name) &&
-                $this->slugify($request->restaurant_address) == $this->slugify($value->address)){
-                $request->merge(['restaurant_id' => $value->id]);
-                $restaurant_flag = 1;
-            }
-        }
-        if($restaurant_flag == 0){
-            $data = array();
-        $data['name'] = $request->restaurant_name;
-        $data['address'] = $request->restaurant_address;
-        $data['time_open'] = $request->time_open;
-        $data['time_close'] = $request->time_close;
-        $data['service'] = $request->service;
-        $data['phone'] = $request->phone;
-        $data['explain'] = $request->explain;
-        $restaurantId = Restaurant::insertGetId($data);
-        $request->merge(['restaurant_id' => $restaurantId]);
-        }
+        
         if(!$request->has('file')){
             $file_file = $request->file_file;
             $request->merge(['image' => $file_file]);
