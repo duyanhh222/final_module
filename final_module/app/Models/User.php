@@ -49,4 +49,8 @@ class User extends Authenticatable
     {
         return $this->hasMany(Bill::class, 'id');
     }
+    public function restaurant()
+    {
+        return $this->belongsTo(Restaurant::class, 'user_restaurent');
+    }
 }

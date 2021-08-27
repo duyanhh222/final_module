@@ -27,25 +27,28 @@
                     <td>{{$restaurant->id}}</td>
                     <td>{{$restaurant->name}}</td>
                     <td></td>
-{{--                    <td>{{$restaurant->user->user_name}}</td>--}}
+                    {{--                    <td>{{$restaurant->user->user_name}}</td>--}}
                     <td>{{$restaurant->phone}}</td>
                     <td>
                         @if($restaurant->status == 1)
-                        Chờ xác nhận
+                            Chờ xác nhận
                         @elseif($restaurant->status == 2)
-                        Đã xác nhận
+                            Đã xác nhận
 
                         @endif
                     </td>
                     <td>
                         @if(strlen($restaurant->address) > 50)
-                        {{substr($restaurant->address,50)}}...
+                            {{substr($restaurant->address,50)}}...
                         @else
-                        {{$restaurant->address}}
+                            {{$restaurant->address}}
                         @endif
                     </td>
                     <td>
 
+                            <a href="{{ route('restaurant.update', $restaurant->id) }}" class="btn btn-sm btn-success">
+                                <i class="fas fa-edit"></i>
+                            </a>
                             <a href="" class="btn btn-sm btn-danger btndelete" onclick="return confirm('Bạn chắc chắn muốn xóa?')">
                                 <i class="fas fa-trash"></i>
                             </a>
@@ -60,3 +63,4 @@
     </div>
     {{ $restaurants->appends(request()->all())->links() }}
 @endsection
+

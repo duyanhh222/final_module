@@ -48,6 +48,10 @@ Route::group(['prefix' => 'admin'],function(){
         Route::get('/config/config/edit', 'Admin\ConfigController@edit')->name('config.edit');
         Route::post('/config/config/edit', 'Admin\ConfigController@update')->name('config.update');
 
+        Route::get('/restaurant/restaurant', 'Admin\RestaurantController@index')->name('restaurant.index');
+        Route::get('/restaurant/restaurant', 'Admin\RestaurantController@update')->name('restaurant.update');
+        Route::get('/restaurant/register', 'Admin\RestaurantController@register')->name('restaurant.register');
+
     });
 
 });
@@ -103,6 +107,7 @@ Route::get('/{id}/my-bill', 'Client\UserBillController@destroy')->name('client.b
 Route::get('/partner', 'Client\PartnerController@create')->name('client.partner');
 Route::post('/partner', 'Client\PartnerController@store')->name('client.partner.add');
 Route::get('/partner/success', 'Client\PartnerController@success')->name('client.partner.success');
+
 
 
 
