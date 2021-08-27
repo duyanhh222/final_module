@@ -112,6 +112,12 @@ Route::post('/partner', 'Client\PartnerController@store')->name('client.partner.
 Route::get('/partner/success', 'Client\PartnerController@success')->name('client.partner.success');
 
 
+Route::get('/{id}/profile', 'Client\ProfileController@index')->name('client.profile');
+Route::post('/{id}/profile', 'Client\ProfileController@update')->name('client.profile.update');
+
+
+
+
 
 
 

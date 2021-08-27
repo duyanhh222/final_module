@@ -141,8 +141,19 @@
                                 <div id="customer-phone" class="col-lg-4 col-md-4 col-sm-12">
                                     <input placeholder="Số điện thoại (bắt buộc)" type="text" name="phone"  @if(old('phone') != null ) value="{{old('phone')}}" @else value="{{Session::get('user_phone')}}" @endif class="form-control" required>
                                 </div>
-                                <div id="customer-add" class="col-lg-12 col-md-12 col-sm-12">
-                                    <input placeholder="Địa chỉ nhà riêng hoặc cơ quan (bắt buộc)" type="text" name="address"  @if(old('address') != null ) value="{{old('address')}}" @else value="{{Session::get('user_address')}}" @endif class="form-control" required>
+                                <div id="customer-add" class="col-lg-4 col-md-4 col-sm-12">
+                                    <select name="address" id="input" class="form-control" required="required">
+                                        <option value="">---Địa chỉ nhận hàng---</option>
+                                        @foreach($address as $value)
+                                        @if(old('address') == $value->address)
+                                        <option value="{{$value->address}}" selected>{{$value->address}} </option>  
+                                        @endif
+                                        @if(old('address') != $value->address)
+                                        <option value="{{$value->address}}" >{{$value->address}} </option>
+                                        @endif
+                                        @endforeach
+                                    </select>
+                                </div>
                                 </div>
                                 <div class="cart_buttons">
                                     <button type="submit" class="button cart_button_checkout">Đặt hàng</button>
