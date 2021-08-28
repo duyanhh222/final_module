@@ -26,15 +26,15 @@
                 <tr>
                     <td>{{$restaurant->id}}</td>
                     <td>{{$restaurant->name}}</td>
-                    <td></td>
-                 <td>{{$restaurant->user->user_name}}</td>
+                 
                     <td>{{$restaurant->phone}}</td>
                     <td>
                         @if($restaurant->status == 1)
                         Chờ xác nhận
                         @elseif($restaurant->status == 2)
                         Đã xác nhận
-
+                        @elseif($restaurant->status == 0)
+                            Tạm dừng
                         @endif
                     </td>
                     <td>
