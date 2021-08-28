@@ -76,22 +76,33 @@
                 <h3>Đăng ký quán đối tác</h3>
                 <div class="card">
                     <h5 class="text-center mb-4">Điền thông tin nhà hàng</h5>
+                    @if(count($errors)>0)
+                        <div class="alert alert-danger">
+                            <div class="col-12">
+                                <ul>
+                                    @foreach($errors->all() as $error)
+                                        <li>{{ $error }}</li><br>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        </div>
+                    @endif
                     <form class="form-card" method="post" action="{{ route('client.partner.add') }}">
                         @csrf
                         <div class="row justify-content-between text-left">
-                            <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Tên nhà hàng<span class="text-danger"> *</span></label> <input type="text" id="fname" name="name" placeholder="Nhập tên nhà hàng" > </div>
-                            <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Số điện thoại<span class="text-danger"> *</span></label> <input type="text" id="lname" name="phone" placeholder="Nhập số điện thoại" > </div>
+                            <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Tên nhà hàng<span class="text-danger"> * </span></label> <input type="text" id="fname" name="name" value="{{ old('name') }}" placeholder="Nhập tên nhà hàng" > </div>
+                            <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Số điện thoại<span class="text-danger"> *</span></label> <input type="text" id="lname" name="phone" value="{{ old('phone') }}" placeholder="Nhập số điện thoại" > </div>
                         </div>
                         <div class="row justify-content-between text-left">
-                            <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Giờ mở cửa<span class="text-danger"> *</span></label> <input type="text" id="email" name="time_open" placeholder="Nhập giờ mở cửa" > </div>
-                            <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Giờ đóng cửa<span class="text-danger"> *</span></label> <input type="text" id="mob" name="time_close" placeholder="Nhập giờ đóng cửa" > </div>
+                            <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Giờ mở cửa<span class="text-danger"> *</span></label> <input type="text" id="email" name="time_open" value="{{ old('time_open') }}" placeholder="Nhập giờ mở cửa" > </div>
+                            <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Giờ đóng cửa<span class="text-danger"> *</span></label> <input type="text" id="mob" name="time_close" value="{{ old('time_close') }}" placeholder="Nhập giờ đóng cửa" > </div>
                         </div>
                         <div class="row justify-content-between text-left">
-                            <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Phí dịch vụ<span class="text-danger"> *</span></label> <input type="text" id="job" name="service" placeholder="Nhập phí dịch vụ"> </div>
-                            <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Giải thích phí dịch vụ<span class="text-danger"> *</span></label> <input type="text" id="explain" name="explain" placeholder="Giải thích phí dịch vụ" > </div>
+                            <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Phí dịch vụ<span class="text-danger"> *</span></label> <input type="text" id="job" name="service" value="{{ old('service') }}" placeholder="Nhập phí dịch vụ"> </div>
+                            <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Giải thích phí dịch vụ<span class="text-danger"> *</span></label> <input type="text" id="explain" value="{{ old('explain') }}" name="explain" placeholder="Giải thích phí dịch vụ" > </div>
                         </div>
                         <div class="row justify-content-between text-left">
-                            <div class="form-group col-12 flex-column d-flex"> <label class="form-control-label px-3">Địa chỉ<span class="text-danger"> *</span></label> <input type="text" id="ans" name="address" placeholder="Nhập địa chỉ" > </div>
+                            <div class="form-group col-12 flex-column d-flex"> <label class="form-control-label px-3">Địa chỉ<span class="text-danger"> *</span></label> <input type="text" id="ans" name="address" value="{{ old('address') }}" placeholder="Nhập địa chỉ" > </div>
                         </div>
                         <div class="row justify-content-end">
                             <div class="form-group col-sm-6"> <button type="submit" class="btn-block btn-primary">Đăng ký</button> </div>

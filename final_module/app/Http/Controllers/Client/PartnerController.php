@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Client;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\PartnerRequest;
 use App\Models\Cart;
 use App\Models\Category;
 use App\Models\Config;
@@ -29,7 +30,7 @@ class PartnerController extends Controller
         return view('Client.Partner.create', compact('like', 'config', 'cart_quantity', 'categories', 'carts'));
     }
 
-    public function store(Request $request)
+    public function store(PartnerRequest $request)
     {
         $restaurant = new Restaurant();
         $restaurant->name = $request->name;
