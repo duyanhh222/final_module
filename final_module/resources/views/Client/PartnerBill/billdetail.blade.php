@@ -265,7 +265,7 @@
                         </li>
                     @endforeach
                 </ul>
-                <form action="" method="post">
+                <form action="{{ route('client.restaurant.update',$bill->id) }}" method="post">
                     @csrf
                     <div class="form-check">
                         <input class="form-check-input" type="radio" name="status" value="0"
