@@ -74,6 +74,7 @@ Route::get('/dashboard','Client\UserController@dashboard')->name('client.dashboa
 
 Route::get('/user/restaurant/bill', 'Client\RestaurantBillController@index')->name('client.restaurant.index');
 Route::get('/user/restaurant/{id}/detail', 'Client\RestaurantBillController@detail')->name('client.restaurant.detail');
+Route::post('/user/restaurant/{id}/detail', 'Client\RestaurantBillController@update')->name('client.restaurant.update');
 
 
 
@@ -116,6 +117,7 @@ Route::get('/{id}/my-bill', 'Client\UserBillController@destroy')->name('client.b
 Route::get('/partner', 'Client\PartnerController@create')->name('client.partner');
 Route::post('/partner', 'Client\PartnerController@store')->name('client.partner.add');
 Route::get('/partner/success', 'Client\PartnerController@success')->name('client.partner.success');
+
 
 
 Route::post('/{id}/profile', 'Client\ProfileController@update')->name('client.profile.update');
