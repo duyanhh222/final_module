@@ -121,6 +121,7 @@ Route::get('/partner/success', 'Client\PartnerController@success')->name('client
 Route::post('/{id}/profile', 'Client\ProfileController@update')->name('client.profile.update');
 Route::get('/{id}/profile', 'Client\ProfileController@destroy')->name('client.profile.destroy');
 
+Route::get('/{id}/profile', 'Client\ProfileController@index')->name('client.profile');
 
 
 
