@@ -84,6 +84,7 @@ class BillController extends Controller
             $check[$cart->food->restaurant_id] = 0;
         }
     }
+        Cart::where('user_id',Session::get('user_id'))->delete();
         $config = Config::find(1);
         $categories = Category::all();
         return view('Client.Home.success',compact('like','cart_quantity','config','categories'));

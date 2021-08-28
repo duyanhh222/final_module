@@ -75,11 +75,11 @@
             <div class="col-xl-7 col-lg-8 col-md-9 col-11 text-center">
                 <div class="card">
                 <h5 class="text-center mb-4">Địa chỉ nhận hàng</h5>
-                @foreach($address as $value)
+                @foreach($address as $key=>$value)
                 <div class="row justify-content-between text-left">
-                    <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Địa chỉ<span class="text-danger"> *</span></label> <input type="text" id="fname"  value="{{$value->address}}" placeholder="Nhập tên người dùng" > 
+                    <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Địa chỉ {{$key+1}}<span class="text-danger"> *</span></label> <input type="text" id="fname"  value="{{$value->address}}" placeholder="Nhập tên người dùng" disabled> </div>
                 </div>
-                @endforeach
+                    @endforeach
                 </div>
             </div>
         </div>
