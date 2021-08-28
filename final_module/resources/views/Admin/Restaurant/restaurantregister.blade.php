@@ -26,8 +26,7 @@
                 <tr>
                     <td>{{$restaurant->id}}</td>
                     <td>{{$restaurant->name}}</td>
-                    <td></td>
-                    {{--                    <td>{{$restaurant->user->user_name}}</td>--}}
+                    <td>{{$restaurant->user->user_name}}</td>
                     <td>{{$restaurant->phone}}</td>
                     <td>
                         @if($restaurant->status == 1)
