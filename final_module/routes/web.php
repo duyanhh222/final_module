@@ -78,6 +78,14 @@ Route::post('/user/restaurant/{id}/detail', 'Client\RestaurantBillController@upd
 
 
 
+
+Route::get('/user/restaurant/bill', 'Client\RestaurantBillController@index')->name('client.restaurant.index');
+Route::get('/user/restaurant/{id}/detail', 'Client\RestaurantBillController@detail')->name('client.restaurant.detail');
+
+
+
+
+
 Route::get('/index', 'Client\HomeClientController@index')->name('client.index');
 Route::get('/home', 'Client\HomeClientController@home')->name('client.home');
 
