@@ -85,6 +85,7 @@
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
+          @if (Session::has('user_restaurant'))
           <li class="nav-item">
             <a href="{{ route('client.dashboard') }}" class="nav-link">
               <i class="nav-icon fas fa-home"></i>
@@ -94,6 +95,7 @@
               </p>
             </a>
           </li>
+          @endif
           <li class="nav-item">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-shopping-cart"></i>
@@ -119,6 +121,7 @@
               </li>
             </ul>
           </li>
+          @if (Session::has('user_restaurant'))
             <li class="nav-item">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-shopping-cart"></i>
@@ -136,6 +139,7 @@
               </li>
             </ul>
           </li>
+          @endif
         </ul>
       </nav>
 
