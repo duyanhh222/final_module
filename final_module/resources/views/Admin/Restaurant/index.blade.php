@@ -44,6 +44,9 @@
                         @endif
                     </td>
                     <td>
+                            <a href="{{route('restaurant.dashboard', $restaurant->id)}}" style="margin-right:10px">
+                            <i class="fas fa-file" style="transform:scale(2.0);"></i>
+                            </a>
                             @if($restaurant->status != 0)
                             <a href="{{route('restaurant.disable',$restaurant->id)}}" class="btn btn-sm btn-danger btndelete" onclick="return confirm('Bạn muốn vô hiệu nhà này ko?')">
                                 <i class="fas fa-trash"></i>
