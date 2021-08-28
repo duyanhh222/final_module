@@ -45,10 +45,15 @@
                         @endif
                     </td>
                     <td>
-
-                            <a href="" class="btn btn-sm btn-danger btndelete" onclick="return confirm('Bạn chắc chắn muốn xóa?')">
+                            @if($restaurant->status != 0)
+                            <a href="{{route('restaurant.disable',$restaurant->id)}}" class="btn btn-sm btn-danger btndelete" onclick="return confirm('Bạn muốn vô hiệu nhà này ko?')">
                                 <i class="fas fa-trash"></i>
                             </a>
+                            @elseif($restaurant->status == 0)
+                            <a href="{{ route('restaurant.update', $restaurant->id) }}" class="btn btn-sm btn-success">
+                                <i class="fas fa-edit"></i>
+                            </a>
+                            @endif
 
 
 

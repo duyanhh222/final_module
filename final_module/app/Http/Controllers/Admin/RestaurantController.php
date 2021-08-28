@@ -11,7 +11,7 @@ class RestaurantController extends Controller
 {
     public function index()
     {
-        $restaurants = Restaurant::with(['user'])->where('status', 2)->paginate(5);
+        $restaurants = Restaurant::with(['user'])->where('status',2)->orWhere('status',0)->paginate(5);
         return view('Admin.Restaurant.index', compact('restaurants'));
     }
     public function register()
@@ -33,16 +33,13 @@ class RestaurantController extends Controller
         return redirect()->route('restaurant.index');
     }
 
-    public function destroy($id)
+    public function disable($id)
     {
         $restaurant = Restaurant::findOrFail($id);
-        $user = User::where('user_restaurent', $id)->first();
-        if (isset($user))
-        {
-            $user->user_level = 0;
-            $user->save();
+        if(isset($restaurant)){
+            $restaurant->status = 0;
+            $restaurant->save();
         }
-        $restaurant->delete();
         return redirect()->route('restaurant.index');
 
     }
