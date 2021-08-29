@@ -93,6 +93,8 @@
 
                                 <!-- Slider Item -->
                                 @for($food = 0; $food < count($mostView); $food++)
+                                @if($mostView->get($food)->restaurant != null)
+                                @if($mostView->get($food)->restaurant->status == 2)
                                     <div class="featured_slider_item">
                                         <div class="border_active"></div>
                                         <div class="product_item discount d-flex flex-column align-items-center justify-content-center text-center">
@@ -189,6 +191,8 @@
                                             </ul>
                                         </div>
                                     </div>
+                                    @endif
+                                    @endif
                                 @endfor
                             </div>
                             <div class="featured_slider_dots_cover"></div>
@@ -201,6 +205,8 @@
 
                                 <!-- Slider Item -->
                                 @for($food = 0; $food < count($onSale); $food ++)
+                                @if($onSale->get($food)->restaurant != null)
+                                @if($onSale->get($food)->restaurant->status == 2)
                                     <div class="featured_slider_item">
                                         <div class="border_active"></div>
                                         <div
@@ -296,6 +302,8 @@
                                             </ul>
                                         </div>
                                     </div>
+                                    @endif
+                                    @endif
                                 @endfor
                             </div>
                             <div class="featured_slider_dots_cover"></div>
