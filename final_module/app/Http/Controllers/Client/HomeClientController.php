@@ -66,7 +66,7 @@ class HomeClientController extends Controller
         $config = Config::find(1);
         $categories = Category::all();
         $category = Category::findOrFail($id);
-        $foods = Food::where('category_id', $id)->paginate(2);
+        $foods = Food::with(['restaurant'])->where('category_id', $id)->paginate(2);
         if(isset($carts)) {
             return view('Client.Category.showcategory', compact('category', 'config', 'categories', 'foods', 'like','cart_quantity'));
 
@@ -90,7 +90,7 @@ class HomeClientController extends Controller
         {
             return redirect()->route('client.home');
         }
-        $foods = Food::where('name', 'LIKE', '%' .$keyword. '%')->orderBy('created_at','desc')->paginate(1);
+        $foods = Food::with(['restaurant'])->where('name', 'LIKE', '%' .$keyword. '%')->orderBy('created_at','desc')->paginate(1);
         $foods->withPath("search?_token=$request->token&keyword=$request->keyword");
         $categories = Category::orderByDesc('amount')->get();
         if(isset($carts)){

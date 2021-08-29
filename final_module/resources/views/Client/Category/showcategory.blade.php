@@ -96,6 +96,8 @@
 
                                 <!-- Product Item -->
                                 @foreach($foods as $food)
+                                @if($food->restaurant != null)
+                                    @if($food->restaurant->status == 2)
                                     <div class="product_item discount">
                                         <div class="product_border"></div>
                                         @if(asset($food->image))
@@ -171,6 +173,8 @@
 
                                         </ul>
                                     </div>
+                                    @endif
+                                    @endif
                                 @endforeach
                             </div>
 
