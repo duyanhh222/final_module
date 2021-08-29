@@ -34,13 +34,13 @@ class HomeClientController extends Controller
                 $cart_quantity += $cart->quantity;
             }
         }
-        $mostView = Food::orderByDesc('view_count')->limit('16')->get();
+        $mostView = Food::with(['restaurant'])->orderByDesc('view_count')->limit('16')->get();
         $categories = Category::all();
-        $onSale = Food::where('on_sale', 1)->limit('16')->get();
-        $fastDelivery = Food::orderByDesc('time_preparation')->limit('20')->get();
-        $sell_quantity = Food::orderByDesc('sell_quantity')->limit('23')->get();
-        $mostNew = Food::orderByDesc('created_at')->limit('12')->get();
-        $bestPrice = Food::orderByDesc('price_discount')->first();
+        $onSale = Food::with(['restaurant'])->where('on_sale', 1)->limit('16')->get();
+        $fastDelivery = Food::with(['restaurant'])->orderByDesc('time_preparation')->limit('20')->get();
+        $sell_quantity = Food::with(['restaurant'])->orderByDesc('sell_quantity')->limit('23')->get();
+        $mostNew = Food::with(['restaurant'])->orderByDesc('created_at')->limit('12')->get();
+        $bestPrice = Food::with(['restaurant'])->orderByDesc('price_discount')->first();
         $tags = Tag::all();
         $config = Config::find(1);
         if(isset($like)){

@@ -22,6 +22,8 @@
 
                                     <!-- Slider Item -->
                                     @for($food = 0; $food < count($fastDelivery); $food ++)
+                                    @if($fastDelivery->get($food)->restaurant != null)
+                                    @if($fastDelivery->get($food)->restaurant->status == 2)
                                     <div class="arrivals_slider_item">
                                         <div class="border_active"></div>
                                         <div class="product_item is_new d-flex flex-column align-items-center justify-content-center text-center">
@@ -93,6 +95,8 @@
                                             </ul>
                                         </div>
                                     </div>
+                                    @endif
+                                    @endif
                                     @endfor
                                 </div>
                                 <div class="arrivals_slider_dots_cover"></div>
@@ -104,6 +108,8 @@
 
                                     <!-- Slider Item -->
                                     @for($food = 3; $food < count($sell_quantity); $food ++)
+                                    @if($sell_quantity->get($food)->restaurant != null)
+                                    @if($sell_quantity->get($food)->restaurant->status == 2)
                                         <div class="arrivals_slider_item">
                                             <div class="border_active"></div>
                                             <div class="product_item is_new d-flex flex-column align-items-center justify-content-center text-center">
@@ -175,6 +181,8 @@
                                                 </ul>
                                             </div>
                                         </div>
+                                        @endif
+                                        @endif
                                     @endfor
                                 </div>
                                 <div class="arrivals_slider_dots_cover"></div>
