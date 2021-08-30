@@ -18,7 +18,6 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('Client/styles/product_responsive.css') }}">
 <div class="super_container">
     <!-- Cart -->
-
     <div class="cart_section">
         <div class="container">
             <div class="row">
@@ -36,6 +35,8 @@
                                     $check_name[$i] = 1;
                                 }                                  
                                 foreach($carts as $cart){
+                                    if($food[$cart->id]->restaurant != null){
+                                        if($food[$cart->id]->restaurant->status == 2){
                                     $total = 0;
                                     if($check[$cart->food->restaurant_id] == 1){
                                         foreach($carts as $value){
@@ -83,6 +84,8 @@
                             </ul>
                            
                             <?php  
+                                        }
+                                    }
                             } 
                         }
                             $check[$cart->food->restaurant_id] = 0; 
@@ -100,23 +103,9 @@
                         
                         <div class="col-5">
                         <table class="table table-striped"> 
-                            <?php $total = 0; ?>
-                        @foreach($data as $key=>$value)
-                            <tr class="food_row">
-                                <?php $total += $value; ?>
-                            </tr>
-                        @endforeach
                         </table>
                         </div>
-                        <div class="order_total">
-                            <div class="order_total_content text-md-right">                             
-                                <div class="order_total_title">                                                               
-                                        Tổng hóa đơn:{{number_format($total)}}               
-                                </div>
-                                
-                                <div class="order_total_amount"></div>
-                            </div>
-                        </div>
+                        
                     </div>
                     <div id="customer">
                         <form id="buy-now" method="post" action="{{route('bill.create')}}">

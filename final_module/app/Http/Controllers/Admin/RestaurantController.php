@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Restaurant;
 use App\Models\User;
 use App\Models\Bill;
-use DB;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
 class RestaurantController extends Controller

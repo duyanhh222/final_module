@@ -21,6 +21,7 @@ class CartController extends Controller
      */
     public function index()
     {
+        $food = array();
         $address = Use_address::where('user_id',Session::get('user_id'))->get();
         $config = Config::find(1);
         $categories = Category::all();
@@ -35,6 +36,7 @@ class CartController extends Controller
         $data = array();
         $name = array();
         foreach($carts as $cart){
+            $food[$cart->id] = Food::with('restaurant')->where('id',$cart->food_id)->first();
             $total = 0;
             if($check[$cart->food->restaurant_id] == 1){
                 foreach($carts as $value){
@@ -48,7 +50,8 @@ class CartController extends Controller
                 $check[$cart->food->restaurant_id] = 0;
             }
         }
-        return view('Client.Home.cart',compact('categories', 'config', 'carts','cart_quantity','data','name','address'));
+        
+        return view('Client.Home.cart',compact('categories', 'config', 'carts','cart_quantity','data','name','address','food'));
     }
 
     /**
@@ -69,7 +72,6 @@ class CartController extends Controller
      */
     public function store(Request $request)
     {
-       
        
         $carts = Cart::with(['food'])->where('user_id',Session::get('user_id'))->get();
         $flag = 0;
@@ -147,9 +149,12 @@ class CartController extends Controller
      */
     public function update(Request $request)
     {
+        $data = array();
         $carts = Cart::where('user_id',Session::get('user_id'))->get();
         foreach($carts as $cart)
         {
+            $data[$cart->id] = Food::with('restaurant')->where('id',$cart->food_id)->first();
+            if($data[$cart->id]->restaurant->status == 2){
             $food = Food::where('id',$cart->food_id)->first();
             if($food->price_discount == 0){
                 $total = (int)$request->num[$cart->id] * $food->price;
@@ -160,6 +165,7 @@ class CartController extends Controller
             $request->merge(['total' => $total]);
             $request->merge(['quantity' => (int)$request->num[$cart->id]]);
             Cart::where('id',$cart->id)->update($request->only('total','quantity'));
+        }
         }
         return redirect()->route('show.cart');
     }

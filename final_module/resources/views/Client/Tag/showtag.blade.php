@@ -96,8 +96,9 @@
 
                                 <!-- Product Item -->
 
-                                @foreach($food_tags as $food_tag)
-
+                                @foreach($food_tags as $food_tag)                         
+                                @if($food[$food_tag->id]->restaurant != null)
+                                @if($food[$food_tag->id]->restaurant->status == 2)
                                     <div class="product_item discount">
                                         <div class="product_border"></div>
                                         @if(asset($food_tag->food->image))
@@ -184,6 +185,8 @@
 {{--                                        </form>--}}
 
                                     </div>
+                                    @endif
+                                    @endif
                                 @endforeach
                             </div>
 

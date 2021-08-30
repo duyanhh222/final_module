@@ -72,7 +72,9 @@
                                     </ul>
                                 </div>
 
+
                                     @if ( Session::get('user_restaurant') == 0)
+
                                     <div class="top_bar_menu">
                                         <button class="btn btn-info"  href="{{ route('client.partner') }}"><a href="{{ route('client.partner') }}">Đăng ký đối tác</a></button>
                                     </div>
