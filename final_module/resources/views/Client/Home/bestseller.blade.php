@@ -22,6 +22,7 @@
 
                             <!-- Best Sellers Item -->
                             @for($food = 3; $food < count($mostNew); $food ++)
+                            @if($mostNew->get($food)->restaurant != null)
                             @if($mostNew->get($food)->restaurant->status == 2)
                             <div class="bestsellers_item discount">
                                 <div class="bestsellers_item_container d-flex flex-row align-items-center justify-content-start">
@@ -92,6 +93,7 @@
                                                                                                             $fastDelivery->get($food)->price * 100) }}%</li>
                                 </ul>
                             </div>
+                            @endif
                             @endif
                             @endfor
                         </div>
