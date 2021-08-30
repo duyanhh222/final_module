@@ -50,7 +50,7 @@
                             <a href="{{ route('restaurant.update', $restaurant->id) }}" class="btn btn-sm btn-success">
                                 <i class="fas fa-edit"></i>
                             </a>
-                            <a href="" class="btn btn-sm btn-danger btndelete" onclick="return confirm('Bạn chắc chắn muốn xóa?')">
+                            <a href="{{  route('restaurant.destroy', $restaurant->id) }}" class="btn btn-sm btn-danger btndelete" onclick="return confirm('Bạn chắc chắn muốn xóa?')">
                                 <i class="fas fa-trash"></i>
                             </a>
 

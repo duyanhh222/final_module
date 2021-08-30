@@ -52,6 +52,7 @@ Route::group(['prefix' => 'admin'],function(){
         Route::get('/restaurant/{id}/update', 'Admin\RestaurantController@update')->name('restaurant.update');
         Route::get('/restaurant/register', 'Admin\RestaurantController@register')->name('restaurant.register');
         Route::get('/restaurant/{id}/disable', 'Admin\RestaurantController@disable')->name('restaurant.disable');
+        Route::get('/restaurant/{id}/destroy', 'Admin\RestaurantController@destroy')->name('restaurant.destroy');
         Route::get('/restaurant/dashboard/{restaurant}','Admin\RestaurantController@dashboard')->name('restaurant.dashboard');
     });
 

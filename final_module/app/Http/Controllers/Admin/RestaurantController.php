@@ -46,7 +46,23 @@ class RestaurantController extends Controller
 
     }
 
-    public function dashboard($id) 
+    public function destroy($id)
+    {
+        $restaurant = Restaurant::findOrFail($id);
+        if(isset($restaurant)){
+            $user = User::where('user_restaurent', $id)->first();
+            if (isset($user))
+            {
+                $user->user_level = 0;
+                $user->save();
+            }
+            $restaurant->delete();
+        }
+        return redirect()->route('restaurant.index');
+
+    }
+
+    public function dashboard($id)
     {
         $totals = null;
         $total = Bill::select(DB::raw("(sum(total)) as totals"), DB::raw("(count(created_at)) as number"))
