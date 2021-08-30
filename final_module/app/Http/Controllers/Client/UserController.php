@@ -100,7 +100,7 @@ class UserController extends Controller
         Session::forget('user_phone');
         Session::forget('user_address');
         Session::forget('user_restaurant');
-        return redirect()->route('client.loadLogin');
+        return redirect()->route('client.home');
     }
     public function showList()
     {

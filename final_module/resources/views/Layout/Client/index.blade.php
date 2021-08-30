@@ -50,7 +50,7 @@
         </a>
       </li>
       <li class="nav-item">
-        <a class="btn btn-outline-secondary" href="{{ route('admin.logout') }}">Đăng xuất</a>
+        <a class="btn btn-outline-secondary" href="{{ route('user.logout') }}">Đăng xuất</a>
       </li>
     </ul>
   </nav>

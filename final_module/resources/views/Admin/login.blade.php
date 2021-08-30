@@ -86,7 +86,7 @@
 
 					<div class="container-login100-form-btn">
 						<button class="login100-form-btn">
-							Đăng ký
+							Đăng nhập
 						</button>
 					</div>
 
