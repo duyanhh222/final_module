@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Client;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\PartnerEditRequest;
 use App\Http\Requests\PartnerRequest;
 use App\Models\Cart;
 use App\Models\Category;
@@ -67,6 +68,25 @@ class PartnerController extends Controller
         $config = Config::find(1);
         $categories = Category::all();
         return view('Client.Partner.success', compact('like', 'config', 'cart_quantity', 'categories', 'carts'));
+
+    }
+
+    public function edit($id)
+    {
+        $restaurant = Restaurant::find($id);
+        return view('Client.User.partneredit', compact('restaurant'));
+    }
+
+    public function update(PartnerEditRequest $request, $id)
+    {
+        $restaurant = Restaurant::find($id);
+        $restaurant->phone = $request->phone;
+        $restaurant->time_open = $request->time_open;
+        $restaurant->time_close = $request->time_close;
+        $restaurant->service = $request->service;
+        $restaurant->explain = $request->explain;
+        $restaurant->save();
+        return view('Client.User.partneredit', compact('restaurant'));
 
     }
 }

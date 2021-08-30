@@ -52,7 +52,7 @@ Route::group(['prefix' => 'admin'],function(){
         Route::get('/restaurant/{id}/update', 'Admin\RestaurantController@update')->name('restaurant.update');
         Route::get('/restaurant/register', 'Admin\RestaurantController@register')->name('restaurant.register');
         Route::get('/restaurant/{id}/disable', 'Admin\RestaurantController@disable')->name('restaurant.disable');
-        Route::get('/dashboard/{restaurant}','Admin\RestaurantController@dashboard')->name('restaurant.dashboard');
+        Route::get('/restaurant/dashboard/{restaurant}','Admin\RestaurantController@dashboard')->name('restaurant.dashboard');
     });
 
 });
@@ -77,7 +77,8 @@ Route::get('/user/restaurant/bill', 'Client\RestaurantBillController@index')->na
 Route::get('/user/restaurant/{id}/detail', 'Client\RestaurantBillController@detail')->name('client.restaurant.detail');
 Route::post('/user/restaurant/{id}/detail', 'Client\RestaurantBillController@update')->name('client.restaurant.update');
 
-
+Route::get('/user/{id}/partner', 'Client\PartnerController@edit')->name('client.partner.edit');
+Route::post('/user/{id}/partner', 'Client\PartnerController@update')->name('client.partner.update');
 
 
 Route::get('/user/restaurant/bill', 'Client\RestaurantBillController@index')->name('client.restaurant.index');
