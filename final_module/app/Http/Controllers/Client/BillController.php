@@ -10,6 +10,7 @@ use App\Models\Cart;
 use App\Models\Favorite;
 use App\Models\Config;
 use App\Models\Category;
+use App\Models\Food;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Session;
 
@@ -55,10 +56,14 @@ class BillController extends Controller
                 $cart_quantity += $cart->quantity;
             }
         }
+        $food = array();
         $check = array();
         for($i= 0;$i<1000000;$i++)
             $check[$i] = 1;
         foreach($carts as $cart){
+            $food[$cart->id] = Food::with('restaurant')->where('id',$cart->food_id)->first();
+            if($food[$cart->id]->restaurant != null){
+                if($food[$cart->id]->restaurant->status == 2){
             $total = 0;
             if($check[$cart->food->restaurant_id] == 1){
                 foreach($carts as $value){
@@ -84,6 +89,8 @@ class BillController extends Controller
             $check[$cart->food->restaurant_id] = 0;
         }
     }
+}
+        }
         Cart::where('user_id',Session::get('user_id'))->delete();
         $config = Config::find(1);
         $categories = Category::all();
