@@ -30,7 +30,7 @@
                     @if($restaurant->user != null)
                     <td>{{$restaurant->user->user_name}}</td>
                     @else
-                    <td>null</td>
+                    <td></td>
                     @endif
 
                     <td>{{$restaurant->phone}}</td>

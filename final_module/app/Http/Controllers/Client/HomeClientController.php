@@ -164,4 +164,21 @@ class HomeClientController extends Controller
         }
         return view('Client.Restaurant.foodrestaurant', compact('restaurant', 'config','foods', 'categories'));
     }
+
+    public function view($id)
+    {
+
+        $productKey = 'product_' . $prd_id;
+        //dd(Session::has($prd_id));
+        if (Session::has($productKey) == false)
+        {
+            Food::where('prd_id', $prd_id)->increment('prd_view_count');
+            Session::put($productKey, 1);
+
+        }
+        $categories = Category::all();
+        $contact = Config::orderByDesc('config_id')->first();
+        $product = Product::findOrFail($prd_id);
+        return view('client.product.product', compact('product', 'contact',  'categories'));
+    }
 }

@@ -27,13 +27,13 @@
                     <td>{{$restaurant->id}}</td>
                     <td>{{$restaurant->name}}</td>
 
-                 
+
                     @if($restaurant->user != null)
                     <td>{{$restaurant->user->user_name}}</td>
                     @else
-                    <td>null</td>
+                    <td></td>
                     @endif
-                    
+
                     <td>{{$restaurant->phone}}</td>
                     <td>
                         @if($restaurant->status == 1)
