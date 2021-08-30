@@ -68,6 +68,14 @@
 						</div>
 					</div>
 
+					<div class="flex-sb-m w-full p-t-3 p-b-32">
+						<div>
+							<a href="{{ route('client.loadRegister') }}" class="txt1">
+								Tôi chưa có tài khoản
+							</a>
+						</div>
+					</div>
+
 					<div class="error-message">
                         @if ($errors->any())
                             @foreach($errors->all() as $nameError)
