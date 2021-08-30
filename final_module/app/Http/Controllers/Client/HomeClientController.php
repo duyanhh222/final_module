@@ -102,6 +102,7 @@ class HomeClientController extends Controller
 
     public function tag($id)
     {
+        $food = array();
         if(Session::has('user_id')){
             $like = Favorite::where('user_id',Session::get('user_id'))->get();
             $carts = Cart::where('user_id',Session::get('user_id'))->get();
@@ -112,12 +113,15 @@ class HomeClientController extends Controller
         }
         $config = Config::find(1);
         $tag = Tag::findOrFail($id);
-        $food_tags = FoodTag::with('food')->where('tag_id', $id)->paginate(2);
+        $food_tags = FoodTag::with(['food'])->where('tag_id', $id)->paginate(2);
+        foreach($food_tags as $food_tag){
+            $food[$food_tag->id] = Food::with('restaurant')->where('id',$food_tag->food_id)->first();
+        }
         $categories = Category::all();
         if(isset($carts)){
-            return view('Client.Tag.showtag', compact('food_tags', 'like', 'config','categories', 'tag','cart_quantity'));
+            return view('Client.Tag.showtag', compact('food_tags', 'like', 'config','categories', 'tag','cart_quantity','food'));
         }
-        return view('Client.Tag.showtag', compact('food_tags', 'config','categories', 'tag'));
+        return view('Client.Tag.showtag', compact('food_tags', 'config','categories', 'tag','food'));
 
     }
 
