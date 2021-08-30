@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Restaurant;
 use App\Models\User;
+use App\Models\Bill;
+use DB;
 use Illuminate\Http\Request;
 
 class RestaurantController extends Controller
@@ -42,5 +44,22 @@ class RestaurantController extends Controller
         }
         return redirect()->route('restaurant.index');
 
+    }
+
+    public function dashboard($id) 
+    {
+        $totals = null;
+        $total = Bill::select(DB::raw("(sum(total)) as totals"), DB::raw("(count(created_at)) as number"))
+                ->where('status', '5')->where('restaurant_id', $id)
+                ->get();
+        $start = request()->start;
+        $end = request()->end;
+        if (isset($start) && isset($end)) {
+            $totals = Bill::select(DB::raw("(sum(total)) as totals"), DB::raw("(count(created_at)) as number"), DB::raw("DATE_FORMAT(created_at, '%Y-%m-%d') as time"))
+                    ->where('status', '5')->where('restaurant_id', $id)
+                    ->whereDate('created_at', '>=', $start)->whereDate('created_at', '<=', $end)
+                    ->orderBy('time')->groupBy('time')->get();
+        }
+        return view('Admin.Restaurant.dashboard', compact('total', 'totals', 'start', 'end'));
     }
 }
