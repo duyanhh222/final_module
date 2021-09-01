@@ -18,7 +18,7 @@
                 <tr>
                     <td>{{$bill->id}}</td>
                     <td>{{$bill->user->user_name}}</td>
-                    <td>{{$bill->total}}</td>
+                    <td>{{number_format($bill->total)}} đ</td>
                     <td>{{$bill->created_at}}</td>
                     <td>
                         @if( $bill->status == 0 )
