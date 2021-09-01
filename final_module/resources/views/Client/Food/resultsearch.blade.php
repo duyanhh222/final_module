@@ -36,16 +36,6 @@
                                     @endforeach
                                 </ul>
                             </div>
-                            <div class="sidebar_section filter_by_section">
-                                <div class="sidebar_title">Filter By</div>
-                                <div class="sidebar_subtitle">Price</div>
-                                <div class="filter_price">
-                                    <div id="slider-range" class="slider_range"></div>
-                                    <p>Range: </p>
-                                    <p><input type="text" id="amount" class="amount" readonly style="border:0; font-weight:bold;"></p>
-                                </div>
-                            </div>
-
                         </div>
                     </div>
                     <div class="col-lg-9">
@@ -54,22 +44,6 @@
                             <div class="shop_bar clearfix">
                                 <div class="shop_food_count"><span>{{ count($foods) }}</span> sản phẩm được tìm
                                     thấy cho: {{ $keyword }}
-                                </div>
-                                <div class="shop_sorting">
-                                    <span>Sort by:</span>
-                                    <ul>
-                                        <li>
-                                            <span class="sorting_text">highest rated<i class="fas fa-chevron-down"></i></span>
-                                            <ul>
-                                                <li class="shop_sorting_button"
-                                                    data-isotope-option='{ "sortBy": "name" }'>name
-                                                </li>
-                                                <li class="shop_sorting_button"
-                                                    data-isotope-option='{ "sortBy": "price" }'>price
-                                                </li>
-                                            </ul>
-                                        </li>
-                                    </ul>
                                 </div>
                             </div>
                             <div class="food_grid">
