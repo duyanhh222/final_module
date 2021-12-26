@@ -4,6 +4,10 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Admin;
+use App\Models\Food;
+use App\Models\User;
+use App\Models\Restaurant;
+use App\Models\Bill;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
@@ -14,6 +18,19 @@ class AdminController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function slugify($str) { 
+        $str = trim(mb_strtolower($str)); 
+        $str = preg_replace('/(à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ)/', 'a', $str); 
+        $str = preg_replace('/(è|é|ẹ|ẻ|ẽ|ê|ề|ế|ệ|ể|ễ)/', 'e', $str); 
+        $str = preg_replace('/(ì|í|ị|ỉ|ĩ)/', 'i', $str); 
+        $str = preg_replace('/(ò|ó|ọ|ỏ|õ|ô|ồ|ố|ộ|ổ|ỗ|ơ|ờ|ớ|ợ|ở|ỡ)/', 'o', $str); 
+        $str = preg_replace('/(ù|ú|ụ|ủ|ũ|ư|ừ|ứ|ự|ử|ữ)/', 'u', $str); 
+        $str = preg_replace('/(ỳ|ý|ỵ|ỷ|ỹ)/', 'y', $str); 
+        $str = preg_replace('/(đ)/', 'd', $str); 
+        $str = preg_replace('/[^a-z0-9-\s]/', '', $str); 
+        $str = preg_replace('/([\s]+)/', '-', $str); 
+        return $str; 
+    }
     public function index()
     {
         return view('Admin.login');
@@ -27,7 +44,7 @@ class AdminController extends Controller
     public function check(Request $request)
     {
         $request->validate([
-            'email' => 'required|email',
+            'email' => 'required|email|regex:/^([a-z0-9\+_\-]+)(\.[a-z0-9\+_\-]+)*@([a-z0-9\-]+\.)+[a-z]{2,6}$/',
             'password' => 'required'
         ],
         [
@@ -40,10 +57,28 @@ class AdminController extends Controller
             Session::put('admin_name',$admin->admin_name);
             return redirect()->route('admin.dashboard');
         }
+        else{
+            return redirect()->route('admin.login')->with('message','Thông tin tài khoản hoặc mật khẩu không chính xác');
+        }
     }
     public function dashboard()
     {
-        return view('Admin.dashboard');
+        $bills = Bill::all();
+        $numberOfBill = $bills->count();
+        $users = User::all();
+        $numberOfUser = $users->count();
+        $foods = Food::all();
+        $numberOfFood = $foods->count();
+        $restaurants = Restaurant::all();
+        $numberOfRestaurant = $restaurants->count();
+        return view('Admin.dashboard', compact('numberOfBill', 'numberOfUser', 'numberOfFood', 'numberOfRestaurant'));
+    }
+    public function logout()
+    {
+        Session::forget('admin_name');
+        Session::forget('message');
+        return redirect()->route('admin.login');
+
     }
     public function create()
     {

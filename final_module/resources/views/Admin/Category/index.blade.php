@@ -1,12 +1,27 @@
 @extends('Layout.Admin.index')
+@section('title','Category')
 @section('main')
+
+<div class="row">
+    <div class="col-6">
+        <h3>Danh sách danh mục</h3>
+    </div>
+    <div class="col-6">
+        <div style="float:right">
+            <a href="{{route('category.create')}}" class="btn btn-primary">Thêm mới</a>
+        </div>
+    </div>
+</div>
+
 <div class="table-responsive">
     <table class="table table-hover">
         <thead>
             <tr>
                 <th>#</th>
-                <th>Category_name</th>
-                <th>Action</th>
+                <th>Tên danh mục</th>
+                <th>Ảnh</th>
+                <th>Số lượng địa điểm</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -14,6 +29,8 @@
             <tr>
                 <td>{{$category->id}}</td>
                 <td>{{$category->name}}</td>
+                <td><img src="{{asset('storage/images/'.$category->image)}}" width="100px" alt=""></td>
+                <td>{{$category->amount}}</td>
                 <td>
                     <a href="{{route('category.edit',$category->id)}}" class="btn btn-sm btn-success">
                     <i class="fas fa-edit"></i>

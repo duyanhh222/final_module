@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="description" content="OneTech shop project">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
     <link rel="stylesheet" type="text/css" href="{{ asset('Client/styles/bootstrap4/bootstrap.min.css') }}">
     <link href="{{ asset('Client/plugins/fontawesome-free-5.0.1/css/fontawesome-all.css') }}" rel="stylesheet" type="text/css">
     <link rel="stylesheet" type="text/css" href="{{ asset('Client/plugins/OwlCarousel2-2.2.1/owl.carousel.css') }}">
@@ -15,17 +16,26 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('Client/styles/main_styles.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('Client/styles/responsive.css') }}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+    <link href='https://fonts.googleapis.com/css?family=Roboto:400,100,300,700' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="{{ asset('Table/css/style.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('Form/css/roboto-font.css') }}">
+	<link rel="stylesheet" type="text/css" href="{{ asset('toast.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('Form/fonts/font-awesome-5/css/fontawesome-all.min.css') }}">
+	<!-- Main Style Css -->
 
+    <link rel="stylesheet" href="{{ asset('Form/css/style.css') }}"/>
+    <link rel="icon" href="{{ asset('storage/images/'.  $config->logo ) }}">
+    @yield('css')
 </head>
 
 <body>
-
+<div id="toast"></div>
 <div class="super_container">
 
     <!-- Header -->
     @section('header')
         <header class="header">
-
             <!-- Top Bar -->
             <!-- Top Bar -->
 
@@ -33,8 +43,8 @@
                 <div class="container">
                     <div class="row">
                         <div class="col d-flex flex-row">
-                            <div class="top_bar_contact_item"><div class="top_bar_icon"><img src="{{ asset('Client/images/phone.png') }}" alt=""></div>113</div>
-                            <div class="top_bar_contact_item"><div class="top_bar_icon"><img src="{{ asset('Client/images/mail.png') }}" alt=""></div><a href="mailto:">an@gmail.com</a></div>
+                            <div class="top_bar_contact_item"><div class="top_bar_icon"><img src="{{ asset('Client/images/phone.png') }}" alt=""></div>{{ $config->phone }}</div>
+                            <div class="top_bar_contact_item"><div class="top_bar_icon"><img src="{{ asset('Client/images/mail.png') }}" alt=""></div><a href="mailto:">{{ $config->email }}</a></div>
                             <div class="top_bar_content ml-auto">
                                 <div class="top_bar_menu">
                                     <ul class="standard_dropdown top_bar_dropdown">
@@ -46,6 +56,34 @@
                                         </li>
                                     </ul>
                                 </div>
+                                @if(Session::has('user_name'))
+                                <div class="top_bar_menu">
+                                    <ul class="standard_dropdown top_bar_dropdown">
+                                        <li>
+                                            <a href="#">{{Session::get('user_name')}}<i class="fas fa-chevron-down"></i></a>
+                                            <ul>
+                                                <li><a href="{{route('client.profile',Session::get('user_id'))}}">Hồ sơ</a></li>
+                                                <li><a href="{{route('favorite')}}">Yêu thích</a></li>
+                                                <li><a href="{{route('client.listFood')}}">Xem bài viết</a></li>
+                                                <li><a href="{{route('client.bill')}}">Đơn hàng</a></li>
+                                                <li><a href="{{route('user.logout')}}">Đăng xuất</a></li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </div>
+
+
+                                    @if ( Session::get('user_restaurant') == 0)
+
+                                    <div class="top_bar_menu">
+                                        <button class="btn btn-info"  href="{{ route('client.partner') }}"><a href="{{ route('client.partner') }}">Đăng ký đối tác</a></button>
+                                    </div>
+                                    @endif
+                                @else
+                                <a class="btn btn-outline-primary" href="{{ route('client.loadLogin') }}">Đăng nhập</a>
+                                <a class="btn btn-outline-primary" href="{{ route('client.loadRegister') }}">Đăng ký</a>
+                                @endif
+
                             </div>
                         </div>
                     </div>
@@ -55,14 +93,14 @@
 
             <!-- Header Main -->
 
-            <div class="header_main">
+            <div class="header_main" style="box-shadow: 5px 5px 5px rgb(245 184 154 / 30%);">
                 <div class="container">
                     <div class="row">
 
                         <!-- Logo -->
                         <div class="col-lg-2 col-sm-3 col-3 order-1">
                             <div class="logo_container">
-                                <div class="logo"><a href="">Eat Clean</a></div>
+                                <div class="logo"><a href="{{ route('client.home') }}">Eat Clean</a></div>
                             </div>
                         </div>
 
@@ -71,20 +109,18 @@
                             <div class="header_search">
                                 <div class="header_search_content">
                                     <div     class="header_search_form_container">
-                                        <form method="post" action="" class="header_search_form clearfix">
+                                        <form method="get" action="{{ route('client.search') }}" class="header_search_form clearfix">
                                             @csrf
                                             <input type="search" name="keyword" required="required" class="header_search_input" placeholder="Tìm kiếm sản phẩm...">
                                             <div class="custom_dropdown">
                                                 <div class="custom_dropdown_list">
-                                                    <span class="custom_dropdown_placeholder clc">All Categories</span>
+                                                    <span class="custom_dropdown_placeholder clc">Tất cả danh mục</span>
                                                     <i class="fas fa-chevron-down"></i>
                                                     <ul class="custom_list clc">
-                                                        <li><a class="clc" href="#">All Categories</a></li>
-                                                        <li><a class="clc" href="#">Computers</a></li>
-                                                        <li><a class="clc" href="#">Laptops</a></li>
-                                                        <li><a class="clc" href="#">Cameras</a></li>
-                                                        <li><a class="clc" href="#">Hardware</a></li>
-                                                        <li><a class="clc" href="#">Smartphones</a></li>
+                                                        <li><a class="clc" href="#">Tất cả danh mục</a></li>
+                                                        @foreach($categories as $category)
+                                                        <li><a class="clc" href="#">{{ $category->name }}</a></li>
+                                                        @endforeach
                                                     </ul>
                                                 </div>
                                             </div>
@@ -104,14 +140,17 @@
                                 <div class="cart">
                                     <div class="cart_container d-flex flex-row align-items-center justify-content-end">
                                         <div class="cart_icon">
-                                            <a href="">
+                                            <a href="{{route('show.cart')}}">
                                                 <img src="{{ asset('Client/images/cart.png') }}" alt="">
                                             </a>
-                                            <div class="cart_count"><span>0</span></div>
+                                            @if(Session::has('user_id'))
+                                             <div class="cart_count"><span id="count_carts">{{$cart_quantity}}</span></div>
+                                            @else
+                                             <div class="cart_count"><span id="count_carts">0</span></div>
+                                            @endif
                                         </div>
                                         <div class="cart_content">
-                                            <div class="cart_text"><a href="">Giỏ hàng</a></div>
-                                            <div class="cart_price">0đ</div>
+                                            <div class="cart_text"><a href="{{route('show.cart')}}">Giỏ hàng</a></div>
                                         </div>
                                     </div>
                                 </div>
@@ -121,114 +160,13 @@
                 </div>
             </div>
 
-            <!-- Main Navigation -->
-
-            <nav class="main_nav">
-                <div class="container">
-                    <div class="row">
-                        <div class="col">
-
-                            <div class="main_nav_content d-flex flex-row">
-
-                                <!-- Categories Menu -->
-
-                                <div class="cat_menu_container">
-                                    <div class="cat_menu_title d-flex flex-row align-items-center justify-content-start">
-                                        <div class="cat_burger"><span></span><span></span><span></span></div>
-                                        <div class="cat_menu_text">categories</div>
-                                    </div>
-
-                                    <ul class="cat_menu">
-                                        <li><a href="#">Computers & Laptops <i class="fas fa-chevron-right ml-auto"></i></a></li>
-                                        <li><a href="#">Cameras & Photos<i class="fas fa-chevron-right"></i></a></li>
-                                        <li class="hassubs">
-                                            <a href="#">Hardware<i class="fas fa-chevron-right"></i></a>
-                                            <ul>
-                                                <li class="hassubs">
-                                                    <a href="#">Menu Item<i class="fas fa-chevron-right"></i></a>
-                                                    <ul>
-                                                        <li><a href="#">Menu Item<i class="fas fa-chevron-right"></i></a></li>
-                                                        <li><a href="#">Menu Item<i class="fas fa-chevron-right"></i></a></li>
-                                                        <li><a href="#">Menu Item<i class="fas fa-chevron-right"></i></a></li>
-                                                        <li><a href="#">Menu Item<i class="fas fa-chevron-right"></i></a></li>
-                                                    </ul>
-                                                </li>
-                                                <li><a href="#">Menu Item<i class="fas fa-chevron-right"></i></a></li>
-                                                <li><a href="#">Menu Item<i class="fas fa-chevron-right"></i></a></li>
-                                                <li><a href="#">Menu Item<i class="fas fa-chevron-right"></i></a></li>
-                                            </ul>
-                                        </li>
-                                        <li><a href="#">Smartphones & Tablets<i class="fas fa-chevron-right"></i></a></li>
-                                        <li><a href="#">TV & Audio<i class="fas fa-chevron-right"></i></a></li>
-                                        <li><a href="#">Gadgets<i class="fas fa-chevron-right"></i></a></li>
-                                        <li><a href="#">Car Electronics<i class="fas fa-chevron-right"></i></a></li>
-                                        <li><a href="#">Video Games & Consoles<i class="fas fa-chevron-right"></i></a></li>
-                                        <li><a href="#">Accessories<i class="fas fa-chevron-right"></i></a></li>
-                                    </ul>
-                                </div>
-
-                                <!-- Main Nav Menu -->
-
-                                <div class="main_nav_menu ml-auto">
-                                    <ul class="standard_dropdown main_nav_dropdown">
-                                        <li><a href="">Home<i class="fas fa-chevron-down"></i></a></li>
-                                        <li><a href="blog.html">Blog<i class="fas fa-chevron-down"></i></a></li>
-                                        <li><a href="">Contact<i class="fas fa-chevron-down"></i></a></li>
-                                    </ul>
-                                </div>
-
-                                <!-- Menu Trigger -->
-
-                                <div class="menu_trigger_container ml-auto">
-                                    <div class="menu_trigger d-flex flex-row align-items-center justify-content-end">
-                                        <div class="menu_burger">
-                                            <div class="menu_trigger_text">menu</div>
-                                            <div class="cat_burger menu_burger_inner"><span></span><span></span><span></span></div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </nav>
         </header>
     @show
 
     @yield('content')
 
-<!-- Footer -->
-    <div class="brands">
-        <div class="container">
-            <div class="row">
-                <div class="col">
-                    <div class="brands_slider_container">
 
-                        <!-- Brands Slider -->
 
-                        <div class="owl-carousel owl-theme brands_slider">
-
-                            <div class="owl-item"><div class="brands_item d-flex flex-column justify-content-center"><img src="{{ asset('Client/images/brands_1.jpg') }}" alt=""></div></div>
-                            <div class="owl-item"><div class="brands_item d-flex flex-column justify-content-center"><img src="{{ asset('Client/images/brands_2.jpg') }}" alt=""></div></div>
-                            <div class="owl-item"><div class="brands_item d-flex flex-column justify-content-center"><img src="{{ asset('Client/images/brands_3.jpg') }}" alt=""></div></div>
-                            <div class="owl-item"><div class="brands_item d-flex flex-column justify-content-center"><img src="{{ asset('Client/images/brands_4.jpg') }}" alt=""></div></div>
-                            <div class="owl-item"><div class="brands_item d-flex flex-column justify-content-center"><img src="{{ asset('Client/images/brands_5.jpg') }}" alt=""></div></div>
-                            <div class="owl-item"><div class="brands_item d-flex flex-column justify-content-center"><img src="{{ asset('Client/images/brands_6.jpg') }}" alt=""></div></div>
-                            <div class="owl-item"><div class="brands_item d-flex flex-column justify-content-center"><img src="{{ asset('Client/images/brands_7.jpg') }}" alt=""></div></div>
-                            <div class="owl-item"><div class="brands_item d-flex flex-column justify-content-center"><img src="{{ asset('Client/images/brands_8.jpg') }}" alt=""></div></div>
-
-                        </div>
-
-                        <!-- Brands Slider Navigation -->
-                        <div class="brands_nav brands_prev"><i class="fas fa-chevron-left"></i></div>
-                        <div class="brands_nav brands_next"><i class="fas fa-chevron-right"></i></div>
-
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
     @section('footer')
         <footer class="footer">
             <div class="container">
@@ -240,48 +178,39 @@
                                 <div class="logo"><a href="#">Eat Clean</a></div>
                             </div>
                             <div class="footer_title">Liên hệ</div>
-                            <div class="footer_phone">0326222518</div>
-                            <div class="footer_contact_text">
-                                <p>tvanit.work@gmail.com</p>
-                                <p>Trên trời</p>
-                            </div>
                             <div class="footer_social">
                                 <ul>
-                                    <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
-                                    <li><a href="#"><i class="fab fa-twitter"></i></a></li>
-                                    <li><a href="#"><i class="fab fa-youtube"></i></a></li>
-                                    <li><a href="#"><i class="fab fa-google"></i></a></li>
-                                    <li><a href="#"><i class="fab fa-vimeo-v"></i></a></li>
+                                    <li><a href="{{ $config->facebook }}"><i class="fab fa-facebook-f"></i></a></li>
+
                                 </ul>
                             </div>
+                            <div class="footer_phone">{{ $config->phone }}</div>
+                            <div class="footer_contact_text">
+                                <p>{{ $config->email }}</p>
+                                <p>{{ $config->address }}</p>
+                            </div>
+
                         </div>
                     </div>
 
                     <div class="col-lg-2 offset-lg-2">
                         <div class="footer_column">
-                            <div class="footer_title">Find it Fast</div>
+                            <div class="footer_title">Tìm danh mục</div>
                             <ul class="footer_list">
-                                <li><a href="#">Computers & Laptops</a></li>
-                                <li><a href="#">Cameras & Photos</a></li>
-                                <li><a href="#">Hardware</a></li>
-                                <li><a href="#">Smartphones & Tablets</a></li>
-                                <li><a href="#">TV & Audio</a></li>
+                                @foreach($categories as $category)
+                                <li><a href="{{  route('client.category', $category->id) }}">{{ $category->name }}</a></li>
+                                @endforeach
                             </ul>
                         </div>
                     </div>
-
-
-                    <div class="col-lg-2">
+                    <div class="col-lg-2 offset-lg-2">
                         <div class="footer_column">
-                            <div class="footer_title">Customer Care</div>
+                            <div class="footer_title">Tải về ứng dụng</div>
                             <ul class="footer_list">
-                                <li><a href="#">My Account</a></li>
-                                <li><a href="#">Order Tracking</a></li>
-                                <li><a href="#">Wish List</a></li>
-                                <li><a href="#">Customer Services</a></li>
-                                <li><a href="#">Returns / Exchange</a></li>
-                                <li><a href="#">FAQs</a></li>
-                                <li><a href="#">Product Support</a></li>
+                                <li><a href="#"><img src="{{ asset('Client/images/AppStore-vn.png') }}" alt="" width="150px"></a></li>
+                                <li><a href="#"><img src="{{ asset('Client/images/PlayStore-vn.png') }}" alt="" width="150px"></a></li>
+                                <li><a href="#"><img src="{{ asset('Client/images/Huawei-gallery-vn.png') }}" alt="" width="150px"></a></li>
+
                             </ul>
                         </div>
                     </div>
@@ -317,6 +246,7 @@
                                 <li><a href="#"><img src="{{ asset('Client/images/logos_4.png') }}" alt=""></a></li>
                             </ul>
                         </div>
+
                     </div>
                 </div>
             </div>
@@ -337,6 +267,68 @@
     <script src="{{ asset('Client/plugins/easing/easing.js') }}"></script>
     <script src="{{ asset('Client/js/custom.js') }}"></script>
 
+
+<script>
+$(document).ready(function(){
+    $(document).on('click','#addCart', function(e){
+        e.preventDefault();
+        var food_id = $(this).attr('data-id');
+		var user_id = $('.userId_'+food_id).val();
+        var _token = $('input[name=_token]').val();
+        $.ajax({
+            type: "POST",
+            url: "{{route('add.cart')}}",
+            data:{
+                food_id: food_id,
+				user_id: user_id,
+                _token: _token
+            },
+            dataType: "json",
+            success: function (response) {
+                document.querySelector('#toast').innerHTML = ' <div class="alert alert-primary" role="alert"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>'+ response.message +'</div>';
+                document.querySelector('#count_carts').innerHTML = document.querySelector('#count_carts').innerHTML = ''+response.data+'';
+            }
+        });
+    });
+});
+$(document).ready(function(){
+    $(document).on('click','#likee', function(e){
+        e.preventDefault();
+        var url = $(this).attr('data-url');
+        $.ajax({
+            type: "GET",
+            url: url,
+            data:{
+                _token: $('meta[name="csrf-token"]').attr('content')
+            },
+            dataType: "json",
+            success: function (response) {
+                document.querySelector('#toast').innerHTML = document.querySelector('#toast').innerHTML = ' <div class="alert alert-primary" role="alert"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>'+ response.message +'</div>';
+            }
+        });
+    });
+});
+$(document).ready(function(){
+$(document).on('click','#dislikee', function(e){
+    e.preventDefault();
+    var id = $(this).attr('data-id');
+    var url = $(this).attr('data-url');
+    $.ajax({
+        type: "GET",
+        url: url,
+        data:{
+            _token: $('meta[name="csrf-token"]').attr('content')
+        },
+        dataType: "json",
+        success: function (response) {
+            $('#child'+id).remove();
+            document.querySelector('#toast').innerHTML = document.querySelector('#toast').innerHTML = ' <div class="alert alert-primary" role="alert"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>'+ response.message +'</div>';
+        }
+    });
+});
+});
+</script>
+@yield('js')
 
 </body>
 

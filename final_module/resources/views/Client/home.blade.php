@@ -9,7 +9,7 @@
     @include('Client.Home.dealofweek')
 
     <!-- Banner -->
-    @include('Client.Home.banner2')
+{{--    @include('Client.Home.banner2')--}}
 
     <!-- Hot New Arrivals -->
     @include('Client.Home.hotnew')
@@ -19,12 +19,12 @@
 
     <!-- Adverts -->
     <!-- Trends -->
-    @include('Client.Home.trend')
+{{--    @include('Client.Home.trend')--}}
 
 
     <!-- Reviews -->
     <!-- Recently Viewed -->
-    @include('Client.Home.reviewviewed')
+{{--    @include('Client.Home.reviewviewed')--}}
 
 
 @endsection
